@@ -3,6 +3,6 @@
 
 # Features
     
-    Hitbox
-    Triggerbot
-    Jetpack
++ Hitbox
++ Triggerbot
++ Jetpack
