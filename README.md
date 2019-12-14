@@ -1,8 +1,8 @@
-# Flare-Client
-External c++ client for Minecraft Windows 10 edition!
+# h1 Flare Client
+# h4 By iShabzz102, EchoHackCmd, ASM & UnlovedCooki
 
-## Code
-
-    Features:
-    + Feature 1
-    + Feature 2
+# Features
+    
+    Hitbox
+    Triggerbot
+    Jetpack
