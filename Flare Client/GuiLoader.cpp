@@ -1,100 +1,82 @@
-// REMEMBER TO CHANGE CREATIVE FROM CREATIVEADDRESS TO GAMEMODE 
+//IMGUI Includes
 #include "GuiLoader.h"
-
-#include <iostream>
-#include "./imgui/imgui.h"
-#include "./imgui/imgui_impl_dx9.h"
-#include "./imgui/imgui_impl_win32.h"
+#include "Imgui/imgui.h"
+#include "Imgui/imgui_impl_dx9.h"
+#include "Imgui/imgui_impl_win32.h"
 #include <d3d9.h>
-#include <dinput.h>
 #include <tchar.h>
+#define DIRECTINPUAT_VERSION 0x0900
+#pragma comment(lib,"d3d9.lib")
 
 
-
-using namespace std;
-
-
-// Data
 static LPDIRECT3D9              g_pD3D = NULL;
 static LPDIRECT3DDEVICE9        g_pd3dDevice = NULL;
 static D3DPRESENT_PARAMETERS    g_d3dpp = {};
 
-// Forward declarations of helper functions
 bool CreateDeviceD3D(HWND hWnd);
 void CleanupDeviceD3D();
 void ResetDevice();
-
-//void ResetDevice();
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
-// Main code
 GuiLoader::GuiLoader() {
-
-
-	// Create application window
-	WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("Minecraft.Windows.exe"), NULL };
-	::RegisterClassEx(&wc);
-	HWND hwnd = ::CreateWindow(wc.lpszClassName, _T("Valve"), WS_OVERLAPPEDWINDOW, 100, 100, 1280, 800, NULL, NULL, wc.hInstance, NULL);
-
-	// Initialize Direct3D
-	if (!CreateDeviceD3D(hwnd))
 	{
-		CleanupDeviceD3D();
-		::UnregisterClass(wc.lpszClassName, wc.hInstance);
+		WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("Flare Client"), NULL };
+		::RegisterClassEx(&wc);
+		HWND hwnd = ::CreateWindow(wc.lpszClassName, NULL, WS_POPUP, 88, 88, 800, 500, NULL, NULL, wc.hInstance, NULL);
 
-	}
-
-	// Show the window
-	::ShowWindow(hwnd, SW_SHOWDEFAULT);
-	::UpdateWindow(hwnd);
-
-	// Setup Dear ImGui context
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
-
-	// Setup Dear ImGui style
-	ImGui::StyleColorsDark();
-	//ImGui::StyleColorsClassic();
-
-	// Setup Platform/Renderer bindings
-	ImGui_ImplWin32_Init(hwnd);
-	ImGui_ImplDX9_Init(g_pd3dDevice);
-
-	// Our state
-	bool show_demo_window = false;
-	bool show_another_window = false;
-	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
-	// Main loop
-	MSG msg;
-	ZeroMemory(&msg, sizeof(msg));
-	while (msg.message != WM_QUIT)
-	{
-
-		if (::PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
+		if (!CreateDeviceD3D(hwnd))
 		{
-			::TranslateMessage(&msg);
-			::DispatchMessage(&msg);
-			continue;
+			CleanupDeviceD3D();
+			::UnregisterClass(wc.lpszClassName, wc.hInstance);
 
 		}
 
+		::ShowWindow(hwnd, SW_SHOW);
+		::UpdateWindow(hwnd);
+
+		IMGUI_CHECKVERSION();
+		ImGui::CreateContext();
+		ImGuiIO& io = ImGui::GetIO(); (void)io;
 
 
-		// Start the Dear ImGui frame
-		ImGui_ImplDX9_NewFrame();
-		ImGui_ImplWin32_NewFrame();
-		ImGui::NewFrame();
+
+		ImGui::StyleColorsDark();
+
+
+		ImGui_ImplWin32_Init(hwnd);
+		ImGui_ImplDX9_Init(g_pd3dDevice);
 
 
 
-		ImGui::Begin("TEST");
-		ImGui::End();
-	
 
-	
-			// Rendering
+		bool show_menu = true;
+		bool show_another_window = false;
+		ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+
+
+		MSG msg;
+		ZeroMemory(&msg, sizeof(msg));
+		while (msg.message != WM_QUIT)
+		{
+			if (::PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
+			{
+				::TranslateMessage(&msg);
+				::DispatchMessage(&msg);
+				continue;
+			}
+			ImGui_ImplDX9_NewFrame();
+			ImGui_ImplWin32_NewFrame();
+			ImGui::NewFrame();
+
+			
+			if (show_menu == true)
+			{
+				ImGui::Begin("Firefly Menu Alpha");
+				ImGui::SetWindowSize(ImVec2(810, 520));
+				ImGui::SetWindowPos(ImVec2(0, 0));
+				
+				ImGui::End();
+			}
 			ImGui::EndFrame();
 			g_pd3dDevice->SetRenderState(D3DRS_ZENABLE, false);
 			g_pd3dDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
@@ -109,13 +91,10 @@ GuiLoader::GuiLoader() {
 			}
 			HRESULT result = g_pd3dDevice->Present(NULL, NULL, NULL, NULL);
 
-			// Handle loss of D3D9 device
+
 			if (result == D3DERR_DEVICELOST && g_pd3dDevice->TestCooperativeLevel() == D3DERR_DEVICENOTRESET)
 				ResetDevice();
 		}
-
-
-
 		ImGui_ImplDX9_Shutdown();
 		ImGui_ImplWin32_Shutdown();
 		ImGui::DestroyContext();
@@ -123,12 +102,11 @@ GuiLoader::GuiLoader() {
 		CleanupDeviceD3D();
 		::DestroyWindow(hwnd);
 		::UnregisterClass(wc.lpszClassName, wc.hInstance);
-		
+
+
 	}
+}
 
-
-
-// He.lper functions
 
 bool CreateDeviceD3D(HWND hWnd)
 {
@@ -143,6 +121,7 @@ bool CreateDeviceD3D(HWND hWnd)
 	g_d3dpp.EnableAutoDepthStencil = TRUE;
 	g_d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
 	g_d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_ONE;
+
 	if (g_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd, D3DCREATE_HARDWARE_VERTEXPROCESSING, &g_d3dpp, &g_pd3dDevice) < 0)
 		return false;
 
@@ -155,7 +134,6 @@ void CleanupDeviceD3D()
 	if (g_pD3D) { g_pD3D->Release(); g_pD3D = NULL; }
 }
 
-
 void ResetDevice()
 {
 	ImGui_ImplDX9_InvalidateDeviceObjects();
@@ -165,7 +143,7 @@ void ResetDevice()
 	ImGui_ImplDX9_CreateDeviceObjects();
 }
 
-// Win32 message handler
+
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -191,5 +169,4 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		return 0;
 	}
 	return ::DefWindowProc(hWnd, msg, wParam, lParam);
-
 }
