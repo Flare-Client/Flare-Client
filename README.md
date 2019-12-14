@@ -1,6 +1,6 @@
 # Flare Client
 ### **Flare Client is an external cheat for Minecraft Bedrock Edition written in C++** 
-8-)
+> :8-)
 
 #### Developers:
 
