@@ -5,5 +5,5 @@
 
 + iShabzz102
 + EchoHackCmd
-+ ASM
++ DisabledMallis
 + UnlovedCooki
