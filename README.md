@@ -1,13 +1,9 @@
 # Flare Client
-FlareClient is an external C++ Cheat for Minecraft, Flare was made by:
+### Flare Client is an external cheat written in C++
+
+#### Developers:
 
 + iShabzz102
 + EchoHackCmd
-+ ASM 
++ ASM
 + UnlovedCooki
-
-# Features
-    
-+ Hitbox
-+ Triggerbot
-+ Jetpack
