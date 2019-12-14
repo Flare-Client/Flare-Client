@@ -4,8 +4,8 @@
 #### Developers:
 
 ```
-+ iShabzz102 
-+ EchoHackCmd
-+ DisabledMallis
-+ UnlovedCooki
+● iShabzz102 
+● EchoHackCmd
+● DisabledMallis
+● UnlovedCooki
 ```
