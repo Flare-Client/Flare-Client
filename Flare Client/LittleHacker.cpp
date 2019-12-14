@@ -35,17 +35,6 @@ void mem::NopEx(BYTE* dst, unsigned int size, HANDLE hProcess)
 	delete[] nopArray;
 }
 
-uintptr_t mem::FindDMAAddy(uintptr_t ptr, std::vector<unsigned int> offsets)
-{
-	uintptr_t addr = ptr;
-	for (unsigned int i = 0; i < offsets.size(); ++i)
-	{
-		addr = *(uintptr_t*)addr;
-		addr += offsets[i];
-	}
-	return addr;
-}
-
 uintptr_t mem::FindAddr(HANDLE hProc, uintptr_t ptr, std::vector<unsigned int> offsets)
 {
 	uintptr_t addr = ptr;
