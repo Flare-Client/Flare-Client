@@ -11,7 +11,4 @@ namespace mem
 	uintptr_t FindAddr(HANDLE hProc, uintptr_t ptr, std::vector<unsigned int> offsets);
 	DWORD GetProcId(const wchar_t* procName);
 	uintptr_t GetModuleBaseAddress(DWORD procId, const wchar_t* modName);
-	static DWORD procId = mem::GetProcId(L"Minecraft.Windows.exe");
-	static HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, NULL, procId);
-	static uintptr_t moduleBase = mem::GetModuleBaseAddress(procId, L"Minecraft.Windows.exe");
 }
