@@ -3,7 +3,9 @@
 
 #### Developers:
 
-+ iShabzz102
+```
++ iShabzz102 
 + EchoHackCmd
 + DisabledMallis
 + UnlovedCooki
+```
