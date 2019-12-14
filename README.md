@@ -3,4 +3,6 @@ External c++ client for Minecraft Windows 10 edition!
 
 ## Code
 
-    Here we can provide code within our indented object
+    Features:
+    + Feature 1
+    + Feature 2
