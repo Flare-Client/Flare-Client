@@ -30,4 +30,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Data.txt">
+      <Filter>Source Files\modules</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

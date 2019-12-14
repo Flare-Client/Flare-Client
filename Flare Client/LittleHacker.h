@@ -14,5 +14,4 @@ namespace mem
 	static DWORD procId = mem::GetProcId(L"Minecraft.Windows.exe");
 	static HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, NULL, procId);
 	static uintptr_t moduleBase = mem::GetModuleBaseAddress(procId, L"Minecraft.Windows.exe");
-	//static float NewHitbox;
 }
