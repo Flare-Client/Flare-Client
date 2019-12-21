@@ -1,10 +1,11 @@
 ﻿  GuiLoader.cpp
-C:\Users\sshab\OneDrive\Desktop\Flare Client\Flare Client\GuiLoader.cpp(148,84): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\sshab\OneDrive\Desktop\Flare Client\Flare Client\GuiLoader.cpp(149,86): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\sshab\OneDrive\Desktop\Flare Client\Flare Client\GuiLoader.cpp(150,91): warning C4305: 'argument': truncation from 'double' to 'float'
+A:\Desktop Files\Minecraft Stuff\Bedrock Modding\Flare-Client\Flare Client\GuiLoader.cpp(153,74): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+A:\Desktop Files\Minecraft Stuff\Bedrock Modding\Flare-Client\Flare Client\GuiLoader.cpp(174,84): warning C4305: 'argument': truncation from 'double' to 'float'
+A:\Desktop Files\Minecraft Stuff\Bedrock Modding\Flare-Client\Flare Client\GuiLoader.cpp(175,86): warning C4305: 'argument': truncation from 'double' to 'float'
+A:\Desktop Files\Minecraft Stuff\Bedrock Modding\Flare-Client\Flare Client\GuiLoader.cpp(176,91): warning C4305: 'argument': truncation from 'double' to 'float'
   Generating code
-  2 of 1240 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+  1 of 1258 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    16 functions had inline decision re-evaluated but remain unchanged
+    13 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  Flare Client.vcxproj -> C:\Users\sshab\OneDrive\Desktop\Flare Client\Flare Client\x64\Release\Flare Client.exe
+  Flare Client.vcxproj -> A:\Desktop Files\Minecraft Stuff\Bedrock Modding\Flare-Client\Flare Client\x64\Release\Flare Client.exe

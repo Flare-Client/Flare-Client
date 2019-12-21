@@ -12,6 +12,33 @@
 
 bool GuiLoader::windowToggle = true;
 
+//Stolen from https://stackoverflow.com/questions/1888863/how-to-get-main-window-handle-from-process-id dont sue me
+struct handle_data {
+	unsigned long process_id;
+	HWND window_handle;
+};
+BOOL is_main_window(HWND handle)
+{
+	return GetWindow(handle, GW_OWNER) == (HWND)0 && IsWindowVisible(handle);
+}
+BOOL CALLBACK enum_windows_callback(HWND handle, LPARAM lParam)
+{
+	handle_data& data = *(handle_data*)lParam;
+	unsigned long process_id = 0;
+	GetWindowThreadProcessId(handle, &process_id);
+	if (data.process_id != process_id || !is_main_window(handle))
+		return TRUE;
+	data.window_handle = handle;
+	return FALSE;
+}
+HWND find_main_window(unsigned long process_id)
+{
+	handle_data data;
+	data.process_id = process_id;
+	data.window_handle = 0;
+	EnumWindows(enum_windows_callback, (LPARAM)&data);
+	return data.window_handle;
+}
 
 static LPDIRECT3D9              g_pD3D = NULL;
 static LPDIRECT3DDEVICE9        g_pd3dDevice = NULL;
@@ -21,6 +48,8 @@ bool CreateDeviceD3D(HWND hWnd);
 void CleanupDeviceD3D();
 void ResetDevice();
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
+HWND hwnd;
 
 void WindowAlwaysOnTop(HWND hwnd) {
 	if (hwnd) {
@@ -79,8 +108,7 @@ GuiLoader::GuiLoader() {
 		ImGui_ImplWin32_Init(hwnd);
 		ImGui_ImplDX9_Init(g_pd3dDevice);
 
-
-
+		HWND windowHandleMC = find_main_window(mem::frameId);
 
 		bool show_menu = true;
 		bool show_another_window = false;
@@ -119,6 +147,10 @@ GuiLoader::GuiLoader() {
 			ImGui::SameLine(0.0, 2.0f);
 			if (ImGui::Button("Settings", ImVec2(100.0f, 0.0f)))
 				switchTabs = 3;
+
+			RECT rect;
+			GetWindowRect(windowHandleMC, &rect);
+			SetWindowPos(hwnd, HWND_TOPMOST, (rect.right-ImGui::GetWindowSize().x)-8, rect.top + 33, rect.right, rect.bottom, SWP_NOSIZE);
 
 			switch (switchTabs) {
 			case 0:
