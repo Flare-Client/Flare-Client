@@ -1,4 +1,2 @@
 ﻿  GuiLoader.cpp
-  Source.cpp
-  Generating Code...
-  Flare Client.vcxproj -> C:\Users\sshab\OneDrive\Desktop\Valve\Flare-Client\Flare Client\x64\Debug\Flare Client.exe
+C:\Users\sshab\OneDrive\Desktop\Valve\Flare-Client\Flare Client\GuiLoader.cpp(2,10): fatal error C1083: Cannot open include file: 'imgui.h': No such file or directory
