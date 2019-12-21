@@ -162,7 +162,7 @@ GuiLoader::GuiLoader() {
 				ImGui::Checkbox("Air Acceleration", &ModuleHandler::airaccspeedToggle);
 				ImGui::Checkbox("NoSlowDown", &ModuleHandler::noslowdownToggle);
 				ImGui::Checkbox("NoKnockBack", &ModuleHandler::noknockbackToggle);
-				ImGui::Checkbox("Player Speed", &ModuleHandler::playerspeedtoggle);
+				ImGui::Checkbox("Player Speed", &ModuleHandler::playerspeedToggle);
 				break;
 			case 2:
 				ImGui::Checkbox("NoWeb", &ModuleHandler::nowebToggle);
