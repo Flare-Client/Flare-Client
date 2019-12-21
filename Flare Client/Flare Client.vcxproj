@@ -198,6 +198,15 @@
     <ClInclude Include="modules\noweb.h" />
     <ClInclude Include="modules\noknockback.h" />
     <ClInclude Include="modules\nofall.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Flare Client.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Resources\Icon.ico" />
+    <Image Include="..\Resources\Icon.png" />
+    <Image Include="icon2.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
