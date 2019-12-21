@@ -15,13 +15,15 @@
 #include "noknockback.h"
 #include "nofall.h"
 #include "gamemode.h"
+#include "instabreak.h"
+#include "playerspeed.h"
 
 class ModuleHandler {
 public:
 	/* Variables */
 	
-	static bool hitboxToggle, triggerbotToggle, airJumpToggle, airaccspeedToggle, noslowdownToggle, nowebToggle, noknockbackToggle, nofallToggle, gamemodeToggle;
-	static float hitboxWidthFloat, hitboxHeightFloat, airAccelerationSpeed;
+	static bool hitboxToggle, triggerbotToggle, airJumpToggle, airaccspeedToggle, noslowdownToggle, nowebToggle, noknockbackToggle, nofallToggle, gamemodeToggle, instabreakToggle, playerspeedtoggle;
+	static float hitboxWidthFloat, hitboxHeightFloat, airAccelerationSpeed, playerSpeedVal;
 	static int gamemodeVal;
 
 	/* Main */

@@ -13,10 +13,13 @@ bool ModuleHandler::nowebToggle = false;
 bool ModuleHandler::noknockbackToggle = false;
 bool ModuleHandler::nofallToggle = false;
 bool ModuleHandler::gamemodeToggle = false;
+bool ModuleHandler::instabreakToggle = false;
+bool ModuleHandler::playerspeedtoggle = false;
 
 float ModuleHandler::hitboxWidthFloat = 6.f;
 float ModuleHandler::hitboxHeightFloat = 3.f;
 float ModuleHandler::airAccelerationSpeed = 0.1;
+float ModuleHandler::playerSpeedVal = 0.45;
 
 int ModuleHandler::gamemodeVal = 1;
 
@@ -103,5 +106,14 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	}
 	else if (!ModuleHandler::gamemodeToggle) {
 		Gamemode::Gamemode(hProcess, LocalPlayer, 5);
+	}
+	if (ModuleHandler::instabreakToggle) {
+		Instabreak::Instabreak(hProcess, 1);
+	}
+	else if (!ModuleHandler::instabreakToggle) {
+		Instabreak::Instabreak(hProcess, 0);
+	}
+	if (ModuleHandler::playerspeedtoggle) {
+		PlayerSpeed::PlayerSpeed(hProcess, ModuleHandler::playerSpeedVal);
 	}
 }
