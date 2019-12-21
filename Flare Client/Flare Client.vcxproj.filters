@@ -78,6 +78,12 @@
     <ClCompile Include="modules\gamemode.cpp">
       <Filter>Source Files\modules</Filter>
     </ClCompile>
+    <ClCompile Include="modules\instabreak.cpp">
+      <Filter>Source Files\modules</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\playerspeed.cpp">
+      <Filter>Source Files\modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GuiLoader.h">
@@ -109,9 +115,6 @@
     </ClInclude>
     <ClInclude Include="LittleHacker.h">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="memory\LittleHacker.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="modules\EntityList.h">
       <Filter>Source Files\modules</Filter>
@@ -146,24 +149,11 @@
     <ClInclude Include="modules\gamemode.h">
       <Filter>Source Files\modules</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="modules\instabreak.h">
+      <Filter>Source Files\modules</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Flare Client.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\Resources\Icon.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="icon2.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\Resources\Icon.png">
-      <Filter>Resource Files</Filter>
-    </Image>
+    <ClInclude Include="modules\playerspeed.h">
+      <Filter>Source Files\modules</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

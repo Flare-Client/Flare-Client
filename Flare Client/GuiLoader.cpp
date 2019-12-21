@@ -12,7 +12,6 @@
 
 bool GuiLoader::windowToggle = true;
 
-//Stolen from https://stackoverflow.com/questions/1888863/how-to-get-main-window-handle-from-process-id dont sue me
 struct handle_data {
 	unsigned long process_id;
 	HWND window_handle;
@@ -84,7 +83,7 @@ GuiLoader::GuiLoader() {
 	{
 		WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("Flare Client"), NULL };
 		::RegisterClassEx(&wc);
-		HWND hwnd = ::CreateWindow(wc.lpszClassName, NULL, WS_POPUP, 0, 0, 700, 700, NULL, NULL, wc.hInstance, NULL);
+		HWND hwnd = ::CreateWindow(wc.lpszClassName, NULL, WS_POPUP, 0, 0, 420, 420, NULL, NULL, wc.hInstance, NULL);
 
 		if (!CreateDeviceD3D(hwnd))
 		{
@@ -131,7 +130,7 @@ GuiLoader::GuiLoader() {
 
 
 			ImGui::Begin("Flare Client");
-			ImGui::SetWindowSize(ImVec2(700, 700));
+			ImGui::SetWindowSize(ImVec2(420, 420));
 			ImGui::SetWindowPos(ImVec2(0, 0));
 
 			static int switchTabs = 3;
@@ -163,17 +162,20 @@ GuiLoader::GuiLoader() {
 				ImGui::Checkbox("Air Acceleration", &ModuleHandler::airaccspeedToggle);
 				ImGui::Checkbox("NoSlowDown", &ModuleHandler::noslowdownToggle);
 				ImGui::Checkbox("NoKnockBack", &ModuleHandler::noknockbackToggle);
+				ImGui::Checkbox("Player Speed", &ModuleHandler::playerspeedtoggle);
 				break;
 			case 2:
 				ImGui::Checkbox("NoWeb", &ModuleHandler::nowebToggle);
 				ImGui::Checkbox("Vanilla NoFall", &ModuleHandler::nofallToggle);
 				ImGui::Checkbox("Gamemode", &ModuleHandler::gamemodeToggle);
+				ImGui::Checkbox("Instabreak", &ModuleHandler::instabreakToggle);
 				break;
 			case 3:
 				const char* gamemodeItems[] = { "Survival", "Creative", "Adventure" };
 				ImGui::SliderFloat("Hitbox: Width", &ModuleHandler::hitboxWidthFloat, 0.6, 12.f);
 				ImGui::SliderFloat("Hitbox: Height", &ModuleHandler::hitboxHeightFloat, 0.6, 12.f);
 				ImGui::SliderFloat("Air Acceleration", &ModuleHandler::airAccelerationSpeed, 0.05, 0.5);
+				ImGui::SliderFloat("Player Speed", &ModuleHandler::playerSpeedVal, 0.1, 4.f);
 				ImGui::Combo("Gamemode", &ModuleHandler::gamemodeVal, gamemodeItems, IM_ARRAYSIZE(gamemodeItems));
 				break;
 			}
