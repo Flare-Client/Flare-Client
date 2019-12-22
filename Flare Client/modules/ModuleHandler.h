@@ -21,7 +21,7 @@
 class ModuleHandler {
 public:
     /* Variables */
-    static bool hitboxToggle, triggerbotToggle, airJumpToggle, airaccspeedToggle, noslowdownToggle, nowebToggle, noknockbackToggle, nofallToggle, gamemodeToggle, instabreakToggle, playerspeedtoggle;
+    static bool hitboxToggle, triggerbotToggle, airJumpToggle, airaccspeedToggle, noslowdownToggle, nowebToggle, noknockbackToggle, nofallToggle, gamemodeToggle, instabreakToggle, playerspeedToggle;
     static float hitboxWidthFloat, hitboxHeightFloat, airAccelerationSpeed, playerSpeedVal;
     static int gamemodeVal;
 
