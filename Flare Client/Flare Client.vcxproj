@@ -176,6 +176,8 @@
     <ClCompile Include="modules\noknockback.cpp" />
     <ClCompile Include="modules\nofall.cpp" />
     <ClCompile Include="modules\playerspeed.cpp" />
+    <ClCompile Include="modules\teleport.cpp" />
+    <ClCompile Include="modules\phase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="modules\instabreak.h" />
@@ -201,6 +203,8 @@
     <ClInclude Include="modules\noknockback.h" />
     <ClInclude Include="modules\nofall.h" />
     <ClInclude Include="modules\playerspeed.h" />
+    <ClInclude Include="modules\teleport.h" />
+    <ClInclude Include="modules\phase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

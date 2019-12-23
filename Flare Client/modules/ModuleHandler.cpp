@@ -15,11 +15,15 @@ bool ModuleHandler::nofallToggle = false;
 bool ModuleHandler::gamemodeToggle = false;
 bool ModuleHandler::instabreakToggle = false;
 bool ModuleHandler::playerspeedtoggle = false;
+bool ModuleHandler::phaseToggle = false;
 
 float ModuleHandler::hitboxWidthFloat = 6.f;
 float ModuleHandler::hitboxHeightFloat = 3.f;
 float ModuleHandler::airAccelerationSpeed = 0.1;
 float ModuleHandler::playerSpeedVal = 0.45;
+float ModuleHandler::teleportX = 0;
+float ModuleHandler::teleportY = 0;
+float ModuleHandler::teleportZ = 0;
 
 int ModuleHandler::gamemodeVal = 1;
 
@@ -115,5 +119,11 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	}
 	if (ModuleHandler::playerspeedtoggle) {
 		PlayerSpeed::PlayerSpeed(hProcess, ModuleHandler::playerSpeedVal);
+	}
+	if (ModuleHandler::phaseToggle) {
+		Phase::Phase(hProcess, LocalPlayer, 'E');
+	}
+	else if (!ModuleHandler::phaseToggle) {
+		Phase::Phase(hProcess, LocalPlayer, 'F');
 	}
 }

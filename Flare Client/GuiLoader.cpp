@@ -9,6 +9,13 @@
 #pragma comment(lib,"d3d9.lib")
 
 #include "modules/ModuleHandler.h"
+#include <fstream>
+#include <iostream>
+bool loadedTheme = false;
+
+using namespace std;
+
+ofstream File;
 
 bool GuiLoader::windowToggle = true;
 
@@ -134,6 +141,29 @@ GuiLoader::GuiLoader() {
 			ImGui::SetWindowPos(ImVec2(0, 0));
 
 			static int switchTabs = 3;
+			static int currentTheme = 0;
+
+			if (!loadedTheme) {
+				ifstream inFile;
+				inFile.open("Theme.txt");
+				if (inFile.is_open()) {
+					inFile >> currentTheme;
+				}
+				inFile.close();
+				loadedTheme = true;
+			}
+
+			switch (currentTheme) {
+			case 0:
+				ImGui::StyleColorsDark();
+			break;
+			case 1:
+				ImGui::StyleColorsLight();
+			break;
+			case 2:
+				ImGui::StyleColorsClassic();
+			break;
+			}
 
 			if (ImGui::Button("Combat", ImVec2(100.0f, 0.0f)))
 				switchTabs = 0;
@@ -162,13 +192,14 @@ GuiLoader::GuiLoader() {
 				ImGui::Checkbox("Air Acceleration", &ModuleHandler::airaccspeedToggle);
 				ImGui::Checkbox("NoSlowDown", &ModuleHandler::noslowdownToggle);
 				ImGui::Checkbox("NoKnockBack", &ModuleHandler::noknockbackToggle);
-				ImGui::Checkbox("Player Speed", &ModuleHandler::playerspeedToggle);
+				ImGui::Checkbox("Player Speed", &ModuleHandler::playerspeedtoggle);
 				break;
 			case 2:
 				ImGui::Checkbox("NoWeb", &ModuleHandler::nowebToggle);
 				ImGui::Checkbox("Vanilla NoFall", &ModuleHandler::nofallToggle);
 				ImGui::Checkbox("Gamemode", &ModuleHandler::gamemodeToggle);
 				ImGui::Checkbox("Instabreak", &ModuleHandler::instabreakToggle);
+				ImGui::Checkbox("Phase", &ModuleHandler::phaseToggle);
 				break;
 			case 3:
 				const char* gamemodeItems[] = { "Survival", "Creative", "Adventure" };
@@ -177,6 +208,27 @@ GuiLoader::GuiLoader() {
 				ImGui::SliderFloat("Air Acceleration", &ModuleHandler::airAccelerationSpeed, 0.05, 0.5);
 				ImGui::SliderFloat("Player Speed", &ModuleHandler::playerSpeedVal, 0.1, 4.f);
 				ImGui::Combo("Gamemode", &ModuleHandler::gamemodeVal, gamemodeItems, IM_ARRAYSIZE(gamemodeItems));
+				ImGui::Text("Teleport:");
+				ImGui::InputFloat("X", &ModuleHandler::teleportX);
+				ImGui::InputFloat("Y", &ModuleHandler::teleportY);
+				ImGui::InputFloat("Z", &ModuleHandler::teleportZ);
+				if (ImGui::Button("Teleport")) {
+					Teleport::Teleport(mem::hProcess, ModuleHandler::teleportX, ModuleHandler::teleportY, ModuleHandler::teleportZ);
+				}
+				ImGui::Text("Theme:");
+				const char* themeItems[] = { "Dark Theme", "Light Theme", "Classic Theme" };
+				ImGui::Combo("Style", &currentTheme, themeItems, IM_ARRAYSIZE(themeItems));
+				ImGui::SameLine();
+				if (ImGui::Button("Save")) {
+					File.open("Theme.txt");
+					if (!File) {
+						cerr << "Flare-Client: Cannot save the specified theme!" << endl;
+					}
+					else {
+						File << currentTheme << endl;
+					}
+				}
+				File.close();
 				break;
 			}
 	

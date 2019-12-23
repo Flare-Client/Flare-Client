@@ -84,6 +84,12 @@
     <ClCompile Include="modules\playerspeed.cpp">
       <Filter>Source Files\modules</Filter>
     </ClCompile>
+    <ClCompile Include="modules\teleport.cpp">
+      <Filter>Source Files\modules</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\phase.cpp">
+      <Filter>Source Files\modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GuiLoader.h">
@@ -153,6 +159,12 @@
       <Filter>Source Files\modules</Filter>
     </ClInclude>
     <ClInclude Include="modules\playerspeed.h">
+      <Filter>Source Files\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\teleport.h">
+      <Filter>Source Files\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\phase.h">
       <Filter>Source Files\modules</Filter>
     </ClInclude>
   </ItemGroup>
