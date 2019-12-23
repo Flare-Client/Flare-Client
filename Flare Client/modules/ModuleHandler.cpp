@@ -16,6 +16,7 @@ bool ModuleHandler::gamemodeToggle = false;
 bool ModuleHandler::instabreakToggle = false;
 bool ModuleHandler::playerspeedtoggle = false;
 bool ModuleHandler::phaseToggle = false;
+bool ModuleHandler::playerspeedToggle = false;
 
 float ModuleHandler::hitboxWidthFloat = 6.f;
 float ModuleHandler::hitboxHeightFloat = 3.f;
@@ -117,7 +118,7 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	else if (!ModuleHandler::instabreakToggle) {
 		Instabreak::Instabreak(hProcess, 0);
 	}
-	if (ModuleHandler::playerspeedtoggle) {
+	if (ModuleHandler::playerspeedToggle) {
 		PlayerSpeed::PlayerSpeed(hProcess, ModuleHandler::playerSpeedVal);
 	}
 	if (ModuleHandler::phaseToggle) {
