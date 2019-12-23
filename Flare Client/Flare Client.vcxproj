@@ -82,6 +82,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Users\EchoHackCmd\Downloads\discord-rpc-master\discord-rpc-master\src;C:\Users\EchoHackCmd\Downloads\discord-rpc-master\discord-rpc-master\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -142,7 +143,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -155,6 +156,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\connection_win.cpp" />
+    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\discord_register_win.cpp" />
+    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\discord_rpc.cpp" />
+    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\dllmain.cpp" />
+    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\rpc_connection.cpp" />
+    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\serialization.cpp" />
+    <ClCompile Include="discord.cpp" />
     <ClCompile Include="modules\instabreak.cpp" />
     <ClCompile Include="modules\gamemode.cpp" />
     <ClCompile Include="modules\airaccelerationspeed.cpp" />
@@ -180,6 +188,11 @@
     <ClCompile Include="modules\phase.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\backoff.h" />
+    <ClInclude Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\msg_queue.h" />
+    <ClInclude Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\rpc_connection.h" />
+    <ClInclude Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\serialization.h" />
+    <ClInclude Include="discord.h" />
     <ClInclude Include="modules\instabreak.h" />
     <ClInclude Include="modules\gamemode.h" />
     <ClInclude Include="modules\airaccelerationspeed.h" />
@@ -206,7 +219,17 @@
     <ClInclude Include="modules\teleport.h" />
     <ClInclude Include="modules\phase.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\tencent.rapidjson.1.1.1\build\tencent.rapidjson.targets" Condition="Exists('packages\tencent.rapidjson.1.1.1\build\tencent.rapidjson.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\tencent.rapidjson.1.1.1\build\tencent.rapidjson.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\tencent.rapidjson.1.1.1\build\tencent.rapidjson.targets'))" />
+  </Target>
 </Project>

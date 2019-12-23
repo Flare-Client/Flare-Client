@@ -3,15 +3,16 @@
 #include "GuiLoader.h"
 #include "LittleHacker.h"
 
-#include "modules/EntityList.h"
-#include "modules/Hitbox.h"
+#include "discord.h"
 
-void GetGameKeyInput(HANDLE hProcess);
+Discord* g_Discord;
 
 using namespace std;
 
 int main()
 {
+	g_Discord->Initialize();
+	g_Discord->Update((char*)"On the main menu");
 	DWORD procID;
 	uintptr_t ModuleBase;
 	HANDLE hProcess;

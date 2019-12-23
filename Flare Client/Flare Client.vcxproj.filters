@@ -19,6 +19,9 @@
     <Filter Include="Source Files\imgui">
       <UniqueIdentifier>{f8eba0ac-547e-46d6-b789-f4d0cfe12b59}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\SDK">
+      <UniqueIdentifier>{babbac6d-4a41-4da3-8855-b6533458e4a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GuiLoader.cpp">
@@ -89,6 +92,27 @@
     </ClCompile>
     <ClCompile Include="modules\phase.cpp">
       <Filter>Source Files\modules</Filter>
+    </ClCompile>
+    <ClCompile Include="discord.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\rpc_connection.cpp">
+      <Filter>Source Files\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\serialization.cpp">
+      <Filter>Source Files\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\discord_rpc.cpp">
+      <Filter>Source Files\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\discord_register_win.cpp">
+      <Filter>Source Files\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\connection_win.cpp">
+      <Filter>Source Files\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\dllmain.cpp">
+      <Filter>Source Files\SDK</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,5 +191,23 @@
     <ClInclude Include="modules\phase.h">
       <Filter>Source Files\modules</Filter>
     </ClInclude>
+    <ClInclude Include="discord.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\rpc_connection.h">
+      <Filter>Source Files\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\serialization.h">
+      <Filter>Source Files\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\backoff.h">
+      <Filter>Source Files\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\msg_queue.h">
+      <Filter>Source Files\SDK</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

@@ -16,7 +16,6 @@ bool ModuleHandler::gamemodeToggle = false;
 bool ModuleHandler::instabreakToggle = false;
 bool ModuleHandler::playerspeedtoggle = false;
 bool ModuleHandler::phaseToggle = false;
-bool ModuleHandler::playerspeedToggle = false;
 
 float ModuleHandler::hitboxWidthFloat = 6.f;
 float ModuleHandler::hitboxHeightFloat = 3.f;
@@ -28,11 +27,33 @@ float ModuleHandler::teleportZ = 0;
 
 int ModuleHandler::gamemodeVal = 1;
 
+
+
+bool nameDisplay = false; //Discord Stuff
+
 ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	uintptr_t LocalPlayer = mem::FindAddr(hProcess, mem::moduleBase + 0x02FEE4B0, { 0xA8, 0x10, 0x40, 0x0 });
 	uintptr_t UIOpen = mem::FindAddr(hProcess, mem::moduleBase + 0x02FA94F0, { 0x200, 0x128, 0x40, 0x8, 0x248 });
 
 	vector<uintptr_t> EntityListArr = EntityList::EntityListHandler(hProcess, LocalPlayer);
+
+	string playerUsername;
+	int movement;
+	ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0x32C }), &movement, sizeof(movement), 0);
+	ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0x9E8 }), &playerUsername, sizeof(playerUsername), 0);
+
+	if (movement && playerUsername.length() > 0 && !nameDisplay) {
+		char* c = new char[playerUsername.length() + 1];
+		strcpy(c, playerUsername.c_str());
+		Discord::Update(c);
+		cout << "Added username " << c << " to the Discord Rich Presence!" << endl;
+		nameDisplay = true;
+	}
+
+	if (playerUsername.length() < 1 && nameDisplay) {
+		nameDisplay = false;
+		Discord::Update((char*)"On the main menu");
+	}
 
 	GuiLoaderTicker += 1;
 
@@ -118,7 +139,7 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	else if (!ModuleHandler::instabreakToggle) {
 		Instabreak::Instabreak(hProcess, 0);
 	}
-	if (ModuleHandler::playerspeedToggle) {
+	if (ModuleHandler::playerspeedtoggle) {
 		PlayerSpeed::PlayerSpeed(hProcess, ModuleHandler::playerSpeedVal);
 	}
 	if (ModuleHandler::phaseToggle) {
