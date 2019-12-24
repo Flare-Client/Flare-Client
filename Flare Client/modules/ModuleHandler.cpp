@@ -16,6 +16,7 @@ bool ModuleHandler::gamemodeToggle = false;
 bool ModuleHandler::instabreakToggle = false;
 bool ModuleHandler::playerspeedtoggle = false;
 bool ModuleHandler::phaseToggle = false;
+bool ModuleHandler::scaffoldToggle = false;
 
 float ModuleHandler::hitboxWidthFloat = 6.f;
 float ModuleHandler::hitboxHeightFloat = 3.f;
@@ -29,7 +30,7 @@ int ModuleHandler::gamemodeVal = 1;
 
 
 
-bool nameDisplay = false; //Discord Stuff
+int discordPresenceTick; //Discord Stuff
 
 //Discord Stuff
 int discordEmbedUpdateTick;
@@ -45,17 +46,18 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0x32C }), &movement, sizeof(movement), 0);
 	ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0x9E8 }), &playerUsername, sizeof(playerUsername), 0);
 
-	if (movement && playerUsername.length() > 0 && !nameDisplay) {
-		char* c = new char[playerUsername.length() + 1];
-		strcpy(c, playerUsername.c_str());
-		Discord::Update(c, EntityListArr.size());
-		cout << "Added username " << c << " to the Discord Rich Presence!" << endl;
-		nameDisplay = true;
-	}
+	discordPresenceTick += 1;
 
-	if (playerUsername.length() < 1 && nameDisplay) {
-		nameDisplay = false;
-		Discord::Update((char*)"On the main menu", EntityListArr.size());
+	if (discordPresenceTick > 200) {
+		if (playerUsername.length() > 0) {
+			char* c = new char[playerUsername.length() + 1];
+			strcpy(c, playerUsername.c_str());
+			Discord::Update(c, EntityListArr.size());
+		}
+		else if (playerUsername.length() < 1) {
+			Discord::Update((char*)"On the main menu", 0);
+		}
+		discordPresenceTick = 0;
 	}
 
 	GuiLoaderTicker += 1;
@@ -150,5 +152,11 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	}
 	else if (!ModuleHandler::phaseToggle) {
 		Phase::Phase(hProcess, LocalPlayer, 'F');
+	}
+	if (ModuleHandler::scaffoldToggle) {
+		Scaffold::Scaffold(hProcess, 'N');
+	}
+	else if (!ModuleHandler::scaffoldToggle) {
+		Scaffold::Scaffold(hProcess, 'F');
 	}
 }

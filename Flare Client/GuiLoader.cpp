@@ -139,7 +139,7 @@ GuiLoader::GuiLoader() {
 			ImGui::NewFrame();
 
 
-			ImGui::Begin("Flare Client");
+			ImGui::Begin("Flare Client", 0, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
 			ImGui::SetWindowSize(ImVec2(420, 420));
 			ImGui::SetWindowPos(ImVec2(0, 0));
 
@@ -213,6 +213,7 @@ GuiLoader::GuiLoader() {
 				ImGui::Checkbox("Gamemode", &ModuleHandler::gamemodeToggle);
 				ImGui::Checkbox("Instabreak", &ModuleHandler::instabreakToggle);
 				ImGui::Checkbox("Phase", &ModuleHandler::phaseToggle);
+				ImGui::Checkbox("Scaffold", &ModuleHandler::scaffoldToggle);
 				break;
 			case 3:
 				const char* gamemodeItems[] = { "Survival", "Creative", "Adventure" };

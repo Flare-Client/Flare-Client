@@ -21,6 +21,7 @@
 #include "playerspeed.h"
 #include "teleport.h"
 #include "phase.h"
+#include "scaffold.h"
 
 #include "../discord.h"
 
@@ -28,7 +29,7 @@ class ModuleHandler {
 public:
     /* Variables */
 
-    static bool hitboxToggle, triggerbotToggle, airJumpToggle, airaccspeedToggle, noslowdownToggle, nowebToggle, noknockbackToggle, nofallToggle, gamemodeToggle, instabreakToggle, playerspeedtoggle, phaseToggle;
+    static bool hitboxToggle, triggerbotToggle, airJumpToggle, airaccspeedToggle, noslowdownToggle, nowebToggle, noknockbackToggle, nofallToggle, gamemodeToggle, instabreakToggle, playerspeedtoggle, phaseToggle, scaffoldToggle;
     static float hitboxWidthFloat, hitboxHeightFloat, airAccelerationSpeed, playerSpeedVal, teleportX, teleportY, teleportZ;
     static int gamemodeVal;
 

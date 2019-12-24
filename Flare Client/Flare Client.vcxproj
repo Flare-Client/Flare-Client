@@ -186,6 +186,7 @@
     <ClCompile Include="modules\playerspeed.cpp" />
     <ClCompile Include="modules\teleport.cpp" />
     <ClCompile Include="modules\phase.cpp" />
+    <ClCompile Include="modules\scaffold.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="discord.h" />
@@ -221,6 +222,7 @@
     <ClInclude Include="modules\playerspeed.h" />
     <ClInclude Include="modules\teleport.h" />
     <ClInclude Include="modules\phase.h" />
+    <ClInclude Include="modules\scaffold.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
