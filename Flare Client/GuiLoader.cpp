@@ -109,10 +109,7 @@ GuiLoader::GuiLoader() {
 		ImGui::CreateContext();
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
 
-
-
 		ImGui::StyleColorsDark();
-
 
 		ImGui_ImplWin32_Init(hwnd);
 		ImGui_ImplDX9_Init(g_pd3dDevice);
@@ -180,9 +177,16 @@ GuiLoader::GuiLoader() {
 			if (ImGui::Button("Settings", ImVec2(100.0f, 0.0f)))
 				switchTabs = 3;
 
+			int gayUwpTitlesize = 0;
+			WINDOWPLACEMENT wpsm;
+			GetWindowPlacement(windowHandleMC, &wpsm);
+			if (wpsm.showCmd == SW_MAXIMIZE) {
+				gayUwpTitlesize = 7;
+			}
+
 			RECT rect;
 			GetWindowRect(windowHandleMC, &rect);
-			SetWindowPos(hwnd, HWND_TOPMOST, (rect.right-ImGui::GetWindowSize().x)-8, rect.top + 33, rect.right, rect.bottom, SWP_NOSIZE);
+			SetWindowPos(hwnd, HWND_TOPMOST, (rect.right - ImGui::GetWindowSize().x) - 8, rect.top + 33 + gayUwpTitlesize, rect.right, rect.bottom, SWP_NOSIZE);
 
 			if (GetForegroundWindow() == hwnd) {
 				SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 1000, LWA_ALPHA);
