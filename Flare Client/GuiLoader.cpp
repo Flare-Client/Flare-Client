@@ -210,6 +210,9 @@ GuiLoader::GuiLoader() {
 				ImGui::Checkbox("NoSlowDown", &ModuleHandler::noslowdownToggle);
 				ImGui::Checkbox("NoKnockBack", &ModuleHandler::noknockbackToggle);
 				ImGui::Checkbox("Player Speed", &ModuleHandler::playerspeedtoggle);
+				ImGui::Checkbox("NoWater", &ModuleHandler::nowaterToggle);
+				ImGui::Checkbox("Jesus", &ModuleHandler::jesusToggle);
+				ImGui::Checkbox("Bunny-Hop", &ModuleHandler::bhopToggle);
 				break;
 			case 2:
 				ImGui::Checkbox("NoWeb", &ModuleHandler::nowebToggle);
@@ -225,6 +228,8 @@ GuiLoader::GuiLoader() {
 				ImGui::SliderFloat("Hitbox: Height", &ModuleHandler::hitboxHeightFloat, 0.6, 12.f);
 				ImGui::SliderFloat("Air Acceleration", &ModuleHandler::airAccelerationSpeed, 0.05, 0.5);
 				ImGui::SliderFloat("Player Speed", &ModuleHandler::playerSpeedVal, 0.1, 4.f);
+				ImGui::SliderFloat("Jesus (Y Boost)", &ModuleHandler::jesusVal, 0.1, 5.f);
+				ImGui::SliderFloat("BHOP (Y Boost)", &ModuleHandler::bhopVal, 0.1, 5.f);
 				ImGui::Combo("Gamemode", &ModuleHandler::gamemodeVal, gamemodeItems, IM_ARRAYSIZE(gamemodeItems));
 				ImGui::Text("Teleport:");
 				ImGui::InputFloat("X", &ModuleHandler::teleportX);

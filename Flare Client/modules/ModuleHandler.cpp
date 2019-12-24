@@ -17,6 +17,9 @@ bool ModuleHandler::instabreakToggle = false;
 bool ModuleHandler::playerspeedtoggle = false;
 bool ModuleHandler::phaseToggle = false;
 bool ModuleHandler::scaffoldToggle = false;
+bool ModuleHandler::nowaterToggle = false;
+bool ModuleHandler::jesusToggle = false;
+bool ModuleHandler::bhopToggle = false;
 
 float ModuleHandler::hitboxWidthFloat = 6.f;
 float ModuleHandler::hitboxHeightFloat = 3.f;
@@ -25,6 +28,8 @@ float ModuleHandler::playerSpeedVal = 0.45;
 float ModuleHandler::teleportX = 0;
 float ModuleHandler::teleportY = 0;
 float ModuleHandler::teleportZ = 0;
+float ModuleHandler::jesusVal = 0.2;
+float ModuleHandler::bhopVal = 0.2;
 
 int ModuleHandler::gamemodeVal = 1;
 
@@ -156,5 +161,17 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	}
 	else if (!ModuleHandler::scaffoldToggle) {
 		Scaffold::Scaffold(hProcess, 'F');
+	}
+	if (ModuleHandler::nowaterToggle) {
+		NoWater::NoWater(hProcess, 'N');
+	}
+	else if (!ModuleHandler::nowaterToggle) {
+		NoWater::NoWater(hProcess, 'F');
+	}
+	if (ModuleHandler::jesusToggle) {
+		Jesus::Jesus(hProcess, LocalPlayer, ModuleHandler::jesusVal);
+	}
+	if (ModuleHandler::bhopToggle) {
+		BHOP::BHOP(hProcess, LocalPlayer, ModuleHandler::bhopVal);
 	}
 }
