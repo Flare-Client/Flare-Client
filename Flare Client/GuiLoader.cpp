@@ -92,6 +92,9 @@ GuiLoader::GuiLoader() {
 		::RegisterClassEx(&wc);
 		HWND hwnd = ::CreateWindow(wc.lpszClassName, NULL, WS_POPUP, 0, 0, 420, 420, NULL, NULL, wc.hInstance, NULL);
 
+		SetWindowLong(hwnd, GWL_EXSTYLE, WS_EX_LAYERED);
+		SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 1000, LWA_ALPHA);
+
 		if (!CreateDeviceD3D(hwnd))
 		{
 			CleanupDeviceD3D();
@@ -180,6 +183,16 @@ GuiLoader::GuiLoader() {
 			RECT rect;
 			GetWindowRect(windowHandleMC, &rect);
 			SetWindowPos(hwnd, HWND_TOPMOST, (rect.right-ImGui::GetWindowSize().x)-8, rect.top + 33, rect.right, rect.bottom, SWP_NOSIZE);
+
+			if (GetForegroundWindow() == hwnd) {
+				SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 1000, LWA_ALPHA);
+			}
+			else if (GetForegroundWindow() == windowHandleMC) {
+				SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 100, LWA_ALPHA);
+			}
+			else {
+				SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 0, LWA_ALPHA);
+			}
 
 			switch (switchTabs) {
 			case 0:
