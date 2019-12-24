@@ -156,6 +156,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="modules\bhop.cpp" />
     <ClCompile Include="discord.cpp" />
     <ClCompile Include="Discord\connection_win.cpp" />
     <ClCompile Include="Discord\discord_register_win.cpp" />
@@ -163,6 +164,7 @@
     <ClCompile Include="Discord\dllmain.cpp" />
     <ClCompile Include="Discord\rpc_connection.cpp" />
     <ClCompile Include="Discord\serialization.cpp" />
+    <ClCompile Include="modules\jesus.cpp" />
     <ClCompile Include="modules\instabreak.cpp" />
     <ClCompile Include="modules\gamemode.cpp" />
     <ClCompile Include="modules\airaccelerationspeed.cpp" />
@@ -186,8 +188,11 @@
     <ClCompile Include="modules\playerspeed.cpp" />
     <ClCompile Include="modules\teleport.cpp" />
     <ClCompile Include="modules\phase.cpp" />
+    <ClCompile Include="modules\scaffold.cpp" />
+    <ClCompile Include="modules\nowater.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="modules\bhop.h" />
     <ClInclude Include="discord.h" />
     <ClInclude Include="Discord\backoff.h" />
     <ClInclude Include="Discord\connection.h" />
@@ -196,6 +201,7 @@
     <ClInclude Include="Discord\msg_queue.h" />
     <ClInclude Include="Discord\rpc_connection.h" />
     <ClInclude Include="Discord\serialization.h" />
+    <ClInclude Include="modules\jesus.h" />
     <ClInclude Include="modules\instabreak.h" />
     <ClInclude Include="modules\gamemode.h" />
     <ClInclude Include="modules\airaccelerationspeed.h" />
@@ -221,6 +227,8 @@
     <ClInclude Include="modules\playerspeed.h" />
     <ClInclude Include="modules\teleport.h" />
     <ClInclude Include="modules\phase.h" />
+    <ClInclude Include="modules\scaffold.h" />
+    <ClInclude Include="modules\nowater.h" />
     <ClInclude Include="resource1.h" />
     <ClInclude Include="resource2.h" />
   </ItemGroup>
