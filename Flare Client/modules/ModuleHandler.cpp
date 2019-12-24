@@ -67,7 +67,7 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 
 	GuiLoaderTicker += 1;
 
-	if (GetAsyncKeyState(VK_F6)) {
+	if (GetAsyncKeyState(VK_F8)) {
 		if (GuiLoaderTicker > 60) {
 			if (GuiLoader::windowToggle) {
 				GuiLoader::windowToggle = false;
