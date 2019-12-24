@@ -394,4 +394,4 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-*.db
+Flare Client/.vs/Flare Client/v16/.suo

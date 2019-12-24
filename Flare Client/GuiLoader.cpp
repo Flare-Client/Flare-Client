@@ -213,7 +213,6 @@ GuiLoader::GuiLoader() {
 				ImGui::Checkbox("Gamemode", &ModuleHandler::gamemodeToggle);
 				ImGui::Checkbox("Instabreak", &ModuleHandler::instabreakToggle);
 				ImGui::Checkbox("Phase", &ModuleHandler::phaseToggle);
-				ImGui::Checkbox("Scaffold", &ModuleHandler::scaffoldToggle);
 				break;
 			case 3:
 				const char* gamemodeItems[] = { "Survival", "Creative", "Adventure" };

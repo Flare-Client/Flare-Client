@@ -82,7 +82,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Users\EchoHackCmd\Documents\GitHub\Flare-Client\Flare Client\Discord-RPC\src;C:\Users\EchoHackCmd\Documents\GitHub\Flare-Client\Flare Client\Discord-RPC\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\EchoHackCmd\Downloads\discord-rpc-master\discord-rpc-master\src;C:\Users\EchoHackCmd\Downloads\discord-rpc-master\discord-rpc-master\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -156,12 +156,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Discord-RPC\src\connection_win.cpp" />
-    <ClCompile Include="Discord-RPC\src\discord_register_win.cpp" />
-    <ClCompile Include="Discord-RPC\src\discord_rpc.cpp" />
-    <ClCompile Include="Discord-RPC\src\dllmain.cpp" />
-    <ClCompile Include="Discord-RPC\src\rpc_connection.cpp" />
-    <ClCompile Include="Discord-RPC\src\serialization.cpp" />
     <ClCompile Include="discord.cpp" />
     <ClCompile Include="Discord\connection_win.cpp" />
     <ClCompile Include="Discord\discord_register_win.cpp" />
@@ -192,13 +186,8 @@
     <ClCompile Include="modules\playerspeed.cpp" />
     <ClCompile Include="modules\teleport.cpp" />
     <ClCompile Include="modules\phase.cpp" />
-    <ClCompile Include="modules\scaffold.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Discord-RPC\src\backoff.h" />
-    <ClInclude Include="Discord-RPC\src\msg_queue.h" />
-    <ClInclude Include="Discord-RPC\src\rpc_connection.h" />
-    <ClInclude Include="Discord-RPC\src\serialization.h" />
     <ClInclude Include="discord.h" />
     <ClInclude Include="Discord\backoff.h" />
     <ClInclude Include="Discord\connection.h" />
@@ -232,7 +221,6 @@
     <ClInclude Include="modules\playerspeed.h" />
     <ClInclude Include="modules\teleport.h" />
     <ClInclude Include="modules\phase.h" />
-    <ClInclude Include="modules\scaffold.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
