@@ -113,6 +113,23 @@
     </ClCompile>
     <ClCompile Include="Discord-RPC\src\connection_win.cpp">
       <Filter>Source Files\SDK</Filter>
+    <ClCompile Include="Discord\connection_win.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Discord\discord_register_win.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Discord\discord_rpc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Discord\dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Discord\rpc_connection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Discord\serialization.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="modules\scaffold.cpp">
       <Filter>Source Files\modules</Filter>
@@ -208,6 +225,26 @@
     </ClInclude>
     <ClInclude Include="Discord-RPC\src\backoff.h">
       <Filter>Source Files\SDK</Filter>
+    <ClInclude Include="Discord\backoff.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Discord\connection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Discord\discord_register.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Discord\discord_rpc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Discord\msg_queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Discord\rpc_connection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Discord\serialization.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="modules\scaffold.h">
       <Filter>Source Files\modules</Filter>
