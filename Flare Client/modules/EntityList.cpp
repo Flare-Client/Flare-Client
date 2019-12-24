@@ -15,7 +15,7 @@ std::vector<uintptr_t> EntityList::EntityListHandler(HANDLE hProcess, uintptr_t 
 	for (uintptr_t entity = entityListStart; entity < entityListEnd; entity += 0x8) {
 		if (entity == entityListStart) continue;
 		int movingVal;
-		ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, localPlayer, { 0x32C }), &movingVal, sizeof(movingVal), 0);
+		ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, entity, { 0x32C }), &movingVal, sizeof(movingVal), 0);
 		if(movingVal > 1) entityListArr.push_back(entity); //Only allow entities that move (Bye bye NPC's)
 	}
 

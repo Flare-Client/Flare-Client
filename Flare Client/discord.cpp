@@ -5,20 +5,22 @@ static int64_t eptime = std::chrono::duration_cast<std::chrono::seconds>(std::ch
 void Discord::Initialize() {
 	DiscordEventHandlers handle;
 	memset(&handle, 0, sizeof(handle));
-	Discord_Initialize("658514848065257475", &handle, 0, NULL);
+	Discord_Initialize("658514848065257475", &handle, 1, NULL);
 }
 
-void Discord::Update(char* details) {
+void Discord::Update(char* details, int entityListSize) {
 	DiscordRichPresence discordPresence;
 	memset(&discordPresence, 0, sizeof(discordPresence));
-	discordPresence.state = "Flare Client";
+	discordPresence.state = "Minecraft";
 	discordPresence.details = details;
 	discordPresence.startTimestamp = eptime;
 	discordPresence.endTimestamp = NULL;
-	discordPresence.largeImageKey = "icon";
-	//discordPresence.largeImageText = "Flare Client";
-	discordPresence.smallImageKey = "icon";
-	//discordPresence.smallImageText = "Flare Client";
+	discordPresence.largeImageKey = "flare";
+	discordPresence.largeImageText = "Flare Client";
+	discordPresence.smallImageKey = "flaresmall";
+	discordPresence.smallImageText = "Hacking in style";
+	discordPresence.partySize = 1;
+	discordPresence.partyMax = entityListSize + 1;
 
 	Discord_UpdatePresence(&discordPresence);
 }

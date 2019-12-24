@@ -82,7 +82,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Users\EchoHackCmd\Downloads\discord-rpc-master\discord-rpc-master\src;C:\Users\EchoHackCmd\Downloads\discord-rpc-master\discord-rpc-master\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\EchoHackCmd\Documents\GitHub\Flare-Client\Flare Client\Discord-RPC\src;C:\Users\EchoHackCmd\Documents\GitHub\Flare-Client\Flare Client\Discord-RPC\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -156,12 +156,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\connection_win.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\discord_register_win.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\discord_rpc.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\dllmain.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\rpc_connection.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\serialization.cpp" />
+    <ClCompile Include="Discord-RPC\src\connection_win.cpp" />
+    <ClCompile Include="Discord-RPC\src\discord_register_win.cpp" />
+    <ClCompile Include="Discord-RPC\src\discord_rpc.cpp" />
+    <ClCompile Include="Discord-RPC\src\dllmain.cpp" />
+    <ClCompile Include="Discord-RPC\src\rpc_connection.cpp" />
+    <ClCompile Include="Discord-RPC\src\serialization.cpp" />
     <ClCompile Include="discord.cpp" />
     <ClCompile Include="modules\instabreak.cpp" />
     <ClCompile Include="modules\gamemode.cpp" />
@@ -186,12 +186,13 @@
     <ClCompile Include="modules\playerspeed.cpp" />
     <ClCompile Include="modules\teleport.cpp" />
     <ClCompile Include="modules\phase.cpp" />
+    <ClCompile Include="modules\scaffold.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\backoff.h" />
-    <ClInclude Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\msg_queue.h" />
-    <ClInclude Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\rpc_connection.h" />
-    <ClInclude Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\serialization.h" />
+    <ClInclude Include="Discord-RPC\src\backoff.h" />
+    <ClInclude Include="Discord-RPC\src\msg_queue.h" />
+    <ClInclude Include="Discord-RPC\src\rpc_connection.h" />
+    <ClInclude Include="Discord-RPC\src\serialization.h" />
     <ClInclude Include="discord.h" />
     <ClInclude Include="modules\instabreak.h" />
     <ClInclude Include="modules\gamemode.h" />
@@ -218,6 +219,7 @@
     <ClInclude Include="modules\playerspeed.h" />
     <ClInclude Include="modules\teleport.h" />
     <ClInclude Include="modules\phase.h" />
+    <ClInclude Include="modules\scaffold.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

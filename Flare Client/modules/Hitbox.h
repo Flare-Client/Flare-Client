@@ -4,6 +4,5 @@
 
 class Hitbox {
 public:
-	static float HitboxWidth(HANDLE hProcess, std::vector<uintptr_t> EntityList, float value);
-	static float HitboxHeight(HANDLE hProcess, std::vector<uintptr_t> EntityList, float value);
+	Hitbox(HANDLE hProcess, std::vector<uintptr_t> EntityList, float width, float height);
 };
