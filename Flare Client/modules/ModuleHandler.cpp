@@ -92,12 +92,10 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	}
 
 	if (ModuleHandler::hitboxToggle) {
-		Hitbox::HitboxWidth(hProcess, EntityListArr, ModuleHandler::hitboxWidthFloat);
-		Hitbox::HitboxHeight(hProcess, EntityListArr, ModuleHandler::hitboxHeightFloat);
+		Hitbox::Hitbox(hProcess, EntityListArr, ModuleHandler::hitboxWidthFloat, ModuleHandler::hitboxHeightFloat);
 	}
 	else if (!ModuleHandler::hitboxToggle) {
-		Hitbox::HitboxWidth(hProcess, EntityListArr, 0.6);
-		Hitbox::HitboxHeight(hProcess, EntityListArr, 1.8);
+		Hitbox::Hitbox(hProcess, EntityListArr, 0.6, 1.8);
 	}
 	if (ModuleHandler::triggerbotToggle) {
 		TriggerBot::TriggerBot(hProcess, 'N');
