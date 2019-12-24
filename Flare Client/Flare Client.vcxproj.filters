@@ -96,23 +96,23 @@
     <ClCompile Include="discord.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\rpc_connection.cpp">
-      <Filter>Source Files\SDK</Filter>
+    <ClCompile Include="Discord\connection_win.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\serialization.cpp">
-      <Filter>Source Files\SDK</Filter>
+    <ClCompile Include="Discord\discord_register_win.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\discord_rpc.cpp">
-      <Filter>Source Files\SDK</Filter>
+    <ClCompile Include="Discord\discord_rpc.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\discord_register_win.cpp">
-      <Filter>Source Files\SDK</Filter>
+    <ClCompile Include="Discord\dllmain.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\connection_win.cpp">
-      <Filter>Source Files\SDK</Filter>
+    <ClCompile Include="Discord\rpc_connection.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\dllmain.cpp">
-      <Filter>Source Files\SDK</Filter>
+    <ClCompile Include="Discord\serialization.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,17 +194,26 @@
     <ClInclude Include="discord.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\rpc_connection.h">
-      <Filter>Source Files\SDK</Filter>
+    <ClInclude Include="Discord\backoff.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\serialization.h">
-      <Filter>Source Files\SDK</Filter>
+    <ClInclude Include="Discord\connection.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\backoff.h">
-      <Filter>Source Files\SDK</Filter>
+    <ClInclude Include="Discord\discord_register.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\discord-rpc-master\discord-rpc-master\src\msg_queue.h">
-      <Filter>Source Files\SDK</Filter>
+    <ClInclude Include="Discord\discord_rpc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Discord\msg_queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Discord\rpc_connection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Discord\serialization.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
