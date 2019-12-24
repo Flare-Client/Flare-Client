@@ -1,121 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Source Files\modules">
-      <UniqueIdentifier>{15438c4d-ec0c-4830-a39c-1b933edc9f21}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\imgui">
-      <UniqueIdentifier>{f8eba0ac-547e-46d6-b789-f4d0cfe12b59}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\SDK">
-      <UniqueIdentifier>{babbac6d-4a41-4da3-8855-b6533458e4a9}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="modules\bhop.cpp" />
+    <ClCompile Include="discord.cpp" />
+    <ClCompile Include="Discord\connection_win.cpp" />
+    <ClCompile Include="Discord\discord_register_win.cpp" />
+    <ClCompile Include="Discord\discord_rpc.cpp" />
+    <ClCompile Include="Discord\dllmain.cpp" />
+    <ClCompile Include="Discord\rpc_connection.cpp" />
+    <ClCompile Include="Discord\serialization.cpp" />
+    <ClCompile Include="modules\jesus.cpp" />
+    <ClCompile Include="modules\instabreak.cpp" />
+    <ClCompile Include="modules\gamemode.cpp" />
+    <ClCompile Include="modules\airaccelerationspeed.cpp" />
+    <ClCompile Include="modules\airjump.cpp" />
+    <ClCompile Include="modules\ModuleHandler.cpp" />
+    <ClCompile Include="modules\Hitbox.cpp" />
+    <ClCompile Include="modules\EntityList.cpp" />
+    <ClCompile Include="GuiLoader.cpp" />
+    <ClCompile Include="imgui\imgui.cpp" />
+    <ClCompile Include="imgui\imgui_draw.cpp" />
+    <ClCompile Include="imgui\imgui_impl_dx9.cpp" />
+    <ClCompile Include="imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="imgui\imgui_widgets.cpp" />
+    <ClCompile Include="LittleHacker.cpp" />
+    <ClCompile Include="FlareClient.cpp" />
+    <ClCompile Include="modules\triggerbot.cpp" />
+    <ClCompile Include="modules\noslowdown.cpp" />
+    <ClCompile Include="modules\noweb.cpp" />
+    <ClCompile Include="modules\noknockback.cpp" />
+    <ClCompile Include="modules\nofall.cpp" />
+    <ClCompile Include="modules\playerspeed.cpp" />
+    <ClCompile Include="modules\teleport.cpp" />
+    <ClCompile Include="modules\phase.cpp" />
+    <ClCompile Include="modules\scaffold.cpp" />
+    <ClCompile Include="modules\nowater.cpp" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< Updated upstream
-    <ClCompile Include="GuiLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LittleHacker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui\imgui_draw.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui\imgui_impl_dx9.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui\imgui_impl_win32.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui\imgui_widgets.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui\imgui.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="FlareClient.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="modules\EntityList.cpp">
-      <Filter>Source Files\modules</Filter>
-    </ClCompile>
-    <ClCompile Include="modules\Hitbox.cpp">
-      <Filter>Source Files\modules</Filter>
-    </ClCompile>
-    <ClCompile Include="modules\ModuleHandler.cpp">
-      <Filter>Source Files\modules</Filter>
-    </ClCompile>
-    <ClCompile Include="modules\triggerbot.cpp">
-      <Filter>Source Files\modules</Filter>
-    </ClCompile>
-    <ClCompile Include="modules\airjump.cpp">
-      <Filter>Source Files\modules</Filter>
-    </ClCompile>
-    <ClCompile Include="modules\airaccelerationspeed.cpp">
-      <Filter>Source Files\modules</Filter>
-    </ClCompile>
-    <ClCompile Include="modules\noweb.cpp">
-      <Filter>Source Files\modules</Filter>
-    </ClCompile>
-    <ClCompile Include="modules\noslowdown.cpp">
-      <Filter>Source Files\modules</Filter>
-    </ClCompile>
-    <ClCompile Include="modules\noknockback.cpp">
-      <Filter>Source Files\modules</Filter>
-    </ClCompile>
-    <ClCompile Include="modules\nofall.cpp">
-      <Filter>Source Files\modules</Filter>
-    </ClCompile>
-    <ClCompile Include="modules\gamemode.cpp">
-      <Filter>Source Files\modules</Filter>
-    </ClCompile>
-    <ClCompile Include="modules\instabreak.cpp">
-      <Filter>Source Files\modules</Filter>
-    </ClCompile>
-    <ClCompile Include="modules\playerspeed.cpp">
-      <Filter>Source Files\modules</Filter>
-    </ClCompile>
-    <ClCompile Include="modules\teleport.cpp">
-      <Filter>Source Files\modules</Filter>
-    </ClCompile>
-    <ClCompile Include="modules\phase.cpp">
-      <Filter>Source Files\modules</Filter>
-    </ClCompile>
-    <ClCompile Include="discord.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Discord\connection_win.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Discord\discord_register_win.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Discord\discord_rpc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Discord\dllmain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Discord\rpc_connection.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Discord\serialization.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-=======
+    <ClInclude Include="modules\bhop.h" />
     <ClInclude Include="discord.h" />
     <ClInclude Include="Discord\backoff.h" />
     <ClInclude Include="Discord\connection.h" />
@@ -124,6 +46,7 @@
     <ClInclude Include="Discord\msg_queue.h" />
     <ClInclude Include="Discord\rpc_connection.h" />
     <ClInclude Include="Discord\serialization.h" />
+    <ClInclude Include="modules\jesus.h" />
     <ClInclude Include="modules\instabreak.h" />
     <ClInclude Include="modules\gamemode.h" />
     <ClInclude Include="modules\airaccelerationspeed.h" />
@@ -150,135 +73,19 @@
     <ClInclude Include="modules\teleport.h" />
     <ClInclude Include="modules\phase.h" />
     <ClInclude Include="modules\scaffold.h" />
+    <ClInclude Include="modules\nowater.h" />
     <ClInclude Include="resource1.h" />
     <ClInclude Include="resource2.h" />
-    <ClInclude Include="modules\nowater.h" />
-    <ClInclude Include="modules\jesus.h" />
-    <ClInclude Include="modules\bhop.h" />
     <ClInclude Include="Lang.h" />
->>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GuiLoader.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imgui_impl_dx9.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imgui_impl_win32.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imgui_internal.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imstb_rectpack.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imstb_textedit.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imstb_truetype.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imconfig.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imgui.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="LittleHacker.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="modules\EntityList.h">
-      <Filter>Source Files\modules</Filter>
-    </ClInclude>
-    <ClInclude Include="modules\Hitbox.h">
-      <Filter>Source Files\modules</Filter>
-    </ClInclude>
-    <ClInclude Include="modules\ModuleHandler.h">
-      <Filter>Source Files\modules</Filter>
-    </ClInclude>
-    <ClInclude Include="modules\triggerbot.h">
-      <Filter>Source Files\modules</Filter>
-    </ClInclude>
-    <ClInclude Include="modules\airjump.h">
-      <Filter>Source Files\modules</Filter>
-    </ClInclude>
-    <ClInclude Include="modules\airaccelerationspeed.h">
-      <Filter>Source Files\modules</Filter>
-    </ClInclude>
-    <ClInclude Include="modules\noslowdown.h">
-      <Filter>Source Files\modules</Filter>
-    </ClInclude>
-    <ClInclude Include="modules\noweb.h">
-      <Filter>Source Files\modules</Filter>
-    </ClInclude>
-    <ClInclude Include="modules\noknockback.h">
-      <Filter>Source Files\modules</Filter>
-    </ClInclude>
-    <ClInclude Include="modules\nofall.h">
-      <Filter>Source Files\modules</Filter>
-    </ClInclude>
-    <ClInclude Include="modules\gamemode.h">
-      <Filter>Source Files\modules</Filter>
-    </ClInclude>
-    <ClInclude Include="modules\instabreak.h">
-      <Filter>Source Files\modules</Filter>
-    </ClInclude>
-    <ClInclude Include="modules\playerspeed.h">
-      <Filter>Source Files\modules</Filter>
-    </ClInclude>
-    <ClInclude Include="modules\teleport.h">
-      <Filter>Source Files\modules</Filter>
-    </ClInclude>
-    <ClInclude Include="modules\phase.h">
-      <Filter>Source Files\modules</Filter>
-    </ClInclude>
-    <ClInclude Include="discord.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Discord\backoff.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Discord\connection.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Discord\discord_register.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Discord\discord_rpc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Discord\msg_queue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Discord\rpc_connection.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Discord\serialization.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ResourceCompile Include="resources.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Resources\Icon.ico" />
+    <Image Include="..\Resources\Icon.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\Resources\Icon.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\Resources\Icon.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="resources.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
   </ItemGroup>
 </Project>

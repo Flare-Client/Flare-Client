@@ -105,7 +105,7 @@ GuiLoader::GuiLoader() {
 
 		}
 
-		activeLang = getEnglish();
+		activeLang = getItalian();
 
 		::ShowWindow(hwnd, SW_SHOW);
 		::UpdateWindow(hwnd);
@@ -147,6 +147,7 @@ GuiLoader::GuiLoader() {
 
 			static int switchTabs = 3;
 			static int currentTheme = 0;
+			static int currentLang = 0;
 
 			if (!loadedTheme) {
 				ifstream inFile;
@@ -170,6 +171,14 @@ GuiLoader::GuiLoader() {
 			break;
 			}
 
+			switch (currentLang) {
+			case 0:
+				activeLang = getEnglish();
+				break;
+			case 1:
+				activeLang = getItalian();
+				break;
+			}
 
 			if (ImGui::Button(activeLang.Combat, ImVec2(100.0f, 0.0f)))
 				switchTabs = 0;
@@ -206,23 +215,23 @@ GuiLoader::GuiLoader() {
 
 			switch (switchTabs) {
 			case 0:
-				
-				ImGui::Checkbox("Hitbox", &ModuleHandler::hitboxToggle);
-				ImGui::Checkbox("Triggerbot", &ModuleHandler::triggerbotToggle);
+
+				ImGui::Checkbox(activeLang.Hitbox, &ModuleHandler::hitboxToggle);
+				ImGui::Checkbox(activeLang.Triggerbot, &ModuleHandler::triggerbotToggle);
 				break;
 			case 1:
-				ImGui::Checkbox("AirJump", &ModuleHandler::airJumpToggle);
-				ImGui::Checkbox("Air Acceleration", &ModuleHandler::airaccspeedToggle);
-				ImGui::Checkbox("NoSlowDown", &ModuleHandler::noslowdownToggle);
-				ImGui::Checkbox("NoKnockBack", &ModuleHandler::noknockbackToggle);
-				ImGui::Checkbox("Player Speed", &ModuleHandler::playerspeedtoggle);
+				ImGui::Checkbox(activeLang.AirJump, &ModuleHandler::airJumpToggle);
+				ImGui::Checkbox(activeLang.AirAcceleration, &ModuleHandler::airaccspeedToggle);
+				ImGui::Checkbox(activeLang.NoSlowDown, &ModuleHandler::noslowdownToggle);
+				ImGui::Checkbox(activeLang.NoKnockBack, &ModuleHandler::noknockbackToggle);
+				ImGui::Checkbox(activeLang.PlayerSpeed, &ModuleHandler::playerspeedtoggle);
 				break;
 			case 2:
-				ImGui::Checkbox("NoWeb", &ModuleHandler::nowebToggle);
-				ImGui::Checkbox("Vanilla NoFall", &ModuleHandler::nofallToggle);
-				ImGui::Checkbox("Gamemode", &ModuleHandler::gamemodeToggle);
-				ImGui::Checkbox("Instabreak", &ModuleHandler::instabreakToggle);
-				ImGui::Checkbox("Phase", &ModuleHandler::phaseToggle);
+				ImGui::Checkbox(activeLang.NoWeb, &ModuleHandler::nowebToggle);
+				ImGui::Checkbox(activeLang.VanillaNoFall, &ModuleHandler::nofallToggle);
+				ImGui::Checkbox(activeLang.Gamemode, &ModuleHandler::gamemodeToggle);
+				ImGui::Checkbox(activeLang.Instabreak, &ModuleHandler::instabreakToggle);
+				ImGui::Checkbox(activeLang.Phase, &ModuleHandler::phaseToggle);
 				break;
 			case 3:
 				const char* gamemodeItems[] = { "Survival", "Creative", "Adventure" };
@@ -252,9 +261,11 @@ GuiLoader::GuiLoader() {
 					}
 				}
 				File.close();
+				const char* langItems[] = { "English","Italian","Spanish" };
+				ImGui::Combo("Language", &currentLang, langItems, IM_ARRAYSIZE(langItems));
 				break;
 			}
-	
+
 			WindowAlwaysOnTop(hwnd);
 			ModuleHandler::ModuleHandler(mem::hProcess);
 
