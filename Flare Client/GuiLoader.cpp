@@ -136,7 +136,7 @@ GuiLoader::GuiLoader() {
 			ImGui::NewFrame();
 
 
-			ImGui::Begin("Flare Client");
+			ImGui::Begin("Flare Client v0.0.1");
 			ImGui::SetWindowSize(ImVec2(420, 420));
 			ImGui::SetWindowPos(ImVec2(0, 0));
 
