@@ -221,9 +221,18 @@
     <ClInclude Include="modules\playerspeed.h" />
     <ClInclude Include="modules\teleport.h" />
     <ClInclude Include="modules\phase.h" />
+    <ClInclude Include="resource1.h" />
+    <ClInclude Include="resource2.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Resources\Icon.ico" />
+    <Image Include="..\Resources\Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resources.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
