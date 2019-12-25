@@ -36,6 +36,7 @@
     <ClCompile Include="modules\jesus.cpp" />
     <ClCompile Include="modules\bhop.cpp" />
     <ClCompile Include="modules\criticals.cpp" />
+    <ClCompile Include="modules\flight.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="discord.h" />
@@ -78,6 +79,7 @@
     <ClInclude Include="modules\jesus.h" />
     <ClInclude Include="modules\bhop.h" />
     <ClInclude Include="modules\criticals.h" />
+    <ClInclude Include="modules\flight.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources.rc" />

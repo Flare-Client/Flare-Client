@@ -135,7 +135,7 @@ GuiLoader::GuiLoader() {
 			ImGui::NewFrame();
 
 
-			ImGui::Begin("Flare Client v0.0.1", 0, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
+			ImGui::Begin("Flare Client v0.0.2", 0, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
 			ImGui::SetWindowSize(ImVec2(420, 420));
 			ImGui::SetWindowPos(ImVec2(0, 0));
 
@@ -227,6 +227,7 @@ GuiLoader::GuiLoader() {
 				ImGui::Checkbox("NoWater", &ModuleHandler::nowaterToggle);
 				ImGui::Checkbox("Jesus", &ModuleHandler::jesusToggle);
 				ImGui::Checkbox("Bunny-Hop", &ModuleHandler::bhopToggle);
+				ImGui::Checkbox("Flight", &ModuleHandler::flightToggle);
 				break;
 			case 2:
 				ImGui::Checkbox("NoWeb", &ModuleHandler::nowebToggle);

@@ -21,6 +21,7 @@ bool ModuleHandler::nowaterToggle = false;
 bool ModuleHandler::jesusToggle = false;
 bool ModuleHandler::bhopToggle = false;
 bool ModuleHandler::criticalsToggle = false;
+bool ModuleHandler::flightToggle = false;
 
 float ModuleHandler::hitboxWidthFloat = 6.f;
 float ModuleHandler::hitboxHeightFloat = 3.f;
@@ -193,5 +194,11 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	}
 	else if (!ModuleHandler::criticalsToggle) {
 		Criticals::Criticals(hProcess, 'F');
+	}
+	if (ModuleHandler::flightToggle) {
+		Flight::Flight(hProcess, LocalPlayer, 1);
+	}
+	else if (!ModuleHandler::flightToggle) {
+		Flight::Flight(hProcess, LocalPlayer, 0);
 	}
 }
