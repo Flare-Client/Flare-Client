@@ -20,7 +20,7 @@ int main()
 
 	procID = mem::GetProcId(L"Minecraft.Windows.exe");
 	if (procID == NULL) {
-		cout << "Unable to locate process, make sure Minecraft is running!!\n";
+		cout << "Unable to locate process, make sure Minecraft is running!\n";
 	}
 	else
 	{

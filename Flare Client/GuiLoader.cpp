@@ -166,13 +166,16 @@ GuiLoader::GuiLoader() {
 			switch (currentTheme) {
 			case 0:
 				ImGui::StyleColorsDark();
-			break;
+				break;
 			case 1:
 				ImGui::StyleColorsLight();
-			break;
+				break;
 			case 2:
 				ImGui::StyleColorsClassic();
-			break;
+				break;
+			case 3:
+				ImGui::StyleColorsGray();
+				break;
 			}
 
 			if (ImGui::Button("Combat", ImVec2(100.0f, 0.0f)))
@@ -250,7 +253,7 @@ GuiLoader::GuiLoader() {
 					Teleport::Teleport(mem::hProcess, ModuleHandler::teleportX, ModuleHandler::teleportY, ModuleHandler::teleportZ);
 				}
 				ImGui::Text("Theme:");
-				const char* themeItems[] = { "Dark Theme", "Light Theme", "Classic Theme" };
+				const char* themeItems[] = { "Dark Theme", "Light Theme", "Classic Theme", "Gray Theme" };
 				ImGui::Combo("Theme", &currentTheme, themeItems, IM_ARRAYSIZE(themeItems));
 				ImGui::SameLine();
 				if (ImGui::Button("Save Theme")) {
