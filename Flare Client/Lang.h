@@ -5,6 +5,7 @@ struct Lang {
 	const char* Movement;
 	const char* Misc;
 	const char* Settings;
+	const char* Keybinds;
 
 	//Combat
 	const char* Hitbox;
@@ -34,6 +35,7 @@ Lang getEnglish() {
 		"Movement",
 		"Misc",
 		"Settings",
+		"Keybinds",
 
 		//Combat
 		"Hitbox",
@@ -62,6 +64,7 @@ Lang getItalian() {
 		"Movimento",
 		"Varie",
 		"Impostaz.",
+		"Keybinds",
 
 		//Combat
 		"Hitbox",

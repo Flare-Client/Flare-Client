@@ -180,17 +180,20 @@ GuiLoader::GuiLoader() {
 				break;
 			}
 
-			if (ImGui::Button(activeLang.Combat, ImVec2(100.0f, 0.0f)))
+			if (ImGui::Button(activeLang.Combat, ImVec2(79.0f, 0.0f)))
 				switchTabs = 0;
 			ImGui::SameLine(0.0, 2.0f);
-			if (ImGui::Button(activeLang.Movement, ImVec2(100.0f, 0.0f)))
+			if (ImGui::Button(activeLang.Movement, ImVec2(79.0f, 0.0f)))
 				switchTabs = 1;
 			ImGui::SameLine(0.0, 2.0f);
-			if (ImGui::Button(activeLang.Misc, ImVec2(100.0f, 0.0f)))
+			if (ImGui::Button(activeLang.Misc, ImVec2(79.0f, 0.0f)))
 				switchTabs = 2;
 			ImGui::SameLine(0.0, 2.0f);
-			if (ImGui::Button(activeLang.Settings, ImVec2(100.0f, 0.0f)))
+			if (ImGui::Button(activeLang.Settings, ImVec2(79.0f, 0.0f)))
 				switchTabs = 3;
+			ImGui::SameLine(0.0, 2.0f);
+			if (ImGui::Button(activeLang.Keybinds, ImVec2(79.0f, 0.0f)))
+				switchTabs = 4;
 
 			int gayUwpTitlesize = 0;
 			WINDOWPLACEMENT wpsm;
@@ -213,57 +216,62 @@ GuiLoader::GuiLoader() {
 				SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 0, LWA_ALPHA);
 			}
 
+			const char* langItems[] = { "English","Italian","Spanish" };
+			const char* themeItems[] = { "Dark Theme", "Light Theme", "Classic Theme" };
+			const char* gamemodeItems[] = { "Survival", "Creative", "Adventure" };
 			switch (switchTabs) {
-			case 0:
+				case 0:
 
-				ImGui::Checkbox(activeLang.Hitbox, &ModuleHandler::hitboxToggle);
-				ImGui::Checkbox(activeLang.Triggerbot, &ModuleHandler::triggerbotToggle);
-				break;
-			case 1:
-				ImGui::Checkbox(activeLang.AirJump, &ModuleHandler::airJumpToggle);
-				ImGui::Checkbox(activeLang.AirAcceleration, &ModuleHandler::airaccspeedToggle);
-				ImGui::Checkbox(activeLang.NoSlowDown, &ModuleHandler::noslowdownToggle);
-				ImGui::Checkbox(activeLang.NoKnockBack, &ModuleHandler::noknockbackToggle);
-				ImGui::Checkbox(activeLang.PlayerSpeed, &ModuleHandler::playerspeedtoggle);
-				break;
-			case 2:
-				ImGui::Checkbox(activeLang.NoWeb, &ModuleHandler::nowebToggle);
-				ImGui::Checkbox(activeLang.VanillaNoFall, &ModuleHandler::nofallToggle);
-				ImGui::Checkbox(activeLang.Gamemode, &ModuleHandler::gamemodeToggle);
-				ImGui::Checkbox(activeLang.Instabreak, &ModuleHandler::instabreakToggle);
-				ImGui::Checkbox(activeLang.Phase, &ModuleHandler::phaseToggle);
-				break;
-			case 3:
-				const char* gamemodeItems[] = { "Survival", "Creative", "Adventure" };
-				ImGui::SliderFloat("Hitbox: Width", &ModuleHandler::hitboxWidthFloat, 0.6, 12.f);
-				ImGui::SliderFloat("Hitbox: Height", &ModuleHandler::hitboxHeightFloat, 0.6, 12.f);
-				ImGui::SliderFloat("Air Acceleration", &ModuleHandler::airAccelerationSpeed, 0.05, 0.5);
-				ImGui::SliderFloat("Player Speed", &ModuleHandler::playerSpeedVal, 0.1, 4.f);
-				ImGui::Combo("Gamemode", &ModuleHandler::gamemodeVal, gamemodeItems, IM_ARRAYSIZE(gamemodeItems));
-				ImGui::Text("Teleport:");
-				ImGui::InputFloat("X", &ModuleHandler::teleportX);
-				ImGui::InputFloat("Y", &ModuleHandler::teleportY);
-				ImGui::InputFloat("Z", &ModuleHandler::teleportZ);
-				if (ImGui::Button("Teleport")) {
-					Teleport::Teleport(mem::hProcess, ModuleHandler::teleportX, ModuleHandler::teleportY, ModuleHandler::teleportZ);
-				}
-				ImGui::Text("Theme:");
-				const char* themeItems[] = { "Dark Theme", "Light Theme", "Classic Theme" };
-				ImGui::Combo("Style", &currentTheme, themeItems, IM_ARRAYSIZE(themeItems));
-				ImGui::SameLine();
-				if (ImGui::Button("Save")) {
-					File.open("Theme.txt");
-					if (!File) {
-						cerr << "Flare-Client: Cannot save the specified theme!" << endl;
+					ImGui::Checkbox(activeLang.Hitbox, &ModuleHandler::hitboxToggle);
+					ImGui::Checkbox(activeLang.Triggerbot, &ModuleHandler::triggerbotToggle);
+					break;
+				case 1:
+					ImGui::Checkbox(activeLang.AirJump, &ModuleHandler::airJumpToggle);
+					ImGui::Checkbox(activeLang.AirAcceleration, &ModuleHandler::airaccspeedToggle);
+					ImGui::Checkbox(activeLang.NoSlowDown, &ModuleHandler::noslowdownToggle);
+					ImGui::Checkbox(activeLang.NoKnockBack, &ModuleHandler::noknockbackToggle);
+					ImGui::Checkbox(activeLang.PlayerSpeed, &ModuleHandler::playerspeedtoggle);
+					break;
+				case 2:
+					ImGui::Checkbox(activeLang.NoWeb, &ModuleHandler::nowebToggle);
+					ImGui::Checkbox(activeLang.VanillaNoFall, &ModuleHandler::nofallToggle);
+					ImGui::Checkbox(activeLang.Gamemode, &ModuleHandler::gamemodeToggle);
+					ImGui::Checkbox(activeLang.Instabreak, &ModuleHandler::instabreakToggle);
+					ImGui::Checkbox(activeLang.Phase, &ModuleHandler::phaseToggle);
+					break;
+				case 3:
+					ImGui::SliderFloat("Hitbox: Width", &ModuleHandler::hitboxWidthFloat, 0.6, 12.f);
+					ImGui::SliderFloat("Hitbox: Height", &ModuleHandler::hitboxHeightFloat, 0.6, 12.f);
+					ImGui::SliderFloat("Air Acceleration", &ModuleHandler::airAccelerationSpeed, 0.05, 0.5);
+					ImGui::SliderFloat("Player Speed", &ModuleHandler::playerSpeedVal, 0.1, 4.f);
+					ImGui::Combo("Gamemode", &ModuleHandler::gamemodeVal, gamemodeItems, IM_ARRAYSIZE(gamemodeItems));
+					ImGui::Text("Teleport:");
+					ImGui::InputFloat("X", &ModuleHandler::teleportX);
+					ImGui::InputFloat("Y", &ModuleHandler::teleportY);
+					ImGui::InputFloat("Z", &ModuleHandler::teleportZ);
+					if (ImGui::Button("Teleport")) {
+						Teleport::Teleport(mem::hProcess, ModuleHandler::teleportX, ModuleHandler::teleportY, ModuleHandler::teleportZ);
 					}
-					else {
-						File << currentTheme << endl;
+					ImGui::Text("Theme:");
+					ImGui::Combo("Style", &currentTheme, themeItems, IM_ARRAYSIZE(themeItems));
+					ImGui::SameLine();
+					if (ImGui::Button("Save")) {
+						File.open("Theme.txt");
+						if (!File) {
+							cerr << "Flare-Client: Cannot save the specified theme!" << endl;
+						}
+						else {
+							File << currentTheme << endl;
+						}
 					}
-				}
-				File.close();
-				const char* langItems[] = { "English","Italian","Spanish" };
-				ImGui::Combo("Language", &currentLang, langItems, IM_ARRAYSIZE(langItems));
-				break;
+					File.close();
+					ImGui::Combo("Language", &currentLang, langItems, IM_ARRAYSIZE(langItems));
+					break;
+				case 4:
+					ImGui::Text(activeLang.Hitbox);
+					ImGui::SameLine();
+					ImGui::Button("...");
+					break;
 			}
 
 			WindowAlwaysOnTop(hwnd);
