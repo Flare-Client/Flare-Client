@@ -156,6 +156,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="modules\keybindhandler.cpp" />
     <ClCompile Include="modules\flight.cpp" />
     <ClCompile Include="modules\criticals.cpp" />
     <ClCompile Include="modules\bhop.cpp" />
@@ -194,6 +195,7 @@
     <ClCompile Include="modules\nowater.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="modules\keybindhandler.h" />
     <ClInclude Include="modules\flight.h" />
     <ClInclude Include="modules\criticals.h" />
     <ClInclude Include="modules\bhop.h" />

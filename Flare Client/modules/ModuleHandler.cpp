@@ -4,6 +4,7 @@ using namespace std;
 
 int GuiLoaderTicker = 0;
 
+bool ModuleHandler::jetpackToggle = false;
 bool ModuleHandler::hitboxToggle = false;
 bool ModuleHandler::triggerbotToggle = false; 
 bool ModuleHandler::airJumpToggle = false;
@@ -94,21 +95,22 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 		}
 	}
 
-	if (GetAsyncKeyState('F')) {
-		int UI;
-		ReadProcessMemory(hProcess, (BYTE*)UIOpen, &UI, sizeof(UI), 0);
-		if (UI) {
-			float vect[3], pitch, yaw;
-			ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0xF0 }), &pitch, sizeof(pitch), 0);
-			ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0xF4 }), &yaw, sizeof(yaw), 0);
-			ModuleHandler::directionalVector(vect, (yaw + 90) * 3.141592653589793 / 180, pitch * 3.141592653589793 / 180);
-			float X = 1.2 * vect[0];
-			float Y = 1.2 * -vect[1];
-			float Z = 1.2 * vect[2];
-			WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0x46C }), &X, sizeof(X), 0);
-			WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0x470 }), &Y, sizeof(Y), 0);
-			WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0x474 }), &Z, sizeof(Z), 0);
-		}
+	int UI;
+	ReadProcessMemory(hProcess, (BYTE*)UIOpen, &UI, sizeof(UI), 0);
+	if (UI) KeybindHandler::KeybindHandler(UI);
+
+	if (ModuleHandler::jetpackToggle) {
+		float vect[3], pitch, yaw;
+		ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0xF0 }), &pitch, sizeof(pitch), 0);
+		ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0xF4 }), &yaw, sizeof(yaw), 0);
+		ModuleHandler::directionalVector(vect, (yaw + 90) * 3.141592653589793 / 180, pitch * 3.141592653589793 / 180);
+		float X = 1.2 * vect[0];
+		float Y = 1.2 * -vect[1];
+		float Z = 1.2 * vect[2];
+		WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0x46C }), &X, sizeof(X), 0);
+		WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0x470 }), &Y, sizeof(Y), 0);
+		WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0x474 }), &Z, sizeof(Z), 0);
+		ModuleHandler::jetpackToggle = false;
 	}
 
 	if (ModuleHandler::hitboxToggle) {

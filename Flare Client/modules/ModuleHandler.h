@@ -7,6 +7,7 @@
 
 #include "../LittleHacker.h"
 #include "../GuiLoader.h"
+#include "keybindhandler.h"
 #include "EntityList.h"
 #include "Hitbox.h"
 #include "triggerbot.h"
@@ -34,7 +35,7 @@ class ModuleHandler {
 public:
     /* Variables */
 
-    static bool hitboxToggle, triggerbotToggle, airJumpToggle, airaccspeedToggle, noslowdownToggle, nowebToggle, noknockbackToggle, nofallToggle, gamemodeToggle, instabreakToggle, playerspeedtoggle, phaseToggle, scaffoldToggle, nowaterToggle, jesusToggle, bhopToggle, criticalsToggle, flightToggle;
+    static bool jetpackToggle, hitboxToggle, triggerbotToggle, airJumpToggle, airaccspeedToggle, noslowdownToggle, nowebToggle, noknockbackToggle, nofallToggle, gamemodeToggle, instabreakToggle, playerspeedtoggle, phaseToggle, scaffoldToggle, nowaterToggle, jesusToggle, bhopToggle, criticalsToggle, flightToggle;
     static float hitboxWidthFloat, hitboxHeightFloat, airAccelerationSpeed, playerSpeedVal, teleportX, teleportY, teleportZ, jesusVal, bhopVal;
     static int gamemodeVal;
 

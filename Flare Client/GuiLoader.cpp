@@ -211,9 +211,11 @@ GuiLoader::GuiLoader() {
 				SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 0, LWA_ALPHA);
 			}
 
+			const char* gamemodeItems[] = { "Survival", "Creative", "Adventure" };
+			const char* themeItems[] = { "Dark Theme", "Light Theme", "Classic Theme", "Grey Theme" };
+			const char* drpDisplayItems[] = { "Display username", "Display in game" };
 			switch (switchTabs) {
 			case 0:
-				
 				ImGui::Checkbox("Hitbox", &ModuleHandler::hitboxToggle);
 				ImGui::Checkbox("Triggerbot", &ModuleHandler::triggerbotToggle);
 				ImGui::Checkbox("Criticals", &ModuleHandler::criticalsToggle);
@@ -238,7 +240,6 @@ GuiLoader::GuiLoader() {
 				ImGui::Checkbox("Scaffold", &ModuleHandler::scaffoldToggle);
 				break;
 			case 3:
-				const char* gamemodeItems[] = { "Survival", "Creative", "Adventure" };
 				ImGui::SliderFloat("Hitbox: Width", &ModuleHandler::hitboxWidthFloat, 0.6, 12.f);
 				ImGui::SliderFloat("Hitbox: Height", &ModuleHandler::hitboxHeightFloat, 0.6, 12.f);
 				ImGui::SliderFloat("Air Acceleration", &ModuleHandler::airAccelerationSpeed, 0.05, 0.5);
@@ -254,7 +255,6 @@ GuiLoader::GuiLoader() {
 					Teleport::Teleport(mem::hProcess, ModuleHandler::teleportX, ModuleHandler::teleportY, ModuleHandler::teleportZ);
 				}
 				ImGui::Text("Theme:");
-				const char* themeItems[] = { "Dark Theme", "Light Theme", "Classic Theme", "Gray Theme" };
 				ImGui::Combo("Theme", &currentTheme, themeItems, IM_ARRAYSIZE(themeItems));
 				ImGui::SameLine();
 				if (ImGui::Button("Save Theme")) {
@@ -267,7 +267,6 @@ GuiLoader::GuiLoader() {
 					}
 				}
 				ImGui::Text("Discord Rich Presence:");
-				const char* drpDisplayItems[] = {"Display username", "Display in game"};
 				ImGui::Combo("DRP", &ModuleHandler::drpDisplayName, drpDisplayItems, IM_ARRAYSIZE(drpDisplayItems));
 				ImGui::SameLine();
 				if (ImGui::Button("Save DRP")) {
@@ -279,9 +278,53 @@ GuiLoader::GuiLoader() {
 						cout << "Saved Presence" << endl;
 					}
 				}
+				if (ImGui::Button("Keybinds")) switchTabs = 4;
+				break;
+			case 4:
+				ImGui::Text("Jetpack");
+				ImGui::SameLine();
+				if (KeybindHandler::jetpackKey) {
+					char* jetpackKeyText = new char[1];
+					jetpackKeyText[1] = KeybindHandler::jetpackKey;
+					if (ImGui::Button(&jetpackKeyText[1])) KeybindHandler::jetpackKey = NULL;
+				}
+				else if (!KeybindHandler::jetpackKey) {
+					ImGui::Button("Waiting for key input");
+					for (int I = 'A'; I < 'Z'; I++) {
+						if (GetAsyncKeyState(I)) KeybindHandler::jetpackKey = I;
+					}
+				}
+
+				ImGui::Text("Hitbox");
+				ImGui::SameLine();
+				if (KeybindHandler::hitboxKey) {
+					char* hitboxKeyText = new char[1];
+					hitboxKeyText[1] = KeybindHandler::hitboxKey;
+					if (ImGui::Button(&hitboxKeyText[1])) KeybindHandler::hitboxKey = NULL;
+				}
+				else if (!KeybindHandler::hitboxKey) {
+					ImGui::Button("Waiting for key input");
+					for (int I = 'A'; I < 'Z'; I++) {
+						if (GetAsyncKeyState(I)) KeybindHandler::hitboxKey = I;
+					}
+				}
+
+				ImGui::Text("Scaffold");
+				ImGui::SameLine();
+				if (KeybindHandler::scaffoldKey) {
+					char* scaffoldKeyText = new char[1];
+					scaffoldKeyText[1] = KeybindHandler::scaffoldKey;
+					if (ImGui::Button(&scaffoldKeyText[1])) KeybindHandler::scaffoldKey = NULL;
+				}
+				else if (!KeybindHandler::scaffoldKey) {
+					ImGui::Button("Waiting for key input");
+					for (int I = 'A'; I < 'Z'; I++) {
+						if (GetAsyncKeyState(I)) KeybindHandler::scaffoldKey = I;
+					}
+				}
 				break;
 			}
-	
+
 			WindowAlwaysOnTop(hwnd);
 			ModuleHandler::ModuleHandler(mem::hProcess);
 
