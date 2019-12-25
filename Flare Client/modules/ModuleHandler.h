@@ -36,6 +36,8 @@ public:
     static float hitboxWidthFloat, hitboxHeightFloat, airAccelerationSpeed, playerSpeedVal, teleportX, teleportY, teleportZ, jesusVal, bhopVal;
     static int gamemodeVal;
 
+	static int drpDisplayName;
+
     /* Main */
     ModuleHandler(HANDLE hProcess);
 

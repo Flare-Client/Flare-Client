@@ -35,7 +35,11 @@ int ModuleHandler::gamemodeVal = 1;
 
 
 
-int discordPresenceTick; //Discord Stuff
+int discordPresenceTick;
+int ModuleHandler::drpDisplayName = 0;
+
+#include <fstream>
+ifstream File;
 
 //Discord Stuff
 int discordEmbedUpdateTick;
@@ -53,11 +57,20 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 
 	discordPresenceTick += 1;
 
+
 	if (discordPresenceTick > 200) {
 		if (playerUsername.length() > 0) {
 			char* c = new char[playerUsername.length() + 1];
 			strcpy(c, playerUsername.c_str());
-			Discord::Update(c, EntityListArr.size());
+			switch (ModuleHandler::drpDisplayName) {
+			case 0:
+				Discord::Update(c, EntityListArr.size());
+			break;
+
+			case 1:
+				Discord::Update((char*)"Currently In Game", EntityListArr.size());
+			break;
+			}
 		}
 		else if (playerUsername.length() < 1) {
 			Discord::Update((char*)"On the main menu", 0);

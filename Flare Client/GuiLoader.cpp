@@ -12,10 +12,9 @@
 #include <fstream>
 #include <iostream>
 bool loadedTheme = false;
+bool loadedDrpDetails = false;
 
 using namespace std;
-
-ofstream File;
 
 bool GuiLoader::windowToggle = true;
 
@@ -143,14 +142,25 @@ GuiLoader::GuiLoader() {
 			static int switchTabs = 3;
 			static int currentTheme = 0;
 
+			ifstream inFile;
 			if (!loadedTheme) {
-				ifstream inFile;
 				inFile.open("Theme.txt");
 				if (inFile.is_open()) {
 					inFile >> currentTheme;
+					inFile.close();
 				}
-				inFile.close();
 				loadedTheme = true;
+				cout << "Loaded Theme" << endl;
+			}
+
+			if (!loadedDrpDetails) {
+				inFile.open("Discord.txt");
+				if (inFile.is_open()) {
+					inFile >> ModuleHandler::drpDisplayName;
+					inFile.close();
+				}
+				loadedDrpDetails = true;
+				cout << "Loaded Discord Rich Presence Details" << endl;
 			}
 
 			switch (currentTheme) {
@@ -240,18 +250,30 @@ GuiLoader::GuiLoader() {
 				}
 				ImGui::Text("Theme:");
 				const char* themeItems[] = { "Dark Theme", "Light Theme", "Classic Theme" };
-				ImGui::Combo("Style", &currentTheme, themeItems, IM_ARRAYSIZE(themeItems));
+				ImGui::Combo("Theme", &currentTheme, themeItems, IM_ARRAYSIZE(themeItems));
 				ImGui::SameLine();
-				if (ImGui::Button("Save")) {
-					File.open("Theme.txt");
-					if (!File) {
-						cerr << "Flare-Client: Cannot save the specified theme!" << endl;
-					}
-					else {
-						File << currentTheme << endl;
+				if (ImGui::Button("Save Theme")) {
+					ofstream themeFile;
+					themeFile.open("Theme.txt");
+					if (themeFile.is_open()) {
+						themeFile << currentTheme << endl;
+						themeFile.close();
+						cout << "Saved Theme" << endl;
 					}
 				}
-				File.close();
+				ImGui::Text("Discord Rich Presence:");
+				const char* drpDisplayItems[] = {"Display username", "Display in game"};
+				ImGui::Combo("DRP", &ModuleHandler::drpDisplayName, drpDisplayItems, IM_ARRAYSIZE(drpDisplayItems));
+				ImGui::SameLine();
+				if (ImGui::Button("Save DRP")) {
+					ofstream discordFile;
+					discordFile.open("Discord.txt");
+					if (discordFile.is_open()) {
+						discordFile << ModuleHandler::drpDisplayName;
+						discordFile.close();
+						cout << "Saved Presence" << endl;
+					}
+				}
 				break;
 			}
 	
