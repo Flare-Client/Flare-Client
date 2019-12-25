@@ -20,6 +20,7 @@ bool ModuleHandler::scaffoldToggle = false;
 bool ModuleHandler::nowaterToggle = false;
 bool ModuleHandler::jesusToggle = false;
 bool ModuleHandler::bhopToggle = false;
+bool ModuleHandler::criticalsToggle = false;
 
 float ModuleHandler::hitboxWidthFloat = 6.f;
 float ModuleHandler::hitboxHeightFloat = 3.f;
@@ -186,5 +187,11 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	}
 	if (ModuleHandler::bhopToggle) {
 		BHOP::BHOP(hProcess, LocalPlayer, ModuleHandler::bhopVal);
+	}
+	if (ModuleHandler::criticalsToggle) {
+		Criticals::Criticals(hProcess, 'P');
+	}
+	else if (!ModuleHandler::criticalsToggle) {
+		Criticals::Criticals(hProcess, 'F');
 	}
 }

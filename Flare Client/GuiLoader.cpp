@@ -213,6 +213,7 @@ GuiLoader::GuiLoader() {
 				
 				ImGui::Checkbox("Hitbox", &ModuleHandler::hitboxToggle);
 				ImGui::Checkbox("Triggerbot", &ModuleHandler::triggerbotToggle);
+				ImGui::Checkbox("Criticals", &ModuleHandler::criticalsToggle);
 				break;
 			case 1:
 				ImGui::Checkbox("AirJump", &ModuleHandler::airJumpToggle);
