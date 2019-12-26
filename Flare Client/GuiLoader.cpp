@@ -180,20 +180,17 @@ GuiLoader::GuiLoader() {
 				break;
 			}
 
-			if (ImGui::Button(activeLang.Combat, ImVec2(79.0f, 0.0f)))
+			if (ImGui::Button(activeLang.Combat, ImVec2(100.0f, 0.0f)))
 				switchTabs = 0;
 			ImGui::SameLine(0.0, 2.0f);
-			if (ImGui::Button(activeLang.Movement, ImVec2(79.0f, 0.0f)))
+			if (ImGui::Button(activeLang.Movement, ImVec2(100.0f, 0.0f)))
 				switchTabs = 1;
 			ImGui::SameLine(0.0, 2.0f);
-			if (ImGui::Button(activeLang.Misc, ImVec2(79.0f, 0.0f)))
+			if (ImGui::Button(activeLang.Misc, ImVec2(100.0f, 0.0f)))
 				switchTabs = 2;
 			ImGui::SameLine(0.0, 2.0f);
-			if (ImGui::Button(activeLang.Settings, ImVec2(79.0f, 0.0f)))
+			if (ImGui::Button(activeLang.Settings, ImVec2(100.0f, 0.0f)))
 				switchTabs = 3;
-			ImGui::SameLine(0.0, 2.0f);
-			if (ImGui::Button(activeLang.Keybinds, ImVec2(79.0f, 0.0f)))
-				switchTabs = 4;
 
 			int gayUwpTitlesize = 0;
 			WINDOWPLACEMENT wpsm;
@@ -266,11 +263,6 @@ GuiLoader::GuiLoader() {
 					}
 					File.close();
 					ImGui::Combo("Language", &currentLang, langItems, IM_ARRAYSIZE(langItems));
-					break;
-				case 4:
-					ImGui::Text(activeLang.Hitbox);
-					ImGui::SameLine();
-					ImGui::Button("...");
 					break;
 			}
 
