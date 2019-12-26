@@ -312,22 +312,10 @@ GuiLoader::GuiLoader() {
 				if (ImGui::Button("Keybinds")) switchTabs = 4;
 				break;
 			case 4:
-				/*ImGui::Text("Jetpack");
-				ImGui::SameLine();
-				if (KeybindHandler::jetpackKey) {
-					char* jetpackKeyText = new char[1];
-					jetpackKeyText[1] = KeybindHandler::jetpackKey;
-					if (ImGui::Button(&jetpackKeyText[1])) KeybindHandler::jetpackKey = NULL;
-				}
-				else if (!KeybindHandler::jetpackKey) {
-					ImGui::Button("Waiting for key input");
-					for (int I = '1'; I < 'Z'; I++) {
-						if (GetAsyncKeyState(I)) KeybindHandler::jetpackKey = I;
-					}
-				}*/
 				createReassign("Jetpack", &KeybindHandler::jetpackKey);
 				createReassign("Hitbox", &KeybindHandler::hitboxKey);
 				createReassign("Scaffold", &KeybindHandler::scaffoldKey);
+				createReassign("Triggerbot", &KeybindHandler::triggerbotKey);
 				break;
 			}
 
