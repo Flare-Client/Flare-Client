@@ -13,10 +13,9 @@
 #include <fstream>
 #include <iostream>
 bool loadedTheme = false;
+bool loadedDrpDetails = false;
 
 using namespace std;
-
-ofstream File;
 
 bool GuiLoader::windowToggle = true;
 
@@ -141,7 +140,7 @@ GuiLoader::GuiLoader() {
 			ImGui::NewFrame();
 
 
-			ImGui::Begin("Flare Client v0.0.1");
+			ImGui::Begin("Flare Client v0.0.2", 0, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
 			ImGui::SetWindowSize(ImVec2(420, 420));
 			ImGui::SetWindowPos(ImVec2(0, 0));
 
@@ -149,26 +148,40 @@ GuiLoader::GuiLoader() {
 			static int currentTheme = 0;
 			static int currentLang = 0;
 
+			ifstream inFile;
 			if (!loadedTheme) {
-				ifstream inFile;
 				inFile.open("Theme.txt");
 				if (inFile.is_open()) {
 					inFile >> currentTheme;
+					inFile.close();
 				}
-				inFile.close();
 				loadedTheme = true;
+				cout << "Loaded Theme" << endl;
+			}
+
+			if (!loadedDrpDetails) {
+				inFile.open("Discord.txt");
+				if (inFile.is_open()) {
+					inFile >> ModuleHandler::drpDisplayName;
+					inFile.close();
+				}
+				loadedDrpDetails = true;
+				cout << "Loaded Discord Rich Presence Details" << endl;
 			}
 
 			switch (currentTheme) {
 			case 0:
 				ImGui::StyleColorsDark();
-			break;
+				break;
 			case 1:
 				ImGui::StyleColorsLight();
-			break;
+				break;
 			case 2:
 				ImGui::StyleColorsClassic();
-			break;
+				break;
+			case 3:
+				ImGui::StyleColorsGray();
+				break;
 			}
 
 			switch (currentLang) {
@@ -213,57 +226,118 @@ GuiLoader::GuiLoader() {
 				SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 0, LWA_ALPHA);
 			}
 
-			const char* langItems[] = { "English","Italian","Spanish" };
-			const char* themeItems[] = { "Dark Theme", "Light Theme", "Classic Theme" };
 			const char* gamemodeItems[] = { "Survival", "Creative", "Adventure" };
+			const char* themeItems[] = { "Dark Theme", "Light Theme", "Classic Theme", "Grey Theme" };
+			const char* drpDisplayItems[] = { "Display username", "Display in game" };
 			switch (switchTabs) {
-				case 0:
+			case 0:
+				ImGui::Checkbox("Hitbox", &ModuleHandler::hitboxToggle);
+				ImGui::Checkbox("Triggerbot", &ModuleHandler::triggerbotToggle);
+				ImGui::Checkbox("Criticals", &ModuleHandler::criticalsToggle);
+				break;
+			case 1:
+				ImGui::Checkbox("AirJump", &ModuleHandler::airJumpToggle);
+				ImGui::Checkbox("Air Acceleration", &ModuleHandler::airaccspeedToggle);
+				ImGui::Checkbox("NoSlowDown", &ModuleHandler::noslowdownToggle);
+				ImGui::Checkbox("NoKnockBack", &ModuleHandler::noknockbackToggle);
+				ImGui::Checkbox("Player Speed", &ModuleHandler::playerspeedtoggle);
+				ImGui::Checkbox("NoWater", &ModuleHandler::nowaterToggle);
+				ImGui::Checkbox("Jesus", &ModuleHandler::jesusToggle);
+				ImGui::Checkbox("Bunny-Hop", &ModuleHandler::bhopToggle);
+				ImGui::Checkbox("Flight", &ModuleHandler::flightToggle);
+				break;
+			case 2:
+				ImGui::Checkbox("NoWeb", &ModuleHandler::nowebToggle);
+				ImGui::Checkbox("Vanilla NoFall", &ModuleHandler::nofallToggle);
+				ImGui::Checkbox("Gamemode", &ModuleHandler::gamemodeToggle);
+				ImGui::Checkbox("Instabreak", &ModuleHandler::instabreakToggle);
+				ImGui::Checkbox("Phase", &ModuleHandler::phaseToggle);
+				ImGui::Checkbox("Scaffold", &ModuleHandler::scaffoldToggle);
+				break;
+			case 3:
+				ImGui::SliderFloat("Hitbox: Width", &ModuleHandler::hitboxWidthFloat, 0.6, 12.f);
+				ImGui::SliderFloat("Hitbox: Height", &ModuleHandler::hitboxHeightFloat, 0.6, 12.f);
+				ImGui::SliderFloat("Air Acceleration", &ModuleHandler::airAccelerationSpeed, 0.05, 0.5);
+				ImGui::SliderFloat("Player Speed", &ModuleHandler::playerSpeedVal, 0.1, 4.f);
+				ImGui::SliderFloat("Jesus (Y Boost)", &ModuleHandler::jesusVal, 0.1, 5.f);
+				ImGui::SliderFloat("BHOP (Y Boost)", &ModuleHandler::bhopVal, 0.1, 5.f);
+				ImGui::Combo("Gamemode", &ModuleHandler::gamemodeVal, gamemodeItems, IM_ARRAYSIZE(gamemodeItems));
+				ImGui::Text("Teleport:");
+				ImGui::InputFloat("X", &ModuleHandler::teleportX);
+				ImGui::InputFloat("Y", &ModuleHandler::teleportY);
+				ImGui::InputFloat("Z", &ModuleHandler::teleportZ);
+				if (ImGui::Button("Teleport")) {
+					Teleport::Teleport(mem::hProcess, ModuleHandler::teleportX, ModuleHandler::teleportY, ModuleHandler::teleportZ);
+				}
+				ImGui::Text("Theme:");
+				ImGui::Combo("Theme", &currentTheme, themeItems, IM_ARRAYSIZE(themeItems));
+				ImGui::SameLine();
+				if (ImGui::Button("Save Theme")) {
+					ofstream themeFile;
+					themeFile.open("Theme.txt");
+					if (themeFile.is_open()) {
+						themeFile << currentTheme << endl;
+						themeFile.close();
+						cout << "Saved Theme" << endl;
+					}
+				}
+				ImGui::Text("Discord Rich Presence:");
+				ImGui::Combo("DRP", &ModuleHandler::drpDisplayName, drpDisplayItems, IM_ARRAYSIZE(drpDisplayItems));
+				ImGui::SameLine();
+				if (ImGui::Button("Save DRP")) {
+					ofstream discordFile;
+					discordFile.open("Discord.txt");
+					if (discordFile.is_open()) {
+						discordFile << ModuleHandler::drpDisplayName;
+						discordFile.close();
+						cout << "Saved Presence" << endl;
+					}
+				}
+				if (ImGui::Button("Keybinds")) switchTabs = 4;
+				break;
+			case 4:
+				ImGui::Text("Jetpack");
+				ImGui::SameLine();
+				if (KeybindHandler::jetpackKey) {
+					char* jetpackKeyText = new char[1];
+					jetpackKeyText[1] = KeybindHandler::jetpackKey;
+					if (ImGui::Button(&jetpackKeyText[1])) KeybindHandler::jetpackKey = NULL;
+				}
+				else if (!KeybindHandler::jetpackKey) {
+					ImGui::Button("Waiting for key input");
+					for (int I = 'A'; I < 'Z'; I++) {
+						if (GetAsyncKeyState(I)) KeybindHandler::jetpackKey = I;
+					}
+				}
 
-					ImGui::Checkbox(activeLang.Hitbox, &ModuleHandler::hitboxToggle);
-					ImGui::Checkbox(activeLang.Triggerbot, &ModuleHandler::triggerbotToggle);
-					break;
-				case 1:
-					ImGui::Checkbox(activeLang.AirJump, &ModuleHandler::airJumpToggle);
-					ImGui::Checkbox(activeLang.AirAcceleration, &ModuleHandler::airaccspeedToggle);
-					ImGui::Checkbox(activeLang.NoSlowDown, &ModuleHandler::noslowdownToggle);
-					ImGui::Checkbox(activeLang.NoKnockBack, &ModuleHandler::noknockbackToggle);
-					ImGui::Checkbox(activeLang.PlayerSpeed, &ModuleHandler::playerspeedtoggle);
-					break;
-				case 2:
-					ImGui::Checkbox(activeLang.NoWeb, &ModuleHandler::nowebToggle);
-					ImGui::Checkbox(activeLang.VanillaNoFall, &ModuleHandler::nofallToggle);
-					ImGui::Checkbox(activeLang.Gamemode, &ModuleHandler::gamemodeToggle);
-					ImGui::Checkbox(activeLang.Instabreak, &ModuleHandler::instabreakToggle);
-					ImGui::Checkbox(activeLang.Phase, &ModuleHandler::phaseToggle);
-					break;
-				case 3:
-					ImGui::SliderFloat("Hitbox: Width", &ModuleHandler::hitboxWidthFloat, 0.6, 12.f);
-					ImGui::SliderFloat("Hitbox: Height", &ModuleHandler::hitboxHeightFloat, 0.6, 12.f);
-					ImGui::SliderFloat("Air Acceleration", &ModuleHandler::airAccelerationSpeed, 0.05, 0.5);
-					ImGui::SliderFloat("Player Speed", &ModuleHandler::playerSpeedVal, 0.1, 4.f);
-					ImGui::Combo("Gamemode", &ModuleHandler::gamemodeVal, gamemodeItems, IM_ARRAYSIZE(gamemodeItems));
-					ImGui::Text("Teleport:");
-					ImGui::InputFloat("X", &ModuleHandler::teleportX);
-					ImGui::InputFloat("Y", &ModuleHandler::teleportY);
-					ImGui::InputFloat("Z", &ModuleHandler::teleportZ);
-					if (ImGui::Button("Teleport")) {
-						Teleport::Teleport(mem::hProcess, ModuleHandler::teleportX, ModuleHandler::teleportY, ModuleHandler::teleportZ);
+				ImGui::Text("Hitbox");
+				ImGui::SameLine();
+				if (KeybindHandler::hitboxKey) {
+					char* hitboxKeyText = new char[1];
+					hitboxKeyText[1] = KeybindHandler::hitboxKey;
+					if (ImGui::Button(&hitboxKeyText[1])) KeybindHandler::hitboxKey = NULL;
+				}
+				else if (!KeybindHandler::hitboxKey) {
+					ImGui::Button("Waiting for key input");
+					for (int I = 'A'; I < 'Z'; I++) {
+						if (GetAsyncKeyState(I)) KeybindHandler::hitboxKey = I;
 					}
-					ImGui::Text("Theme:");
-					ImGui::Combo("Style", &currentTheme, themeItems, IM_ARRAYSIZE(themeItems));
-					ImGui::SameLine();
-					if (ImGui::Button("Save")) {
-						File.open("Theme.txt");
-						if (!File) {
-							cerr << "Flare-Client: Cannot save the specified theme!" << endl;
-						}
-						else {
-							File << currentTheme << endl;
-						}
+				}
+
+				ImGui::Text("Scaffold");
+				ImGui::SameLine();
+				if (KeybindHandler::scaffoldKey) {
+					char* scaffoldKeyText = new char[1];
+					scaffoldKeyText[1] = KeybindHandler::scaffoldKey;
+					if (ImGui::Button(&scaffoldKeyText[1])) KeybindHandler::scaffoldKey = NULL;
+				}
+				else if (!KeybindHandler::scaffoldKey) {
+					ImGui::Button("Waiting for key input");
+					for (int I = 'A'; I < 'Z'; I++) {
+						if (GetAsyncKeyState(I)) KeybindHandler::scaffoldKey = I;
 					}
-					File.close();
-					ImGui::Combo("Language", &currentLang, langItems, IM_ARRAYSIZE(langItems));
-					break;
+				}
+				break;
 			}
 
 			WindowAlwaysOnTop(hwnd);

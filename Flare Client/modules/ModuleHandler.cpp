@@ -4,6 +4,7 @@ using namespace std;
 
 int GuiLoaderTicker = 0;
 
+bool ModuleHandler::jetpackToggle = false;
 bool ModuleHandler::hitboxToggle = false;
 bool ModuleHandler::triggerbotToggle = false; 
 bool ModuleHandler::airJumpToggle = false;
@@ -16,6 +17,12 @@ bool ModuleHandler::gamemodeToggle = false;
 bool ModuleHandler::instabreakToggle = false;
 bool ModuleHandler::playerspeedtoggle = false;
 bool ModuleHandler::phaseToggle = false;
+bool ModuleHandler::scaffoldToggle = false;
+bool ModuleHandler::nowaterToggle = false;
+bool ModuleHandler::jesusToggle = false;
+bool ModuleHandler::bhopToggle = false;
+bool ModuleHandler::criticalsToggle = false;
+bool ModuleHandler::flightToggle = false;
 
 float ModuleHandler::hitboxWidthFloat = 6.f;
 float ModuleHandler::hitboxHeightFloat = 3.f;
@@ -24,12 +31,18 @@ float ModuleHandler::playerSpeedVal = 0.45;
 float ModuleHandler::teleportX = 0;
 float ModuleHandler::teleportY = 0;
 float ModuleHandler::teleportZ = 0;
+float ModuleHandler::jesusVal = 0.2;
+float ModuleHandler::bhopVal = 0.2;
 
 int ModuleHandler::gamemodeVal = 1;
 
 
 
-bool nameDisplay = false; //Discord Stuff
+int discordPresenceTick;
+int ModuleHandler::drpDisplayName = 0;
+
+#include <fstream>
+ifstream File;
 
 //Discord Stuff
 int discordEmbedUpdateTick;
@@ -45,22 +58,32 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0x32C }), &movement, sizeof(movement), 0);
 	ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0x9E8 }), &playerUsername, sizeof(playerUsername), 0);
 
-	if (movement && playerUsername.length() > 0 && !nameDisplay) {
-		char* c = new char[playerUsername.length() + 1];
-		strcpy(c, playerUsername.c_str());
-		Discord::Update(c, EntityListArr.size());
-		cout << "Added username " << c << " to the Discord Rich Presence!" << endl;
-		nameDisplay = true;
-	}
+	discordPresenceTick += 1;
 
-	if (playerUsername.length() < 1 && nameDisplay) {
-		nameDisplay = false;
-		Discord::Update((char*)"On the main menu", EntityListArr.size());
+
+	if (discordPresenceTick > 200) {
+		if (playerUsername.length() > 0) {
+			char* c = new char[playerUsername.length() + 1];
+			strcpy(c, playerUsername.c_str());
+			switch (ModuleHandler::drpDisplayName) {
+			case 0:
+				Discord::Update(c, EntityListArr.size());
+			break;
+
+			case 1:
+				Discord::Update((char*)"Currently In Game", EntityListArr.size());
+			break;
+			}
+		}
+		else if (playerUsername.length() < 1) {
+			Discord::Update((char*)"On the main menu", 0);
+		}
+		discordPresenceTick = 0;
 	}
 
 	GuiLoaderTicker += 1;
 
-	if (GetAsyncKeyState(VK_F6)) {
+	if (GetAsyncKeyState(VK_F8)) {
 		if (GuiLoaderTicker > 60) {
 			if (GuiLoader::windowToggle) {
 				GuiLoader::windowToggle = false;
@@ -72,30 +95,29 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 		}
 	}
 
-	if (GetAsyncKeyState('F')) {
-		int UI;
-		ReadProcessMemory(hProcess, (BYTE*)UIOpen, &UI, sizeof(UI), 0);
-		if (UI) {
-			float vect[3], pitch, yaw;
-			ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0xF0 }), &pitch, sizeof(pitch), 0);
-			ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0xF4 }), &yaw, sizeof(yaw), 0);
-			ModuleHandler::directionalVector(vect, (yaw + 90) * 3.141592653589793 / 180, pitch * 3.141592653589793 / 180);
-			float X = 1.2 * vect[0];
-			float Y = 1.2 * -vect[1];
-			float Z = 1.2 * vect[2];
-			WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0x46C }), &X, sizeof(X), 0);
-			WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0x470 }), &Y, sizeof(Y), 0);
-			WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0x474 }), &Z, sizeof(Z), 0);
-		}
+	int UI;
+	ReadProcessMemory(hProcess, (BYTE*)UIOpen, &UI, sizeof(UI), 0);
+	if (UI) KeybindHandler::KeybindHandler(UI);
+
+	if (ModuleHandler::jetpackToggle) {
+		float vect[3], pitch, yaw;
+		ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0xF0 }), &pitch, sizeof(pitch), 0);
+		ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0xF4 }), &yaw, sizeof(yaw), 0);
+		ModuleHandler::directionalVector(vect, (yaw + 90) * 3.141592653589793 / 180, pitch * 3.141592653589793 / 180);
+		float X = 1.2 * vect[0];
+		float Y = 1.2 * -vect[1];
+		float Z = 1.2 * vect[2];
+		WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0x46C }), &X, sizeof(X), 0);
+		WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0x470 }), &Y, sizeof(Y), 0);
+		WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0x474 }), &Z, sizeof(Z), 0);
+		ModuleHandler::jetpackToggle = false;
 	}
 
 	if (ModuleHandler::hitboxToggle) {
-		Hitbox::HitboxWidth(hProcess, EntityListArr, ModuleHandler::hitboxWidthFloat);
-		Hitbox::HitboxHeight(hProcess, EntityListArr, ModuleHandler::hitboxHeightFloat);
+		Hitbox::Hitbox(hProcess, EntityListArr, ModuleHandler::hitboxWidthFloat, ModuleHandler::hitboxHeightFloat);
 	}
 	else if (!ModuleHandler::hitboxToggle) {
-		Hitbox::HitboxWidth(hProcess, EntityListArr, 0.6);
-		Hitbox::HitboxHeight(hProcess, EntityListArr, 1.8);
+		Hitbox::Hitbox(hProcess, EntityListArr, 0.6, 1.8);
 	}
 	if (ModuleHandler::triggerbotToggle) {
 		TriggerBot::TriggerBot(hProcess, 'N');
@@ -150,5 +172,35 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	}
 	else if (!ModuleHandler::phaseToggle) {
 		Phase::Phase(hProcess, LocalPlayer, 'F');
+	}
+	if (ModuleHandler::scaffoldToggle) {
+		Scaffold::Scaffold(hProcess, 'N');
+	}
+	else if (!ModuleHandler::scaffoldToggle) {
+		Scaffold::Scaffold(hProcess, 'F');
+	}
+	if (ModuleHandler::nowaterToggle) {
+		NoWater::NoWater(hProcess, 'N');
+	}
+	else if (!ModuleHandler::nowaterToggle) {
+		NoWater::NoWater(hProcess, 'F');
+	}
+	if (ModuleHandler::jesusToggle) {
+		Jesus::Jesus(hProcess, LocalPlayer, ModuleHandler::jesusVal);
+	}
+	if (ModuleHandler::bhopToggle) {
+		BHOP::BHOP(hProcess, LocalPlayer, ModuleHandler::bhopVal);
+	}
+	if (ModuleHandler::criticalsToggle) {
+		Criticals::Criticals(hProcess, 'P');
+	}
+	else if (!ModuleHandler::criticalsToggle) {
+		Criticals::Criticals(hProcess, 'F');
+	}
+	if (ModuleHandler::flightToggle) {
+		Flight::Flight(hProcess, LocalPlayer, 1);
+	}
+	else if (!ModuleHandler::flightToggle) {
+		Flight::Flight(hProcess, LocalPlayer, 0);
 	}
 }

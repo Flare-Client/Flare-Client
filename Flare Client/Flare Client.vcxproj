@@ -156,6 +156,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="modules\keybindhandler.cpp" />
+    <ClCompile Include="modules\flight.cpp" />
+    <ClCompile Include="modules\criticals.cpp" />
+    <ClCompile Include="modules\bhop.cpp" />
     <ClCompile Include="discord.cpp" />
     <ClCompile Include="Discord\connection_win.cpp" />
     <ClCompile Include="Discord\discord_register_win.cpp" />
@@ -163,6 +167,7 @@
     <ClCompile Include="Discord\dllmain.cpp" />
     <ClCompile Include="Discord\rpc_connection.cpp" />
     <ClCompile Include="Discord\serialization.cpp" />
+    <ClCompile Include="modules\jesus.cpp" />
     <ClCompile Include="modules\instabreak.cpp" />
     <ClCompile Include="modules\gamemode.cpp" />
     <ClCompile Include="modules\airaccelerationspeed.cpp" />
@@ -186,9 +191,13 @@
     <ClCompile Include="modules\playerspeed.cpp" />
     <ClCompile Include="modules\teleport.cpp" />
     <ClCompile Include="modules\phase.cpp" />
+    <ClCompile Include="modules\scaffold.cpp" />
+    <ClCompile Include="modules\nowater.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Lang.h" />
+    <ClInclude Include="modules\keybindhandler.h" />
+    <ClInclude Include="modules\flight.h" />
+    <ClInclude Include="modules\criticals.h" />
     <ClInclude Include="modules\bhop.h" />
     <ClInclude Include="discord.h" />
     <ClInclude Include="Discord\backoff.h" />

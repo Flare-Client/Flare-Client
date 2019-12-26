@@ -7,6 +7,7 @@
 
 #include "../LittleHacker.h"
 #include "../GuiLoader.h"
+#include "keybindhandler.h"
 #include "EntityList.h"
 #include "Hitbox.h"
 #include "triggerbot.h"
@@ -21,6 +22,12 @@
 #include "playerspeed.h"
 #include "teleport.h"
 #include "phase.h"
+#include "scaffold.h"
+#include "nowater.h"
+#include "jesus.h"
+#include "bhop.h"
+#include "criticals.h"
+#include "flight.h"
 
 #include "../discord.h"
 
@@ -28,9 +35,11 @@ class ModuleHandler {
 public:
     /* Variables */
 
-    static bool hitboxToggle, triggerbotToggle, airJumpToggle, airaccspeedToggle, noslowdownToggle, nowebToggle, noknockbackToggle, nofallToggle, gamemodeToggle, instabreakToggle, playerspeedtoggle, phaseToggle;
-    static float hitboxWidthFloat, hitboxHeightFloat, airAccelerationSpeed, playerSpeedVal, teleportX, teleportY, teleportZ;
+    static bool jetpackToggle, hitboxToggle, triggerbotToggle, airJumpToggle, airaccspeedToggle, noslowdownToggle, nowebToggle, noknockbackToggle, nofallToggle, gamemodeToggle, instabreakToggle, playerspeedtoggle, phaseToggle, scaffoldToggle, nowaterToggle, jesusToggle, bhopToggle, criticalsToggle, flightToggle;
+    static float hitboxWidthFloat, hitboxHeightFloat, airAccelerationSpeed, playerSpeedVal, teleportX, teleportY, teleportZ, jesusVal, bhopVal;
     static int gamemodeVal;
+
+	static int drpDisplayName;
 
     /* Main */
     ModuleHandler(HANDLE hProcess);
