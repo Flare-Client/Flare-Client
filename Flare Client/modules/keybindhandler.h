@@ -9,6 +9,7 @@ public:
 	static char hitboxKey;
 	static char scaffoldKey;
 	static char triggerbotKey;
+	static char tpauraKey;
 	
 
 	static int keybindTick;

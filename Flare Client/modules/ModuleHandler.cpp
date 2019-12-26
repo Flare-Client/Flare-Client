@@ -23,6 +23,7 @@ bool ModuleHandler::jesusToggle = false;
 bool ModuleHandler::bhopToggle = false;
 bool ModuleHandler::criticalsToggle = false;
 bool ModuleHandler::flightToggle = false;
+bool ModuleHandler::tpauraToggle = false;
 
 float ModuleHandler::hitboxWidthFloat = 6.f;
 float ModuleHandler::hitboxHeightFloat = 3.f;
@@ -202,5 +203,11 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	}
 	else if (!ModuleHandler::flightToggle) {
 		Flight::Flight(hProcess, LocalPlayer, 0);
+	}
+	if (ModuleHandler::tpauraToggle) {
+		TpAura::TpAura(hProcess, LocalPlayer, EntityListArr, 0);
+	}
+	else if (!ModuleHandler::tpauraToggle) {
+		TpAura::TpAura(hProcess, LocalPlayer, EntityListArr, 1);
 	}
 }

@@ -4,6 +4,7 @@ char KeybindHandler::jetpackKey = 'F';
 char KeybindHandler::hitboxKey = 'G';
 char KeybindHandler::scaffoldKey = 'H';
 char KeybindHandler::triggerbotKey = 'R';
+char KeybindHandler::tpauraKey = 'L';
 
 int KeybindHandler::keybindTick = 0;
 
@@ -27,11 +28,12 @@ KeybindHandler::KeybindHandler(int UI) {
 		}
 	}
 
-	if (UI && KeybindHandler::keybindTick > 40) {
+	if (UI && KeybindHandler::keybindTick > 10) {
 		
 		keystateCheck(&KeybindHandler::hitboxKey, &ModuleHandler::hitboxToggle);
 		keystateCheck(&KeybindHandler::scaffoldKey, &ModuleHandler::scaffoldToggle);
 		keystateCheck(&KeybindHandler::triggerbotKey, &ModuleHandler::triggerbotToggle);
+		keystateCheck(&KeybindHandler::tpauraKey, &ModuleHandler::tpauraToggle);
 
 		KeybindHandler::keybindTick = 0;
 	}
