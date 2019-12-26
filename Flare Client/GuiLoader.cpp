@@ -89,7 +89,7 @@ void WindowAlwaysOnTop(HWND hwnd) {
 }
 
 char* keyText = new char[1];
-void createReassign(const char* hackName, char* hackKey) {
+void createReassign(const char* hackName, char *hackKey) {
 	ImGui::Text(hackName);
 	ImGui::SameLine();
 	if (*hackKey) {
@@ -351,7 +351,6 @@ GuiLoader::GuiLoader() {
 
 	}
 }
-
 
 bool CreateDeviceD3D(HWND hWnd)
 {
