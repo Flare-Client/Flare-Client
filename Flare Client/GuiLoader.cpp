@@ -88,6 +88,22 @@ void WindowAlwaysOnTop(HWND hwnd) {
 	}
 }
 
+char* keyText = new char[1];
+void createReassign(const char* hackName, char* hackKey) {
+	ImGui::Text(hackName);
+	ImGui::SameLine();
+	if (*hackKey) {
+		keyText[0] = *hackKey;
+		if (ImGui::Button(&keyText[0])) *hackKey = NULL;
+	}
+	else if (!*hackKey) {
+		ImGui::Button("Waiting for key input");
+		for (int I = '1'; I < 'Z'; I++) {
+			if (GetAsyncKeyState(I)) *hackKey = I;
+		}
+	}
+}
+
 GuiLoader::GuiLoader() {
 	{
 		WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("Flare Client"), NULL };
@@ -296,47 +312,10 @@ GuiLoader::GuiLoader() {
 				if (ImGui::Button("Keybinds")) switchTabs = 4;
 				break;
 			case 4:
-				ImGui::Text("Jetpack");
-				ImGui::SameLine();
-				if (KeybindHandler::jetpackKey) {
-					char* jetpackKeyText = new char[1];
-					jetpackKeyText[1] = KeybindHandler::jetpackKey;
-					if (ImGui::Button(&jetpackKeyText[1])) KeybindHandler::jetpackKey = NULL;
-				}
-				else if (!KeybindHandler::jetpackKey) {
-					ImGui::Button("Waiting for key input");
-					for (int I = 'A'; I < 'Z'; I++) {
-						if (GetAsyncKeyState(I)) KeybindHandler::jetpackKey = I;
-					}
-				}
-
-				ImGui::Text("Hitbox");
-				ImGui::SameLine();
-				if (KeybindHandler::hitboxKey) {
-					char* hitboxKeyText = new char[1];
-					hitboxKeyText[1] = KeybindHandler::hitboxKey;
-					if (ImGui::Button(&hitboxKeyText[1])) KeybindHandler::hitboxKey = NULL;
-				}
-				else if (!KeybindHandler::hitboxKey) {
-					ImGui::Button("Waiting for key input");
-					for (int I = 'A'; I < 'Z'; I++) {
-						if (GetAsyncKeyState(I)) KeybindHandler::hitboxKey = I;
-					}
-				}
-
-				ImGui::Text("Scaffold");
-				ImGui::SameLine();
-				if (KeybindHandler::scaffoldKey) {
-					char* scaffoldKeyText = new char[1];
-					scaffoldKeyText[1] = KeybindHandler::scaffoldKey;
-					if (ImGui::Button(&scaffoldKeyText[1])) KeybindHandler::scaffoldKey = NULL;
-				}
-				else if (!KeybindHandler::scaffoldKey) {
-					ImGui::Button("Waiting for key input");
-					for (int I = 'A'; I < 'Z'; I++) {
-						if (GetAsyncKeyState(I)) KeybindHandler::scaffoldKey = I;
-					}
-				}
+				createReassign("Jetpack", &KeybindHandler::jetpackKey);
+				createReassign("Hitbox", &KeybindHandler::hitboxKey);
+				createReassign("Scaffold", &KeybindHandler::scaffoldKey);
+				createReassign("Triggerbot", &KeybindHandler::triggerbotKey);
 				break;
 			}
 

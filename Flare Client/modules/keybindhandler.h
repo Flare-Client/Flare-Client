@@ -8,6 +8,7 @@ public:
 	static char jetpackKey;
 	static char hitboxKey;
 	static char scaffoldKey;
+	static char triggerbotKey;
 	
 
 	static int keybindTick;
