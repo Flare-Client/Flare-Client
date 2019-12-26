@@ -38,6 +38,7 @@
     <ClCompile Include="modules\criticals.cpp" />
     <ClCompile Include="modules\flight.cpp" />
     <ClCompile Include="modules\keybindhandler.cpp" />
+    <ClCompile Include="modules\tpaura.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="discord.h" />
@@ -82,6 +83,7 @@
     <ClInclude Include="modules\criticals.h" />
     <ClInclude Include="modules\flight.h" />
     <ClInclude Include="modules\keybindhandler.h" />
+    <ClInclude Include="modules\tpaura.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources.rc" />

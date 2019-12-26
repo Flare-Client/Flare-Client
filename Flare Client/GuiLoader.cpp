@@ -250,6 +250,7 @@ GuiLoader::GuiLoader() {
 				ImGui::Checkbox("Hitbox", &ModuleHandler::hitboxToggle);
 				ImGui::Checkbox("Triggerbot", &ModuleHandler::triggerbotToggle);
 				ImGui::Checkbox("Criticals", &ModuleHandler::criticalsToggle);
+				ImGui::Checkbox("TP Aura", &ModuleHandler::tpauraToggle);
 				break;
 			case 1:
 				ImGui::Checkbox("AirJump", &ModuleHandler::airJumpToggle);
@@ -316,6 +317,7 @@ GuiLoader::GuiLoader() {
 				createReassign("Hitbox", &KeybindHandler::hitboxKey);
 				createReassign("Scaffold", &KeybindHandler::scaffoldKey);
 				createReassign("Triggerbot", &KeybindHandler::triggerbotKey);
+				createReassign("TpAura", &KeybindHandler::tpauraKey);
 				break;
 			}
 
