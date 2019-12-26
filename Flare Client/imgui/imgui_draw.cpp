@@ -391,8 +391,8 @@ void ImGui::StyleColorsGray(ImGuiStyle* dst)
 	style.Colors[ImGuiCol_NavWindowingHighlight] = ImVec4(0.70f, 0.70f, 0.70f, 0.70f);
 	style.Colors[ImGuiCol_NavWindowingDimBg] = ImVec4(0.20f, 0.20f, 0.20f, 0.20f);
 	style.Colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.20f, 0.20f, 0.20f, 0.35f);
-
 }
+
 //-----------------------------------------------------------------------------
 // ImDrawList
 //-----------------------------------------------------------------------------

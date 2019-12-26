@@ -1,5 +1,6 @@
 //IMGUI Includes
 #include "GuiLoader.h"
+#include "Lang.h"
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_dx9.h"
 #include "Imgui/imgui_impl_win32.h"
@@ -56,6 +57,8 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 HWND hwnd;
 
+Lang activeLang;
+
 void WindowAlwaysOnTop(HWND hwnd) {
 	if (hwnd) {
 		if (GuiLoader::windowToggle) {
@@ -101,6 +104,8 @@ GuiLoader::GuiLoader() {
 
 		}
 
+		activeLang = getItalian();
+
 		::ShowWindow(hwnd, SW_SHOW);
 		::UpdateWindow(hwnd);
 
@@ -141,6 +146,7 @@ GuiLoader::GuiLoader() {
 
 			static int switchTabs = 3;
 			static int currentTheme = 0;
+			static int currentLang = 0;
 
 			ifstream inFile;
 			if (!loadedTheme) {
@@ -178,16 +184,25 @@ GuiLoader::GuiLoader() {
 				break;
 			}
 
-			if (ImGui::Button("Combat", ImVec2(100.0f, 0.0f)))
+			switch (currentLang) {
+			case 0:
+				activeLang = getEnglish();
+				break;
+			case 1:
+				activeLang = getItalian();
+				break;
+			}
+
+			if (ImGui::Button(activeLang.Combat, ImVec2(100.0f, 0.0f)))
 				switchTabs = 0;
 			ImGui::SameLine(0.0, 2.0f);
-			if (ImGui::Button("Movement", ImVec2(100.0f, 0.0f)))
+			if (ImGui::Button(activeLang.Movement, ImVec2(100.0f, 0.0f)))
 				switchTabs = 1;
 			ImGui::SameLine(0.0, 2.0f);
-			if (ImGui::Button("Misc", ImVec2(100.0f, 0.0f)))
+			if (ImGui::Button(activeLang.Misc, ImVec2(100.0f, 0.0f)))
 				switchTabs = 2;
 			ImGui::SameLine(0.0, 2.0f);
-			if (ImGui::Button("Settings", ImVec2(100.0f, 0.0f)))
+			if (ImGui::Button(activeLang.Settings, ImVec2(100.0f, 0.0f)))
 				switchTabs = 3;
 
 			int gayUwpTitlesize = 0;
