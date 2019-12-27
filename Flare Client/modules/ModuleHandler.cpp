@@ -34,6 +34,8 @@ float ModuleHandler::teleportY = 0;
 float ModuleHandler::teleportZ = 0;
 float ModuleHandler::jesusVal = 0.2;
 float ModuleHandler::bhopVal = 0.2;
+float ModuleHandler::tpauraRange = 24;
+int ModuleHandler::tpauraSkips = 10;
 
 int ModuleHandler::gamemodeVal = 1;
 
@@ -205,9 +207,9 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 		Flight::Flight(hProcess, LocalPlayer, 0);
 	}
 	if (ModuleHandler::tpauraToggle) {
-		TpAura::TpAura(hProcess, LocalPlayer, EntityListArr, 0);
+		TpAura::TpAura(hProcess, LocalPlayer, EntityListArr, 0, ModuleHandler::tpauraRange, ModuleHandler::tpauraSkips);
 	}
 	else if (!ModuleHandler::tpauraToggle) {
-		TpAura::TpAura(hProcess, LocalPlayer, EntityListArr, 1);
+		TpAura::TpAura(hProcess, LocalPlayer, EntityListArr, 1, ModuleHandler::tpauraRange, ModuleHandler::tpauraSkips);
 	}
 }

@@ -286,6 +286,8 @@ GuiLoader::GuiLoader() {
 				if (ImGui::Button("Teleport")) {
 					Teleport::Teleport(mem::hProcess, ModuleHandler::teleportX, ModuleHandler::teleportY, ModuleHandler::teleportZ);
 				}
+				ImGui::SliderFloat("TP Aura: Range", &ModuleHandler::tpauraRange, 0.0, 48.0f);
+				ImGui::SliderInt("TP Aura: TP Skips", &ModuleHandler::tpauraSkips, 0, 1000);
 				ImGui::Text("Theme:");
 				ImGui::Combo("Theme", &currentTheme, themeItems, IM_ARRAYSIZE(themeItems));
 				ImGui::SameLine();
