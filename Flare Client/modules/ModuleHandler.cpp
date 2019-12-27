@@ -154,10 +154,10 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 		NoFall::NoFall(hProcess, LocalPlayer);
 	}
 	if (ModuleHandler::gamemodeToggle) {
-		Gamemode::Gamemode(hProcess, LocalPlayer, ModuleHandler::gamemodeVal);
+		Gamemode::Gamemode(hProcess, LocalPlayer, ModuleHandler::gamemodeVal, 1);
 	}
 	else if (!ModuleHandler::gamemodeToggle) {
-		Gamemode::Gamemode(hProcess, LocalPlayer, 5);
+		Gamemode::Gamemode(hProcess, LocalPlayer, ModuleHandler::gamemodeVal, 0);
 	}
 	if (ModuleHandler::instabreakToggle) {
 		Instabreak::Instabreak(hProcess, 1);
