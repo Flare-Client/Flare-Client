@@ -4,5 +4,5 @@
 
 class Gamemode {
 public:
-	Gamemode(HANDLE hProcess, uintptr_t LocalPlayer, int gamemodeVal);
+	Gamemode(HANDLE hProcess, uintptr_t LocalPlayer, int gamemodeVal, int toggle);
 };
