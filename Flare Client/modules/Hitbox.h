@@ -1,6 +1,6 @@
 #pragma once
-#include <Windows.h>
-#include <vector>
+#include "../LittleHacker.h"
+#include "ModuleHandler.h"
 
 class Hitbox {
 public:

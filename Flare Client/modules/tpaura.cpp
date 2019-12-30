@@ -16,7 +16,7 @@ vec3 lastpos;
 
 TpAura::TpAura(HANDLE hProcess, uintptr_t LocalPlayer, std::vector<uintptr_t> EntityList, int option) {
 	//Made by ASM#6137
-	uintptr_t entityFacingAddr = mem::FindAddr(hProcess, mem::moduleBase + 0x02FEE4B0, { 0xA8, 0x20, 0x38, 0x728, 0x0, 0x870 });
+	uintptr_t entityFacingAddr = pointers::entityFacing();
 	switch (option) {
 	case 0:
 		reset = true;
@@ -25,9 +25,9 @@ TpAura::TpAura(HANDLE hProcess, uintptr_t LocalPlayer, std::vector<uintptr_t> En
 		
 		for (int entity = 0; entity < EntityList.size(); entity++) {
 			//std::cout << std::hex << mem::FindAddr(hProcess, EntityList[entity], { 0x0 }) << "\n";
-			uintptr_t playerX = mem::FindAddr(hProcess, LocalPlayer, { 0x430 });
-			uintptr_t playerY = mem::FindAddr(hProcess, LocalPlayer, { 0x434 });
-			uintptr_t playerZ = mem::FindAddr(hProcess, LocalPlayer, { 0x438 });
+			uintptr_t playerX = mem::FindAddr(hProcess, LocalPlayer, { Player::currentX1 });
+			uintptr_t playerY = mem::FindAddr(hProcess, LocalPlayer, { Player::currentY1 });
+			uintptr_t playerZ = mem::FindAddr(hProcess, LocalPlayer, { Player::currentZ1 });
 			float xValPlr;
 			float yValPlr;
 			float zValPlr;
@@ -36,9 +36,9 @@ TpAura::TpAura(HANDLE hProcess, uintptr_t LocalPlayer, std::vector<uintptr_t> En
 			ReadProcessMemory(hProcess, (BYTE*)playerZ, &zValPlr, sizeof(zValPlr), 0);
 
 			uintptr_t opponent = EntityList[entity];
-			uintptr_t opponentX = mem::FindAddr(hProcess, opponent, { 0x454 });
-			uintptr_t opponentY = mem::FindAddr(hProcess, opponent, { 0x458 });
-			uintptr_t opponentZ = mem::FindAddr(hProcess, opponent, { 0x45C });
+			uintptr_t opponentX = mem::FindAddr(hProcess, opponent, { Player::currentX1 });
+			uintptr_t opponentY = mem::FindAddr(hProcess, opponent, { Player::currentY1 });
+			uintptr_t opponentZ = mem::FindAddr(hProcess, opponent, { Player::currentZ1 });
 			float xValOp;
 			float yValOp;
 			float zValOp;
@@ -57,7 +57,7 @@ TpAura::TpAura(HANDLE hProcess, uintptr_t LocalPlayer, std::vector<uintptr_t> En
 					lastpos = { xValPlr, yValPlr, zValPlr };
 					swing = 0;
 					//ModuleHandler::flightToggle = true;
-					WriteProcessMemory(hProcess, (BYTE*)mem::moduleBase + 0x102460E, &swing, sizeof(byte), 0);
+					WriteProcessMemory(hProcess, (BYTE*)pointers::attackSwing(), &swing, sizeof(byte), 0);
 					Teleport::Teleport(hProcess, xValOp, yValOp, zValOp);
 					switchP = false;
 				}
@@ -79,7 +79,7 @@ TpAura::TpAura(HANDLE hProcess, uintptr_t LocalPlayer, std::vector<uintptr_t> En
 		if (reset) {
 			//ModuleHandler::flightToggle = false;
 			swing = 1;
-			WriteProcessMemory(hProcess, (BYTE*)mem::moduleBase + 0x102460E, &swing, sizeof(byte), 0);
+			WriteProcessMemory(hProcess, (BYTE*)pointers::attackSwing(), &swing, sizeof(byte), 0);
 			reset = false;
 		}
 		break;

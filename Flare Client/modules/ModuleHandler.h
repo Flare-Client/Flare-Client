@@ -7,6 +7,7 @@
 
 #include "../LittleHacker.h"
 #include "../GuiLoader.h"
+#include "../LocalPlayer.h"
 #include "keybindhandler.h"
 #include "EntityList.h"
 #include "Hitbox.h"

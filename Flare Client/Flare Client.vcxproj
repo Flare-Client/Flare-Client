@@ -22,7 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{E030AE88-ED9E-4A75-B13F-D6FD4BBB5940}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Valve</RootNamespace>
+    <RootNamespace>Flare</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>Flare Client</ProjectName>
   </PropertyGroup>
@@ -156,6 +156,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="LocalPlayer.cpp" />
     <ClCompile Include="modules\keybindhandler.cpp" />
     <ClCompile Include="modules\flight.cpp" />
     <ClCompile Include="modules\criticals.cpp" />
@@ -196,6 +197,7 @@
     <ClCompile Include="modules\tpaura.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="LocalPlayer.h" />
     <ClInclude Include="modules\keybindhandler.h" />
     <ClInclude Include="modules\flight.h" />
     <ClInclude Include="modules\criticals.h" />
@@ -241,14 +243,14 @@
     <ClInclude Include="modules\tpaura.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="..\Resources\Icon.ico" />
     <Image Include="..\Resources\Icon.png" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

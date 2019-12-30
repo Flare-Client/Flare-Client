@@ -5,8 +5,8 @@ bool Phase::oneTimeWrite = false;
 Phase::Phase(HANDLE hProcess, uintptr_t localPlayer, char option) {
 	float Y1, Y2;
 
-	uintptr_t yCoordinateAddr1 = mem::FindAddr(hProcess, localPlayer, { 0x434 });
-	uintptr_t yCoordinateAddr2 = mem::FindAddr(hProcess, localPlayer, { 0x440 });
+	uintptr_t yCoordinateAddr1 = mem::FindAddr(hProcess, localPlayer, { Player::currentY1 });
+	uintptr_t yCoordinateAddr2 = mem::FindAddr(hProcess, localPlayer, { Player::currentY2 });
 
 	ReadProcessMemory(hProcess, (BYTE*)yCoordinateAddr1, &Y1, sizeof(Y1), 0);
 	ReadProcessMemory(hProcess, (BYTE*)yCoordinateAddr1, &Y2, sizeof(Y2), 0);

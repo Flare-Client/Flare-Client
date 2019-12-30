@@ -49,7 +49,7 @@ ifstream File;
 int discordEmbedUpdateTick;
 
 ModuleHandler::ModuleHandler(HANDLE hProcess) {
-	uintptr_t LocalPlayer = mem::FindAddr(hProcess, mem::moduleBase + 0x02FEE4B0, { 0xA8, 0x10, 0x40, 0x0 });
+	uintptr_t LocalPlayer = Player::LocalPlayer();
 	uintptr_t UIOpen = mem::FindAddr(hProcess, mem::moduleBase + 0x02FA94F0, { 0x200, 0x128, 0x40, 0x8, 0x248 });
 
 	vector<uintptr_t> EntityListArr = EntityList::EntityListHandler(hProcess, LocalPlayer);
@@ -102,15 +102,15 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 
 	if (ModuleHandler::jetpackToggle) {
 		float vect[3], pitch, yaw;
-		ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0xF0 }), &pitch, sizeof(pitch), 0);
-		ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0xF4 }), &yaw, sizeof(yaw), 0);
+		ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { Player::currentPitch }), &pitch, sizeof(pitch), 0);
+		ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { Player::currentYaw }), &yaw, sizeof(yaw), 0);
 		ModuleHandler::directionalVector(vect, (yaw + 90) * 3.141592653589793 / 180, pitch * 3.141592653589793 / 180);
 		float X = 1.2 * vect[0];
 		float Y = 1.2 * -vect[1];
 		float Z = 1.2 * vect[2];
-		WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0x46C }), &X, sizeof(X), 0);
-		WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0x470 }), &Y, sizeof(Y), 0);
-		WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { 0x474 }), &Z, sizeof(Z), 0);
+		WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { Player::velocityX }), &X, sizeof(X), 0);
+		WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { Player::velocityY }), &Y, sizeof(Y), 0);
+		WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { Player::velocityZ }), &Z, sizeof(Z), 0);
 		ModuleHandler::jetpackToggle = false;
 	}
 
