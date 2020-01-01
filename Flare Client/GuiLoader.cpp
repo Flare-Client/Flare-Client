@@ -244,7 +244,7 @@ GuiLoader::GuiLoader() {
 			const char* gamemodeItems[] = { "Survival", "Creative", "Adventure" };
 			const char* themeItems[] = { "Dark Theme", "Light Theme", "Classic Theme", "Grey Theme" };
 			const char* drpDisplayItems[] = { "Display username", "Display in game" };
-			const char* langItems[] = { getEnglish().Name, getItalian().Name };
+			const char* langItems[] = { getEnglish().Name, getItalian().Name, getSpanish().Name };
 			switch (switchTabs) {
 			case 0:
 				ImGui::Checkbox(activeLang.Hitbox, &ModuleHandler::hitboxToggle);

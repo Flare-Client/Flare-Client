@@ -84,6 +84,7 @@
     <ClInclude Include="modules\flight.h" />
     <ClInclude Include="modules\keybindhandler.h" />
     <ClInclude Include="modules\tpaura.h" />
+    <ClInclude Include="Lang.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources.rc" />

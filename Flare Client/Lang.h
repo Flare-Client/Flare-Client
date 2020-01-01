@@ -102,7 +102,7 @@ Lang getItalian() {
 		"TpAura",
 
 		//Movement
-		"Jetpack",
+		"Zaino-Jet",
 		"Salta Aria",
 		"Accelerazione di Aria",
 		"No Rallenta",
@@ -122,4 +122,46 @@ Lang getItalian() {
 		"Impalcatura"
 	};
 	return italian;
+}
+
+Lang getSpanish() {
+	Lang spanish = {
+		//Meta
+		"Espanol",
+		"Idioma",
+
+		//Categories
+		"Combate",
+		"Movimiento",
+		"Misc",
+		"Config.",
+		"Keybinds",
+
+		//Combat
+		"Hitbox",
+		"Triggerbot",
+		"Criticos",
+		"TpAura",
+
+		//Movement
+		"Mochila Cohete",
+		"Salto Aereo",
+		"Aceleracion de Aire",
+		"No Desacelerar",
+		"No Bloquear",
+		"Velocidad di Jugador",
+		"NoAgua",
+		"Jesus",
+		"Saltar del Conejo",
+		"Vuelo",
+
+		//Misc
+		"NoTelarana",
+		"VanillaNoCaerse",
+		"Gamemode",
+		"Instabreak",
+		"Phase",
+		"Scaffold"
+	};
+	return spanish;
 }
