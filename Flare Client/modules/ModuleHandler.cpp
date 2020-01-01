@@ -15,7 +15,7 @@ bool ModuleHandler::noknockbackToggle = false;
 bool ModuleHandler::nofallToggle = false;
 bool ModuleHandler::gamemodeToggle = false;
 bool ModuleHandler::instabreakToggle = false;
-bool ModuleHandler::playerspeedtoggle = false;
+bool ModuleHandler::playerspeedToggle = false;
 bool ModuleHandler::phaseToggle = false;
 bool ModuleHandler::scaffoldToggle = false;
 bool ModuleHandler::nowaterToggle = false;
@@ -167,7 +167,7 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	else if (!ModuleHandler::instabreakToggle) {
 		Instabreak::Instabreak(hProcess, 0);
 	}
-	if (ModuleHandler::playerspeedtoggle) {
+	if (ModuleHandler::playerspeedToggle) {
 		PlayerSpeed::PlayerSpeed(hProcess, ModuleHandler::playerSpeedVal);
 	}
 	if (ModuleHandler::phaseToggle) {
