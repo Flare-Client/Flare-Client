@@ -6,8 +6,8 @@ bool oneTimeWriteGM;
 int savedGamemode;
 
 Gamemode::Gamemode(HANDLE hProcess, uintptr_t LocalPlayer, int gamemodeVal, int toggle) {
-	uintptr_t gamemodeAddr = mem::FindAddr(hProcess, LocalPlayer, { 0x1D9C });
-	uintptr_t displayCreativeItemsAddr = mem::FindAddr(hProcess, LocalPlayer, { 0xAA0 });
+	uintptr_t gamemodeAddr = mem::FindAddr(hProcess, LocalPlayer, { Player::currentGamemode });
+	uintptr_t displayCreativeItemsAddr = mem::FindAddr(hProcess, LocalPlayer, { Player::viewCreativeItems });
 	switch (toggle) {
 	case 0:
 		if (oneTimeWriteGM) {

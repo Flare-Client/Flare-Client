@@ -3,7 +3,7 @@
 bool oneTimeWrite = false;
 
 Flight::Flight(HANDLE hProcess, uintptr_t localPlayer, int toggle) {
-	uintptr_t flightAddr = mem::FindAddr(hProcess, localPlayer, { 0xA88 });
+	uintptr_t flightAddr = mem::FindAddr(hProcess, localPlayer, { Player::isFlying });
 	switch (toggle) {
 	case 0:
 		if (oneTimeWrite) {

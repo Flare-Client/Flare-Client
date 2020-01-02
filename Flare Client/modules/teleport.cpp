@@ -2,19 +2,19 @@
 
 Teleport::Teleport(HANDLE hProcess, float X, float Y, float Z) {
 
-	uintptr_t localPlayer = mem::FindAddr(hProcess, mem::moduleBase + 0x02FEE4B0, { 0xA8, 0x10, 0x40, 0x0 }); //Can't pass as parameter since local player isn't defined within GuiLoader
+	uintptr_t localPlayer = Player::LocalPlayer();
 	float X2 = X + 0.6;
 	float Y2 = Y + 1.8;
 	float Z2 = Z + 0.6;
 
-	uintptr_t xCoordinateAddr1 = mem::FindAddr(hProcess, localPlayer, { 0x430 });
-	uintptr_t xCoordinateAddr2 = mem::FindAddr(hProcess, localPlayer, { 0x43C });
+	uintptr_t xCoordinateAddr1 = mem::FindAddr(hProcess, localPlayer, { Player::currentX1 });
+	uintptr_t xCoordinateAddr2 = mem::FindAddr(hProcess, localPlayer, { Player::currentX2 });
 
-	uintptr_t yCoordinateAddr1 = mem::FindAddr(hProcess, localPlayer, { 0x434 });
-	uintptr_t yCoordinateAddr2 = mem::FindAddr(hProcess, localPlayer, { 0x440 });
+	uintptr_t yCoordinateAddr1 = mem::FindAddr(hProcess, localPlayer, { Player::currentY1 });
+	uintptr_t yCoordinateAddr2 = mem::FindAddr(hProcess, localPlayer, { Player::currentY2 });
 
-	uintptr_t zCoordinateAddr1 = mem::FindAddr(hProcess, localPlayer, { 0x438 });
-	uintptr_t zCoordinateAddr2 = mem::FindAddr(hProcess, localPlayer, { 0x444 });
+	uintptr_t zCoordinateAddr1 = mem::FindAddr(hProcess, localPlayer, { Player::currentZ1 });
+	uintptr_t zCoordinateAddr2 = mem::FindAddr(hProcess, localPlayer, { Player::currentZ2 });
 
 	WriteProcessMemory(hProcess, (BYTE*)xCoordinateAddr1, &X, sizeof(float), 0);
 	WriteProcessMemory(hProcess, (BYTE*)xCoordinateAddr2, &X2, sizeof(float), 0);
