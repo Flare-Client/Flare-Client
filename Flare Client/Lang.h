@@ -133,13 +133,13 @@ Lang getSpanish() {
 		//Categories
 		"Combate",
 		"Movimiento",
-		"Misc",
+		"Miscelaneo",
 		"Config.",
 		"Keybinds",
 
 		//Combat
 		"Hitbox",
-		"Triggerbot",
+		"Gatillo",
 		"Criticos",
 		"TpAura",
 
@@ -149,7 +149,7 @@ Lang getSpanish() {
 		"Aceleracion de Aire",
 		"No Desacelerar",
 		"No Bloquear",
-		"Velocidad di Jugador",
+		"Velocidad del Jugador",
 		"NoAgua",
 		"Jesus",
 		"Saltar del Conejo",
@@ -158,10 +158,10 @@ Lang getSpanish() {
 		//Misc
 		"NoTelarana",
 		"VanillaNoCaerse",
-		"Gamemode",
+		"Modo de Juego",
 		"Instabreak",
-		"Phase",
-		"Scaffold"
+		"Fase",
+		"Andamio"
 	};
 	return spanish;
 }

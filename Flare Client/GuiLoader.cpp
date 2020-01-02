@@ -206,6 +206,9 @@ GuiLoader::GuiLoader() {
 			case 1:
 				activeLang = getItalian();
 				break;
+			case 2:
+				activeLang = getSpanish();
+				break;
 			}
 
 			if (ImGui::Button(activeLang.Combat, ImVec2(100.0f, 0.0f)))
