@@ -7,5 +7,4 @@
 ● iShabzz102 
 ● EchoHackCmd
 ● DisabledMallis
-● UnlovedCookie
 ```
