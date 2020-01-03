@@ -34,4 +34,9 @@ public:
 	static uintptr_t entityFacing();
 	static uintptr_t attackSwing();
 	static uintptr_t playerSpeed();
+
+	static uintptr_t canPlaceBlock();
+	static uintptr_t blockCoordX();
+	static uintptr_t blockCoordY();
+	static uintptr_t blockCoordZ();
 };

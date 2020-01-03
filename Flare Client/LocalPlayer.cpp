@@ -16,6 +16,22 @@ uintptr_t pointers::playerSpeed() {
 	return mem::FindAddr(mem::hProcess, mem::moduleBase + 0x03016010, { 0x30, 0xF0, 0x410, 0x18, 0xE0, 0x8, 0x9C });
 }
 
+uintptr_t pointers::canPlaceBlock() {
+	return mem::FindAddr(mem::hProcess, mem::moduleBase + 0x03016010, { 0x30, 0x88, 0x30, 0x6E8, 0x0, 0x850 });
+}
+
+uintptr_t pointers::blockCoordX() {
+	return mem::FindAddr(mem::hProcess, mem::moduleBase + 0x03016010, { 0x30, 0x88, 0x30, 0x6E8, 0x0, 0x858 });
+}
+
+uintptr_t pointers::blockCoordY() {
+	return mem::FindAddr(mem::hProcess, mem::moduleBase + 0x03016010, { 0x30, 0x88, 0x30, 0x6E8, 0x0, 0x85C });
+}
+
+uintptr_t pointers::blockCoordZ() {
+	return mem::FindAddr(mem::hProcess, mem::moduleBase + 0x03016010, { 0x30, 0x88, 0x30, 0x6E8, 0x0, 0x860 });
+}
+
 unsigned int Player::airJump = 0x178;
 unsigned int Player::onGround = 0x17C;
 unsigned int Player::isFlying = 0xA88;

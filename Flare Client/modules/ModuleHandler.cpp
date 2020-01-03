@@ -175,13 +175,13 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 		Phase::Phase(hProcess, LocalPlayer, 'F');
 	}
 	if (ModuleHandler::scaffoldToggle) {
-		Scaffold::Scaffold(hProcess, 'N');
+		Scaffold::Scaffold(hProcess, 1);
 	}
 	else if (!ModuleHandler::scaffoldToggle) {
-		Scaffold::Scaffold(hProcess, 'F');
+		Scaffold::Scaffold(hProcess, 0);
 	}
 	if (ModuleHandler::nowaterToggle) {
-		NoWater::NoWater(hProcess, 'N');
+		NoWater::NoWater(hProcess, 0);
 	}
 	else if (!ModuleHandler::nowaterToggle) {
 		NoWater::NoWater(hProcess, 'F');
