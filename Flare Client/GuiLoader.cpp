@@ -262,6 +262,7 @@ GuiLoader::GuiLoader() {
 				ImGui::Checkbox("Jesus", &ModuleHandler::jesusToggle);
 				ImGui::Checkbox("Bunny-Hop", &ModuleHandler::bhopToggle);
 				ImGui::Checkbox("Flight", &ModuleHandler::flightToggle);
+				ImGui::Checkbox("Step Assist", &ModuleHandler::stepAssistToggle);
 				break;
 			case 2:
 				ImGui::Checkbox("NoWeb", &ModuleHandler::nowebToggle);

@@ -54,3 +54,5 @@ unsigned int Player::currentZ2 = 0x444;
 unsigned int Player::currentUsername = 0x9E8;
 unsigned int Player::currentPitch = 0xF0;
 unsigned int Player::currentYaw = 0xF4;
+unsigned int Player::stepAssist = 0x220;
+unsigned int Player::dimensionID = 0xBC;

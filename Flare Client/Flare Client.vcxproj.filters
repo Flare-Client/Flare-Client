@@ -40,6 +40,7 @@
     <ClCompile Include="modules\keybindhandler.cpp" />
     <ClCompile Include="modules\tpaura.cpp" />
     <ClCompile Include="LocalPlayer.cpp" />
+    <ClCompile Include="modules\stepassist.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="discord.h" />
@@ -86,6 +87,7 @@
     <ClInclude Include="modules\keybindhandler.h" />
     <ClInclude Include="modules\tpaura.h" />
     <ClInclude Include="LocalPlayer.h" />
+    <ClInclude Include="modules\stepassist.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources.rc" />

@@ -53,24 +53,24 @@ Scaffold::Scaffold(HANDLE hProcess, int toggle) {
 		blockPosZ = static_cast<int>(floor(currentZ));
 
 		if (playerYaw >= -135 && playerYaw < -90 || playerYaw < -45 && playerYaw >= -90) {
-			Scaffold::SpecifiyBlockPosition(blockPosX, blockPosY, blockPosZ);
 			Scaffold::SpecifyBlockFace(5);
-			Scaffold::AdditionalCalculations(currentX, currentY, currentZ, playerYaw);
+			Scaffold::SpecifiyBlockPosition(blockPosX, blockPosY, blockPosZ);
+			//Scaffold::AdditionalCalculations(currentX, currentY, currentZ, playerYaw);
 		}
 		else if (playerYaw <= 135 && playerYaw >= 90 || playerYaw <= 90 && playerYaw >= 45) {
-			Scaffold::SpecifiyBlockPosition(blockPosX, blockPosY, blockPosZ);
 			Scaffold::SpecifyBlockFace(4);
-			Scaffold::AdditionalCalculations(currentX, currentY, currentZ, playerYaw);
+			Scaffold::SpecifiyBlockPosition(blockPosX, blockPosY, blockPosZ);
+			//Scaffold::AdditionalCalculations(currentX, currentY, currentZ, playerYaw);
 		}
 		else if (playerYaw <= 0 && playerYaw >= -45 || playerYaw >= 0 && playerYaw <= 45) {
-			Scaffold::SpecifiyBlockPosition(blockPosX, blockPosY, blockPosZ);
 			Scaffold::SpecifyBlockFace(3);
-			Scaffold::AdditionalCalculations(currentX, currentY, currentZ, playerYaw);
+			Scaffold::SpecifiyBlockPosition(blockPosX, blockPosY, blockPosZ);
+			//Scaffold::AdditionalCalculations(currentX, currentY, currentZ, playerYaw);
 		}
 		else if (playerYaw >= -180 && playerYaw <= -135 || playerYaw >= 135 && playerYaw <= 180) {
-			Scaffold::SpecifiyBlockPosition(blockPosX, blockPosY, blockPosZ);
 			Scaffold::SpecifyBlockFace(2);
-			Scaffold::AdditionalCalculations(currentX, currentY, currentZ, playerYaw);
+			Scaffold::SpecifiyBlockPosition(blockPosX, blockPosY, blockPosZ);
+			//Scaffold::AdditionalCalculations(currentX, currentY, currentZ, playerYaw);
 		}
 
 	}
@@ -125,11 +125,11 @@ void Scaffold::AdditionalCalculations(float X, float Y, float Z, float playerYaw
 		float RIGHT = floor(Z + 1);
 		if (roundf(Z - 0.65f) == LEFT) {
 			Scaffold::SpecifyBlockFace(2);
-			Scaffold::SpecifiyBlockPosition(roundf(X + 0.4f), floor(Y - 1), floor(Z));
+			//Scaffold::SpecifiyBlockPosition(roundf(X + 0.4f), floor(Y - 1), floor(Z));
 		}
 		else if (roundf(Z + 0.15f) == RIGHT) {
 			Scaffold::SpecifyBlockFace(3);
-			Scaffold::SpecifiyBlockPosition(roundf(X + 0.4f), floor(Y - 1), floor(Z));
+			//Scaffold::SpecifiyBlockPosition(roundf(X + 0.4f), floor(Y - 1), floor(Z));
 		}
 	}
 	else if (playerYaw <= 135 && playerYaw >= 90 || playerYaw <= 90 && playerYaw >= 45) {
@@ -137,11 +137,11 @@ void Scaffold::AdditionalCalculations(float X, float Y, float Z, float playerYaw
 		float RIGHT = floor(Z - 1);
 		if (roundf(Z + 0.15f) == LEFT) {
 			Scaffold::SpecifyBlockFace(3);
-			Scaffold::SpecifiyBlockPosition(roundf(X - 0.6f), floor(Y - 1), floor(Z));
+			//Scaffold::SpecifiyBlockPosition(roundf(X - 0.6f), floor(Y - 1), floor(Z));
 		}
 		else if (roundf(Z - 0.65f) == RIGHT) {
 			Scaffold::SpecifyBlockFace(2);
-			Scaffold::SpecifiyBlockPosition(roundf(X - 0.6f), floor(Y - 1), floor(Z));
+			//Scaffold::SpecifiyBlockPosition(roundf(X - 0.6f), floor(Y - 1), floor(Z));
 		}
 	}
 	else if (playerYaw <= 0 && playerYaw >= -45 || playerYaw >= 0 && playerYaw <= 45) {
@@ -149,11 +149,11 @@ void Scaffold::AdditionalCalculations(float X, float Y, float Z, float playerYaw
 		float RIGHT = floor(X - 1);
 		if (roundf(X + 0.15f) == LEFT) {
 			Scaffold::SpecifyBlockFace(5);
-			Scaffold::SpecifiyBlockPosition(floor(X), floor(Y - 1), roundf(Z + 0.4f));
+			//Scaffold::SpecifiyBlockPosition(floor(X), floor(Y - 1), roundf(Z + 0.4f));
 		}
 		else if (roundf(X - 0.65f) == RIGHT) {
 			Scaffold::SpecifyBlockFace(4);
-			Scaffold::SpecifiyBlockPosition(floor(X), floor(Y - 1), roundf(Z + 0.4f));
+			//Scaffold::SpecifiyBlockPosition(floor(X), floor(Y - 1), roundf(Z + 0.4f));
 		}
 	}
 	else if (playerYaw >= -180 && playerYaw <= -135 || playerYaw >= 135 && playerYaw <= 180) {
@@ -161,11 +161,11 @@ void Scaffold::AdditionalCalculations(float X, float Y, float Z, float playerYaw
 		float RIGHT = floor(X + 1);
 		if (roundf(X - 0.65f) == LEFT) {
 			Scaffold::SpecifyBlockFace(4);
-			Scaffold::SpecifiyBlockPosition(floor(X), floor(Y - 1), roundf(Z - 0.6f));
+			//Scaffold::SpecifiyBlockPosition(floor(X), floor(Y - 1), roundf(Z - 0.6f));
 		}
 		else if (roundf(X + 0.15f) == RIGHT) {
 			Scaffold::SpecifyBlockFace(5);
-			Scaffold::SpecifiyBlockPosition(floor(X), floor(Y - 1), roundf(Z - 0.6f));
+			//Scaffold::SpecifiyBlockPosition(floor(X), floor(Y - 1), roundf(Z - 0.6f));
 		}
 	}
 }

@@ -24,6 +24,7 @@ bool ModuleHandler::bhopToggle = false;
 bool ModuleHandler::criticalsToggle = false;
 bool ModuleHandler::flightToggle = false;
 bool ModuleHandler::tpauraToggle = false;
+bool ModuleHandler::stepAssistToggle = false;
 
 float ModuleHandler::hitboxWidthFloat = 6.f;
 float ModuleHandler::hitboxHeightFloat = 3.f;
@@ -61,6 +62,9 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 
 	discordPresenceTick += 1;
 
+	int currentDimensionID;
+	ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { Player::dimensionID }), &currentDimensionID, sizeof(int), 0);
+
 
 	if (discordPresenceTick > 200) {
 		if (playerUsername.length() > 0) {
@@ -68,16 +72,16 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 			strcpy(c, playerUsername.c_str());
 			switch (ModuleHandler::drpDisplayName) {
 			case 0:
-				Discord::Update(c, EntityListArr.size());
+				Discord::Update(c, EntityListArr.size(), currentDimensionID);
 			break;
 
 			case 1:
-				Discord::Update((char*)"Currently In Game", EntityListArr.size());
+				Discord::Update((char*)"Currently In Game", EntityListArr.size(), currentDimensionID);
 			break;
 			}
 		}
 		else if (playerUsername.length() < 1) {
-			Discord::Update((char*)"On the main menu", 0);
+			Discord::Update((char*)"On the main menu", 0, -1);
 		}
 		discordPresenceTick = 0;
 	}
@@ -209,5 +213,11 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	}
 	else if (!ModuleHandler::tpauraToggle) {
 		TpAura::TpAura(hProcess, LocalPlayer, EntityListArr, 1);
+	}
+	if (ModuleHandler::stepAssistToggle) {
+		StepAssist::StepAssist(hProcess, LocalPlayer, 1);
+	}
+	else if (!ModuleHandler::stepAssistToggle) {
+		StepAssist::StepAssist(hProcess, LocalPlayer, 0);
 	}
 }

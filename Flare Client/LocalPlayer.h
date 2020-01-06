@@ -5,7 +5,8 @@ class Player {
 public:
 	static uintptr_t LocalPlayer();
 
-	static unsigned int airJump,
+	static unsigned int dimensionID,
+		airJump,
 		onGround,
 		isFlying,
 		isInWater,
@@ -26,7 +27,8 @@ public:
 		currentZ2,
 		currentUsername,
 		currentPitch,
-		currentYaw;
+		currentYaw,
+		stepAssist;
 };
 
 class pointers {
