@@ -41,6 +41,8 @@
     <ClCompile Include="modules\tpaura.cpp" />
     <ClCompile Include="LocalPlayer.cpp" />
     <ClCompile Include="modules\stepassist.cpp" />
+    <ClCompile Include="modules\nopacket.cpp" />
+    <ClCompile Include="modules\freecam.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="discord.h" />
@@ -88,6 +90,8 @@
     <ClInclude Include="modules\tpaura.h" />
     <ClInclude Include="LocalPlayer.h" />
     <ClInclude Include="modules\stepassist.h" />
+    <ClInclude Include="modules\nopacket.h" />
+    <ClInclude Include="modules\freecam.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources.rc" />

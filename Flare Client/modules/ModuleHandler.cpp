@@ -25,6 +25,8 @@ bool ModuleHandler::criticalsToggle = false;
 bool ModuleHandler::flightToggle = false;
 bool ModuleHandler::tpauraToggle = false;
 bool ModuleHandler::stepAssistToggle = false;
+bool ModuleHandler::nopacketToggle = false;
+bool ModuleHandler::freecamToggle = false;
 
 float ModuleHandler::hitboxWidthFloat = 6.f;
 float ModuleHandler::hitboxHeightFloat = 3.f;
@@ -219,5 +221,17 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	}
 	else if (!ModuleHandler::stepAssistToggle) {
 		StepAssist::StepAssist(hProcess, LocalPlayer, 0);
+	}
+	if (ModuleHandler::nopacketToggle) {
+		NoPacket::NoPacket(hProcess, 'N');
+	}
+	else if (!ModuleHandler::nopacketToggle) {
+		NoPacket::NoPacket(hProcess, 'F');
+	}
+	if (ModuleHandler::freecamToggle) {
+		FreeCam::FreeCam(hProcess, 'N');
+	}
+	else if (!ModuleHandler::freecamToggle) {
+		FreeCam::FreeCam(hProcess, 'F');
 	}
 }

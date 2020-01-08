@@ -156,6 +156,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="modules\freecam.cpp" />
     <ClCompile Include="LocalPlayer.cpp" />
     <ClCompile Include="modules\keybindhandler.cpp" />
     <ClCompile Include="modules\flight.cpp" />
@@ -196,8 +197,10 @@
     <ClCompile Include="modules\nowater.cpp" />
     <ClCompile Include="modules\tpaura.cpp" />
     <ClCompile Include="modules\stepassist.cpp" />
+    <ClCompile Include="modules\nopacket.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="modules\freecam.h" />
     <ClInclude Include="LocalPlayer.h" />
     <ClInclude Include="modules\keybindhandler.h" />
     <ClInclude Include="modules\flight.h" />
@@ -239,6 +242,7 @@
     <ClInclude Include="modules\phase.h" />
     <ClInclude Include="modules\scaffold.h" />
     <ClInclude Include="modules\nowater.h" />
+    <ClInclude Include="modules\nopacket.h" />
     <ClInclude Include="resource1.h" />
     <ClInclude Include="resource2.h" />
     <ClInclude Include="modules\tpaura.h" />
