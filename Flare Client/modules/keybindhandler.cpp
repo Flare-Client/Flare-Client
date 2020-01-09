@@ -34,7 +34,7 @@ KeybindHandler::KeybindHandler() {
 		keystateCheck(&KeybindHandler::tpauraKey, &ModuleHandler::tpauraToggle);
 
 		if (GetAsyncKeyState(KeybindHandler::jetpackKey)) {
-			ModuleHandler::jesusToggle = true;
+			ModuleHandler::jetpackToggle = true;
 		}
 	}
 }

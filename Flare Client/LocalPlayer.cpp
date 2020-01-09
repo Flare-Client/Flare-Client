@@ -36,6 +36,10 @@ uintptr_t pointers::blockCoordZ() {
 	return mem::FindAddr(mem::hProcess, mem::moduleBase + 0x03016010, { 0x30, 0x88, 0x30, 0x6E8, 0x0, 0x860 });
 }
 
+uintptr_t pointers::serverCrashPacket() {
+	return mem::moduleBase + 0xFD1E2B;
+}
+
 unsigned int Player::airJump = 0x178;
 unsigned int Player::onGround = 0x17C;
 unsigned int Player::isFlying = 0xA88;

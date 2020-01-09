@@ -27,6 +27,7 @@ bool ModuleHandler::tpauraToggle = false;
 bool ModuleHandler::stepAssistToggle = false;
 bool ModuleHandler::nopacketToggle = false;
 bool ModuleHandler::freecamToggle = false;
+bool ModuleHandler::servercrasherToggle = false;
 
 float ModuleHandler::hitboxWidthFloat = 6.f;
 float ModuleHandler::hitboxHeightFloat = 3.f;
@@ -230,5 +231,11 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	}
 	else if (!ModuleHandler::freecamToggle) {
 		FreeCam::FreeCam(hProcess, 'F');
+	}
+	if (ModuleHandler::servercrasherToggle) {
+		ServerCrasher::ServerCrasher(hProcess, 'N');
+	}
+	else if (!ModuleHandler::servercrasherToggle) {
+		ServerCrasher::ServerCrasher(hProcess, 'F');
 	}
 }

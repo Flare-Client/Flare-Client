@@ -43,6 +43,7 @@
     <ClCompile Include="modules\stepassist.cpp" />
     <ClCompile Include="modules\nopacket.cpp" />
     <ClCompile Include="modules\freecam.cpp" />
+    <ClCompile Include="modules\servercrasher.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="discord.h" />
@@ -92,6 +93,7 @@
     <ClInclude Include="modules\stepassist.h" />
     <ClInclude Include="modules\nopacket.h" />
     <ClInclude Include="modules\freecam.h" />
+    <ClInclude Include="modules\servercrasher.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources.rc" />

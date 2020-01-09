@@ -273,6 +273,7 @@ GuiLoader::GuiLoader() {
 				ImGui::Checkbox("Scaffold", &ModuleHandler::scaffoldToggle);
 				ImGui::Checkbox("NoPacket", &ModuleHandler::nopacketToggle);
 				ImGui::Checkbox("Freecam", &ModuleHandler::freecamToggle);
+				ImGui::Checkbox("Server Crasher", &ModuleHandler::servercrasherToggle);
 				break;
 			case 3:
 				ImGui::SliderFloat("Hitbox: Width", &ModuleHandler::hitboxWidthFloat, 0.6, 12.f);
