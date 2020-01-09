@@ -33,6 +33,7 @@ public:
 
 class pointers {
 public:
+	static uintptr_t UI();
 	static uintptr_t entityFacing();
 	static uintptr_t attackSwing();
 	static uintptr_t playerSpeed();

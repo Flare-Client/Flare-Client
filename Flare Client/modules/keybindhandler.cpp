@@ -10,31 +10,31 @@ int KeybindHandler::keybindTick = 0;
 
 void keystateCheck(char *key, bool *respectiveToggle) {
 	if (GetAsyncKeyState(*key)) {
-		if (!*respectiveToggle) {
-			*respectiveToggle = true;
-		}
-		else if (*respectiveToggle) {
-			*respectiveToggle = false;
+		KeybindHandler::keybindTick += 1;
+		if (KeybindHandler::keybindTick >= 6) {
+			if (!*respectiveToggle) {
+				*respectiveToggle = true;
+			}
+			else if (*respectiveToggle) {
+				*respectiveToggle = false;
+			}
+			KeybindHandler::keybindTick = 0;
 		}
 	}
 }
 
-KeybindHandler::KeybindHandler(int UI) {
-	KeybindHandler::keybindTick += 1;
-
-	if (UI && GetAsyncKeyState(KeybindHandler::jetpackKey)) {
-		if (!ModuleHandler::jetpackToggle) {
-			ModuleHandler::jetpackToggle = true;
-		}
-	}
-
-	if (UI && KeybindHandler::keybindTick > 10) {
-		
+KeybindHandler::KeybindHandler() {
+	uintptr_t UIOpen = pointers::UI();
+	int UI = 0;
+	ReadProcessMemory(mem::hProcess, (BYTE*)UIOpen, &UI, sizeof(int), 0);
+	if (UI) {
 		keystateCheck(&KeybindHandler::hitboxKey, &ModuleHandler::hitboxToggle);
 		keystateCheck(&KeybindHandler::scaffoldKey, &ModuleHandler::scaffoldToggle);
 		keystateCheck(&KeybindHandler::triggerbotKey, &ModuleHandler::triggerbotToggle);
 		keystateCheck(&KeybindHandler::tpauraKey, &ModuleHandler::tpauraToggle);
 
-		KeybindHandler::keybindTick = 0;
+		if (GetAsyncKeyState(KeybindHandler::jetpackKey)) {
+			ModuleHandler::jesusToggle = true;
+		}
 	}
 }

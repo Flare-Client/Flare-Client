@@ -53,7 +53,6 @@ int discordEmbedUpdateTick;
 
 ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	uintptr_t LocalPlayer = Player::LocalPlayer();
-	uintptr_t UIOpen = mem::FindAddr(hProcess, mem::moduleBase + 0x02FA94F0, { 0x200, 0x128, 0x40, 0x8, 0x248 });
 
 	vector<uintptr_t> EntityListArr = EntityList::EntityListHandler(hProcess, LocalPlayer);
 
@@ -102,9 +101,7 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 		}
 	}
 
-	int UI;
-	ReadProcessMemory(hProcess, (BYTE*)UIOpen, &UI, sizeof(UI), 0);
-	if (UI) KeybindHandler::KeybindHandler(UI);
+	KeybindHandler::KeybindHandler();
 
 	if (ModuleHandler::jetpackToggle) {
 		float vect[3], pitch, yaw;

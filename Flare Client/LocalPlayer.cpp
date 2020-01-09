@@ -4,6 +4,10 @@ uintptr_t Player::LocalPlayer() {
 	return mem::FindAddr(mem::hProcess, mem::moduleBase + 0x02FEE4B0, { 0xA8, 0x10, 0x40, 0x0 });
 }
 
+uintptr_t pointers::UI() {
+	return mem::FindAddr(mem::hProcess, mem::moduleBase + 0x02FA94F0, { 0x200, 0x128, 0x40, 0x8, 0x248 });
+}
+
 uintptr_t pointers::entityFacing() {
 	return mem::FindAddr(mem::hProcess, mem::moduleBase + 0x02FEE4B0, { 0xA8, 0x20, 0x38, 0x728, 0x0, 0x870 });
 }
