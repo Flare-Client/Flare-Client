@@ -54,4 +54,5 @@ public:
 	static uintptr_t knockBackY();
 	static uintptr_t knockBackZ();
 	static uintptr_t inWaterTick();
+	static uintptr_t showCoords();
 };

@@ -156,7 +156,7 @@ GuiLoader::GuiLoader() {
 			ImGui::NewFrame();
 
 
-			ImGui::Begin("Flare Client v0.0.3", 0, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
+			ImGui::Begin("Flare Client v0.0.4", 0, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
 			ImGui::SetWindowSize(ImVec2(420, 420));
 			ImGui::SetWindowPos(ImVec2(0, 0));
 
@@ -225,7 +225,7 @@ GuiLoader::GuiLoader() {
 			WINDOWPLACEMENT wpsm;
 			GetWindowPlacement(windowHandleMC, &wpsm);
 			if (wpsm.showCmd == SW_MAXIMIZE) {
-				gayUwpTitlesize = 7;
+				gayUwpTitlesize = 7; //Lol - Echo
 			}
 
 			RECT rect;
@@ -274,6 +274,7 @@ GuiLoader::GuiLoader() {
 				ImGui::Checkbox("NoPacket", &ModuleHandler::nopacketToggle);
 				ImGui::Checkbox("Freecam", &ModuleHandler::freecamToggle);
 				ImGui::Checkbox("Server Crasher", &ModuleHandler::servercrasherToggle);
+				ImGui::Checkbox("Coordinates", &ModuleHandler::coordinatesToggle);
 				break;
 			case 3:
 				ImGui::SliderFloat("Hitbox: Width", &ModuleHandler::hitboxWidthFloat, 0.6, 12.f);

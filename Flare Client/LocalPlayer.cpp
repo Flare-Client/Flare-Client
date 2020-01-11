@@ -84,6 +84,10 @@ uintptr_t pointers::inWaterTick() {
 	return mem::moduleBase + 0x121883D;
 }
 
+uintptr_t pointers::showCoords() {
+	return mem::moduleBase + 0x5FF84D;
+}
+
 unsigned int Player::airJump = 0x178;
 unsigned int Player::onGround = 0x17C;
 unsigned int Player::isFlying = 0xA88;
