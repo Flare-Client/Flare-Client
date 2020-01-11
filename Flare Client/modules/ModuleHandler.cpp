@@ -182,7 +182,10 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 		Instabreak::Instabreak(hProcess, 0);
 	}
 	if (ModuleHandler::playerspeedtoggle) {
-		PlayerSpeed::PlayerSpeed(hProcess, ModuleHandler::playerSpeedVal);
+		PlayerSpeed::PlayerSpeed(hProcess, ModuleHandler::playerSpeedVal, 1);
+	}
+	else if (!ModuleHandler::playerspeedtoggle) {
+		PlayerSpeed::PlayerSpeed(hProcess, ModuleHandler::playerSpeedVal, 0);
 	}
 	if (ModuleHandler::phaseToggle) {
 		Phase::Phase(hProcess, LocalPlayer, 'E');

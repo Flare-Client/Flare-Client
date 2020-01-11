@@ -19,8 +19,10 @@ void Discord::Update(char* details, char* presenceState, int entityListSize) {
 	discordPresence.largeImageText = "Flare Client";
 	discordPresence.smallImageKey = "flaresmall";
 	discordPresence.smallImageText = "Hacking in style";
-	discordPresence.partySize = 1;
-	discordPresence.partyMax = entityListSize + 1;
+	if (entityListSize > 0) {
+		discordPresence.partySize = 1;
+		discordPresence.partyMax = entityListSize + 1;
+	}
 
 	Discord_UpdatePresence(&discordPresence);
 }
