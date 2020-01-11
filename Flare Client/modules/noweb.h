@@ -1,6 +1,5 @@
 #pragma once
-#include <iostream>
-#include "../LittleHacker.h"
+#include "ModuleHandler.h"
 
 class NoWeb {
 public:

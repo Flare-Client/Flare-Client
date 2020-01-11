@@ -1,5 +1,5 @@
 #pragma once
-#include "../LittleHacker.h"
+#include "ModuleHandler.h"
 
 class Criticals {
 public:

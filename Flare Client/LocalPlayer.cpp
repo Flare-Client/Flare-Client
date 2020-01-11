@@ -24,6 +24,10 @@ uintptr_t pointers::canPlaceBlock() {
 	return mem::FindAddr(mem::hProcess, mem::moduleBase + 0x03016010, { 0x30, 0x88, 0x30, 0x6E8, 0x0, 0x850 });
 }
 
+uintptr_t pointers::blockFace() {
+	return mem::moduleBase + 0x5D2412;
+}
+
 uintptr_t pointers::blockCoordX() {
 	return mem::FindAddr(mem::hProcess, mem::moduleBase + 0x03016010, { 0x30, 0x88, 0x30, 0x6E8, 0x0, 0x858 });
 }
@@ -38,6 +42,46 @@ uintptr_t pointers::blockCoordZ() {
 
 uintptr_t pointers::serverCrashPacket() {
 	return mem::moduleBase + 0xFD1E2B;
+}
+
+uintptr_t pointers::criticalsPacket() {
+	return mem::moduleBase + 0xFD1E56;
+}
+
+uintptr_t pointers::movementPacket() {
+	return mem::moduleBase + 0xF9508B;
+}
+
+uintptr_t pointers::noPacket() {
+	return mem::moduleBase + 0xF984ED;
+}
+
+uintptr_t pointers::webTick() {
+	return mem::moduleBase + 0x12073A5;
+}
+
+uintptr_t pointers::noSlowDownOne() {
+	return mem::moduleBase + 0x1A5B9F9;
+}
+
+uintptr_t pointers::noSlowDownTwo() {
+	return mem::moduleBase + 0xF72506;
+}
+
+uintptr_t pointers::knockBackX() {
+	return mem::moduleBase + 0x1210362;
+}
+
+uintptr_t pointers::knockBackY() {
+	return mem::moduleBase + 0x121036B;
+}
+
+uintptr_t pointers::knockBackZ() {
+	return mem::moduleBase + 0x1210374;
+}
+
+uintptr_t pointers::inWaterTick() {
+	return mem::moduleBase + 0x121883D;
 }
 
 unsigned int Player::airJump = 0x178;
@@ -64,3 +108,4 @@ unsigned int Player::currentPitch = 0xF0;
 unsigned int Player::currentYaw = 0xF4;
 unsigned int Player::stepAssist = 0x220;
 unsigned int Player::dimensionID = 0xBC;
+unsigned int Player::movedTick = 0x32C;
