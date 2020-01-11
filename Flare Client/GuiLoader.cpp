@@ -225,7 +225,7 @@ GuiLoader::GuiLoader() {
 			WINDOWPLACEMENT wpsm;
 			GetWindowPlacement(windowHandleMC, &wpsm);
 			if (wpsm.showCmd == SW_MAXIMIZE) {
-				gayUwpTitlesize = 7; //Lol - Echo
+				gayUwpTitlesize = 7;
 			}
 
 			RECT rect;

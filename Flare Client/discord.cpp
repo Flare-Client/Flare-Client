@@ -8,26 +8,10 @@ void Discord::Initialize() {
 	Discord_Initialize("658514848065257475", &handle, 1, NULL);
 }
 
-void Discord::Update(char* details, int entityListSize, int ID) {
+void Discord::Update(char* details, char* presenceState, int entityListSize) {
 	DiscordRichPresence discordPresence;
 	memset(&discordPresence, 0, sizeof(discordPresence));
-	switch (ID) {
-	
-	case 0:
-		discordPresence.state = "Minecraft - Overworld";
-	break;
-	
-	case 1:
-		discordPresence.state = "Minecraft - Nether";
-	break;
-
-	case 2:
-		discordPresence.state = "Minecraft - End";
-	break;
-
-	default:
-		discordPresence.state = "Minecraft";
-	}
+	discordPresence.state = presenceState;
 	discordPresence.details = details;
 	discordPresence.startTimestamp = eptime;
 	discordPresence.endTimestamp = NULL;

@@ -65,9 +65,10 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 
 	discordPresenceTick += 1;
 
-	int currentDimensionID;
-	ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { Player::dimensionID }), &currentDimensionID, sizeof(int), 0);
+	string connectedServer;
+	ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, mem::moduleBase + 0x03016010, { 0x30, 0x68, 0xC0, 0x18, 0x360, 0x0 }), &connectedServer, sizeof(string), 0);
 
+	const char* serverIP = connectedServer.c_str();
 
 	if (discordPresenceTick > 200) {
 		if (playerUsername.length() > 0) {
@@ -75,16 +76,26 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 			strcpy(c, playerUsername.c_str());
 			switch (ModuleHandler::drpDisplayName) {
 			case 0:
-				Discord::Update(c, EntityListArr.size(), currentDimensionID);
+				if (serverIP != NULL) {
+					Discord::Update(c, (char*)serverIP, EntityListArr.size());
+				}
+				else {
+					Discord::Update(c, (char*)"World", EntityListArr.size());
+				}
 			break;
 
 			case 1:
-				Discord::Update((char*)"Currently In Game", EntityListArr.size(), currentDimensionID);
+				if (serverIP != NULL) {
+					Discord::Update((char*)"Currently In Game", (char*)serverIP, EntityListArr.size());
+				}
+				else {
+					Discord::Update((char*)"Currently In Game", (char*)"World", EntityListArr.size());
+				}
 			break;
 			}
 		}
 		else if (playerUsername.length() < 1) {
-			Discord::Update((char*)"On the main menu", 0, -1);
+			Discord::Update((char*)"Minecraft", (char*)"Main Menu", 0);
 		}
 		discordPresenceTick = 0;
 	}
