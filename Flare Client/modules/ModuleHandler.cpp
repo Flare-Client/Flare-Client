@@ -15,7 +15,7 @@ bool ModuleHandler::noknockbackToggle = false;
 bool ModuleHandler::nofallToggle = false;
 bool ModuleHandler::gamemodeToggle = false;
 bool ModuleHandler::instabreakToggle = false;
-bool ModuleHandler::playerspeedtoggle = false;
+bool ModuleHandler::playerspeedToggle = false;
 bool ModuleHandler::phaseToggle = false;
 bool ModuleHandler::scaffoldToggle = false;
 bool ModuleHandler::nowaterToggle = false;
@@ -39,6 +39,8 @@ float ModuleHandler::teleportY = 0;
 float ModuleHandler::teleportZ = 0;
 float ModuleHandler::jesusVal = 0.2;
 float ModuleHandler::bhopVal = 0.2;
+float ModuleHandler::tpauraRange = 24;
+int ModuleHandler::tpauraSkips = 10;
 
 int ModuleHandler::gamemodeVal = 1;
 
@@ -181,10 +183,10 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	else if (!ModuleHandler::instabreakToggle) {
 		Instabreak::Instabreak(hProcess, 0);
 	}
-	if (ModuleHandler::playerspeedtoggle) {
+	if (ModuleHandler::playerspeedToggle) {
 		PlayerSpeed::PlayerSpeed(hProcess, ModuleHandler::playerSpeedVal, 1);
 	}
-	else if (!ModuleHandler::playerspeedtoggle) {
+	else if (!ModuleHandler::playerspeedToggle) {
 		PlayerSpeed::PlayerSpeed(hProcess, ModuleHandler::playerSpeedVal, 0);
 	}
 	if (ModuleHandler::phaseToggle) {
@@ -224,10 +226,10 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 		Flight::Flight(hProcess, LocalPlayer, 0);
 	}
 	if (ModuleHandler::tpauraToggle) {
-		TpAura::TpAura(hProcess, LocalPlayer, EntityListArr, 0);
+		TpAura::TpAura(hProcess, LocalPlayer, EntityListArr, 0, ModuleHandler::tpauraRange, ModuleHandler::tpauraSkips);
 	}
 	else if (!ModuleHandler::tpauraToggle) {
-		TpAura::TpAura(hProcess, LocalPlayer, EntityListArr, 1);
+		TpAura::TpAura(hProcess, LocalPlayer, EntityListArr, 1, ModuleHandler::tpauraRange, ModuleHandler::tpauraSkips);
 	}
 	if (ModuleHandler::stepAssistToggle) {
 		StepAssist::StepAssist(hProcess, LocalPlayer, 1);

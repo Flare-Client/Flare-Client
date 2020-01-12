@@ -156,10 +156,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="languagehandler.cpp" />
+    <ClCompile Include="mcSDK\LocalPlayer.cpp" />
     <ClCompile Include="modules\coordinates.cpp" />
     <ClCompile Include="modules\freecam.cpp" />
-    <ClCompile Include="LocalPlayer.cpp" />
     <ClCompile Include="modules\keybindhandler.cpp" />
     <ClCompile Include="modules\flight.cpp" />
     <ClCompile Include="modules\criticals.cpp" />
@@ -203,10 +202,11 @@
     <ClCompile Include="modules\servercrasher.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Lang.h" />
+    <ClInclude Include="mcSDK\LocalPlayer.h" />
     <ClInclude Include="languagehandler.h" />
     <ClInclude Include="modules\coordinates.h" />
     <ClInclude Include="modules\freecam.h" />
-    <ClInclude Include="LocalPlayer.h" />
     <ClInclude Include="modules\keybindhandler.h" />
     <ClInclude Include="modules\flight.h" />
     <ClInclude Include="modules\criticals.h" />

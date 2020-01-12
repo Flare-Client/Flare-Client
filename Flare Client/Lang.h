@@ -1,5 +1,9 @@
 #pragma once
 struct Lang {
+	//Meta
+	const char* Name;
+	const char* Language;
+
 	//Categories
 	const char* Combat;
 	const char* Movement;
@@ -10,13 +14,20 @@ struct Lang {
 	//Combat
 	const char* Hitbox;
 	const char* Triggerbot;
+	const char* Criticals;
+	const char* TpAura;
 
 	//Movement
+	const char* Jetpack;
 	const char* AirJump;
 	const char* AirAcceleration;
 	const char* NoSlowDown;
 	const char* NoKnockBack;
 	const char* PlayerSpeed;
+	const char* NoWater;
+	const char* Jesus;
+	const char* Bhop;
+	const char* Flight;
 
 	//Misc
 	const char* NoWeb;
@@ -24,12 +35,17 @@ struct Lang {
 	const char* Gamemode;
 	const char* Instabreak;
 	const char* Phase;
+	const char* Scaffold;
 
 	//Settings
 };
 
 Lang getEnglish() {
 	Lang english = {
+		//Meta
+		"English",
+		"Language",
+
 		//Categories
 		"Combat",
 		"Movement",
@@ -40,26 +56,39 @@ Lang getEnglish() {
 		//Combat
 		"Hitbox",
 		"Triggerbot",
+		"Criticals",
+		"TpAura",
 
 		//Movement
+		"Jetpack",
 		"AirJump",
 		"AirAcceleration",
 		"NoSlowDown",
 		"No KnockBack",
 		"PlayerSpeed",
+		"NoWater",
+		"Jesus",
+		"Bunny-Hop",
+		"Flight",
 
 		//Misc
 		"NoWeb",
 		"VanillaNoFall",
 		"Gamemode",
 		"Instabreak",
-		"Phase"
+		"Phase",
+		"Scaffold"
 	};
 	return english;
 }
 
 Lang getItalian() {
 	Lang italian = {
+		//Meta
+		"Italiano",
+		"Linguaggio",
+
+		//Categories
 		"Combattimento",
 		"Movimento",
 		"Varie",
@@ -69,20 +98,70 @@ Lang getItalian() {
 		//Combat
 		"Hitbox",
 		"Triggerbot",
+		"Critici",
+		"TpAura",
 
 		//Movement
+		"Zaino-Jet",
 		"Salta Aria",
 		"Accelerazione di Aria",
 		"No Rallenta",
 		"No KnockBack",
 		"Velocita",
+		"NoAcqua",
+		"Gesu",
+		"Salto del Coniglietto",
+		"Vola",
 
 		//Misc
 		"No Ragnatela",
 		"Vanilla NoCad.",
 		"Gamemode",
 		"Instabreak",
-		"Fase"
+		"Fase",
+		"Impalcatura"
 	};
 	return italian;
+}
+
+Lang getSpanish() {
+	Lang spanish = {
+		//Meta
+		"Espanol",
+		"Idioma",
+
+		//Categories
+		"Combate",
+		"Movimiento",
+		"Miscelaneo",
+		"Config.",
+		"Keybinds",
+
+		//Combat
+		"Hitbox",
+		"Gatillo",
+		"Criticos",
+		"TpAura",
+
+		//Movement
+		"Mochila Cohete",
+		"Salto Aereo",
+		"Aceleracion de Aire",
+		"No Desacelerar",
+		"No Bloquear",
+		"Velocidad del Jugador",
+		"NoAgua",
+		"Jesus",
+		"Saltar del Conejo",
+		"Vuelo",
+
+		//Misc
+		"NoTelarana",
+		"VanillaNoCaerse",
+		"Modo de Juego",
+		"Instabreak",
+		"Fase",
+		"Andamio"
+	};
+	return spanish;
 }

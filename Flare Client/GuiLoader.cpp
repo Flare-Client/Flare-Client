@@ -1,11 +1,11 @@
 //IMGUI Includes
 #include "GuiLoader.h"
-#include "languagehandler.h"
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_dx9.h"
 #include "Imgui/imgui_impl_win32.h"
 #include <d3d9.h>
 #include <tchar.h>
+#include "Lang.h"
 #define DIRECTINPUAT_VERSION 0x0900
 #pragma comment(lib,"d3d9.lib")
 
@@ -102,6 +102,8 @@ void createReassign(const char* hackName, char *hackKey) {
 	}
 }
 
+int currentLang;
+Lang activeLang;
 GuiLoader::GuiLoader() {
 	{
 		WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("Flare Client"), NULL };
@@ -149,18 +151,15 @@ GuiLoader::GuiLoader() {
 			}
 			ImGui_ImplDX9_NewFrame();
 			ImGui_ImplWin32_NewFrame();
-			ImGui::NewFrame();
+			ImGui::NewFrame();			
 
-
-			ImGui::Begin("Flare Client v0.0.4", 0, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
+			ImGui::Begin("Flare Client v0.0.5", 0, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
 			ImGui::SetWindowSize(ImVec2(420, 420));
 			ImGui::SetWindowPos(ImVec2(0, 0));
 
 			static int switchTabs = 3;
 			static int currentTheme = 0;
 			static int currentLanguage = 0;
-
-			LanguageHandler::LanguageHandler(currentLanguage); //Load Language
 
 			ifstream inFile;
 			if (!loadedTheme) {
@@ -196,16 +195,28 @@ GuiLoader::GuiLoader() {
 				break;
 			}
 
-			if (ImGui::Button(LanguageHandler::combatMenuItem, ImVec2(100.0f, 0.0f)))
+			switch (currentLang) {
+			case 0:
+				activeLang = getEnglish();
+				break;
+			case 1:
+				activeLang = getItalian();
+				break;
+			case 2:
+				activeLang = getSpanish();
+				break;
+			}
+
+			if (ImGui::Button(activeLang.Combat, ImVec2(100.0f, 0.0f)))
 				switchTabs = 0;
 			ImGui::SameLine(0.0, 2.0f);
-			if (ImGui::Button(LanguageHandler::movementMenuItem, ImVec2(100.0f, 0.0f)))
+			if (ImGui::Button(activeLang.Movement, ImVec2(100.0f, 0.0f)))
 				switchTabs = 1;
 			ImGui::SameLine(0.0, 2.0f);
-			if (ImGui::Button(LanguageHandler::miscMenuItem, ImVec2(100.0f, 0.0f)))
+			if (ImGui::Button(activeLang.Misc, ImVec2(100.0f, 0.0f)))
 				switchTabs = 2;
 			ImGui::SameLine(0.0, 2.0f);
-			if (ImGui::Button(LanguageHandler::settingsMenuItem, ImVec2(100.0f, 0.0f)))
+			if (ImGui::Button(activeLang.Settings, ImVec2(100.0f, 0.0f)))
 				switchTabs = 3;
 
 			int gayUwpTitlesize = 0;
@@ -232,57 +243,54 @@ GuiLoader::GuiLoader() {
 			const char* gamemodeItems[] = { "Survival", "Creative", "Adventure" };
 			const char* themeItems[] = { "Dark Theme", "Light Theme", "Classic Theme", "Grey Theme" };
 			const char* drpDisplayItems[] = { "Display username", "Display in game" };
-			const char* languageItems[] = {"English", "Espanol"};
+			const char* langItems[] = { getEnglish().Name, getItalian().Name, getSpanish().Name };
 			switch (switchTabs) {
 			case 0:
-				ImGui::Checkbox(LanguageHandler::hitboxBtn, &ModuleHandler::hitboxToggle);
-				ImGui::Checkbox(LanguageHandler::triggerbotBtn, &ModuleHandler::triggerbotToggle);
-				ImGui::Checkbox(LanguageHandler::criticalsBtn, &ModuleHandler::criticalsToggle);
-				ImGui::Checkbox(LanguageHandler::tpauraBtn, &ModuleHandler::tpauraToggle);
+				ImGui::Checkbox(activeLang.Hitbox, &ModuleHandler::hitboxToggle);
+				ImGui::Checkbox(activeLang.Triggerbot, &ModuleHandler::triggerbotToggle);
+				ImGui::Checkbox(activeLang.Criticals, &ModuleHandler::criticalsToggle);
+				ImGui::Checkbox(activeLang.TpAura, &ModuleHandler::tpauraToggle);
 				break;
 			case 1:
-				ImGui::Checkbox(LanguageHandler::airjumpBtn, &ModuleHandler::airJumpToggle);
-				ImGui::Checkbox(LanguageHandler::airaccBtn, &ModuleHandler::airaccspeedToggle);
-				ImGui::Checkbox(LanguageHandler::noslowdownBtn, &ModuleHandler::noslowdownToggle);
-				ImGui::Checkbox(LanguageHandler::noknockbackBtn, &ModuleHandler::noknockbackToggle);
-				ImGui::Checkbox(LanguageHandler::playerspeedBtn, &ModuleHandler::playerspeedtoggle);
-				ImGui::Checkbox(LanguageHandler::nowaterBtn, &ModuleHandler::nowaterToggle);
-				ImGui::Checkbox(LanguageHandler::jesusBtn, &ModuleHandler::jesusToggle);
-				ImGui::Checkbox(LanguageHandler::bhopBtn, &ModuleHandler::bhopToggle);
-				ImGui::Checkbox(LanguageHandler::flightBtn, &ModuleHandler::flightToggle);
-				ImGui::Checkbox(LanguageHandler::stepAssistBtn, &ModuleHandler::stepAssistToggle);
+				ImGui::Checkbox(activeLang.AirJump, &ModuleHandler::airJumpToggle);
+				ImGui::Checkbox(activeLang.AirAcceleration, &ModuleHandler::airaccspeedToggle);
+				ImGui::Checkbox(activeLang.NoSlowDown, &ModuleHandler::noslowdownToggle);
+				ImGui::Checkbox(activeLang.NoKnockBack, &ModuleHandler::noknockbackToggle);
+				ImGui::Checkbox(activeLang.PlayerSpeed, &ModuleHandler::playerspeedToggle);
+				ImGui::Checkbox(activeLang.NoWater, &ModuleHandler::nowaterToggle);
+				ImGui::Checkbox(activeLang.Jesus, &ModuleHandler::jesusToggle);
+				ImGui::Checkbox(activeLang.Bhop, &ModuleHandler::bhopToggle);
+				ImGui::Checkbox(activeLang.Flight, &ModuleHandler::flightToggle);
 				break;
 			case 2:
-				ImGui::Checkbox(LanguageHandler::nowebBtn, &ModuleHandler::nowebToggle);
-				ImGui::Checkbox(LanguageHandler::nofallBtn, &ModuleHandler::nofallToggle);
-				ImGui::Checkbox(LanguageHandler::gamemodeBtn, &ModuleHandler::gamemodeToggle);
-				ImGui::Checkbox(LanguageHandler::instabreakBtn, &ModuleHandler::instabreakToggle);
-				ImGui::Checkbox(LanguageHandler::phaseBtn, &ModuleHandler::phaseToggle);
-				ImGui::Checkbox(LanguageHandler::scaffoldBtn, &ModuleHandler::scaffoldToggle);
-				ImGui::Checkbox(LanguageHandler::nopacketBtn, &ModuleHandler::nopacketToggle);
-				ImGui::Checkbox(LanguageHandler::freecamBtn, &ModuleHandler::freecamToggle);
-				ImGui::Checkbox(LanguageHandler::servercrasherBtn, &ModuleHandler::servercrasherToggle);
-				ImGui::Checkbox(LanguageHandler::coordinatesBtn, &ModuleHandler::coordinatesToggle);
+				ImGui::Checkbox(activeLang.NoWeb, &ModuleHandler::nowebToggle);
+				ImGui::Checkbox(activeLang.VanillaNoFall, &ModuleHandler::nofallToggle);
+				ImGui::Checkbox(activeLang.Gamemode, &ModuleHandler::gamemodeToggle);
+				ImGui::Checkbox(activeLang.Instabreak, &ModuleHandler::instabreakToggle);
+				ImGui::Checkbox(activeLang.Phase, &ModuleHandler::phaseToggle);
+				ImGui::Checkbox(activeLang.Scaffold, &ModuleHandler::scaffoldToggle);
 				break;
 			case 3:
-				ImGui::SliderFloat(LanguageHandler::hitboxWidthSlider, &ModuleHandler::hitboxWidthFloat, 0.6, 12.f);
-				ImGui::SliderFloat(LanguageHandler::hitboxHeightSlider, &ModuleHandler::hitboxHeightFloat, 0.6, 12.f);
-				ImGui::SliderFloat(LanguageHandler::airaccSlider, &ModuleHandler::airAccelerationSpeed, 0.05, 0.5);
-				ImGui::SliderFloat(LanguageHandler::playerSpeedSlider, &ModuleHandler::playerSpeedVal, 0.1, 4.f);
-				ImGui::SliderFloat(LanguageHandler::jesusSlider, &ModuleHandler::jesusVal, 0.1, 5.f);
-				ImGui::SliderFloat(LanguageHandler::bhopSlider, &ModuleHandler::bhopVal, 0.1, 5.f);
-				ImGui::Combo(LanguageHandler::gamemodeSwitcher, &ModuleHandler::gamemodeVal, gamemodeItems, IM_ARRAYSIZE(gamemodeItems));
-				ImGui::Text(LanguageHandler::teleportText);
+				ImGui::SliderFloat("LanguageHandler::hitboxWidthSlider", &ModuleHandler::hitboxWidthFloat, 0.6, 12.f);
+				ImGui::SliderFloat("LanguageHandler::hitboxHeightSlider", &ModuleHandler::hitboxHeightFloat, 0.6, 12.f);
+				ImGui::SliderFloat("LanguageHandler::airaccSlider", &ModuleHandler::airAccelerationSpeed, 0.05, 0.5);
+				ImGui::SliderFloat("LanguageHandler::playerSpeedSlider", &ModuleHandler::playerSpeedVal, 0.1, 4.f);
+				ImGui::SliderFloat("LanguageHandler::jesusSlider", &ModuleHandler::jesusVal, 0.1, 5.f);
+				ImGui::SliderFloat("LanguageHandler::bhopSlider", &ModuleHandler::bhopVal, 0.1, 5.f);
+				ImGui::Combo("LanguageHandler::gamemodeSwitcher", &ModuleHandler::gamemodeVal, gamemodeItems, IM_ARRAYSIZE(gamemodeItems));
+				ImGui::Text("LanguageHandler::teleportText");
 				ImGui::InputFloat("X", &ModuleHandler::teleportX);
 				ImGui::InputFloat("Y", &ModuleHandler::teleportY);
 				ImGui::InputFloat("Z", &ModuleHandler::teleportZ);
-				if (ImGui::Button(LanguageHandler::teleportBtn)) {
+				if (ImGui::Button("LanguageHandler::teleportBtn")) {
 					Teleport::Teleport(mem::hProcess, ModuleHandler::teleportX, ModuleHandler::teleportY, ModuleHandler::teleportZ);
 				}
-				ImGui::Text(LanguageHandler::themeText);
-				ImGui::Combo(LanguageHandler::themeSwitcher, &currentTheme, themeItems, IM_ARRAYSIZE(themeItems));
+				ImGui::SliderFloat("TP Aura: Range", &ModuleHandler::tpauraRange, 0.0, 48.0f);
+				ImGui::SliderInt("TP Aura: TP Skips", &ModuleHandler::tpauraSkips, 0, 1000);
+				ImGui::Text("Theme:");
+				ImGui::Combo("Theme", &currentTheme, themeItems, IM_ARRAYSIZE(themeItems));
 				ImGui::SameLine();
-				if (ImGui::Button(LanguageHandler::themeSaverBtn)) {
+				if (ImGui::Button("LanguageHandler::themeSaverBtn")) {
 					ofstream themeFile;
 					themeFile.open("Theme.txt");
 					if (themeFile.is_open()) {
@@ -290,10 +298,10 @@ GuiLoader::GuiLoader() {
 						themeFile.close();
 					}
 				}
-				ImGui::Text(LanguageHandler::drpText);
-				ImGui::Combo(LanguageHandler::drpSwitcher, &ModuleHandler::drpDisplayName, drpDisplayItems, IM_ARRAYSIZE(drpDisplayItems));
+				ImGui::Text("LanguageHandler::drpText");
+				ImGui::Combo("LanguageHandler::drpSwitcher", &ModuleHandler::drpDisplayName, drpDisplayItems, IM_ARRAYSIZE(drpDisplayItems));
 				ImGui::SameLine();
-				if (ImGui::Button(LanguageHandler::drpSaverBtn)) {
+				if (ImGui::Button("LanguageHandler::drpSaverBtn")) {
 					ofstream discordFile;
 					discordFile.open("Discord.txt");
 					if (discordFile.is_open()) {
@@ -301,16 +309,31 @@ GuiLoader::GuiLoader() {
 						discordFile.close();
 					}
 				}
-				ImGui::Text("Language");
-				ImGui::Combo("Language", &currentLanguage, languageItems, IM_ARRAYSIZE(languageItems));
-				if (ImGui::Button(LanguageHandler::keybindsBtn)) switchTabs = 4;
+				ImGui::Combo(activeLang.Language, &currentLang, langItems, IM_ARRAYSIZE(langItems));
+
+				if (ImGui::Button("Keybinds")) switchTabs = 4;
 				break;
 			case 4:
-				createReassign("Jetpack", &KeybindHandler::jetpackKey);
-				createReassign("Hitbox", &KeybindHandler::hitboxKey);
-				createReassign("Scaffold", &KeybindHandler::scaffoldKey);
-				createReassign("Triggerbot", &KeybindHandler::triggerbotKey);
-				createReassign("TpAura", &KeybindHandler::tpauraKey);
+				createReassign(activeLang.Jetpack, &KeybindHandler::jetpackKey);
+				createReassign(activeLang.Hitbox, &KeybindHandler::hitboxKey);
+				createReassign(activeLang.Scaffold, &KeybindHandler::scaffoldKey);
+				createReassign(activeLang.Triggerbot, &KeybindHandler::triggerbotKey);
+				createReassign(activeLang.AirJump, &KeybindHandler::airjumpKey);
+				createReassign(activeLang.AirAcceleration, &KeybindHandler::airaccKey);
+				createReassign(activeLang.NoSlowDown, &KeybindHandler::noslowdownKey);
+				createReassign(activeLang.NoWeb, &KeybindHandler::nowebKey);
+				createReassign(activeLang.NoKnockBack, &KeybindHandler::noknockbackKey);
+				createReassign(activeLang.VanillaNoFall, &KeybindHandler::nofallKey);
+				createReassign(activeLang.Gamemode, &KeybindHandler::gamemodeKey);
+				createReassign(activeLang.Instabreak, &KeybindHandler::instabreakKey);
+				createReassign(activeLang.PlayerSpeed, &KeybindHandler::playerspeedKey);
+				createReassign(activeLang.Phase, &KeybindHandler::phaseKey);
+				createReassign(activeLang.NoWater, &KeybindHandler::nowaterKey);
+				createReassign(activeLang.Jesus, &KeybindHandler::jesusKey);
+				createReassign(activeLang.Bhop, &KeybindHandler::bhopKey);
+				createReassign(activeLang.Criticals, &KeybindHandler::criticalsKey);
+				createReassign(activeLang.Flight, &KeybindHandler::flightKey);
+				createReassign(activeLang.TpAura, &KeybindHandler::tpauraKey);
 				break;
 			}
 

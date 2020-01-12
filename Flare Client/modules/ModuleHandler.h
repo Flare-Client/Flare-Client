@@ -7,7 +7,7 @@
 
 #include "../LittleHacker.h"
 #include "../GuiLoader.h"
-#include "../LocalPlayer.h"
+#include "../mcSDK/LocalPlayer.h"
 #include "keybindhandler.h"
 #include "EntityList.h"
 #include "Hitbox.h"
@@ -42,12 +42,9 @@ class ModuleHandler {
 public:
     /* Variables */
 
-    static bool jetpackToggle, hitboxToggle, triggerbotToggle, airJumpToggle, airaccspeedToggle, noslowdownToggle, nowebToggle, noknockbackToggle, nofallToggle, gamemodeToggle, instabreakToggle, playerspeedtoggle, phaseToggle, scaffoldToggle, nowaterToggle, jesusToggle, bhopToggle, criticalsToggle, flightToggle, tpauraToggle, stepAssistToggle, nopacketToggle, freecamToggle, servercrasherToggle, coordinatesToggle;
-
-    static float hitboxWidthFloat, hitboxHeightFloat, airAccelerationSpeed, playerSpeedVal, teleportX, teleportY, teleportZ, jesusVal, bhopVal;
-
-    static int gamemodeVal;
-
+    static bool jetpackToggle, hitboxToggle, triggerbotToggle, airJumpToggle, airaccspeedToggle, noslowdownToggle, nowebToggle, noknockbackToggle, nofallToggle, gamemodeToggle, instabreakToggle, playerspeedToggle, phaseToggle, scaffoldToggle, nowaterToggle, jesusToggle, bhopToggle, criticalsToggle, flightToggle, tpauraToggle, stepAssistToggle, nopacketToggle, freecamToggle, servercrasherToggle, coordinatesToggle;
+    static float hitboxWidthFloat, hitboxHeightFloat, airAccelerationSpeed, playerSpeedVal, teleportX, teleportY, teleportZ, jesusVal, bhopVal, tpauraRange;
+    static int gamemodeVal, tpauraSkips;
 	static int drpDisplayName;
 
     /* Main */
