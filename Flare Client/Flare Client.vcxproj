@@ -156,6 +156,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="languagehandler.cpp" />
     <ClCompile Include="modules\coordinates.cpp" />
     <ClCompile Include="modules\freecam.cpp" />
     <ClCompile Include="LocalPlayer.cpp" />
@@ -202,6 +203,7 @@
     <ClCompile Include="modules\servercrasher.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="languagehandler.h" />
     <ClInclude Include="modules\coordinates.h" />
     <ClInclude Include="modules\freecam.h" />
     <ClInclude Include="LocalPlayer.h" />
