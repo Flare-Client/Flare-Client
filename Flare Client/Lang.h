@@ -36,6 +36,7 @@ struct Lang {
 	const char* Bhop;
 	const char* Flight;
 	const char* NoClip;
+	const char* StepAssist;
 
 	/*
 		Misc
@@ -119,6 +120,7 @@ Lang getEnglish() {
 		"Bunny-Hop",
 		"Flight",
 		"NoClip",
+		"Step Assist",
 
 		/*
 			Misc
@@ -204,6 +206,7 @@ Lang getItalian() {
 		"Salto del Coniglietto",
 		"Vola",
 		"NoClip",
+		"Step Assist",
 
 		/*
 			Misc
@@ -289,6 +292,7 @@ Lang getSpanish() {
 		"Saltar del Conejo",
 		"Vuelo",
 		"NoClip",
+		"Step Assist",
 
 		/*
 			Misc
