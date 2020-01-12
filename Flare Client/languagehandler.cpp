@@ -112,7 +112,61 @@ LanguageHandler::LanguageHandler(int switcher) {
 	break;
 	
 	case 1: //Espanol
-		//
+		
+		/* Menu Items */
+		LanguageHandler::combatMenuItem = (char*)"Combate";
+		LanguageHandler::movementMenuItem = (char*)"Movimiento";
+		LanguageHandler::miscMenuItem = (char*)"Misc";
+		LanguageHandler::settingsMenuItem = (char*)"Config";
+
+		/* Combat */
+		LanguageHandler::hitboxBtn = (char*)"Hitbox";
+		LanguageHandler::triggerbotBtn = (char*)"Gatillo";
+		LanguageHandler::criticalsBtn = (char*)"Criticos";
+		LanguageHandler::tpauraBtn = (char*)"TPAura";
+
+		/* Movement */
+		LanguageHandler::airjumpBtn = (char*)"Salto aereo";
+		LanguageHandler::airaccBtn = (char*)"Aceleracion de Aire";
+		LanguageHandler::noslowdownBtn = (char*)"No Desacelerar";
+		LanguageHandler::noknockbackBtn = (char*)"No Bloquear";
+		LanguageHandler::playerspeedBtn = (char*)"Velocidad del Jugador";
+		LanguageHandler::nowaterBtn = (char*)"NoAgua";
+		LanguageHandler::jesusBtn = (char*)"Jesus";
+		LanguageHandler::bhopBtn = (char*)"Salto de conejo";
+		LanguageHandler::flightBtn = (char*)"Vuelo";
+		LanguageHandler::stepAssistBtn = (char*)"El paso";
+
+		/* Misc */
+		LanguageHandler::nowebBtn = (char*)"NoTelarana";
+		LanguageHandler::nofallBtn = (char*)"VanillaNoCaerse";
+		LanguageHandler::gamemodeBtn = (char*)"Modo de juego";
+		LanguageHandler::instabreakBtn = (char*)"Instabreak";
+		LanguageHandler::phaseBtn = (char*)"Fase";
+		LanguageHandler::scaffoldBtn = (char*)"Andamio";
+		LanguageHandler::nopacketBtn = (char*)"NoPacket";
+		LanguageHandler::freecamBtn = (char*)"Camlibre";
+		LanguageHandler::servercrasherBtn = (char*)"Servidor estrellarse";
+		LanguageHandler::coordinatesBtn = (char*)"Coordenadas";
+
+		/* Settings */
+		LanguageHandler::hitboxWidthSlider = (char*)"Hitbox: Anchura";
+		LanguageHandler::hitboxHeightSlider = (char*)"Hitbox: Altura";
+		LanguageHandler::airaccSlider = (char*)"Aceleracion de Aire";
+		LanguageHandler::playerSpeedSlider = (char*)"Velocidad del Jugador";
+		LanguageHandler::jesusSlider = (char*)"Jesus (Y Aumentar)";
+		LanguageHandler::bhopSlider = (char*)"Salto de conejo (Y Aumentar)";
+		LanguageHandler::gamemodeSwitcher = (char*)"Modo de juego";
+		LanguageHandler::teleportText = (char*)"Teletransporte:";
+		LanguageHandler::teleportBtn = (char*)"Teletransporte";
+		LanguageHandler::themeText = (char*)"Fondo de pantalla:";
+		LanguageHandler::themeSwitcher = (char*)"Fondo de pantalla";
+		LanguageHandler::themeSaverBtn = (char*)"Guardar fondo de pantalla";
+		LanguageHandler::drpText = (char*)"Discord Rich Presence:";
+		LanguageHandler::drpSwitcher = (char*)"DRP";
+		LanguageHandler::drpSaverBtn = (char*)"Guardar DRP";
+		LanguageHandler::keybindsBtn = (char*)"Llaves";
+
 	break;
 	}
 }

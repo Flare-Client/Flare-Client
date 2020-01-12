@@ -232,6 +232,7 @@ GuiLoader::GuiLoader() {
 			const char* gamemodeItems[] = { "Survival", "Creative", "Adventure" };
 			const char* themeItems[] = { "Dark Theme", "Light Theme", "Classic Theme", "Grey Theme" };
 			const char* drpDisplayItems[] = { "Display username", "Display in game" };
+			const char* languageItems[] = {"English", "Espanol"};
 			switch (switchTabs) {
 			case 0:
 				ImGui::Checkbox(LanguageHandler::hitboxBtn, &ModuleHandler::hitboxToggle);
@@ -301,6 +302,8 @@ GuiLoader::GuiLoader() {
 					}
 				}
 				if (ImGui::Button(LanguageHandler::keybindsBtn)) switchTabs = 4;
+				ImGui::Text("Language");
+				ImGui::Combo("Language", &currentLanguage, languageItems, IM_ARRAYSIZE(languageItems));
 				break;
 			case 4:
 				createReassign("Jetpack", &KeybindHandler::jetpackKey);
