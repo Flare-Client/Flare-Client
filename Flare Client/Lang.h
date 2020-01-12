@@ -5,6 +5,7 @@ struct Lang {
 	*/
 	const char* Name;
 	const char* Language;
+	const char* LanguageSave;
 
 	/*
 		Categories
@@ -89,6 +90,7 @@ Lang getEnglish() {
 		*/
 		"English",
 		"Language",
+		"Save Language",
 
 		/*
 			Categories
@@ -175,6 +177,7 @@ Lang getItalian() {
 		*/
 		"Italiano",
 		"Linguaggio",
+		"Salva Linguaggio",
 
 		/*
 			Categories
@@ -261,6 +264,7 @@ Lang getSpanish() {
 		*/
 		"Espanol",
 		"Idioma",
+		"Salvar Idioma",
 
 		/*
 			Categories

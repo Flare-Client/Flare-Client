@@ -14,6 +14,7 @@
 #include <iostream>
 bool loadedTheme = false;
 bool loadedDrpDetails = false;
+bool loadedLanguage = false;
 
 using namespace std;
 
@@ -159,7 +160,6 @@ GuiLoader::GuiLoader() {
 
 			static int switchTabs = 3;
 			static int currentTheme = 0;
-			static int currentLanguage = 0;
 
 			ifstream inFile;
 			if (!loadedTheme) {
@@ -178,6 +178,16 @@ GuiLoader::GuiLoader() {
 					inFile.close();
 				}
 				loadedDrpDetails = true;
+			}
+
+			if (!loadedLanguage) {
+				inFile.open("Lang.txt");
+				if (inFile.is_open()) {
+					inFile >> currentLang;
+					inFile.close();
+				}
+				loadedLanguage = true;
+				cout << "Loaded Language" << endl;
 			}
 
 			switch (currentTheme) {
@@ -314,6 +324,16 @@ GuiLoader::GuiLoader() {
 					}
 				}
 				ImGui::Combo(activeLang.Language, &currentLang, langItems, IM_ARRAYSIZE(langItems));
+				ImGui::SameLine();
+				if (ImGui::Button(activeLang.LanguageSave)) {
+					ofstream langFile;
+					langFile.open("Lang.txt");
+					if (langFile.is_open()) {
+						langFile << currentLang;
+						langFile.close();
+					}
+					cout << "Saved Language" << endl;
+				}
 
 				if (ImGui::Button("Keybinds")) switchTabs = 4;
 				break;
