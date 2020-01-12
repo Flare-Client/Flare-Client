@@ -73,11 +73,11 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	discordPresenceTick += 1;
 
 	char connectedServer[20];
-	ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, mem::moduleBase + 0x03016010, { 0x30, 0x68, 0xC0, 0x18, 0x360, 0x0 }), &connectedServer, sizeof(connectedServer), 0);
+	ReadProcessMemory(hProcess, (BYTE*)pointers::connectedServerIP(), &connectedServer, sizeof(connectedServer), 0);
 
 	char* serverIP = NULL;
 
-	for (char A = '1'; A < 'Z'; A++) {
+	for (char A = '1'; A < 'Z'; A++) { //Check for valid char for first character of IP - Simple logic so we don't get odd chars when on single player
 		if (toupper(connectedServer[0]) == A) serverIP = (char*)connectedServer;
 	}
 
