@@ -240,7 +240,7 @@ GuiLoader::GuiLoader() {
 				SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 0, LWA_ALPHA);
 			}
 
-			const char* gamemodeItems[] = { "Survival", "Creative", "Adventure" };
+			const char* gamemodeItems[] = { activeLang.Survival, activeLang.Creative, activeLang.Adventure };
 			const char* themeItems[] = { "Dark Theme", "Light Theme", "Classic Theme", "Grey Theme" };
 			const char* drpDisplayItems[] = { "Display username", "Display in game" };
 			const char* langItems[] = { getEnglish().Name, getItalian().Name, getSpanish().Name };
@@ -271,26 +271,26 @@ GuiLoader::GuiLoader() {
 				ImGui::Checkbox(activeLang.Scaffold, &ModuleHandler::scaffoldToggle);
 				break;
 			case 3:
-				ImGui::SliderFloat("LanguageHandler::hitboxWidthSlider", &ModuleHandler::hitboxWidthFloat, 0.6, 12.f);
-				ImGui::SliderFloat("LanguageHandler::hitboxHeightSlider", &ModuleHandler::hitboxHeightFloat, 0.6, 12.f);
-				ImGui::SliderFloat("LanguageHandler::airaccSlider", &ModuleHandler::airAccelerationSpeed, 0.05, 0.5);
-				ImGui::SliderFloat("LanguageHandler::playerSpeedSlider", &ModuleHandler::playerSpeedVal, 0.1, 4.f);
-				ImGui::SliderFloat("LanguageHandler::jesusSlider", &ModuleHandler::jesusVal, 0.1, 5.f);
-				ImGui::SliderFloat("LanguageHandler::bhopSlider", &ModuleHandler::bhopVal, 0.1, 5.f);
-				ImGui::Combo("LanguageHandler::gamemodeSwitcher", &ModuleHandler::gamemodeVal, gamemodeItems, IM_ARRAYSIZE(gamemodeItems));
-				ImGui::Text("LanguageHandler::teleportText");
+				ImGui::SliderFloat(activeLang.HitboxWidthSlider, &ModuleHandler::hitboxWidthFloat, 0.6, 12.f);
+				ImGui::SliderFloat(activeLang.HitboxHeightSlider, &ModuleHandler::hitboxHeightFloat, 0.6, 12.f);
+				ImGui::SliderFloat(activeLang.AirAccSlider, &ModuleHandler::airAccelerationSpeed, 0.05, 0.5);
+				ImGui::SliderFloat(activeLang.PlayerSpeedSlider, &ModuleHandler::playerSpeedVal, 0.1, 4.f);
+				ImGui::SliderFloat(activeLang.JesusSlider, &ModuleHandler::jesusVal, 0.1, 5.f);
+				ImGui::SliderFloat(activeLang.BhopSlider, &ModuleHandler::bhopVal, 0.1, 5.f);
+				ImGui::Combo(activeLang.GamemodeSwitcher, &ModuleHandler::gamemodeVal, gamemodeItems, IM_ARRAYSIZE(gamemodeItems));
+				ImGui::Text(activeLang.TeleportText);
 				ImGui::InputFloat("X", &ModuleHandler::teleportX);
 				ImGui::InputFloat("Y", &ModuleHandler::teleportY);
 				ImGui::InputFloat("Z", &ModuleHandler::teleportZ);
-				if (ImGui::Button("LanguageHandler::teleportBtn")) {
+				if (ImGui::Button(activeLang.TeleportButton)) {
 					Teleport::Teleport(mem::hProcess, ModuleHandler::teleportX, ModuleHandler::teleportY, ModuleHandler::teleportZ);
 				}
-				ImGui::SliderFloat("TP Aura: Range", &ModuleHandler::tpauraRange, 0.0, 48.0f);
-				ImGui::SliderInt("TP Aura: TP Skips", &ModuleHandler::tpauraSkips, 0, 1000);
-				ImGui::Text("Theme:");
-				ImGui::Combo("Theme", &currentTheme, themeItems, IM_ARRAYSIZE(themeItems));
+				ImGui::SliderFloat(activeLang.TpAuraRange, &ModuleHandler::tpauraRange, 0.0, 48.0f);
+				ImGui::SliderInt(activeLang.TpAuraSkips, &ModuleHandler::tpauraSkips, 0, 1000);
+				ImGui::Text(activeLang.Theme);
+				ImGui::Combo(activeLang.Theme, &currentTheme, themeItems, IM_ARRAYSIZE(themeItems));
 				ImGui::SameLine();
-				if (ImGui::Button("LanguageHandler::themeSaverBtn")) {
+				if (ImGui::Button(activeLang.ThemeSaveButton)) {
 					ofstream themeFile;
 					themeFile.open("Theme.txt");
 					if (themeFile.is_open()) {
@@ -298,10 +298,10 @@ GuiLoader::GuiLoader() {
 						themeFile.close();
 					}
 				}
-				ImGui::Text("LanguageHandler::drpText");
-				ImGui::Combo("LanguageHandler::drpSwitcher", &ModuleHandler::drpDisplayName, drpDisplayItems, IM_ARRAYSIZE(drpDisplayItems));
+				ImGui::Text(activeLang.DrpText);
+				ImGui::Combo(activeLang.DrpSwitcher, &ModuleHandler::drpDisplayName, drpDisplayItems, IM_ARRAYSIZE(drpDisplayItems));
 				ImGui::SameLine();
-				if (ImGui::Button("LanguageHandler::drpSaverBtn")) {
+				if (ImGui::Button(activeLang.DrpSaveButton)) {
 					ofstream discordFile;
 					discordFile.open("Discord.txt");
 					if (discordFile.is_open()) {
