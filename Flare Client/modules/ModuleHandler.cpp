@@ -58,6 +58,9 @@ ifstream File;
 int discordEmbedUpdateTick;
 
 ModuleHandler::ModuleHandler(HANDLE hProcess) {
+
+	if (mem::GetModuleBaseAddress(mem::GetProcId(L"Minecraft.Windows.exe"), L"Minecraft.Windows.exe") == NULL) exit(3);
+
 	uintptr_t LocalPlayer = Player::LocalPlayer();
 
 	vector<uintptr_t> EntityListArr = EntityList::EntityListHandler(hProcess, LocalPlayer);
@@ -72,7 +75,11 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	char connectedServer[20];
 	ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, mem::moduleBase + 0x03016010, { 0x30, 0x68, 0xC0, 0x18, 0x360, 0x0 }), &connectedServer, sizeof(connectedServer), 0);
 
-	char* serverIP = (char*)connectedServer;
+	char* serverIP = NULL;
+
+	for (char A = '1'; A < 'Z'; A++) {
+		if (toupper(connectedServer[0]) == A) serverIP = (char*)connectedServer;
+	}
 
 	if (discordPresenceTick > 200) {
 		if (playerUsername.length() > 0) {

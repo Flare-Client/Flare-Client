@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <cstring>
+#include <cctype>
 
 #include "../LittleHacker.h"
 #include "../GuiLoader.h"
