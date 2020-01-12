@@ -1,23 +1,30 @@
 #pragma once
 struct Lang {
-	//Meta
+	/*
+		Meta
+	*/
 	const char* Name;
 	const char* Language;
 
-	//Categories
+	/*
+		Categories
+	*/
 	const char* Combat;
 	const char* Movement;
 	const char* Misc;
 	const char* Settings;
-	const char* Keybinds;
 
-	//Combat
+	/*
+		Combat
+	*/
 	const char* Hitbox;
 	const char* Triggerbot;
 	const char* Criticals;
 	const char* TpAura;
 
-	//Movement
+	/*
+		Movement
+	*/
 	const char* Jetpack;
 	const char* AirJump;
 	const char* AirAcceleration;
@@ -29,7 +36,9 @@ struct Lang {
 	const char* Bhop;
 	const char* Flight;
 
-	//Misc
+	/*
+		Misc
+	*/
 	const char* NoWeb;
 	const char* VanillaNoFall;
 	const char* Gamemode;
@@ -37,29 +46,63 @@ struct Lang {
 	const char* Phase;
 	const char* Scaffold;
 
-	//Settings
+	/*
+		Settings
+	*/
+	const char* HitboxWidthSlider;
+	const char* HitboxHeightSlider;
+	const char* AirAccSlider;
+	const char* PlayerSpeedSlider;
+	const char* JesusSlider;
+	const char* BhopSlider;
+	const char* GamemodeSwitcher;
+	const char* TeleportText;
+	const char* TeleportButton;
+	const char* TpAuraRange;
+	const char* TpAuraSkips;
+	const char* Theme;
+	const char* ThemeSaveButton;
+	const char* DrpText;
+	const char* DrpSwitcher;
+	const char* DrpSaveButton;
+	const char* Keybinds;
+
+	/*
+		Etc
+	*/
+	//Gamemode names
+	const char* Survival;
+	const char* Creative;
+	const char* Adventure;
 };
 
 Lang getEnglish() {
 	Lang english = {
-		//Meta
+		/*
+			Meta
+		*/
 		"English",
 		"Language",
 
-		//Categories
+		/*
+			Categories
+		*/
 		"Combat",
 		"Movement",
 		"Misc",
 		"Settings",
-		"Keybinds",
 
-		//Combat
+		/*
+			Combat
+		*/
 		"Hitbox",
 		"Triggerbot",
 		"Criticals",
 		"TpAura",
 
-		//Movement
+		/*
+			Movement
+		*/
 		"Jetpack",
 		"AirJump",
 		"AirAcceleration",
@@ -71,37 +114,75 @@ Lang getEnglish() {
 		"Bunny-Hop",
 		"Flight",
 
-		//Misc
+		/*
+			Misc
+		*/
 		"NoWeb",
 		"VanillaNoFall",
 		"Gamemode",
 		"Instabreak",
 		"Phase",
-		"Scaffold"
+		"Scaffold",
+
+		/*
+			Settings
+		*/
+		"Hitbox Width",
+		"Hitbox Height",
+		"Air Acceleration Speed",
+		"Player Speed Modifier",
+		"Jesus Boost",
+		"Bhop Boost",
+		"Gamemode",
+		"Teleport",
+		"Teleport",
+		"TP Aura: Range",
+		"TP Aura: Skips",
+		"Theme",
+		"Save",
+		"DrpText",
+		"DrpSwitcher",
+		"DrpSaveButton",
+		"Keybinds",
+
+		/*
+			Etc
+		*/
+		//Gamemode names
+		"Survival",
+		"Creative",
+		"Adventure"
 	};
 	return english;
 }
 
 Lang getItalian() {
 	Lang italian = {
-		//Meta
+		/*
+			Meta
+		*/
 		"Italiano",
 		"Linguaggio",
 
-		//Categories
+		/*
+			Categories
+		*/
 		"Combattimento",
 		"Movimento",
 		"Varie",
 		"Impostaz.",
-		"Keybinds",
 
-		//Combat
+		/*
+			Combat
+		*/
 		"Hitbox",
 		"Triggerbot",
 		"Critici",
 		"TpAura",
 
-		//Movement
+		/*
+			Movement
+		*/
 		"Zaino-Jet",
 		"Salta Aria",
 		"Accelerazione di Aria",
@@ -113,37 +194,75 @@ Lang getItalian() {
 		"Salto del Coniglietto",
 		"Vola",
 
-		//Misc
+		/*
+			Misc
+		*/
 		"No Ragnatela",
 		"Vanilla NoCad.",
 		"Gamemode",
 		"Instabreak",
 		"Fase",
-		"Impalcatura"
+		"Impalcatura",
+
+		/*
+			Settings
+		*/
+		"Hitbox Width",
+		"Hitbox Height",
+		"Air Acceleration Speed",
+		"Player Speed Modifier",
+		"Jesus Boost",
+		"Bhop Boost",
+		"Gamemode",
+		"Teleport",
+		"Teleport",
+		"TP Aura: Range",
+		"TP Aura: Skips",
+		"Theme",
+		"Save",
+		"DrpText",
+		"DrpSwitcher",
+		"DrpSaveButton",
+		"Keybinds",
+
+		/*
+			Etc
+		*/
+		//Gamemode names
+		"Survival",
+		"Creative",
+		"Adventure"
 	};
 	return italian;
 }
 
 Lang getSpanish() {
 	Lang spanish = {
-		//Meta
+		/*
+			Meta
+		*/
 		"Espanol",
 		"Idioma",
 
-		//Categories
+		/*
+			Categories
+		*/
 		"Combate",
 		"Movimiento",
 		"Miscelaneo",
 		"Config.",
-		"Keybinds",
 
-		//Combat
+		/*
+			Combat
+		*/
 		"Hitbox",
 		"Gatillo",
 		"Criticos",
 		"TpAura",
 
-		//Movement
+		/*
+			Movement
+		*/
 		"Mochila Cohete",
 		"Salto Aereo",
 		"Aceleracion de Aire",
@@ -155,13 +274,44 @@ Lang getSpanish() {
 		"Saltar del Conejo",
 		"Vuelo",
 
-		//Misc
+		/*
+			Misc
+		*/
 		"NoTelarana",
 		"VanillaNoCaerse",
 		"Modo de Juego",
 		"Instabreak",
 		"Fase",
-		"Andamio"
+		"Andamio",
+
+		/*
+			Settings
+		*/
+		"Hitbox Width",
+		"Hitbox Height",
+		"Air Acceleration Speed",
+		"Player Speed Modifier",
+		"Jesus Boost",
+		"Bhop Boost",
+		"Gamemode",
+		"Teleport",
+		"Teleport",
+		"TP Aura: Range",
+		"TP Aura: Skips",
+		"Theme",
+		"Save",
+		"DrpText",
+		"DrpSwitcher",
+		"DrpSaveButton",
+		"Keybinds",
+
+		/*
+			Etc
+		*/
+		//Gamemode names
+		"Survival",
+		"Creative",
+		"Adventure"
 	};
 	return spanish;
 }
