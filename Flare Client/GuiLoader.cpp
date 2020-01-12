@@ -1,11 +1,11 @@
 //IMGUI Includes
 #include "GuiLoader.h"
-#include "languagehandler.h"
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_dx9.h"
 #include "Imgui/imgui_impl_win32.h"
 #include <d3d9.h>
 #include <tchar.h>
+#include "Lang.h"
 #define DIRECTINPUAT_VERSION 0x0900
 #pragma comment(lib,"d3d9.lib")
 
@@ -102,6 +102,8 @@ void createReassign(const char* hackName, char *hackKey) {
 	}
 }
 
+int currentLang;
+Lang activeLang;
 GuiLoader::GuiLoader() {
 	{
 		WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("Flare Client"), NULL };
@@ -159,8 +161,6 @@ GuiLoader::GuiLoader() {
 			static int currentTheme = 0;
 			static int currentLanguage = 0;
 
-			LanguageHandler::LanguageHandler(currentLanguage); //Load Language
-
 			ifstream inFile;
 			if (!loadedTheme) {
 				inFile.open("Theme.txt");
@@ -210,13 +210,13 @@ GuiLoader::GuiLoader() {
 			if (ImGui::Button(activeLang.Combat, ImVec2(100.0f, 0.0f)))
 				switchTabs = 0;
 			ImGui::SameLine(0.0, 2.0f);
-			if (ImGui::Button(LanguageHandler::movementMenuItem, ImVec2(100.0f, 0.0f)))
+			if (ImGui::Button(activeLang.Movement, ImVec2(100.0f, 0.0f)))
 				switchTabs = 1;
 			ImGui::SameLine(0.0, 2.0f);
-			if (ImGui::Button(LanguageHandler::miscMenuItem, ImVec2(100.0f, 0.0f)))
+			if (ImGui::Button(activeLang.Misc, ImVec2(100.0f, 0.0f)))
 				switchTabs = 2;
 			ImGui::SameLine(0.0, 2.0f);
-			if (ImGui::Button(LanguageHandler::settingsMenuItem, ImVec2(100.0f, 0.0f)))
+			if (ImGui::Button(activeLang.Settings, ImVec2(100.0f, 0.0f)))
 				switchTabs = 3;
 
 			int gayUwpTitlesize = 0;
@@ -271,18 +271,18 @@ GuiLoader::GuiLoader() {
 				ImGui::Checkbox(activeLang.Scaffold, &ModuleHandler::scaffoldToggle);
 				break;
 			case 3:
-				ImGui::SliderFloat(LanguageHandler::hitboxWidthSlider, &ModuleHandler::hitboxWidthFloat, 0.6, 12.f);
-				ImGui::SliderFloat(LanguageHandler::hitboxHeightSlider, &ModuleHandler::hitboxHeightFloat, 0.6, 12.f);
-				ImGui::SliderFloat(LanguageHandler::airaccSlider, &ModuleHandler::airAccelerationSpeed, 0.05, 0.5);
-				ImGui::SliderFloat(LanguageHandler::playerSpeedSlider, &ModuleHandler::playerSpeedVal, 0.1, 4.f);
-				ImGui::SliderFloat(LanguageHandler::jesusSlider, &ModuleHandler::jesusVal, 0.1, 5.f);
-				ImGui::SliderFloat(LanguageHandler::bhopSlider, &ModuleHandler::bhopVal, 0.1, 5.f);
-				ImGui::Combo(LanguageHandler::gamemodeSwitcher, &ModuleHandler::gamemodeVal, gamemodeItems, IM_ARRAYSIZE(gamemodeItems));
-				ImGui::Text(LanguageHandler::teleportText);
+				ImGui::SliderFloat("LanguageHandler::hitboxWidthSlider", &ModuleHandler::hitboxWidthFloat, 0.6, 12.f);
+				ImGui::SliderFloat("LanguageHandler::hitboxHeightSlider", &ModuleHandler::hitboxHeightFloat, 0.6, 12.f);
+				ImGui::SliderFloat("LanguageHandler::airaccSlider", &ModuleHandler::airAccelerationSpeed, 0.05, 0.5);
+				ImGui::SliderFloat("LanguageHandler::playerSpeedSlider", &ModuleHandler::playerSpeedVal, 0.1, 4.f);
+				ImGui::SliderFloat("LanguageHandler::jesusSlider", &ModuleHandler::jesusVal, 0.1, 5.f);
+				ImGui::SliderFloat("LanguageHandler::bhopSlider", &ModuleHandler::bhopVal, 0.1, 5.f);
+				ImGui::Combo("LanguageHandler::gamemodeSwitcher", &ModuleHandler::gamemodeVal, gamemodeItems, IM_ARRAYSIZE(gamemodeItems));
+				ImGui::Text("LanguageHandler::teleportText");
 				ImGui::InputFloat("X", &ModuleHandler::teleportX);
 				ImGui::InputFloat("Y", &ModuleHandler::teleportY);
 				ImGui::InputFloat("Z", &ModuleHandler::teleportZ);
-				if (ImGui::Button(LanguageHandler::teleportBtn)) {
+				if (ImGui::Button("LanguageHandler::teleportBtn")) {
 					Teleport::Teleport(mem::hProcess, ModuleHandler::teleportX, ModuleHandler::teleportY, ModuleHandler::teleportZ);
 				}
 				ImGui::SliderFloat("TP Aura: Range", &ModuleHandler::tpauraRange, 0.0, 48.0f);
@@ -290,7 +290,7 @@ GuiLoader::GuiLoader() {
 				ImGui::Text("Theme:");
 				ImGui::Combo("Theme", &currentTheme, themeItems, IM_ARRAYSIZE(themeItems));
 				ImGui::SameLine();
-				if (ImGui::Button(LanguageHandler::themeSaverBtn)) {
+				if (ImGui::Button("LanguageHandler::themeSaverBtn")) {
 					ofstream themeFile;
 					themeFile.open("Theme.txt");
 					if (themeFile.is_open()) {
@@ -298,10 +298,10 @@ GuiLoader::GuiLoader() {
 						themeFile.close();
 					}
 				}
-				ImGui::Text(LanguageHandler::drpText);
-				ImGui::Combo(LanguageHandler::drpSwitcher, &ModuleHandler::drpDisplayName, drpDisplayItems, IM_ARRAYSIZE(drpDisplayItems));
+				ImGui::Text("LanguageHandler::drpText");
+				ImGui::Combo("LanguageHandler::drpSwitcher", &ModuleHandler::drpDisplayName, drpDisplayItems, IM_ARRAYSIZE(drpDisplayItems));
 				ImGui::SameLine();
-				if (ImGui::Button(LanguageHandler::drpSaverBtn)) {
+				if (ImGui::Button("LanguageHandler::drpSaverBtn")) {
 					ofstream discordFile;
 					discordFile.open("Discord.txt");
 					if (discordFile.is_open()) {
