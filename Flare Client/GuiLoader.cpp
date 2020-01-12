@@ -15,6 +15,7 @@
 bool loadedTheme = false;
 bool loadedDrpDetails = false;
 bool loadedLanguage = false;
+bool loadedKeybinds = false;
 
 using namespace std;
 
@@ -190,6 +191,15 @@ GuiLoader::GuiLoader() {
 				cout << "Loaded Language" << endl;
 			}
 
+			if (!loadedKeybinds) {
+				inFile.open("Keybinds.txt");
+				if (inFile.is_open()) {
+					inFile >> KeybindHandler::jetpackKey >> KeybindHandler::hitboxKey >> KeybindHandler::scaffoldKey >> KeybindHandler::triggerbotKey >> KeybindHandler::airjumpKey >> KeybindHandler::airaccKey >> KeybindHandler::noslowdownKey >> KeybindHandler::nowebKey >> KeybindHandler::noknockbackKey >> KeybindHandler::nofallKey >> KeybindHandler::gamemodeKey >> KeybindHandler::instabreakKey >> KeybindHandler::playerspeedKey >> KeybindHandler::phaseKey >> KeybindHandler::nowaterKey >> KeybindHandler::jesusKey >> KeybindHandler::bhopKey >> KeybindHandler::criticalsKey >> KeybindHandler::flightKey >> KeybindHandler::tpauraKey;
+					inFile.close();
+				}
+				loadedKeybinds = true;
+			}
+
 			switch (currentTheme) {
 			case 0:
 				ImGui::StyleColorsDark();
@@ -358,6 +368,32 @@ GuiLoader::GuiLoader() {
 				createReassign(activeLang.Criticals, &KeybindHandler::criticalsKey);
 				createReassign(activeLang.Flight, &KeybindHandler::flightKey);
 				createReassign(activeLang.TpAura, &KeybindHandler::tpauraKey);
+
+				ofstream keybindsFile;
+				keybindsFile.open("Keybinds.txt");
+				if (keybindsFile.is_open()) {
+					keybindsFile << KeybindHandler::jetpackKey << endl;
+					keybindsFile << KeybindHandler::hitboxKey << endl;
+					keybindsFile << KeybindHandler::scaffoldKey << endl;
+					keybindsFile << KeybindHandler::triggerbotKey << endl;
+					keybindsFile << KeybindHandler::airjumpKey << endl;
+					keybindsFile << KeybindHandler::airaccKey << endl;
+					keybindsFile << KeybindHandler::noslowdownKey << endl;
+					keybindsFile << KeybindHandler::nowebKey << endl;
+					keybindsFile << KeybindHandler::noknockbackKey << endl;
+					keybindsFile << KeybindHandler::nofallKey << endl;
+					keybindsFile << KeybindHandler::gamemodeKey << endl;
+					keybindsFile << KeybindHandler::instabreakKey << endl;
+					keybindsFile << KeybindHandler::playerspeedKey << endl;
+					keybindsFile << KeybindHandler::phaseKey << endl;
+					keybindsFile << KeybindHandler::nowaterKey << endl;
+					keybindsFile << KeybindHandler::jesusKey << endl;
+					keybindsFile << KeybindHandler::bhopKey << endl;
+					keybindsFile << KeybindHandler::criticalsKey << endl;
+					keybindsFile << KeybindHandler::flightKey << endl;
+					keybindsFile << KeybindHandler::tpauraKey << endl;
+					keybindsFile.close();
+				}
 				break;
 			}
 
