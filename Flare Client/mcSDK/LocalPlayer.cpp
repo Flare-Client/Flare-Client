@@ -88,6 +88,10 @@ uintptr_t pointers::showCoords() {
 	return mem::moduleBase + 0x5FF84D;
 }
 
+uintptr_t pointers::groundCollision() {
+	return mem::moduleBase + 0x1898F92;
+}
+
 unsigned int Player::airJump = 0x178;
 unsigned int Player::onGround = 0x17C;
 unsigned int Player::isFlying = 0xA88;

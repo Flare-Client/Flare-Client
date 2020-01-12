@@ -55,4 +55,5 @@ public:
 	static uintptr_t knockBackZ();
 	static uintptr_t inWaterTick();
 	static uintptr_t showCoords();
+	static uintptr_t groundCollision();
 };

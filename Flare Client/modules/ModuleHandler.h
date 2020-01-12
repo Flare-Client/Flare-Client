@@ -35,6 +35,8 @@
 #include "freecam.h"
 #include "servercrasher.h"
 #include "coordinates.h"
+#include "noclip.h"
+#include "clicktp.h"
 
 #include "../discord.h"
 
@@ -42,7 +44,7 @@ class ModuleHandler {
 public:
     /* Variables */
 
-    static bool jetpackToggle, hitboxToggle, triggerbotToggle, airJumpToggle, airaccspeedToggle, noslowdownToggle, nowebToggle, noknockbackToggle, nofallToggle, gamemodeToggle, instabreakToggle, playerspeedToggle, phaseToggle, scaffoldToggle, nowaterToggle, jesusToggle, bhopToggle, criticalsToggle, flightToggle, tpauraToggle, stepAssistToggle, nopacketToggle, freecamToggle, servercrasherToggle, coordinatesToggle;
+    static bool jetpackToggle, hitboxToggle, triggerbotToggle, airJumpToggle, airaccspeedToggle, noslowdownToggle, nowebToggle, noknockbackToggle, nofallToggle, gamemodeToggle, instabreakToggle, playerspeedToggle, phaseToggle, scaffoldToggle, nowaterToggle, jesusToggle, bhopToggle, criticalsToggle, flightToggle, tpauraToggle, stepAssistToggle, nopacketToggle, freecamToggle, servercrasherToggle, coordinatesToggle, noClipToggle, clicktpToggle;
     static float hitboxWidthFloat, hitboxHeightFloat, airAccelerationSpeed, playerSpeedVal, teleportX, teleportY, teleportZ, jesusVal, bhopVal, tpauraRange;
     static int gamemodeVal, tpauraSkips;
 	static int drpDisplayName;

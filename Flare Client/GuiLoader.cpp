@@ -261,6 +261,7 @@ GuiLoader::GuiLoader() {
 				ImGui::Checkbox(activeLang.Jesus, &ModuleHandler::jesusToggle);
 				ImGui::Checkbox(activeLang.Bhop, &ModuleHandler::bhopToggle);
 				ImGui::Checkbox(activeLang.Flight, &ModuleHandler::flightToggle);
+				ImGui::Checkbox(activeLang.NoClip, &ModuleHandler::noClipToggle);
 				break;
 			case 2:
 				ImGui::Checkbox(activeLang.NoWeb, &ModuleHandler::nowebToggle);
@@ -273,6 +274,7 @@ GuiLoader::GuiLoader() {
 				ImGui::Checkbox(activeLang.Freecam, &ModuleHandler::freecamToggle);
 				ImGui::Checkbox(activeLang.ServerCrasher, &ModuleHandler::servercrasherToggle);
 				ImGui::Checkbox(activeLang.Coordinates, &ModuleHandler::coordinatesToggle);
+				ImGui::Checkbox(activeLang.clickTP, &ModuleHandler::clicktpToggle);
 				break;
 			case 3:
 				ImGui::SliderFloat(activeLang.HitboxWidthSlider, &ModuleHandler::hitboxWidthFloat, 0.6, 12.f);
