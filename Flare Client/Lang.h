@@ -45,6 +45,10 @@ struct Lang {
 	const char* Instabreak;
 	const char* Phase;
 	const char* Scaffold;
+	const char* NoPacket;
+	const char* Freecam;
+	const char* ServerCrasher;
+	const char* Coordinates;
 
 	/*
 		Settings
@@ -62,7 +66,6 @@ struct Lang {
 	const char* TpAuraSkips;
 	const char* Theme;
 	const char* ThemeSaveButton;
-	const char* DrpText;
 	const char* DrpSwitcher;
 	const char* DrpSaveButton;
 	const char* Keybinds;
@@ -105,10 +108,10 @@ Lang getEnglish() {
 		*/
 		"Jetpack",
 		"AirJump",
-		"AirAcceleration",
+		"Air Acceleration",
 		"NoSlowDown",
 		"No KnockBack",
-		"PlayerSpeed",
+		"Player Speed",
 		"NoWater",
 		"Jesus",
 		"Bunny-Hop",
@@ -118,31 +121,33 @@ Lang getEnglish() {
 			Misc
 		*/
 		"NoWeb",
-		"VanillaNoFall",
+		"Vanilla NoFall",
 		"Gamemode",
 		"Instabreak",
 		"Phase",
 		"Scaffold",
+		"No Packet",
+		"Freecam",
+		"Server Crasher",
+		"Coordinates"
 
 		/*
 			Settings
 		*/
 		"Hitbox Width",
 		"Hitbox Height",
-		"Air Acceleration Speed",
-		"Player Speed Modifier",
+		"Air Acceleration",
+		"Player Speed",
 		"Jesus Boost",
 		"Bhop Boost",
 		"Gamemode",
 		"Teleport",
-		"Teleport",
 		"TP Aura: Range",
 		"TP Aura: Skips",
 		"Theme",
-		"Save",
-		"DrpText",
-		"DrpSwitcher",
-		"DrpSaveButton",
+		"Save Theme",
+		"DRP",
+		"Save DRP",
 		"Keybinds",
 
 		/*
@@ -199,39 +204,41 @@ Lang getItalian() {
 		*/
 		"No Ragnatela",
 		"Vanilla NoCad.",
-		"Gamemode",
+		"Modalita di gioco",
 		"Instabreak",
 		"Fase",
 		"Impalcatura",
+		"NoPacket",
+		"Cam gratis",
+		"Server schianto",
+		"Coordinate",
 
 		/*
 			Settings
 		*/
-		"Hitbox Width",
-		"Hitbox Height",
-		"Air Acceleration Speed",
-		"Player Speed Modifier",
-		"Jesus Boost",
-		"Bhop Boost",
-		"Gamemode",
-		"Teleport",
-		"Teleport",
+		"Hitbox Larghezza",
+		"Hitbox Altezza",
+		"Accelerazione dell'aria",
+		"Velocita del giocatore",
+		"Jesus Incremento",
+		"Bhop Incremento",
+		"modalita di gioco",
+		"teletrasporto",
 		"TP Aura: Range",
 		"TP Aura: Skips",
-		"Theme",
-		"Save",
-		"DrpText",
-		"DrpSwitcher",
-		"DrpSaveButton",
+		"Tema",
+		"Salva Tema",
+		"DRP",
+		"Salva DRP",
 		"Keybinds",
 
 		/*
 			Etc
 		*/
 		//Gamemode names
-		"Survival",
-		"Creative",
-		"Adventure"
+		"Sopravvivenza",
+		"Creativo",
+		"Avventura"
 	};
 	return italian;
 }
@@ -283,35 +290,36 @@ Lang getSpanish() {
 		"Instabreak",
 		"Fase",
 		"Andamio",
+		"NoPacket",
+		"Camara gratis",
+		"estrellarse servidor",
 
 		/*
 			Settings
 		*/
-		"Hitbox Width",
-		"Hitbox Height",
-		"Air Acceleration Speed",
-		"Player Speed Modifier",
-		"Jesus Boost",
-		"Bhop Boost",
-		"Gamemode",
-		"Teleport",
-		"Teleport",
+		"Hitbox Anchura",
+		"Hitbox Altura",
+		"Aceleracion de aire",
+		"Velocidad del jugador",
+		"Jesus Aumentar",
+		"Bhop Aumentar",
+		"Modo de juego",
+		"Teletransportarse",
 		"TP Aura: Range",
 		"TP Aura: Skips",
-		"Theme",
-		"Save",
-		"DrpText",
-		"DrpSwitcher",
-		"DrpSaveButton",
+		"Tema",
+		"Salvar Tema",
+		"DRP",
+		"Salvar DRP",
 		"Keybinds",
 
 		/*
 			Etc
 		*/
 		//Gamemode names
-		"Survival",
-		"Creative",
-		"Adventure"
+		"Supervivencia",
+		"Creativo",
+		"Aventuras"
 	};
 	return spanish;
 }

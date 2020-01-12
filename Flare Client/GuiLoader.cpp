@@ -269,6 +269,10 @@ GuiLoader::GuiLoader() {
 				ImGui::Checkbox(activeLang.Instabreak, &ModuleHandler::instabreakToggle);
 				ImGui::Checkbox(activeLang.Phase, &ModuleHandler::phaseToggle);
 				ImGui::Checkbox(activeLang.Scaffold, &ModuleHandler::scaffoldToggle);
+				ImGui::Checkbox(activeLang.NoPacket, &ModuleHandler::nopacketToggle);
+				ImGui::Checkbox(activeLang.Freecam, &ModuleHandler::freecamToggle);
+				ImGui::Checkbox(activeLang.ServerCrasher, &ModuleHandler::servercrasherToggle);
+				ImGui::Checkbox(activeLang.Coordinates, &ModuleHandler::coordinatesToggle);
 				break;
 			case 3:
 				ImGui::SliderFloat(activeLang.HitboxWidthSlider, &ModuleHandler::hitboxWidthFloat, 0.6, 12.f);
@@ -278,7 +282,6 @@ GuiLoader::GuiLoader() {
 				ImGui::SliderFloat(activeLang.JesusSlider, &ModuleHandler::jesusVal, 0.1, 5.f);
 				ImGui::SliderFloat(activeLang.BhopSlider, &ModuleHandler::bhopVal, 0.1, 5.f);
 				ImGui::Combo(activeLang.GamemodeSwitcher, &ModuleHandler::gamemodeVal, gamemodeItems, IM_ARRAYSIZE(gamemodeItems));
-				ImGui::Text(activeLang.TeleportText);
 				ImGui::InputFloat("X", &ModuleHandler::teleportX);
 				ImGui::InputFloat("Y", &ModuleHandler::teleportY);
 				ImGui::InputFloat("Z", &ModuleHandler::teleportZ);
@@ -287,7 +290,6 @@ GuiLoader::GuiLoader() {
 				}
 				ImGui::SliderFloat(activeLang.TpAuraRange, &ModuleHandler::tpauraRange, 0.0, 48.0f);
 				ImGui::SliderInt(activeLang.TpAuraSkips, &ModuleHandler::tpauraSkips, 0, 1000);
-				ImGui::Text(activeLang.Theme);
 				ImGui::Combo(activeLang.Theme, &currentTheme, themeItems, IM_ARRAYSIZE(themeItems));
 				ImGui::SameLine();
 				if (ImGui::Button(activeLang.ThemeSaveButton)) {
@@ -298,7 +300,6 @@ GuiLoader::GuiLoader() {
 						themeFile.close();
 					}
 				}
-				ImGui::Text(activeLang.DrpText);
 				ImGui::Combo(activeLang.DrpSwitcher, &ModuleHandler::drpDisplayName, drpDisplayItems, IM_ARRAYSIZE(drpDisplayItems));
 				ImGui::SameLine();
 				if (ImGui::Button(activeLang.DrpSaveButton)) {
