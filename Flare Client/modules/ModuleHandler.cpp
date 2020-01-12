@@ -59,7 +59,7 @@ int discordEmbedUpdateTick;
 
 ModuleHandler::ModuleHandler(HANDLE hProcess) {
 
-	if (mem::GetModuleBaseAddress(mem::GetProcId(L"Minecraft.Windows.exe"), L"Minecraft.Windows.exe") == NULL) exit(3);
+	if (FindWindowA(NULL, "Minecraft") == NULL) exit(3);
 
 	uintptr_t LocalPlayer = Player::LocalPlayer();
 
