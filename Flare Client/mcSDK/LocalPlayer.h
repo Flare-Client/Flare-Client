@@ -1,5 +1,5 @@
 #pragma once
-#include "LittleHacker.h"
+#include "../LittleHacker.h"
 
 class Player {
 public:

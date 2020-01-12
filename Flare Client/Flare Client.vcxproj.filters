@@ -39,7 +39,7 @@
     <ClCompile Include="modules\flight.cpp" />
     <ClCompile Include="modules\keybindhandler.cpp" />
     <ClCompile Include="modules\tpaura.cpp" />
-    <ClCompile Include="LocalPlayer.cpp" />
+    <ClCompile Include="mcSDK\LocalPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="discord.h" />
@@ -86,7 +86,7 @@
     <ClInclude Include="modules\keybindhandler.h" />
     <ClInclude Include="modules\tpaura.h" />
     <ClInclude Include="Lang.h" />
-    <ClInclude Include="LocalPlayer.h" />
+    <ClInclude Include="mcSDK\LocalPlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources.rc" />

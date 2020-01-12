@@ -156,7 +156,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="LocalPlayer.cpp" />
+    <ClCompile Include="mcSDK\LocalPlayer.cpp" />
     <ClCompile Include="modules\keybindhandler.cpp" />
     <ClCompile Include="modules\flight.cpp" />
     <ClCompile Include="modules\criticals.cpp" />
@@ -198,7 +198,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lang.h" />
-    <ClInclude Include="LocalPlayer.h" />
+    <ClInclude Include="mcSDK\LocalPlayer.h" />
     <ClInclude Include="modules\keybindhandler.h" />
     <ClInclude Include="modules\flight.h" />
     <ClInclude Include="modules\criticals.h" />
