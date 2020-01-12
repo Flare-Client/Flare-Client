@@ -129,7 +129,7 @@ Lang getEnglish() {
 		"No Packet",
 		"Freecam",
 		"Server Crasher",
-		"Coordinates"
+		"Coordinates",
 
 		/*
 			Settings
@@ -141,6 +141,7 @@ Lang getEnglish() {
 		"Jesus Boost",
 		"Bhop Boost",
 		"Gamemode",
+		"Teleport",
 		"Teleport",
 		"TP Aura: Range",
 		"TP Aura: Skips",
@@ -223,7 +224,8 @@ Lang getItalian() {
 		"Jesus Incremento",
 		"Bhop Incremento",
 		"modalita di gioco",
-		"teletrasporto",
+		"Teletrasporto",
+		"Teletrasporto",
 		"TP Aura: Range",
 		"TP Aura: Skips",
 		"Tema",
@@ -292,7 +294,8 @@ Lang getSpanish() {
 		"Andamio",
 		"NoPacket",
 		"Camara gratis",
-		"estrellarse servidor",
+		"Estrellarse servidor",
+		"Coordinates",
 
 		/*
 			Settings
@@ -304,6 +307,7 @@ Lang getSpanish() {
 		"Jesus Aumentar",
 		"Bhop Aumentar",
 		"Modo de juego",
+		"Teletransportarse",
 		"Teletransportarse",
 		"TP Aura: Range",
 		"TP Aura: Skips",
