@@ -301,9 +301,9 @@ GuiLoader::GuiLoader() {
 						discordFile.close();
 					}
 				}
-				if (ImGui::Button(LanguageHandler::keybindsBtn)) switchTabs = 4;
 				ImGui::Text("Language");
 				ImGui::Combo("Language", &currentLanguage, languageItems, IM_ARRAYSIZE(languageItems));
+				if (ImGui::Button(LanguageHandler::keybindsBtn)) switchTabs = 4;
 				break;
 			case 4:
 				createReassign("Jetpack", &KeybindHandler::jetpackKey);

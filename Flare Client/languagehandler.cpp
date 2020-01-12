@@ -160,7 +160,7 @@ LanguageHandler::LanguageHandler(int switcher) {
 		LanguageHandler::teleportText = (char*)"Teletransporte:";
 		LanguageHandler::teleportBtn = (char*)"Teletransporte";
 		LanguageHandler::themeText = (char*)"Fondo de pantalla:";
-		LanguageHandler::themeSwitcher = (char*)"Fondo de pantalla";
+		LanguageHandler::themeSwitcher = (char*)"";
 		LanguageHandler::themeSaverBtn = (char*)"Guardar fondo de pantalla";
 		LanguageHandler::drpText = (char*)"Discord Rich Presence:";
 		LanguageHandler::drpSwitcher = (char*)"DRP";
