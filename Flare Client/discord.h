@@ -7,5 +7,5 @@
 class Discord {
 public:
     static void Initialize();
-    static void Update(char* details, int entityListSize);
+    static void Update(char* details, char* presenceState, int entityListSize);
 };

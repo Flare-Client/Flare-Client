@@ -24,6 +24,11 @@ bool ModuleHandler::bhopToggle = false;
 bool ModuleHandler::criticalsToggle = false;
 bool ModuleHandler::flightToggle = false;
 bool ModuleHandler::tpauraToggle = false;
+bool ModuleHandler::stepAssistToggle = false;
+bool ModuleHandler::nopacketToggle = false;
+bool ModuleHandler::freecamToggle = false;
+bool ModuleHandler::servercrasherToggle = false;
+bool ModuleHandler::coordinatesToggle = false;
 
 float ModuleHandler::hitboxWidthFloat = 6.f;
 float ModuleHandler::hitboxHeightFloat = 3.f;
@@ -52,7 +57,6 @@ int discordEmbedUpdateTick;
 
 ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	uintptr_t LocalPlayer = Player::LocalPlayer();
-	uintptr_t UIOpen = mem::FindAddr(hProcess, mem::moduleBase + 0x02FA94F0, { 0x200, 0x128, 0x40, 0x8, 0x248 });
 
 	vector<uintptr_t> EntityListArr = EntityList::EntityListHandler(hProcess, LocalPlayer);
 
@@ -63,6 +67,10 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 
 	discordPresenceTick += 1;
 
+	string connectedServer;
+	ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, mem::moduleBase + 0x03016010, { 0x30, 0x68, 0xC0, 0x18, 0x360, 0x0 }), &connectedServer, sizeof(string), 0);
+
+	const char* serverIP = connectedServer.c_str();
 
 	if (discordPresenceTick > 200) {
 		if (playerUsername.length() > 0) {
@@ -70,16 +78,26 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 			strcpy(c, playerUsername.c_str());
 			switch (ModuleHandler::drpDisplayName) {
 			case 0:
-				Discord::Update(c, EntityListArr.size());
+				if (serverIP != NULL) {
+					Discord::Update(c, (char*)serverIP, EntityListArr.size());
+				}
+				else {
+					Discord::Update(c, (char*)"World", EntityListArr.size());
+				}
 			break;
 
 			case 1:
-				Discord::Update((char*)"Currently In Game", EntityListArr.size());
+				if (serverIP != NULL) {
+					Discord::Update((char*)"Currently In Game", (char*)serverIP, EntityListArr.size());
+				}
+				else {
+					Discord::Update((char*)"Currently In Game", (char*)"World", EntityListArr.size());
+				}
 			break;
 			}
 		}
 		else if (playerUsername.length() < 1) {
-			Discord::Update((char*)"On the main menu", 0);
+			Discord::Update((char*)"Minecraft", (char*)"Main Menu", 0);
 		}
 		discordPresenceTick = 0;
 	}
@@ -98,9 +116,7 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 		}
 	}
 
-	int UI;
-	ReadProcessMemory(hProcess, (BYTE*)UIOpen, &UI, sizeof(UI), 0);
-	if (UI) KeybindHandler::KeybindHandler(UI);
+	KeybindHandler::KeybindHandler();
 
 	if (ModuleHandler::jetpackToggle) {
 		float vect[3], pitch, yaw;
@@ -167,8 +183,11 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	else if (!ModuleHandler::instabreakToggle) {
 		Instabreak::Instabreak(hProcess, 0);
 	}
-	if (ModuleHandler::playerspeedToggle) {
-		PlayerSpeed::PlayerSpeed(hProcess, ModuleHandler::playerSpeedVal);
+	if (ModuleHandler::playerspeedtoggle) {
+		PlayerSpeed::PlayerSpeed(hProcess, ModuleHandler::playerSpeedVal, 1);
+	}
+	else if (!ModuleHandler::playerspeedtoggle) {
+		PlayerSpeed::PlayerSpeed(hProcess, ModuleHandler::playerSpeedVal, 0);
 	}
 	if (ModuleHandler::phaseToggle) {
 		Phase::Phase(hProcess, LocalPlayer, 'E');
@@ -177,13 +196,13 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 		Phase::Phase(hProcess, LocalPlayer, 'F');
 	}
 	if (ModuleHandler::scaffoldToggle) {
-		Scaffold::Scaffold(hProcess, 'N');
+		Scaffold::Scaffold(hProcess, 1);
 	}
 	else if (!ModuleHandler::scaffoldToggle) {
-		Scaffold::Scaffold(hProcess, 'F');
+		Scaffold::Scaffold(hProcess, 0);
 	}
 	if (ModuleHandler::nowaterToggle) {
-		NoWater::NoWater(hProcess, 'N');
+		NoWater::NoWater(hProcess, 0);
 	}
 	else if (!ModuleHandler::nowaterToggle) {
 		NoWater::NoWater(hProcess, 'F');
@@ -211,5 +230,35 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	}
 	else if (!ModuleHandler::tpauraToggle) {
 		TpAura::TpAura(hProcess, LocalPlayer, EntityListArr, 1, ModuleHandler::tpauraRange, ModuleHandler::tpauraSkips);
+	}
+	if (ModuleHandler::stepAssistToggle) {
+		StepAssist::StepAssist(hProcess, LocalPlayer, 1);
+	}
+	else if (!ModuleHandler::stepAssistToggle) {
+		StepAssist::StepAssist(hProcess, LocalPlayer, 0);
+	}
+	if (ModuleHandler::nopacketToggle) {
+		NoPacket::NoPacket(hProcess, 'N');
+	}
+	else if (!ModuleHandler::nopacketToggle) {
+		NoPacket::NoPacket(hProcess, 'F');
+	}
+	if (ModuleHandler::freecamToggle) {
+		FreeCam::FreeCam(hProcess, 'N');
+	}
+	else if (!ModuleHandler::freecamToggle) {
+		FreeCam::FreeCam(hProcess, 'F');
+	}
+	if (ModuleHandler::servercrasherToggle) {
+		ServerCrasher::ServerCrasher(hProcess, 'N');
+	}
+	else if (!ModuleHandler::servercrasherToggle) {
+		ServerCrasher::ServerCrasher(hProcess, 'F');
+	}
+	if (ModuleHandler::coordinatesToggle) {
+		Coordinates::Coordinates(hProcess, 1);
+	}
+	else if (!ModuleHandler::coordinatesToggle) {
+		Coordinates::Coordinates(hProcess, 0);
 	}
 }
