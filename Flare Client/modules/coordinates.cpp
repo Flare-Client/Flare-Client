@@ -7,6 +7,5 @@ Coordinates::Coordinates(HANDLE hProcess, int toggle) {
 	}
 	else {
 		mem::PatchEx((BYTE*)pointers::showCoords(), (BYTE*)"\x80\x78\x04\x00\x74\x07", 6, hProcess);
-	
 	}
 }
