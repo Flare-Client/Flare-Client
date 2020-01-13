@@ -9,9 +9,9 @@ NoKnockBack::NoKnockBack(HANDLE hProcess, char option) {
 	break;
 
 	case 'F':
-		mem::PatchEx((BYTE*)pointers::knockBackX(), (BYTE*)"\x89\x81\x6C\x04\x00\x00", 6, hProcess);
-		mem::PatchEx((BYTE*)pointers::knockBackY(), (BYTE*)"\x89\x81\x70\x04\x00\x00", 6, hProcess);
-		mem::PatchEx((BYTE*)pointers::knockBackZ(), (BYTE*)"\x89\x81\x74\x04\x00\x00", 6, hProcess);
+		mem::PatchEx((BYTE*)pointers::knockBackX(), (BYTE*)gameBytes::NOKNOCKBACKXBYTES, 6, hProcess);
+		mem::PatchEx((BYTE*)pointers::knockBackY(), (BYTE*)gameBytes::NOKNOCKBACKYBYTES, 6, hProcess);
+		mem::PatchEx((BYTE*)pointers::knockBackZ(), (BYTE*)gameBytes::NOKNOCKBACKZBYTES, 6, hProcess);
 	break;
 	}
 }

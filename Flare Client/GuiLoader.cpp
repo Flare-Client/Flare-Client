@@ -14,6 +14,8 @@
 #include <iostream>
 bool loadedTheme = false;
 bool loadedDrpDetails = false;
+bool loadedLanguage = false;
+bool loadedKeybinds = false;
 
 using namespace std;
 
@@ -159,7 +161,6 @@ GuiLoader::GuiLoader() {
 
 			static int switchTabs = 3;
 			static int currentTheme = 0;
-			static int currentLanguage = 0;
 
 			ifstream inFile;
 			if (!loadedTheme) {
@@ -178,6 +179,25 @@ GuiLoader::GuiLoader() {
 					inFile.close();
 				}
 				loadedDrpDetails = true;
+			}
+
+			if (!loadedLanguage) {
+				inFile.open("Lang.txt");
+				if (inFile.is_open()) {
+					inFile >> currentLang;
+					inFile.close();
+				}
+				loadedLanguage = true;
+				cout << "Loaded Language" << endl;
+			}
+
+			if (!loadedKeybinds) {
+				inFile.open("Keybinds.txt");
+				if (inFile.is_open()) {
+					inFile >> KeybindHandler::jetpackKey >> KeybindHandler::hitboxKey >> KeybindHandler::scaffoldKey >> KeybindHandler::triggerbotKey >> KeybindHandler::airjumpKey >> KeybindHandler::airaccKey >> KeybindHandler::noslowdownKey >> KeybindHandler::nowebKey >> KeybindHandler::noknockbackKey >> KeybindHandler::nofallKey >> KeybindHandler::gamemodeKey >> KeybindHandler::instabreakKey >> KeybindHandler::playerspeedKey >> KeybindHandler::phaseKey >> KeybindHandler::nowaterKey >> KeybindHandler::jesusKey >> KeybindHandler::bhopKey >> KeybindHandler::criticalsKey >> KeybindHandler::flightKey >> KeybindHandler::tpauraKey;
+					inFile.close();
+				}
+				loadedKeybinds = true;
 			}
 
 			switch (currentTheme) {
@@ -261,6 +281,8 @@ GuiLoader::GuiLoader() {
 				ImGui::Checkbox(activeLang.Jesus, &ModuleHandler::jesusToggle);
 				ImGui::Checkbox(activeLang.Bhop, &ModuleHandler::bhopToggle);
 				ImGui::Checkbox(activeLang.Flight, &ModuleHandler::flightToggle);
+				ImGui::Checkbox(activeLang.NoClip, &ModuleHandler::noClipToggle);
+				ImGui::Checkbox(activeLang.StepAssist, &ModuleHandler::stepAssistToggle);
 				break;
 			case 2:
 				ImGui::Checkbox(activeLang.NoWeb, &ModuleHandler::nowebToggle);
@@ -273,6 +295,7 @@ GuiLoader::GuiLoader() {
 				ImGui::Checkbox(activeLang.Freecam, &ModuleHandler::freecamToggle);
 				ImGui::Checkbox(activeLang.ServerCrasher, &ModuleHandler::servercrasherToggle);
 				ImGui::Checkbox(activeLang.Coordinates, &ModuleHandler::coordinatesToggle);
+				ImGui::Checkbox(activeLang.clickTP, &ModuleHandler::clicktpToggle);
 				break;
 			case 3:
 				ImGui::SliderFloat(activeLang.HitboxWidthSlider, &ModuleHandler::hitboxWidthFloat, 0.6, 12.f);
@@ -311,6 +334,16 @@ GuiLoader::GuiLoader() {
 					}
 				}
 				ImGui::Combo(activeLang.Language, &currentLang, langItems, IM_ARRAYSIZE(langItems));
+				ImGui::SameLine();
+				if (ImGui::Button(activeLang.LanguageSave)) {
+					ofstream langFile;
+					langFile.open("Lang.txt");
+					if (langFile.is_open()) {
+						langFile << currentLang;
+						langFile.close();
+					}
+					cout << "Saved Language" << endl;
+				}
 
 				if (ImGui::Button("Keybinds")) switchTabs = 4;
 				break;
@@ -335,6 +368,32 @@ GuiLoader::GuiLoader() {
 				createReassign(activeLang.Criticals, &KeybindHandler::criticalsKey);
 				createReassign(activeLang.Flight, &KeybindHandler::flightKey);
 				createReassign(activeLang.TpAura, &KeybindHandler::tpauraKey);
+
+				ofstream keybindsFile;
+				keybindsFile.open("Keybinds.txt");
+				if (keybindsFile.is_open()) {
+					keybindsFile << KeybindHandler::jetpackKey << endl;
+					keybindsFile << KeybindHandler::hitboxKey << endl;
+					keybindsFile << KeybindHandler::scaffoldKey << endl;
+					keybindsFile << KeybindHandler::triggerbotKey << endl;
+					keybindsFile << KeybindHandler::airjumpKey << endl;
+					keybindsFile << KeybindHandler::airaccKey << endl;
+					keybindsFile << KeybindHandler::noslowdownKey << endl;
+					keybindsFile << KeybindHandler::nowebKey << endl;
+					keybindsFile << KeybindHandler::noknockbackKey << endl;
+					keybindsFile << KeybindHandler::nofallKey << endl;
+					keybindsFile << KeybindHandler::gamemodeKey << endl;
+					keybindsFile << KeybindHandler::instabreakKey << endl;
+					keybindsFile << KeybindHandler::playerspeedKey << endl;
+					keybindsFile << KeybindHandler::phaseKey << endl;
+					keybindsFile << KeybindHandler::nowaterKey << endl;
+					keybindsFile << KeybindHandler::jesusKey << endl;
+					keybindsFile << KeybindHandler::bhopKey << endl;
+					keybindsFile << KeybindHandler::criticalsKey << endl;
+					keybindsFile << KeybindHandler::flightKey << endl;
+					keybindsFile << KeybindHandler::tpauraKey << endl;
+					keybindsFile.close();
+				}
 				break;
 			}
 

@@ -55,4 +55,25 @@ public:
 	static uintptr_t knockBackZ();
 	static uintptr_t inWaterTick();
 	static uintptr_t showCoords();
+	static uintptr_t groundCollision();
+	static uintptr_t connectedServerIP();
+};
+
+class gameBytes {
+public:
+	static BYTE* SCAFFOLDBYTES;
+	static BYTE* SERVERCRASHERBYTES;
+	static BYTE* NOPACKETBYTES;
+	static BYTE* WEBTICKBYTES;
+	static BYTE* NOSLOWDOWN1BYTES;
+	static BYTE* NOSLOWDOWN2BYTES;
+	static BYTE* NOKNOCKBACKXBYTES;
+	static BYTE* NOKNOCKBACKYBYTES;
+	static BYTE* NOKNOCKBACKZBYTES;
+	static BYTE* INWATERBYTES;
+	static BYTE* COORDINATESONBYTES;
+	static BYTE* COORDINATEOFFBYTES;
+	static BYTE* GROUNDCOLLISIONBYTES;
+	static BYTE* CRITICALSPATCHBYTES;
+	static BYTE* CRITICALSFIXBYTES;
 };

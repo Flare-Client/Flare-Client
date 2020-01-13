@@ -1,5 +1,7 @@
 #include "LocalPlayer.h"
 
+/* Pointers */
+
 uintptr_t Player::LocalPlayer() {
 	return mem::FindAddr(mem::hProcess, mem::moduleBase + 0x02FEE4B0, { 0xA8, 0x10, 0x40, 0x0 });
 }
@@ -87,6 +89,34 @@ uintptr_t pointers::inWaterTick() {
 uintptr_t pointers::showCoords() {
 	return mem::moduleBase + 0x5FF84D;
 }
+
+uintptr_t pointers::groundCollision() {
+	return mem::moduleBase + 0x1898F92;
+}
+
+uintptr_t pointers::connectedServerIP() {
+	return mem::FindAddr(mem::hProcess, mem::moduleBase + 0x03016010, { 0x30, 0x68, 0xC0, 0x18, 0x360, 0x0 });
+}
+
+/* Bytes */
+
+BYTE* gameBytes::SCAFFOLDBYTES = (BYTE*)"\x41\x88\x86\x54\x08\x00\x00";
+BYTE* gameBytes::SERVERCRASHERBYTES = (BYTE*)"\xFF\x50\x58\xF2\x0F\x10\x00";
+BYTE* gameBytes::NOPACKETBYTES = (BYTE*)"\x80\xB8\x31\x03\x00\x00\x00";
+BYTE* gameBytes::WEBTICKBYTES = (BYTE*)"\xF3\x0F\x11\x89\x38\x02\x00\x00";
+BYTE* gameBytes::NOSLOWDOWN1BYTES = (BYTE*)"\xF3\x0F\x11\x46\x0C";
+BYTE* gameBytes::NOSLOWDOWN2BYTES = (BYTE*)"\xF3\x0F\x11\x46\x0C";
+BYTE* gameBytes::NOKNOCKBACKXBYTES = (BYTE*)"\x89\x81\x6C\x04\x00\x00";
+BYTE* gameBytes::NOKNOCKBACKYBYTES = (BYTE*)"\x89\x81\x70\x04\x00\x00";
+BYTE* gameBytes::NOKNOCKBACKZBYTES = (BYTE*)"\x89\x81\x74\x04\x00\x00";
+BYTE* gameBytes::INWATERBYTES = (BYTE*)"\xC6\x83\x3D\x02\x00\x00\x01";
+BYTE* gameBytes::COORDINATESONBYTES = (BYTE*)"\x90\x90\x90\x90\x74\x07";
+BYTE* gameBytes::COORDINATEOFFBYTES = (BYTE*)"\x80\x78\x04\x00\x74\x07";
+BYTE* gameBytes::GROUNDCOLLISIONBYTES = (BYTE*)"\xF3\x41\x0F\x5C\x19";
+BYTE* gameBytes::CRITICALSPATCHBYTES = (BYTE*)"\xB8\x00\x00\x00\x00\x90\x90";
+BYTE* gameBytes::CRITICALSFIXBYTES = (BYTE*)"\x0F\xB6\x86\x78\x01\x00\x00";
+
+/* Local Player Offsets */
 
 unsigned int Player::airJump = 0x178;
 unsigned int Player::onGround = 0x17C;

@@ -26,7 +26,7 @@ Scaffold::Scaffold(HANDLE hProcess, int toggle) {
 
 	}
 	else {
-		mem::PatchEx((BYTE*)pointers::blockFace(), (BYTE*)"\x41\x88\x86\x54\x08\x00\x00", 7, hProcess);
+		mem::PatchEx((BYTE*)pointers::blockFace(), (BYTE*)gameBytes::SCAFFOLDBYTES, 7, hProcess);
 
 		if (rapidBuildToggle) {
 			BYTE TOGGLE = 1;
