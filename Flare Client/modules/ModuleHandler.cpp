@@ -31,6 +31,7 @@ bool ModuleHandler::servercrasherToggle = false;
 bool ModuleHandler::coordinatesToggle = false;
 bool ModuleHandler::noClipToggle = false;
 bool ModuleHandler::clicktpToggle = false;
+bool ModuleHandler::autoSprintToggle = false;
 
 float ModuleHandler::hitboxWidthFloat = 6.f;
 float ModuleHandler::hitboxHeightFloat = 3.f;
@@ -278,5 +279,11 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 	}
 	if (ModuleHandler::clicktpToggle) {
 		ClickTP::ClickTP(hProcess, LocalPlayer);
+	}
+	if (ModuleHandler::autoSprintToggle) {
+		AutoSprint::AutoSprint(hProcess, 1);
+	}
+	else if (!ModuleHandler::autoSprintToggle) {
+		AutoSprint::AutoSprint(hProcess, 0);
 	}
 }

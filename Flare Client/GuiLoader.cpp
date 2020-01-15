@@ -283,6 +283,7 @@ GuiLoader::GuiLoader() {
 				ImGui::Checkbox(activeLang.Flight, &ModuleHandler::flightToggle);
 				ImGui::Checkbox(activeLang.NoClip, &ModuleHandler::noClipToggle);
 				ImGui::Checkbox(activeLang.StepAssist, &ModuleHandler::stepAssistToggle);
+				ImGui::Checkbox(activeLang.AutoSprint, &ModuleHandler::autoSprintToggle);
 				break;
 			case 2:
 				ImGui::Checkbox(activeLang.NoWeb, &ModuleHandler::nowebToggle);

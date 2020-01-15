@@ -57,6 +57,7 @@ public:
 	static uintptr_t showCoords();
 	static uintptr_t groundCollision();
 	static uintptr_t connectedServerIP();
+	static uintptr_t SprintInstruction();
 };
 
 class gameBytes {
@@ -76,4 +77,5 @@ public:
 	static BYTE* GROUNDCOLLISIONBYTES;
 	static BYTE* CRITICALSPATCHBYTES;
 	static BYTE* CRITICALSFIXBYTES;
+	static BYTE* SPRINTINSTRUCTIONBYTES;
 };

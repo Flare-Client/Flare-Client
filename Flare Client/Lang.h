@@ -38,6 +38,7 @@ struct Lang {
 	const char* Flight;
 	const char* NoClip;
 	const char* StepAssist;
+	const char* AutoSprint;
 
 	/*
 		Misc
@@ -123,6 +124,7 @@ Lang getEnglish() {
 		"Flight",
 		"NoClip",
 		"Step Assist",
+		"AutoSprint",
 
 		/*
 			Misc
@@ -210,6 +212,7 @@ Lang getItalian() {
 		"Vola",
 		"NoClip",
 		"Step Assist",
+		"AutomaticoSprint",
 
 		/*
 			Misc
@@ -297,6 +300,7 @@ Lang getSpanish() {
 		"Vuelo",
 		"NoClip",
 		"Step Assist",
+		"AutomaticoSprint",
 
 		/*
 			Misc

@@ -98,6 +98,10 @@ uintptr_t pointers::connectedServerIP() {
 	return mem::FindAddr(mem::hProcess, mem::moduleBase + 0x03016010, { 0x30, 0x68, 0xC0, 0x18, 0x360, 0x0 });
 }
 
+uintptr_t pointers::SprintInstruction() {
+	return mem::moduleBase + 0x1A5B8F0;
+}
+
 /* Bytes */
 
 BYTE* gameBytes::SCAFFOLDBYTES = (BYTE*)"\x41\x88\x86\x54\x08\x00\x00";
@@ -115,6 +119,7 @@ BYTE* gameBytes::COORDINATEOFFBYTES = (BYTE*)"\x80\x78\x04\x00\x74\x07";
 BYTE* gameBytes::GROUNDCOLLISIONBYTES = (BYTE*)"\xF3\x41\x0F\x5C\x19";
 BYTE* gameBytes::CRITICALSPATCHBYTES = (BYTE*)"\xB8\x00\x00\x00\x00\x90\x90";
 BYTE* gameBytes::CRITICALSFIXBYTES = (BYTE*)"\x0F\xB6\x86\x78\x01\x00\x00";
+BYTE* gameBytes::SPRINTINSTRUCTIONBYTES = (BYTE*)"\x44\x0F\x2F\x66\x0C";
 
 /* Local Player Offsets */
 

@@ -47,6 +47,7 @@
     <ClCompile Include="modules\coordinates.cpp" />
     <ClCompile Include="modules\noclip.cpp" />
     <ClCompile Include="modules\clicktp.cpp" />
+    <ClCompile Include="modules\autosprint.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="discord.h" />
@@ -102,6 +103,7 @@
     <ClInclude Include="languagehandler.h" />
     <ClInclude Include="modules\noclip.h" />
     <ClInclude Include="modules\clicktp.h" />
+    <ClInclude Include="modules\autosprint.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources.rc" />
