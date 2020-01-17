@@ -306,46 +306,18 @@ GuiLoader::GuiLoader() {
 				ImGui::SliderFloat(activeLang.JesusSlider, &ModuleHandler::jesusVal, 0.1, 5.f);
 				ImGui::SliderFloat(activeLang.BhopSlider, &ModuleHandler::bhopVal, 0.1, 5.f);
 				ImGui::Combo(activeLang.GamemodeSwitcher, &ModuleHandler::gamemodeVal, gamemodeItems, IM_ARRAYSIZE(gamemodeItems));
+				ImGui::SliderFloat(activeLang.TpAuraRange, &ModuleHandler::tpauraRange, 0.0, 48.0f);
+				ImGui::SliderInt(activeLang.TpAuraSkips, &ModuleHandler::tpauraSkips, 0, 1000);
 				ImGui::InputFloat("X", &ModuleHandler::teleportX);
 				ImGui::InputFloat("Y", &ModuleHandler::teleportY);
 				ImGui::InputFloat("Z", &ModuleHandler::teleportZ);
 				if (ImGui::Button(activeLang.TeleportButton)) {
 					Teleport::Teleport(mem::hProcess, ModuleHandler::teleportX, ModuleHandler::teleportY, ModuleHandler::teleportZ);
 				}
-				ImGui::SliderFloat(activeLang.TpAuraRange, &ModuleHandler::tpauraRange, 0.0, 48.0f);
-				ImGui::SliderInt(activeLang.TpAuraSkips, &ModuleHandler::tpauraSkips, 0, 1000);
 				ImGui::Combo(activeLang.Theme, &currentTheme, themeItems, IM_ARRAYSIZE(themeItems));
-				ImGui::SameLine();
-				if (ImGui::Button(activeLang.ThemeSaveButton)) {
-					ofstream themeFile;
-					themeFile.open("Theme.txt");
-					if (themeFile.is_open()) {
-						themeFile << currentTheme << endl;
-						themeFile.close();
-					}
-				}
-				ImGui::Combo(activeLang.DrpSwitcher, &ModuleHandler::drpDisplayName, drpDisplayItems, IM_ARRAYSIZE(drpDisplayItems));
-				ImGui::SameLine();
-				if (ImGui::Button(activeLang.DrpSaveButton)) {
-					ofstream discordFile;
-					discordFile.open("Discord.txt");
-					if (discordFile.is_open()) {
-						discordFile << ModuleHandler::drpDisplayName;
-						discordFile.close();
-					}
-				}
-				ImGui::Combo(activeLang.Language, &currentLang, langItems, IM_ARRAYSIZE(langItems));
-				ImGui::SameLine();
-				if (ImGui::Button(activeLang.LanguageSave)) {
-					ofstream langFile;
-					langFile.open("Lang.txt");
-					if (langFile.is_open()) {
-						langFile << currentLang;
-						langFile.close();
-					}
-					cout << "Saved Language" << endl;
-				}
 
+				ImGui::Combo(activeLang.DrpSwitcher, &ModuleHandler::drpDisplayName, drpDisplayItems, IM_ARRAYSIZE(drpDisplayItems));
+				ImGui::Combo(activeLang.Language, &currentLang, langItems, IM_ARRAYSIZE(langItems));
 				if (ImGui::Button("Keybinds")) switchTabs = 4;
 				break;
 			case 4:
@@ -369,34 +341,57 @@ GuiLoader::GuiLoader() {
 				createReassign(activeLang.Criticals, &KeybindHandler::criticalsKey);
 				createReassign(activeLang.Flight, &KeybindHandler::flightKey);
 				createReassign(activeLang.TpAura, &KeybindHandler::tpauraKey);
-
-				ofstream keybindsFile;
-				keybindsFile.open("Keybinds.txt");
-				if (keybindsFile.is_open()) {
-					keybindsFile << KeybindHandler::jetpackKey << endl;
-					keybindsFile << KeybindHandler::hitboxKey << endl;
-					keybindsFile << KeybindHandler::scaffoldKey << endl;
-					keybindsFile << KeybindHandler::triggerbotKey << endl;
-					keybindsFile << KeybindHandler::airjumpKey << endl;
-					keybindsFile << KeybindHandler::airaccKey << endl;
-					keybindsFile << KeybindHandler::noslowdownKey << endl;
-					keybindsFile << KeybindHandler::nowebKey << endl;
-					keybindsFile << KeybindHandler::noknockbackKey << endl;
-					keybindsFile << KeybindHandler::nofallKey << endl;
-					keybindsFile << KeybindHandler::gamemodeKey << endl;
-					keybindsFile << KeybindHandler::instabreakKey << endl;
-					keybindsFile << KeybindHandler::playerspeedKey << endl;
-					keybindsFile << KeybindHandler::phaseKey << endl;
-					keybindsFile << KeybindHandler::nowaterKey << endl;
-					keybindsFile << KeybindHandler::jesusKey << endl;
-					keybindsFile << KeybindHandler::bhopKey << endl;
-					keybindsFile << KeybindHandler::criticalsKey << endl;
-					keybindsFile << KeybindHandler::flightKey << endl;
-					keybindsFile << KeybindHandler::tpauraKey << endl;
-					keybindsFile.close();
-				}
 				break;
 			}
+			/* File Saving */
+			ofstream themeFile;
+			themeFile.open("Theme.txt");
+			if (themeFile.is_open()) {
+				themeFile << currentTheme << endl;
+				themeFile.close();
+			}
+
+			ofstream discordFile;
+			discordFile.open("Discord.txt");
+			if (discordFile.is_open()) {
+				discordFile << ModuleHandler::drpDisplayName;
+				discordFile.close();
+			}
+
+			ofstream langFile;
+			langFile.open("Lang.txt");
+			if (langFile.is_open()) {
+				langFile << currentLang;
+				langFile.close();
+			}
+
+			ofstream keybindsFile;
+			keybindsFile.open("Keybinds.txt");
+			if (keybindsFile.is_open()) {
+				keybindsFile << KeybindHandler::jetpackKey << endl;
+				keybindsFile << KeybindHandler::hitboxKey << endl;
+				keybindsFile << KeybindHandler::scaffoldKey << endl;
+				keybindsFile << KeybindHandler::triggerbotKey << endl;
+				keybindsFile << KeybindHandler::airjumpKey << endl;
+				keybindsFile << KeybindHandler::airaccKey << endl;
+				keybindsFile << KeybindHandler::noslowdownKey << endl;
+				keybindsFile << KeybindHandler::nowebKey << endl;
+				keybindsFile << KeybindHandler::noknockbackKey << endl;
+				keybindsFile << KeybindHandler::nofallKey << endl;
+				keybindsFile << KeybindHandler::gamemodeKey << endl;
+				keybindsFile << KeybindHandler::instabreakKey << endl;
+				keybindsFile << KeybindHandler::playerspeedKey << endl;
+				keybindsFile << KeybindHandler::phaseKey << endl;
+				keybindsFile << KeybindHandler::nowaterKey << endl;
+				keybindsFile << KeybindHandler::jesusKey << endl;
+				keybindsFile << KeybindHandler::bhopKey << endl;
+				keybindsFile << KeybindHandler::criticalsKey << endl;
+				keybindsFile << KeybindHandler::flightKey << endl;
+				keybindsFile << KeybindHandler::tpauraKey << endl;
+				keybindsFile.close();
+			}
+
+			/* */
 
 			WindowAlwaysOnTop(hwnd);
 			ModuleHandler::ModuleHandler(mem::hProcess);
