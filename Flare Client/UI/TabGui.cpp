@@ -1,49 +1,51 @@
 #include "TabGui.h"
-#include <d3d9.h>
-#include <tchar.h>
-#include "../Lang.h"
-#include <fstream>
-#include <iostream>
+
+LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 TabGui::TabGui() {
-	{
-		WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("Flare Client Tab"), NULL };
-		::RegisterClassEx(&wc);
-		HWND hwnd = ::CreateWindow(wc.lpszClassName, NULL, WS_POPUP, 0, 0, 200, 400, NULL, NULL, wc.hInstance, NULL);
-		SetWindowLong(hwnd, GWL_EXSTYLE, WS_EX_LAYERED);
-		SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 1000, LWA_ALPHA);
+	const wchar_t CLASS_NAME[] = L"Flare tab GUI";
+	WNDCLASS wc = {};
+	wc.lpfnWndProc = WindowProc;
+	wc.hInstance = GetModuleHandle(NULL);
+	wc.lpszClassName = CLASS_NAME;
 
-		if (!CreateDeviceD3D(hwnd))
-		{
-			CleanupDeviceD3D();
-			::UnregisterClass(wc.lpszClassName, wc.hInstance);
+	RegisterClass(&wc);
 
-		}
-
-		::ShowWindow(hwnd, SW_SHOW);
-		::UpdateWindow(hwnd);
+	HWND hwnd = CreateWindow(wc.lpszClassName, NULL, WS_POPUP, 0, 0, 420, 420, NULL, NULL, wc.hInstance, NULL);
+	if (hwnd == NULL) {
+		MessageBox(NULL, L"No HWND!", L"Failed to create window for Tab UI", MB_OK);
+		return;
 	}
+	ShowWindow(hwnd, SW_SHOW);
+
+	MSG msg = { };
+	while (GetMessage(&msg, NULL, 0, 0))
+	{
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+	return;
 }
 
-LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	switch (msg)
+	switch (uMsg)
 	{
-	case WM_SIZE:
-		if (g_pd3dDevice != NULL && wParam != SIZE_MINIMIZED)
-		{
-			g_d3dpp.BackBufferWidth = LOWORD(lParam);
-			g_d3dpp.BackBufferHeight = HIWORD(lParam);
-			ResetDevice();
-		}
-		return 0;
-	case WM_SYSCOMMAND:
-		if ((wParam & 0xfff0) == SC_KEYMENU)
+		case WM_DESTROY:
+			PostQuitMessage(0);
 			return 0;
-		break;
-	case WM_DESTROY:
-		::PostQuitMessage(0);
-		return 0;
+		case WM_PAINT:
+		{
+			PAINTSTRUCT ps;
+			HDC hdc = BeginPaint(hwnd, &ps);
+
+			// All painting occurs here, between BeginPaint and EndPaint.
+
+			FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW + 1));
+
+			EndPaint(hwnd, &ps);
+		}
+	break;
 	}
-	return ::DefWindowProc(hWnd, msg, wParam, lParam);
+	return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }

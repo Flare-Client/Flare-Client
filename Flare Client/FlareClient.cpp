@@ -37,7 +37,7 @@ int main()
 		BYTE epb[7] = { 0xE9, 0x3B, 0x22, 0xD1, 0x01, 0x90, 0x90 };
 		mem::PatchEx((BYTE*)eppb, epb, 7, hProcess);
 
-		GuiLoader f;
+		//GuiLoader f;
 		TabGui g;
 	}
 }
