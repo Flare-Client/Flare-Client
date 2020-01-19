@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "UI/GuiLoader.h"
+#include "UI/TabGui.h"
 #include "LittleHacker.h"
 
 #include "discord.h"
@@ -37,5 +38,6 @@ int main()
 		mem::PatchEx((BYTE*)eppb, epb, 7, hProcess);
 
 		GuiLoader f;
+		TabGui g;
 	}
 }
