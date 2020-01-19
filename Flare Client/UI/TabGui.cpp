@@ -18,9 +18,26 @@ TabGui::TabGui() {
 	}
 	ShowWindow(hwnd, SW_SHOW);
 
+	HWND windowHandleMC = find_main_window(mem::frameId);
+
 	MSG msg = { };
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
+		RECT rectMC;
+		RECT rectThis;
+		GetWindowRect(windowHandleMC, &rectMC);
+		GetWindowRect(hwnd, &rectThis);
+		SetWindowPos(hwnd, HWND_TOPMOST, (rect.right - GetWindowSize().x) - 8, rect.top + 33 + gayUwpTitlesize, rect.right, rect.bottom, SWP_NOSIZE);
+
+		if (GetForegroundWindow() == hwnd) {
+			SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 1000, LWA_ALPHA);
+		}
+		else if (GetForegroundWindow() == windowHandleMC) {
+			SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 100, LWA_ALPHA);
+		}
+		else {
+			SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 0, LWA_ALPHA);
+		}
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
@@ -41,7 +58,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 			// All painting occurs here, between BeginPaint and EndPaint.
 
-			FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW + 1));
+			FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_DESKTOP + 1));
 
 			EndPaint(hwnd, &ps);
 		}
