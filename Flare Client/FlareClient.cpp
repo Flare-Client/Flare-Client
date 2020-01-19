@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "GuiLoader.h"
+#include "UI/GuiLoader.h"
 #include "LittleHacker.h"
 
 #include "discord.h"

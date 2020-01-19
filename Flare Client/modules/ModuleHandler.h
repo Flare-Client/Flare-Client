@@ -6,7 +6,7 @@
 #include <cstring>
 
 #include "../LittleHacker.h"
-#include "../GuiLoader.h"
+#include "../UI/GuiLoader.h"
 #include "../mcSDK/LocalPlayer.h"
 #include "keybindhandler.h"
 #include "EntityList.h"
