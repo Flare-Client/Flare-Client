@@ -143,8 +143,13 @@ GuiLoader::GuiLoader() {
 
 		MSG msg;
 		ZeroMemory(&msg, sizeof(msg));
+		BYTE underFix = 0;
 		while (msg.message != WM_QUIT)
 		{
+			if (underFix < 200) {
+				SetForegroundWindow(hwnd);
+				underFix++;
+			}
 			if (::PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
 			{
 				::TranslateMessage(&msg);
