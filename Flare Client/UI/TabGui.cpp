@@ -232,6 +232,7 @@ TabGui::TabGui() {
 
 	MSG msg = { };
 	int keyBuf = 0;
+	bool trig = false;
 	while (msg.message != WM_QUIT)
 	{
 		if (::PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
@@ -324,10 +325,17 @@ TabGui::TabGui() {
 		}
 
 		if (GetForegroundWindow() == windowHandleMC) {
+			trig = true;
 			topStyle = HWND_TOPMOST;
 		}
 		else {
-			topStyle = HWND_NOTOPMOST;
+			if (trig) {
+				topStyle = HWND_BOTTOM;
+			}
+			else {
+				topStyle = HWND_NOTOPMOST;
+			}
+			trig = false;
 		}
 		//InvalidateRect(hWnd, 0, TRUE);
 	}
@@ -353,23 +361,27 @@ VOID OnPaint(HDC hdc)
 	graphics.DrawString(L"v0.0.6", -1, &verFont, verPointF, &vBrush);
 
 	Gdiplus::SolidBrush cPen(Gdiplus::Color(200, 0, 0, 0));
-	graphics.FillRectangle(&cPen, Gdiplus::Rect(desktop.left + 8, desktop.top + 72, 200, 400));
 
 	Gdiplus::FontFamily categoryFontFamily(L"Arial");
 	Gdiplus::Font categoryFont(&categoryFontFamily, 32, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
 
+	Gdiplus::SolidBrush oBrush(Gdiplus::Color(255, 255, 255, 0));
 	Gdiplus::SolidBrush sBrush(Gdiplus::Color(255, 0, 255, 255));
 	Gdiplus::SolidBrush aBrush(Gdiplus::Color(255, 255, 0, 255));
 	for (byte b = 0; b < categoryCount; b++) {
+		graphics.FillRectangle(&cPen, Gdiplus::Rect(desktop.left + 8, desktop.top + 75 + (32 * b), 200, 32));
 		if (categories[b].selected) {
 			if (categories[b].active) {
 				graphics.FillRectangle(&aBrush, Gdiplus::Rect(desktop.left + 8, (desktop.top + 75) + (32 * b), 200, 32));
 				int z = 0;
 				for (int c = 0; c < categories[b].moduleCount; c++) {
 					graphics.FillRectangle(&cPen, Gdiplus::Rect(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z), 200, 32));
-					if (*categories[b].modules[c].moduleToggle) {
+					if (*categories[b].modules[c].moduleToggle && categories[b].modules[c].selected) {
+						graphics.FillRectangle(&oBrush, Gdiplus::Rect(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z), 200, 32));
+					}
+					else if (*categories[b].modules[c].moduleToggle) {
 						graphics.FillRectangle(&aBrush, Gdiplus::Rect(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z), 200, 32));
-					}else if (categories[b].modules[c].selected) {
+					} else if (categories[b].modules[c].selected) {
 						graphics.FillRectangle(&sBrush, Gdiplus::Rect(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z), 200, 32));
 					}
 					Gdiplus::PointF pointL(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z));
