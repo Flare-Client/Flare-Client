@@ -11,17 +11,19 @@
 #include <gdiplus.h>
 #include <list>
 
-struct Category {
-	std::string name;
-	bool selected;
-	bool active;
-};
 struct ModuleUI {
-	byte parent;
 	std::string name;
 	bool selected;
 	bool* moduleToggle;
 };
+struct Category {
+	std::string name;
+	bool selected;
+	bool active;
+	int moduleCount;
+	std::vector<ModuleUI> modules;
+};
+
 
 class TabGui
 {

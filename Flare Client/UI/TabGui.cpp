@@ -39,7 +39,6 @@ HWND hWnd;
 POINT winPos;
 SIZE winSize;
 Category categories[32];
-ModuleUI modules[1024];
 HWND topStyle = HWND_TOPMOST;
 bool render = true;
 static Lang activeLang = getEnglish();
@@ -65,12 +64,10 @@ void RegisterCategory(std::string categoryName, byte id)
 	categories[id] = { categoryName, id==0 };
 }
 void RegisterModule(byte categoryID, int moduleID, std::string hackName, bool* moduleToggle) {
-	modules[moduleID].parent = categoryID;
-	modules[moduleID].name = hackName;
-	modules[moduleID].selected = false;
-	modules[moduleID].moduleToggle = moduleToggle;
+	categories[categoryID].modules.push_back({ hackName, false, moduleToggle });
+	categories[categoryID].moduleCount++;
 }
-int getActiveCategory() {
+int getActiveCategoryID() {
 	int active = -1;
 	for (byte b = 0; b < 32; b++) {
 		if (categories[b].active) {
@@ -80,7 +77,9 @@ int getActiveCategory() {
 	}
 	return active;
 }
-
+Category getActiveCategory() {
+	return categories[getActiveCategoryID()];
+}
 
 void selectNextCategory() {
 	byte selected = 0;
@@ -118,46 +117,34 @@ void selectPrevCategory() {
 void selectNextModule() {
 	int selected = 0;
 	for (int b = 0; b < 1024; b++) {
-		if (modules[b].selected) {
+		if (getActiveCategory().modules[b].selected) {
 			selected = b;
 			break;
 		}
 	}
-	modules[selected].selected = false;
-	int validMin = 0;
-	int validMax = 0;
-	for (int b = 0; b < 1024; b++) {
-		if (modules[selected-b].parent == getActiveCategory()) {
-			validMin = selected - b;
-		}
+	getActiveCategory().modules[selected].selected = false;
+	if (getActiveCategory().moduleCount < selected + 1) {
+		getActiveCategory().modules[0].selected = true;
 	}
-	for (int b = 0; b < 1024; b++) {
-		if (modules[selected + b].parent == getActiveCategory()) {
-			validMax = selected + b;
-		}
+	else {
+		getActiveCategory().modules[selected + 1];
 	}
-	if (selected + 1 > validMax) {
-		selected = validMin;
-	}
-	modules[selected+1].selected = true;
 }
 void selectPrevModule() {
 	int selected = 0;
 	for (int b = 0; b < 32; b++) {
-		if (modules[b].selected) {
+		if (getActiveCategory().modules[b].selected) {
 			selected = b;
 			break;
 		}
 	}
-	modules[selected].selected = false;
-	if (modules[selected - 1].name != "") {
-		if (selected - 1 < 0) {
-			selected = 32;
-		}
-		modules[selected - 1].selected = true;
-		return;
+	getActiveCategory().modules[selected].selected = false;
+	if (0 < selected - 1) {
+		getActiveCategory().modules[getActiveCategory().moduleCount].selected = true;
 	}
-	categories[0].selected = true;
+	else {
+		getActiveCategory().modules[selected - 1];
+	}
 }
 void activateSelectedCategory() {
 	byte selected = 0;
@@ -169,13 +156,10 @@ void activateSelectedCategory() {
 	}
 	categories[selected].active = true;
 	for (int c = 0; c < 1024; c++) {
-		modules[c].selected = false;
+		categories[selected].modules[c].selected = false;
 	}
 	for (int c = 0; c < 1024; c++) {
-		if (modules[c].parent == selected) {
-			modules[c].selected = true;
-			break;
-		}
+		categories[selected].modules[c].selected = true;
 	}
 }
 void deactivateSelectedCategory() {
@@ -213,10 +197,6 @@ TabGui::TabGui() {
 
 	Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
 
-	for (int a = 0; a < 1024; a++) {
-		modules[a].parent = -1;
-	}
-
 	//Register categories
 	RegisterCategory(activeLang.Combat,0);
 	RegisterCategory(activeLang.Movement,1);
@@ -238,7 +218,7 @@ TabGui::TabGui() {
 			::DispatchMessage(&msg);
 			continue;
 		}
-		std::cout << getActiveCategory();
+		//std::cout << getActiveCategory();
 		int gayUwpTitlesize = 0;
 		WINDOWPLACEMENT wpsm;
 		GetWindowPlacement(windowHandleMC, &wpsm);
@@ -252,7 +232,7 @@ TabGui::TabGui() {
 		SetWindowPos(hWnd, topStyle, rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize, rectMC.right - rectMC.left - 8, rectMC.bottom - rectMC.top - 33, SWP_NOSIZE);
 
 		if (GetAsyncKeyState(VK_DOWN)) {
-			if (getActiveCategory() != -1) {
+			if (getActiveCategoryID() != -1) {
 				if (keyBuf > 0) {
 					continue;
 				}
@@ -270,7 +250,7 @@ TabGui::TabGui() {
 			}
 		}
 		else if (GetAsyncKeyState(VK_UP)) {
-			if (getActiveCategory() != -1) {
+			if (getActiveCategoryID() != -1) {
 				if (keyBuf > 0) {
 					continue;
 				}
@@ -349,17 +329,15 @@ VOID OnPaint(HDC hdc)
 			if (categories[b].active) {
 				graphics.FillRectangle(&aBrush, Gdiplus::Rect(desktop.left + 8, (desktop.top + 75) + (32 * b), 200, 32));
 				int z = 0;
-				for (int c = 0; c < 1024; c++) {
-					if (modules[c].parent == b) {
-						graphics.FillRectangle(&cPen, Gdiplus::Rect(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z), 200, 32));
-						if (modules[c].selected) {
-							graphics.FillRectangle(&sBrush, Gdiplus::Rect(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z), 200, 32));
-						}
-						Gdiplus::PointF pointL(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z));
-						std::wstring wstr = std::wstring(modules[c].name.begin(), modules[c].name.end());
-						graphics.DrawString(wstr.c_str(), -1, &categoryFont, pointL, &tBrush);
-						z++;
+				for (int c = 0; c < getActiveCategory().moduleCount; c++) {
+					graphics.FillRectangle(&cPen, Gdiplus::Rect(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z), 200, 32));
+					if (getActiveCategory().modules[c].selected) {
+						graphics.FillRectangle(&sBrush, Gdiplus::Rect(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z), 200, 32));
 					}
+					Gdiplus::PointF pointL(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z));
+					std::wstring wstr = std::wstring(getActiveCategory().modules[c].name.begin(), getActiveCategory().modules[c].name.end());
+					graphics.DrawString(wstr.c_str(), -1, &categoryFont, pointL, &tBrush);
+					z++;
 				}
 			}
 			else {
