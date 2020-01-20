@@ -70,11 +70,13 @@ TabGui::TabGui() {
 	GetWindowRect(windowHandleMC, &rectMC);
 	GetDesktopRect(&desktop);
 
-	hWnd = CreateWindow(wc.lpszClassName, NULL, WS_POPUP, 0, desktop.top, desktop.right, desktop.bottom, NULL, NULL, wc.hInstance, NULL);
+	hWnd = CreateWindow(wc.lpszClassName, NULL, WS_POPUP, rectMC.left, rectMC.top, rectMC.right- rectMC.left-8, rectMC.bottom- rectMC.top-33, NULL, NULL, wc.hInstance, NULL);
 	if (hWnd == NULL) {
 		MessageBox(NULL, L"No HWND!", L"Failed to create window for Tab UI", MB_OK);
 		return;
 	}
+	SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLong(hWnd, GWL_EXSTYLE) | WS_EX_LAYERED);
+	SetLayeredWindowAttributes(hWnd, RGB(77, 77, 77), 0, LWA_COLORKEY);
 	ShowWindow(hWnd, SW_SHOW);
 
 	Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
@@ -98,9 +100,9 @@ TabGui::TabGui() {
 		GetWindowRect(windowHandleMC, &rectMC);
 		winPos = POINT { rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize };
 		winSize = SIZE { rectMC.left, rectMC.bottom };
-		SetWindowPos(hWnd, HWND_TOPMOST, rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize, rectMC.right, rectMC.bottom, SWP_NOSIZE);
+		SetWindowPos(hWnd, HWND_TOPMOST, rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize, rectMC.right - rectMC.left - 8, rectMC.bottom - rectMC.top - 33, SWP_NOSIZE);
 
-		if (GetForegroundWindow() == hWnd) {
+		/*if (GetForegroundWindow() == hWnd) {
 			SetLayeredWindowAttributes(hWnd, RGB(0, 0, 0), 1000, LWA_ALPHA);
 		}
 		else if (GetForegroundWindow() == windowHandleMC) {
@@ -108,8 +110,8 @@ TabGui::TabGui() {
 		}
 		else {
 			SetLayeredWindowAttributes(hWnd, RGB(0, 0, 0), 0, LWA_ALPHA);
-		}
-		InvalidateRect(hWnd, 0, TRUE);
+		}*/
+		//InvalidateRect(hWnd, 0, TRUE);
 	}
 	return;
 }
@@ -118,16 +120,19 @@ TabGui::TabGui() {
 VOID OnPaint(HDC hdc)
 {
 	Gdiplus::Graphics graphics(hdc);
-	Gdiplus::SolidBrush bBrush(Gdiplus::Color(255, 0, 0, 0));
-	graphics.FillRectangle(&bBrush, Gdiplus::Rect(desktop.left, desktop.top, rectMC.right-rectMC.left, rectMC.bottom- rectMC.top));
+	Gdiplus::SolidBrush bBrush(Gdiplus::Color(255, 77, 77, 77));
+	graphics.FillRectangle(&bBrush, Gdiplus::Rect(desktop.left, desktop.top, desktop.right, desktop.bottom));
 
 	Gdiplus::SolidBrush tBrush(Gdiplus::Color(255, 255, 255, 255));
 	Gdiplus::FontFamily fontFamily(L"Arial");
 	Gdiplus::Font font(&fontFamily, 72, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
 	Gdiplus::PointF pointF(desktop.left, desktop.top);
 	graphics.DrawString(L"Flare", -1, &font, pointF, &tBrush);
-	BLENDFUNCTION bf = { AC_SRC_OVER, 0, 200, AC_SRC_ALPHA };
-	//UpdateLayeredWindow(hWnd, hdc, &winPos, &winSize, hdc, &winPos, RGB(0,0,0), NULL, NULL);
+	/*BLENDFUNCTION bf;
+	bf.BlendOp = AC_SRC_OVER;
+	bf.SourceConstantAlpha = 255;
+	bf.AlphaFormat = AC_SRC_ALPHA;
+	UpdateLayeredWindow(hWnd, hdc, &winPos, &winSize, hdc, &winPos, RGB(77,77,77), &bf, ULW_ALPHA);*/
 }
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
