@@ -42,6 +42,7 @@ HWND hWnd;
 POINT winPos;
 SIZE winSize;
 Category categories[32];
+HWND topStyle = HWND_TOPMOST;
 
 void GetDesktopRect(RECT* rect)
 {
@@ -81,15 +82,18 @@ void selectNextCategory() {
 }
 void selectPrevCategory() {
 	byte selected = 0;
-	for (byte b = 32; b == 0; b--) {
+	for (byte b = 0; b < 32; b++) {
 		if (categories[b].selected) {
 			selected = b;
 			break;
 		}
 	}
 	categories[selected].selected = false;
-	if (categories[(selected - 1)&32].name != "") {
-		categories[(selected - 1) & 32].selected = true;
+	if (categories[selected - 1].name != "") {
+		if (selected - 1 < 0) {
+			selected = 32;
+		}
+		categories[selected - 1].selected = true;
 		return;
 	}
 	categories[0].selected = true;
@@ -142,7 +146,7 @@ TabGui::TabGui() {
 		GetWindowRect(windowHandleMC, &rectMC);
 		winPos = POINT { rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize };
 		winSize = SIZE { rectMC.left, rectMC.bottom };
-		SetWindowPos(hWnd, HWND_TOPMOST, rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize, rectMC.right - rectMC.left - 8, rectMC.bottom - rectMC.top - 33, SWP_NOSIZE);
+		SetWindowPos(hWnd, topStyle, rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize, rectMC.right - rectMC.left - 8, rectMC.bottom - rectMC.top - 33, SWP_NOSIZE);
 
 		if (GetAsyncKeyState(VK_DOWN)) {
 			if (keyBuf < 4000) {
@@ -163,15 +167,12 @@ TabGui::TabGui() {
 			InvalidateRect(hWnd, 0, TRUE);
 		}
 
-		/*if (GetForegroundWindow() == hWnd) {
-			SetLayeredWindowAttributes(hWnd, RGB(0, 0, 0), 1000, LWA_ALPHA);
-		}
-		else if (GetForegroundWindow() == windowHandleMC) {
-			SetLayeredWindowAttributes(hWnd, RGB(0, 0, 0), 100, LWA_ALPHA);
+		if (GetForegroundWindow() == windowHandleMC) {
+			topStyle = HWND_TOPMOST;
 		}
 		else {
-			SetLayeredWindowAttributes(hWnd, RGB(0, 0, 0), 0, LWA_ALPHA);
-		}*/
+			topStyle = HWND_NOTOPMOST;
+		}
 		//InvalidateRect(hWnd, 0, TRUE);
 	}
 	return;
@@ -198,9 +199,9 @@ VOID OnPaint(HDC hdc)
 	Gdiplus::SolidBrush sBrush(Gdiplus::Color(255, 0, 255, 255));
 	for (byte b = 0; b < 32; b++) {
 		if (categories[b].selected) {
-			graphics.FillRectangle(&sBrush, Gdiplus::Rect(desktop.left + 8, (desktop.top + 73) + (32 * b), 200, 32));
+			graphics.FillRectangle(&sBrush, Gdiplus::Rect(desktop.left + 8, (desktop.top + 75) + (32 * b), 200, 32));
 		}
-		Gdiplus::PointF pointL(desktop.left+8, (desktop.top+73)+(32*b));
+		Gdiplus::PointF pointL(desktop.left + 8, (desktop.top + 73) + (32 * b));
 		std::wstring wstr = std::wstring(categories[b].name.begin(), categories[b].name.end());
 		graphics.DrawString(wstr.c_str(), -1, &categoryFont, pointL, &tBrush);
 	}
