@@ -157,6 +157,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="UI\ClickUI.cpp" />
     <ClCompile Include="mcSDK\LocalPlayer.cpp" />
     <ClCompile Include="modules\coordinates.cpp" />
     <ClCompile Include="modules\freecam.cpp" />
@@ -204,6 +205,7 @@
     <ClCompile Include="modules\servercrasher.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="UI\ClickUI.h" />
     <ClInclude Include="Lang.h" />
     <ClInclude Include="mcSDK\LocalPlayer.h" />
     <ClInclude Include="languagehandler.h" />

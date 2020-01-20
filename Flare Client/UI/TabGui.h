@@ -11,6 +11,7 @@
 #include <gdiplus.h>
 #include <list>
 #include <vector>
+#include "ClickUI.h"
 
 enum SettingType {
 	Slider

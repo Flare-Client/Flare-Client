@@ -210,7 +210,7 @@ TabGui::TabGui() {
 		MessageBox(NULL, L"No HWND!", L"Failed to create window for Tab UI", MB_OK);
 		return;
 	}
-	SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLong(hWnd, GWL_EXSTYLE) | WS_EX_LAYERED);
+	SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLong(hWnd, GWL_EXSTYLE) | WS_EX_LAYERED | WS_EX_TRANSPARENT);
 	SetLayeredWindowAttributes(hWnd, RGB(77, 77, 77), 0, LWA_COLORKEY);
 	ShowWindow(hWnd, SW_SHOW);
 
@@ -348,7 +348,8 @@ VOID OnPaint(HDC hdc)
 	//Main box, basically the screen ig. idk how to describe it but it makes it transparent
 	Gdiplus::Graphics graphics(hdc);
 	Gdiplus::SolidBrush bBrush(Gdiplus::Color(255, 77, 77, 77));
-	graphics.FillRectangle(&bBrush, Gdiplus::Rect(desktop.left, desktop.top, desktop.right, desktop.bottom));
+	Gdiplus::Rect desktopRect = Gdiplus::Rect(desktop.left, desktop.top, desktop.right, desktop.bottom);
+	graphics.FillRectangle(&bBrush, desktopRect);
 
 	//Draw the Flare branding
 	Gdiplus::SolidBrush tBrush(Gdiplus::Color(255, 255, 100, 100));
@@ -412,6 +413,10 @@ VOID OnPaint(HDC hdc)
 		Gdiplus::PointF pointL(desktop.left + 8, (desktop.top + (73 * scale)) + ((32 * scale) * b));
 		std::wstring wstr = std::wstring(categories[b].name.begin(), categories[b].name.end());
 		graphics.DrawString(wstr.c_str(), wstr.length(), &categoryFont, pointL, &tBrush);
+	}
+
+	if (categories[3].active) {
+		ClickUI::OnPaint(&graphics, &tBrush, &cPen, &sBrush, scale, desktopRect);
 	}
 
 	/*BLENDFUNCTION bf;
