@@ -58,8 +58,7 @@ ifstream File;
 //Discord Stuff
 int discordEmbedUpdateTick;
 
-ModuleHandler::ModuleHandler(HANDLE hProcess) {
-
+ModuleHandler::ModuleHandler(HANDLE hProcess, HWND host) {
 	if (FindWindowA(NULL, "Minecraft") == NULL) exit(3);
 
 	uintptr_t LocalPlayer = Player::LocalPlayer();
@@ -126,7 +125,7 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 		}
 	}
 
-	KeybindHandler::KeybindHandler();
+	KeybindHandler::KeybindHandler(host);
 
 	if (ModuleHandler::jetpackToggle) {
 		float vect[3], pitch, yaw;

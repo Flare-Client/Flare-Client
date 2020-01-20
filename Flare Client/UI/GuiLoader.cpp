@@ -5,11 +5,11 @@
 #include "Imgui/imgui_impl_win32.h"
 #include <d3d9.h>
 #include <tchar.h>
-#include "Lang.h"
+#include "../Lang.h"
 #define DIRECTINPUAT_VERSION 0x0900
 #pragma comment(lib,"d3d9.lib")
 
-#include "modules/ModuleHandler.h"
+#include "../modules/ModuleHandler.h"
 #include <fstream>
 #include <iostream>
 bool loadedTheme = false;
@@ -399,7 +399,7 @@ GuiLoader::GuiLoader() {
 			/* */
 
 			WindowAlwaysOnTop(hwnd);
-			ModuleHandler::ModuleHandler(mem::hProcess);
+			ModuleHandler::ModuleHandler(mem::hProcess, hwnd);
 
 			ImGui::EndFrame();
 			g_pd3dDevice->SetRenderState(D3DRS_ZENABLE, false);

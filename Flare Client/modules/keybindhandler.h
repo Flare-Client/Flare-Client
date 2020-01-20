@@ -3,7 +3,7 @@
 
 class KeybindHandler {
 public:
-	KeybindHandler();
+	KeybindHandler(HWND hWnd);
 
 	static char jetpackKey;
 	static char hitboxKey;

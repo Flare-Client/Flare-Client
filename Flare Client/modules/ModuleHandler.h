@@ -7,7 +7,8 @@
 #include <cctype>
 
 #include "../LittleHacker.h"
-#include "../GuiLoader.h"
+#include "../UI/GuiLoader.h"
+#include "../UI/TabGui.h"
 #include "../mcSDK/LocalPlayer.h"
 #include "keybindhandler.h"
 #include "EntityList.h"
@@ -52,7 +53,7 @@ public:
 	static int drpDisplayName;
 
     /* Main */
-    ModuleHandler(HANDLE hProcess);
+    ModuleHandler(HANDLE hProcess, HWND host);
 
     void directionalVector(float vect[], float yaw, float pitch) {
         vect[0] = cos(yaw) * cos(pitch);
