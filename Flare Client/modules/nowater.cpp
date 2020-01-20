@@ -7,7 +7,7 @@ NoWater::NoWater(HANDLE hProcess, char option) {
 	break;
 
 	case 'F':
-		mem::PatchEx((BYTE*)pointers::inWaterTick(), (BYTE*)"\xC6\x83\x3D\x02\x00\x00\x01", 7, hProcess);
+		mem::PatchEx((BYTE*)pointers::inWaterTick(), (BYTE*)gameBytes::INWATERBYTES, 7, hProcess);
 	break;
 	}
 }

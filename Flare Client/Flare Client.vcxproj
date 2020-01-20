@@ -158,6 +158,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="UI\ClickUI.cpp" />
+    <ClCompile Include="modules\autosprint.cpp" />
+    <ClCompile Include="modules\clicktp.cpp" />
     <ClCompile Include="mcSDK\LocalPlayer.cpp" />
     <ClCompile Include="modules\coordinates.cpp" />
     <ClCompile Include="modules\freecam.cpp" />
@@ -203,9 +205,12 @@
     <ClCompile Include="modules\stepassist.cpp" />
     <ClCompile Include="modules\nopacket.cpp" />
     <ClCompile Include="modules\servercrasher.cpp" />
+    <ClCompile Include="modules\noclip.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\ClickUI.h" />
+    <ClInclude Include="modules\autosprint.h" />
+    <ClInclude Include="modules\clicktp.h" />
     <ClInclude Include="Lang.h" />
     <ClInclude Include="mcSDK\LocalPlayer.h" />
     <ClInclude Include="languagehandler.h" />
@@ -253,6 +258,7 @@
     <ClInclude Include="modules\scaffold.h" />
     <ClInclude Include="modules\nowater.h" />
     <ClInclude Include="modules\nopacket.h" />
+    <ClInclude Include="modules\noclip.h" />
     <ClInclude Include="resource1.h" />
     <ClInclude Include="resource2.h" />
     <ClInclude Include="modules\tpaura.h" />

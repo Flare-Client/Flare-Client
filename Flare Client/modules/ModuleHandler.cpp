@@ -29,6 +29,9 @@ bool ModuleHandler::nopacketToggle = false;
 bool ModuleHandler::freecamToggle = false;
 bool ModuleHandler::servercrasherToggle = false;
 bool ModuleHandler::coordinatesToggle = false;
+bool ModuleHandler::noClipToggle = false;
+bool ModuleHandler::clicktpToggle = false;
+bool ModuleHandler::autoSprintToggle = false;
 
 float ModuleHandler::hitboxWidthFloat = 6.f;
 float ModuleHandler::hitboxHeightFloat = 3.f;
@@ -56,6 +59,8 @@ ifstream File;
 int discordEmbedUpdateTick;
 
 ModuleHandler::ModuleHandler(HANDLE hProcess, HWND host) {
+	if (FindWindowA(NULL, "Minecraft") == NULL) exit(3);
+
 	uintptr_t LocalPlayer = Player::LocalPlayer();
 
 	vector<uintptr_t> EntityListArr = EntityList::EntityListHandler(hProcess, LocalPlayer);
@@ -68,9 +73,13 @@ ModuleHandler::ModuleHandler(HANDLE hProcess, HWND host) {
 	discordPresenceTick += 1;
 
 	char connectedServer[20];
-	ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, mem::moduleBase + 0x03016010, { 0x30, 0x68, 0xC0, 0x18, 0x360, 0x0 }), &connectedServer, sizeof(connectedServer), 0);
+	ReadProcessMemory(hProcess, (BYTE*)pointers::connectedServerIP(), &connectedServer, sizeof(connectedServer), 0);
 
-	char* serverIP = (char*)connectedServer;
+	char* serverIP = NULL;
+
+	for (char A = '1'; A < 'Z'; A++) { //Check for valid char for first character of IP - Simple logic so we don't get odd chars when on single player
+		if (toupper(connectedServer[0]) == A) serverIP = (char*)connectedServer;
+	}
 
 	if (discordPresenceTick > 200) {
 		if (playerUsername.length() > 0) {
@@ -260,5 +269,20 @@ ModuleHandler::ModuleHandler(HANDLE hProcess, HWND host) {
 	}
 	else if (!ModuleHandler::coordinatesToggle) {
 		Coordinates::Coordinates(hProcess, 0);
+	}
+	if (ModuleHandler::noClipToggle) {
+		NoClip::NoClip(hProcess, 1);
+	}
+	else if (!ModuleHandler::noClipToggle) {
+		NoClip::NoClip(hProcess, 0);
+	}
+	if (ModuleHandler::clicktpToggle) {
+		ClickTP::ClickTP(hProcess, LocalPlayer);
+	}
+	if (ModuleHandler::autoSprintToggle) {
+		AutoSprint::AutoSprint(hProcess, 1);
+	}
+	else if (!ModuleHandler::autoSprintToggle) {
+		AutoSprint::AutoSprint(hProcess, 0);
 	}
 }

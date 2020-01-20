@@ -14,6 +14,8 @@
 #include <iostream>
 bool loadedTheme = false;
 bool loadedDrpDetails = false;
+bool loadedLanguage = false;
+bool loadedKeybinds = false;
 
 using namespace std;
 
@@ -141,8 +143,13 @@ GuiLoader::GuiLoader() {
 
 		MSG msg;
 		ZeroMemory(&msg, sizeof(msg));
+		BYTE underFix = 0;
 		while (msg.message != WM_QUIT)
 		{
+			if (underFix < 200) {
+				SetForegroundWindow(hwnd);
+				underFix++;
+			}
 			if (::PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
 			{
 				::TranslateMessage(&msg);
@@ -153,13 +160,12 @@ GuiLoader::GuiLoader() {
 			ImGui_ImplWin32_NewFrame();
 			ImGui::NewFrame();			
 
-			ImGui::Begin("Flare Client v0.0.5", 0, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
+			ImGui::Begin("Flare Client v0.0.6", 0, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
 			ImGui::SetWindowSize(ImVec2(420, 420));
 			ImGui::SetWindowPos(ImVec2(0, 0));
 
 			static int switchTabs = 3;
 			static int currentTheme = 0;
-			static int currentLanguage = 0;
 
 			ifstream inFile;
 			if (!loadedTheme) {
@@ -178,6 +184,25 @@ GuiLoader::GuiLoader() {
 					inFile.close();
 				}
 				loadedDrpDetails = true;
+			}
+
+			if (!loadedLanguage) {
+				inFile.open("Lang.txt");
+				if (inFile.is_open()) {
+					inFile >> currentLang;
+					inFile.close();
+				}
+				loadedLanguage = true;
+				cout << "Loaded Language" << endl;
+			}
+
+			if (!loadedKeybinds) {
+				inFile.open("Keybinds.txt");
+				if (inFile.is_open()) {
+					inFile >> KeybindHandler::jetpackKey >> KeybindHandler::hitboxKey >> KeybindHandler::scaffoldKey >> KeybindHandler::triggerbotKey >> KeybindHandler::airjumpKey >> KeybindHandler::airaccKey >> KeybindHandler::noslowdownKey >> KeybindHandler::nowebKey >> KeybindHandler::noknockbackKey >> KeybindHandler::nofallKey >> KeybindHandler::gamemodeKey >> KeybindHandler::instabreakKey >> KeybindHandler::playerspeedKey >> KeybindHandler::phaseKey >> KeybindHandler::nowaterKey >> KeybindHandler::jesusKey >> KeybindHandler::bhopKey >> KeybindHandler::criticalsKey >> KeybindHandler::flightKey >> KeybindHandler::tpauraKey;
+					inFile.close();
+				}
+				loadedKeybinds = true;
 			}
 
 			switch (currentTheme) {
@@ -261,6 +286,9 @@ GuiLoader::GuiLoader() {
 				ImGui::Checkbox(activeLang.Jesus, &ModuleHandler::jesusToggle);
 				ImGui::Checkbox(activeLang.Bhop, &ModuleHandler::bhopToggle);
 				ImGui::Checkbox(activeLang.Flight, &ModuleHandler::flightToggle);
+				ImGui::Checkbox(activeLang.NoClip, &ModuleHandler::noClipToggle);
+				ImGui::Checkbox(activeLang.StepAssist, &ModuleHandler::stepAssistToggle);
+				ImGui::Checkbox(activeLang.AutoSprint, &ModuleHandler::autoSprintToggle);
 				break;
 			case 2:
 				ImGui::Checkbox(activeLang.NoWeb, &ModuleHandler::nowebToggle);
@@ -273,6 +301,7 @@ GuiLoader::GuiLoader() {
 				ImGui::Checkbox(activeLang.Freecam, &ModuleHandler::freecamToggle);
 				ImGui::Checkbox(activeLang.ServerCrasher, &ModuleHandler::servercrasherToggle);
 				ImGui::Checkbox(activeLang.Coordinates, &ModuleHandler::coordinatesToggle);
+				ImGui::Checkbox(activeLang.clickTP, &ModuleHandler::clicktpToggle);
 				break;
 			case 3:
 				ImGui::SliderFloat(activeLang.HitboxWidthSlider, &ModuleHandler::hitboxWidthFloat, 0.6, 12.f);
@@ -282,36 +311,18 @@ GuiLoader::GuiLoader() {
 				ImGui::SliderFloat(activeLang.JesusSlider, &ModuleHandler::jesusVal, 0.1, 5.f);
 				ImGui::SliderFloat(activeLang.BhopSlider, &ModuleHandler::bhopVal, 0.1, 5.f);
 				ImGui::Combo(activeLang.GamemodeSwitcher, &ModuleHandler::gamemodeVal, gamemodeItems, IM_ARRAYSIZE(gamemodeItems));
+				ImGui::SliderFloat(activeLang.TpAuraRange, &ModuleHandler::tpauraRange, 0.0, 48.0f);
+				ImGui::SliderInt(activeLang.TpAuraSkips, &ModuleHandler::tpauraSkips, 0, 1000);
 				ImGui::InputFloat("X", &ModuleHandler::teleportX);
 				ImGui::InputFloat("Y", &ModuleHandler::teleportY);
 				ImGui::InputFloat("Z", &ModuleHandler::teleportZ);
 				if (ImGui::Button(activeLang.TeleportButton)) {
 					Teleport::Teleport(mem::hProcess, ModuleHandler::teleportX, ModuleHandler::teleportY, ModuleHandler::teleportZ);
 				}
-				ImGui::SliderFloat(activeLang.TpAuraRange, &ModuleHandler::tpauraRange, 0.0, 48.0f);
-				ImGui::SliderInt(activeLang.TpAuraSkips, &ModuleHandler::tpauraSkips, 0, 1000);
 				ImGui::Combo(activeLang.Theme, &currentTheme, themeItems, IM_ARRAYSIZE(themeItems));
-				ImGui::SameLine();
-				if (ImGui::Button(activeLang.ThemeSaveButton)) {
-					ofstream themeFile;
-					themeFile.open("Theme.txt");
-					if (themeFile.is_open()) {
-						themeFile << currentTheme << endl;
-						themeFile.close();
-					}
-				}
-				ImGui::Combo(activeLang.DrpSwitcher, &ModuleHandler::drpDisplayName, drpDisplayItems, IM_ARRAYSIZE(drpDisplayItems));
-				ImGui::SameLine();
-				if (ImGui::Button(activeLang.DrpSaveButton)) {
-					ofstream discordFile;
-					discordFile.open("Discord.txt");
-					if (discordFile.is_open()) {
-						discordFile << ModuleHandler::drpDisplayName;
-						discordFile.close();
-					}
-				}
-				ImGui::Combo(activeLang.Language, &currentLang, langItems, IM_ARRAYSIZE(langItems));
 
+				ImGui::Combo(activeLang.DrpSwitcher, &ModuleHandler::drpDisplayName, drpDisplayItems, IM_ARRAYSIZE(drpDisplayItems));
+				ImGui::Combo(activeLang.Language, &currentLang, langItems, IM_ARRAYSIZE(langItems));
 				if (ImGui::Button("Keybinds")) switchTabs = 4;
 				break;
 			case 4:
@@ -337,6 +348,55 @@ GuiLoader::GuiLoader() {
 				createReassign(activeLang.TpAura, &KeybindHandler::tpauraKey);
 				break;
 			}
+			/* File Saving */
+			ofstream themeFile;
+			themeFile.open("Theme.txt");
+			if (themeFile.is_open()) {
+				themeFile << currentTheme << endl;
+				themeFile.close();
+			}
+
+			ofstream discordFile;
+			discordFile.open("Discord.txt");
+			if (discordFile.is_open()) {
+				discordFile << ModuleHandler::drpDisplayName;
+				discordFile.close();
+			}
+
+			ofstream langFile;
+			langFile.open("Lang.txt");
+			if (langFile.is_open()) {
+				langFile << currentLang;
+				langFile.close();
+			}
+
+			ofstream keybindsFile;
+			keybindsFile.open("Keybinds.txt");
+			if (keybindsFile.is_open()) {
+				keybindsFile << KeybindHandler::jetpackKey << endl;
+				keybindsFile << KeybindHandler::hitboxKey << endl;
+				keybindsFile << KeybindHandler::scaffoldKey << endl;
+				keybindsFile << KeybindHandler::triggerbotKey << endl;
+				keybindsFile << KeybindHandler::airjumpKey << endl;
+				keybindsFile << KeybindHandler::airaccKey << endl;
+				keybindsFile << KeybindHandler::noslowdownKey << endl;
+				keybindsFile << KeybindHandler::nowebKey << endl;
+				keybindsFile << KeybindHandler::noknockbackKey << endl;
+				keybindsFile << KeybindHandler::nofallKey << endl;
+				keybindsFile << KeybindHandler::gamemodeKey << endl;
+				keybindsFile << KeybindHandler::instabreakKey << endl;
+				keybindsFile << KeybindHandler::playerspeedKey << endl;
+				keybindsFile << KeybindHandler::phaseKey << endl;
+				keybindsFile << KeybindHandler::nowaterKey << endl;
+				keybindsFile << KeybindHandler::jesusKey << endl;
+				keybindsFile << KeybindHandler::bhopKey << endl;
+				keybindsFile << KeybindHandler::criticalsKey << endl;
+				keybindsFile << KeybindHandler::flightKey << endl;
+				keybindsFile << KeybindHandler::tpauraKey << endl;
+				keybindsFile.close();
+			}
+
+			/* */
 
 			WindowAlwaysOnTop(hwnd);
 			ModuleHandler::ModuleHandler(mem::hProcess, hwnd);

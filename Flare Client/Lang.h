@@ -5,6 +5,7 @@ static struct Lang {
 	*/
 	const char* Name;
 	const char* Language;
+	const char* LanguageSave;
 
 	/*
 		Categories
@@ -35,6 +36,9 @@ static struct Lang {
 	const char* Jesus;
 	const char* Bhop;
 	const char* Flight;
+	const char* NoClip;
+	const char* StepAssist;
+	const char* AutoSprint;
 
 	/*
 		Misc
@@ -49,6 +53,7 @@ static struct Lang {
 	const char* Freecam;
 	const char* ServerCrasher;
 	const char* Coordinates;
+	const char* clickTP;
 
 	/*
 		Settings
@@ -86,6 +91,7 @@ static Lang getEnglish() {
 		*/
 		"English",
 		"Language",
+		"Save Language",
 
 		/*
 			Categories
@@ -116,6 +122,9 @@ static Lang getEnglish() {
 		"Jesus",
 		"Bunny-Hop",
 		"Flight",
+		"NoClip",
+		"Step Assist",
+		"AutoSprint",
 
 		/*
 			Misc
@@ -130,6 +139,7 @@ static Lang getEnglish() {
 		"Freecam",
 		"Server Crasher",
 		"Coordinates",
+		"ClickTP",
 
 		/*
 			Settings
@@ -169,6 +179,7 @@ static Lang getItalian() {
 		*/
 		"Italiano",
 		"Linguaggio",
+		"Salva Linguaggio",
 
 		/*
 			Categories
@@ -199,6 +210,9 @@ static Lang getItalian() {
 		"Gesu",
 		"Salto del Coniglietto",
 		"Vola",
+		"NoClip",
+		"Step Assist",
+		"AutomaticoSprint",
 
 		/*
 			Misc
@@ -213,6 +227,7 @@ static Lang getItalian() {
 		"Cam gratis",
 		"Server schianto",
 		"Coordinate",
+		"ClickTP",
 
 		/*
 			Settings
@@ -252,6 +267,7 @@ static Lang getSpanish() {
 		*/
 		"Espanol",
 		"Idioma",
+		"Salvar Idioma",
 
 		/*
 			Categories
@@ -282,6 +298,9 @@ static Lang getSpanish() {
 		"Jesus",
 		"Saltar del Conejo",
 		"Vuelo",
+		"NoClip",
+		"Step Assist",
+		"AutomaticoSprint",
 
 		/*
 			Misc
@@ -296,6 +315,7 @@ static Lang getSpanish() {
 		"Camara gratis",
 		"Estrellarse servidor",
 		"Coordinates",
+		"ClickTP",
 
 		/*
 			Settings
