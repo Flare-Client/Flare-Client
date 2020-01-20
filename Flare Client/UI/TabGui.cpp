@@ -344,37 +344,49 @@ TabGui::TabGui() {
 
 VOID OnPaint(HDC hdc)
 {
+	//Main box, basically the screen ig. idk how to describe it but it makes it transparent
 	Gdiplus::Graphics graphics(hdc);
 	Gdiplus::SolidBrush bBrush(Gdiplus::Color(255, 77, 77, 77));
 	graphics.FillRectangle(&bBrush, Gdiplus::Rect(desktop.left, desktop.top, desktop.right, desktop.bottom));
 
+	//Draw the Flare branding
 	Gdiplus::SolidBrush tBrush(Gdiplus::Color(255, 255, 100, 100));
 	Gdiplus::FontFamily titleFontFamily(L"Arial");
 	Gdiplus::Font titleFont(&titleFontFamily, 72, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
 	Gdiplus::PointF pointF(desktop.left, desktop.top);
 	graphics.DrawString(L"Flare", -1, &titleFont, pointF, &tBrush);
 
+	//Version too
 	Gdiplus::SolidBrush vBrush(Gdiplus::Color(255, 255, 100, 100));
 	Gdiplus::FontFamily verFontFamily(L"Arial");
 	Gdiplus::Font verFont(&verFontFamily, 16, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
 	Gdiplus::PointF verPointF(desktop.left+160, desktop.top+8);
 	graphics.DrawString(L"v0.0.6", -1, &verFont, verPointF, &vBrush);
 
+	//Clear pen. basically what the box for categories and modules are.
 	Gdiplus::SolidBrush cPen(Gdiplus::Color(200, 0, 0, 0));
 
+	//Font for categories and shit
 	Gdiplus::FontFamily categoryFontFamily(L"Arial");
 	Gdiplus::Font categoryFont(&categoryFontFamily, 32, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
 
+	//Overlap brush. when a module is both selected and active
 	Gdiplus::SolidBrush oBrush(Gdiplus::Color(255, 255, 255, 0));
+	//Selected brush. when a module is selected
 	Gdiplus::SolidBrush sBrush(Gdiplus::Color(255, 0, 255, 255));
+	//Active brush. When the module or category is active
 	Gdiplus::SolidBrush aBrush(Gdiplus::Color(255, 255, 0, 255));
+	//for every category
 	for (byte b = 0; b < categoryCount; b++) {
+		//Draw a rect for each category
 		graphics.FillRectangle(&cPen, Gdiplus::Rect(desktop.left + 8, desktop.top + 75 + (32 * b), 200, 32));
 		if (categories[b].selected) {
 			if (categories[b].active) {
+				//Draw a diff color rect for active categories
 				graphics.FillRectangle(&aBrush, Gdiplus::Rect(desktop.left + 8, (desktop.top + 75) + (32 * b), 200, 32));
 				int z = 0;
 				for (int c = 0; c < categories[b].moduleCount; c++) {
+					//Draw rects for modules
 					graphics.FillRectangle(&cPen, Gdiplus::Rect(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z), 200, 32));
 					if (*categories[b].modules[c].moduleToggle && categories[b].modules[c].selected) {
 						graphics.FillRectangle(&oBrush, Gdiplus::Rect(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z), 200, 32));
@@ -384,6 +396,7 @@ VOID OnPaint(HDC hdc)
 					} else if (categories[b].modules[c].selected) {
 						graphics.FillRectangle(&sBrush, Gdiplus::Rect(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z), 200, 32));
 					}
+					//Draw module name
 					Gdiplus::PointF pointL(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z));
 					std::wstring wstr = std::wstring(categories[b].modules[c].name.begin(), categories[b].modules[c].name.end());
 					graphics.DrawString(wstr.c_str(), wstr.length(), &categoryFont, pointL, &tBrush);
@@ -391,6 +404,7 @@ VOID OnPaint(HDC hdc)
 				}
 			}
 			else {
+				//Only if we're just selected
 				graphics.FillRectangle(&sBrush, Gdiplus::Rect(desktop.left + 8, (desktop.top + 75) + (32 * b), 200, 32));
 			}
 		}
