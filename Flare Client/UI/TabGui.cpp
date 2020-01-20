@@ -124,6 +124,7 @@ void selectNextModule() {
 			break;
 		}
 	}
+	if (categories[active].moduleCount == 0) { return; }
 	categories[active].modules[selected].selected = false;
 	if (categories[active].moduleCount <= selected + 1) {
 		categories[active].modules[0].selected = true;
@@ -141,6 +142,7 @@ void selectPrevModule() {
 			break;
 		}
 	}
+	if (categories[active].moduleCount == 0) { return; }
 	categories[active].modules[selected].selected = false;
 	if (0 > selected - 1) {
 		categories[active].modules[categories[active].moduleCount-1].selected = true;
@@ -180,6 +182,7 @@ void deactivateSelectedCategory() {
 void toggleSelectedModule() {
 	int selected = 0;
 	int active = getActiveCategoryID();
+	if (categories[active].moduleCount == 0) { return; }
 	for (int b = 0; b < categories[active].moduleCount; b++) {
 		if (categories[active].modules[b].selected) {
 			selected = b;
@@ -222,7 +225,10 @@ TabGui::TabGui() {
 	//Register Modules
 	RegisterModule(0, 0, "Hitbox", &ModuleHandler::hitboxToggle);
 	RegisterModule(0, 1, "Triggerbot", &ModuleHandler::triggerbotToggle);
+	RegisterModule(0, 2, "Criticals", &ModuleHandler::criticalsToggle);
+	RegisterModule(0, 3, "TPAura", &ModuleHandler::tpauraToggle);
 	RegisterModule(1, 0, "Jetpack", &ModuleHandler::jetpackToggle);
+	RegisterModule(1, 1, "AirJump", &ModuleHandler::airJumpToggle);
 
 	MSG msg = { };
 	int keyBuf = 0;
@@ -243,8 +249,6 @@ TabGui::TabGui() {
 		}
 
 		ModuleHandler::ModuleHandler(mem::hProcess, hWnd);
-
-
 
 		GetWindowRect(windowHandleMC, &rectMC);
 		winPos = POINT { rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize };
