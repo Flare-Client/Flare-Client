@@ -43,6 +43,7 @@ POINT winPos;
 SIZE winSize;
 Category categories[32];
 HWND topStyle = HWND_TOPMOST;
+bool render = true;
 
 void GetDesktopRect(RECT* rect)
 {
@@ -190,6 +191,12 @@ VOID OnPaint(HDC hdc)
 	Gdiplus::PointF pointF(desktop.left, desktop.top);
 	graphics.DrawString(L"Flare", -1, &titleFont, pointF, &tBrush);
 
+	Gdiplus::SolidBrush vBrush(Gdiplus::Color(255, 255, 100, 100));
+	Gdiplus::FontFamily verFontFamily(L"Forte");
+	Gdiplus::Font verFont(&verFontFamily, 16, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+	Gdiplus::PointF verPointF(desktop.left+160, desktop.top+8);
+	graphics.DrawString(L"v0.0.6", -1, &verFont, verPointF, &vBrush);
+
 	Gdiplus::SolidBrush cPen(Gdiplus::Color(200, 0, 0, 0));
 	graphics.FillRectangle(&cPen, Gdiplus::Rect(desktop.left + 8, desktop.top + 72, 200, 400));
 
@@ -224,7 +231,9 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		PAINTSTRUCT ps;
 		HDC hdc = BeginPaint(hwnd, &ps);
-		OnPaint(hdc);
+		if (render) {
+			OnPaint(hdc);
+		}
 		EndPaint(hwnd, &ps);
 	}
 	break;
