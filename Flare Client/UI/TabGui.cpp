@@ -177,6 +177,17 @@ void deactivateSelectedCategory() {
 	}
 	categories[selected].active = false;
 }
+void toggleSelectedModule() {
+	int selected = 0;
+	int active = getActiveCategoryID();
+	for (int b = 0; b < categories[active].moduleCount; b++) {
+		if (categories[active].modules[b].selected) {
+			selected = b;
+			break;
+		}
+	}
+	*categories[active].modules[selected].moduleToggle = !*categories[active].modules[selected].moduleToggle;
+}
 
 TabGui::TabGui() {
 	const wchar_t CLASS_NAME[] = L"Flare tab GUI";
@@ -231,6 +242,10 @@ TabGui::TabGui() {
 			gayUwpTitlesize = 7;
 		}
 
+		ModuleHandler::ModuleHandler(mem::hProcess, hWnd);
+
+
+
 		GetWindowRect(windowHandleMC, &rectMC);
 		winPos = POINT { rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize };
 		winSize = SIZE { rectMC.left, rectMC.bottom };
@@ -275,12 +290,22 @@ TabGui::TabGui() {
 			}
 		}
 		else if (GetAsyncKeyState(VK_RIGHT)) {
-			if (keyBuf > 0) {
-				continue;
+			if (getActiveCategoryID() != -1) {
+				if (keyBuf > 0) {
+					continue;
+				}
+				keyBuf++;
+				toggleSelectedModule();
+				InvalidateRect(hWnd, 0, TRUE);
 			}
-			keyBuf++;
-			activateSelectedCategory();
-			InvalidateRect(hWnd, 0, TRUE);
+			else {
+				if (keyBuf > 0) {
+					continue;
+				}
+				keyBuf++;
+				activateSelectedCategory();
+				InvalidateRect(hWnd, 0, TRUE);
+			}
 		}
 		else if (GetAsyncKeyState(VK_LEFT)) {
 			if (keyBuf > 0) {
@@ -338,7 +363,9 @@ VOID OnPaint(HDC hdc)
 				int z = 0;
 				for (int c = 0; c < categories[b].moduleCount; c++) {
 					graphics.FillRectangle(&cPen, Gdiplus::Rect(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z), 200, 32));
-					if (categories[b].modules[c].selected) {
+					if (*categories[b].modules[c].moduleToggle) {
+						graphics.FillRectangle(&aBrush, Gdiplus::Rect(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z), 200, 32));
+					}else if (categories[b].modules[c].selected) {
 						graphics.FillRectangle(&sBrush, Gdiplus::Rect(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z), 200, 32));
 					}
 					Gdiplus::PointF pointL(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z));

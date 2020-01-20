@@ -49,7 +49,7 @@ public:
 	static int drpDisplayName;
 
     /* Main */
-    ModuleHandler(HANDLE hProcess);
+    ModuleHandler(HANDLE hProcess, HWND host);
 
     void directionalVector(float vect[], float yaw, float pitch) {
         vect[0] = cos(yaw) * cos(pitch);

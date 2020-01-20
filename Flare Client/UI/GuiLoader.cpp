@@ -339,7 +339,7 @@ GuiLoader::GuiLoader() {
 			}
 
 			WindowAlwaysOnTop(hwnd);
-			ModuleHandler::ModuleHandler(mem::hProcess);
+			ModuleHandler::ModuleHandler(mem::hProcess, hwnd);
 
 			ImGui::EndFrame();
 			g_pd3dDevice->SetRenderState(D3DRS_ZENABLE, false);

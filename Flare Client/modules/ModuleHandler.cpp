@@ -55,7 +55,7 @@ ifstream File;
 //Discord Stuff
 int discordEmbedUpdateTick;
 
-ModuleHandler::ModuleHandler(HANDLE hProcess) {
+ModuleHandler::ModuleHandler(HANDLE hProcess, HWND host) {
 	uintptr_t LocalPlayer = Player::LocalPlayer();
 
 	vector<uintptr_t> EntityListArr = EntityList::EntityListHandler(hProcess, LocalPlayer);
@@ -116,7 +116,7 @@ ModuleHandler::ModuleHandler(HANDLE hProcess) {
 		}
 	}
 
-	KeybindHandler::KeybindHandler();
+	KeybindHandler::KeybindHandler(host);
 
 	if (ModuleHandler::jetpackToggle) {
 		float vect[3], pitch, yaw;
