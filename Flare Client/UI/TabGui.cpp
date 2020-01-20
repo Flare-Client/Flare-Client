@@ -44,6 +44,7 @@ SIZE winSize;
 Category categories[32];
 HWND topStyle = HWND_TOPMOST;
 bool render = true;
+static Lang activeLang = getEnglish();
 
 void GetDesktopRect(RECT* rect)
 {
@@ -124,8 +125,10 @@ TabGui::TabGui() {
 
 	Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
 
-	RegisterCategory("Combat",0);
-	RegisterCategory("Movement",1);
+	RegisterCategory(activeLang.Combat,0);
+	RegisterCategory(activeLang.Movement,1);
+	RegisterCategory(activeLang.Misc, 2);
+	RegisterCategory(activeLang.Settings, 3);
 
 	MSG msg = { };
 	int keyBuf = 0;

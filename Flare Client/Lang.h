@@ -1,5 +1,5 @@
 #pragma once
-struct Lang {
+static struct Lang {
 	/*
 		Meta
 	*/
@@ -79,7 +79,7 @@ struct Lang {
 	const char* Adventure;
 };
 
-Lang getEnglish() {
+static Lang getEnglish() {
 	Lang english = {
 		/*
 			Meta
@@ -162,7 +162,7 @@ Lang getEnglish() {
 	return english;
 }
 
-Lang getItalian() {
+static Lang getItalian() {
 	Lang italian = {
 		/*
 			Meta
@@ -245,7 +245,7 @@ Lang getItalian() {
 	return italian;
 }
 
-Lang getSpanish() {
+static Lang getSpanish() {
 	Lang spanish = {
 		/*
 			Meta
