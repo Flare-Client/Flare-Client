@@ -223,12 +223,38 @@ TabGui::TabGui() {
 	RegisterCategory(activeLang.Settings, 3);
 
 	//Register Modules
-	RegisterModule(0, 0, "Hitbox", &ModuleHandler::hitboxToggle);
-	RegisterModule(0, 1, "Triggerbot", &ModuleHandler::triggerbotToggle);
-	RegisterModule(0, 2, "Criticals", &ModuleHandler::criticalsToggle);
-	RegisterModule(0, 3, "TPAura", &ModuleHandler::tpauraToggle);
-	RegisterModule(1, 0, "Jetpack", &ModuleHandler::jetpackToggle);
-	RegisterModule(1, 1, "AirJump", &ModuleHandler::airJumpToggle);
+
+	/* Combat */
+	RegisterModule(0, 0, activeLang.Hitbox, &ModuleHandler::hitboxToggle);
+	RegisterModule(0, 1, activeLang.Triggerbot, &ModuleHandler::triggerbotToggle);
+	RegisterModule(0, 2, activeLang.Criticals, &ModuleHandler::criticalsToggle);
+	RegisterModule(0, 3, activeLang.TpAura, &ModuleHandler::tpauraToggle);
+	/* Movement */
+	RegisterModule(1, 0, activeLang.Jetpack, &ModuleHandler::jetpackToggle);
+	RegisterModule(1, 1, activeLang.AirJump, &ModuleHandler::airJumpToggle);
+	RegisterModule(1, 2, activeLang.NoSlowDown, & ModuleHandler::noslowdownToggle);
+	RegisterModule(1, 3, activeLang.NoKnockBack, &ModuleHandler::noknockbackToggle);
+	RegisterModule(1, 4, activeLang.PlayerSpeed, &ModuleHandler::playerspeedToggle);
+	RegisterModule(1, 5, activeLang.NoWater, &ModuleHandler::nowaterToggle);
+	RegisterModule(1, 6, activeLang.Jesus, &ModuleHandler::jesusToggle);
+	RegisterModule(1, 7, activeLang.Bhop, &ModuleHandler::bhopToggle);
+	RegisterModule(1, 8, activeLang.Flight, &ModuleHandler::flightToggle);
+	RegisterModule(1, 9, activeLang.NoClip, &ModuleHandler::noClipToggle);
+	RegisterModule(1, 10, activeLang.StepAssist, &ModuleHandler::stepAssistToggle);
+	RegisterModule(1, 11, activeLang.AutoSprint, &ModuleHandler::autoSprintToggle);
+
+	/* Other */
+	RegisterModule(2, 0, activeLang.NoWeb, &ModuleHandler::nowebToggle);
+	RegisterModule(2, 1, activeLang.VanillaNoFall, &ModuleHandler::nofallToggle);
+	RegisterModule(2, 2, activeLang.Gamemode, &ModuleHandler::gamemodeToggle);
+	RegisterModule(2, 3, activeLang.Instabreak, &ModuleHandler::instabreakToggle);
+	RegisterModule(2, 4, activeLang.Phase, &ModuleHandler::phaseToggle);
+	RegisterModule(2, 5, activeLang.Scaffold, &ModuleHandler::scaffoldToggle);
+	RegisterModule(2, 6, activeLang.NoPacket, &ModuleHandler::nopacketToggle);
+	RegisterModule(2, 7, activeLang.Freecam, &ModuleHandler::freecamToggle);
+	RegisterModule(2, 8, activeLang.ServerCrasher, &ModuleHandler::servercrasherToggle);
+	RegisterModule(2, 9, activeLang.Coordinates, &ModuleHandler::coordinatesToggle);
+	RegisterModule(2, 10, activeLang.clickTP, &ModuleHandler::clicktpToggle);
 
 	MSG msg = { };
 	int keyBuf = 0;
