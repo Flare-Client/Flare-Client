@@ -157,6 +157,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="UI\ClickUI.cpp" />
     <ClCompile Include="modules\autosprint.cpp" />
     <ClCompile Include="modules\clicktp.cpp" />
     <ClCompile Include="mcSDK\LocalPlayer.cpp" />
@@ -207,6 +208,7 @@
     <ClCompile Include="modules\noclip.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="UI\ClickUI.h" />
     <ClInclude Include="modules\autosprint.h" />
     <ClInclude Include="modules\clicktp.h" />
     <ClInclude Include="Lang.h" />
