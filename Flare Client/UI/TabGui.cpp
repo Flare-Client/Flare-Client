@@ -50,14 +50,15 @@ TabGui::TabGui() {
 
 	RegisterClass(&wc);
 
-	hWnd = CreateWindow(wc.lpszClassName, NULL, WS_POPUP, 0, 0, 420, 420, NULL, NULL, wc.hInstance, NULL);
+	HWND windowHandleMC = find_main_window(mem::frameId);
+	GetWindowRect(windowHandleMC, &rectMC);
+
+	hWnd = CreateWindow(wc.lpszClassName, NULL, WS_POPUP, rectMC.left, rectMC.top, 420, 420, NULL, NULL, wc.hInstance, NULL);
 	if (hWnd == NULL) {
 		MessageBox(NULL, L"No HWND!", L"Failed to create window for Tab UI", MB_OK);
 		return;
 	}
 	ShowWindow(hWnd, SW_SHOW);
-
-	HWND windowHandleMC = find_main_window(mem::frameId);
 
 	Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
 
@@ -92,7 +93,10 @@ TabGui::TabGui() {
 		else {
 			SetLayeredWindowAttributes(hWnd, RGB(0, 0, 0), 0, LWA_ALPHA);
 		}
-		InvalidateRect(hWnd, &rectThis, FALSE);
+
+		if (GetAsyncKeyState('J')) {
+			InvalidateRect(hWnd, 0, TRUE);
+		}
 	}
 	return;
 }
@@ -101,16 +105,16 @@ TabGui::TabGui() {
 VOID OnPaint(HDC hdc)
 {
 	Gdiplus::Graphics graphics(hdc);
-	Gdiplus::SolidBrush bBrush(Gdiplus::Color(255, 255, 255, 0));
-	//graphics.FillRectangle(&bBrush, Gdiplus::Rect(rectThis.left, rectThis.top, rectThis.right, rectThis.bottom));
+	Gdiplus::SolidBrush bBrush(Gdiplus::Color(255, 0, 0, 0));
+	graphics.FillRectangle(&bBrush, Gdiplus::Rect(rectThis.left, rectThis.top, rectThis.right, rectThis.bottom));
 
 	Gdiplus::SolidBrush tBrush(Gdiplus::Color(255, 255, 255, 255));
-	Gdiplus::FontFamily fontFamily(L"Arial");
+	Gdiplus::FontFamily fontFamily(L"Terminal");
 	Gdiplus::Font font(&fontFamily, 72, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
 	Gdiplus::PointF pointF(rectThis.left, rectThis.top);
 	graphics.DrawString(L"Flare", -1, &font, pointF, &tBrush);
 	BLENDFUNCTION bf = { AC_SRC_OVER, 0, 200, AC_SRC_ALPHA };
-	//UpdateLayeredWindow(hWnd, GetDC(NULL), &winPos, &winSize, hdc, &winPos, RGB(0,0,0), &bf, ULW_OPAQUE);
+	UpdateLayeredWindow(hWnd, GetDC(NULL), &winPos, &winSize, hdc, &winPos, RGB(0,0,0), &bf, ULW_OPAQUE);
 }
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
