@@ -81,9 +81,6 @@ int getActiveCategoryID() {
 	}
 	return active;
 }
-Category getActiveCategory() {
-	return categories[getActiveCategoryID()];
-}
 
 void selectNextCategory() {
 	byte selected = 0;
@@ -120,38 +117,41 @@ void selectPrevCategory() {
 }
 void selectNextModule() {
 	int selected = 0;
-	for (int b = 0; b < getActiveCategory().moduleCount; b++) {
-		if (getActiveCategory().modules[b].selected) {
+	int active = getActiveCategoryID();
+	for (int b = 0; b < categories[active].moduleCount; b++) {
+		if (categories[active].modules[b].selected) {
 			selected = b;
 			break;
 		}
 	}
-	getActiveCategory().modules[selected].selected = false;
-	if (getActiveCategory().moduleCount < selected + 1) {
-		getActiveCategory().modules[0].selected = true;
+	categories[active].modules[selected].selected = false;
+	if (categories[active].moduleCount <= selected + 1) {
+		categories[active].modules[0].selected = true;
 	}
 	else {
-		getActiveCategory().modules[selected + 1].selected = true;
+		categories[active].modules[selected + 1].selected = true;
 	}
 }
 void selectPrevModule() {
 	int selected = 0;
-	for (int b = 0; b < getActiveCategory().moduleCount; b++) {
-		if (getActiveCategory().modules[b].selected) {
+	int active = getActiveCategoryID();
+	for (int b = 0; b < categories[active].moduleCount; b++) {
+		if (categories[active].modules[b].selected) {
 			selected = b;
 			break;
 		}
 	}
-	getActiveCategory().modules[selected].selected = false;
-	if (0 < selected - 1) {
-		getActiveCategory().modules[getActiveCategory().moduleCount].selected = true;
+	categories[active].modules[selected].selected = false;
+	if (0 > selected - 1) {
+		categories[active].modules[categories[active].moduleCount-1].selected = true;
 	}
 	else {
-		getActiveCategory().modules[selected - 1].selected = true;
+		categories[active].modules[selected - 1].selected = true;
 	}
 }
 void activateSelectedCategory() {
 	byte selected = 0;
+	int active = getActiveCategoryID();
 	for (byte b = 0; b < categoryCount; b++) {
 		if (categories[b].selected) {
 			selected = b;
@@ -235,6 +235,8 @@ TabGui::TabGui() {
 		winPos = POINT { rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize };
 		winSize = SIZE { rectMC.left, rectMC.bottom };
 		SetWindowPos(hWnd, topStyle, rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize, rectMC.right - rectMC.left - 8, rectMC.bottom - rectMC.top - 33, SWP_NOSIZE);
+
+		//std::cout << getActiveCategoryID();
 
 		if (GetAsyncKeyState(VK_DOWN)) {
 			if (getActiveCategoryID() != -1) {
