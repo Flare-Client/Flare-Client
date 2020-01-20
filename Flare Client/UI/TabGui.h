@@ -12,10 +12,17 @@
 #include <list>
 #include <vector>
 
+enum SettingType {
+	Slider
+};
 struct ModuleUI {
 	std::string name;
 	bool selected;
 	bool* moduleToggle;
+};
+struct Setting {
+	SettingType type;
+	std::string name;
 };
 struct Category {
 	std::string name;
