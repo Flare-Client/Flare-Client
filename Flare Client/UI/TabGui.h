@@ -10,6 +10,7 @@
 #include <objidl.h>
 #include <gdiplus.h>
 #include <list>
+#include <vector>
 
 struct ModuleUI {
 	std::string name;

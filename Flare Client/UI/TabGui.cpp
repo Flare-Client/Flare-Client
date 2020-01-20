@@ -38,7 +38,8 @@ Gdiplus::GdiplusStartupInput gdiplusStartupInput;
 HWND hWnd;
 POINT winPos;
 SIZE winSize;
-std::vector<Category> categories(32);
+static std::vector<Category> categories;
+int categoryCount = 0;
 HWND topStyle = HWND_TOPMOST;
 bool render = true;
 static Lang activeLang = getEnglish();
@@ -61,15 +62,18 @@ void GetDesktopRect(RECT* rect)
 
 void RegisterCategory(std::string categoryName, byte id)
 {
-	categories.at(id)={ categoryName, id==0 };
+	categories.push_back({});
+	categories[id] = { categoryName, id == 0 };
+	categoryCount++;
 }
 void RegisterModule(byte categoryID, int moduleID, std::string hackName, bool* moduleToggle) {
-	categories.at(categoryID).modules.at(moduleID) = { hackName, false, moduleToggle };
-	categories.at(categoryID).moduleCount++;
+	categories[categoryID].modules.push_back({ "",false,0 });
+	categories[categoryID].modules[moduleID] = { hackName, false, moduleToggle };
+	categories[categoryID].moduleCount++;
 }
 int getActiveCategoryID() {
 	int active = -1;
-	for (byte b = 0; b < 32; b++) {
+	for (byte b = 0; b < categoryCount; b++) {
 		if (categories[b].active) {
 			active = b;
 			break;
@@ -83,7 +87,7 @@ Category getActiveCategory() {
 
 void selectNextCategory() {
 	byte selected = 0;
-	for (byte b = 0; b < 32; b++) {
+	for (byte b = 0; b < categoryCount; b++) {
 		if (categories[b].selected) {
 			selected = b;
 			break;
@@ -98,7 +102,7 @@ void selectNextCategory() {
 }
 void selectPrevCategory() {
 	byte selected = 0;
-	for (byte b = 0; b < 32; b++) {
+	for (byte b = 0; b < categoryCount; b++) {
 		if (categories[b].selected) {
 			selected = b;
 			break;
@@ -116,7 +120,7 @@ void selectPrevCategory() {
 }
 void selectNextModule() {
 	int selected = 0;
-	for (int b = 0; b < 1024; b++) {
+	for (int b = 0; b < getActiveCategory().moduleCount; b++) {
 		if (getActiveCategory().modules[b].selected) {
 			selected = b;
 			break;
@@ -127,12 +131,12 @@ void selectNextModule() {
 		getActiveCategory().modules[0].selected = true;
 	}
 	else {
-		getActiveCategory().modules[selected + 1];
+		getActiveCategory().modules[selected + 1].selected = true;
 	}
 }
 void selectPrevModule() {
 	int selected = 0;
-	for (int b = 0; b < 32; b++) {
+	for (int b = 0; b < getActiveCategory().moduleCount; b++) {
 		if (getActiveCategory().modules[b].selected) {
 			selected = b;
 			break;
@@ -143,28 +147,29 @@ void selectPrevModule() {
 		getActiveCategory().modules[getActiveCategory().moduleCount].selected = true;
 	}
 	else {
-		getActiveCategory().modules[selected - 1];
+		getActiveCategory().modules[selected - 1].selected = true;
 	}
 }
 void activateSelectedCategory() {
 	byte selected = 0;
-	for (byte b = 0; b < 32; b++) {
+	for (byte b = 0; b < categoryCount; b++) {
 		if (categories[b].selected) {
 			selected = b;
 			break;
 		}
 	}
 	categories[selected].active = true;
-	for (int c = 0; c < 1024; c++) {
+	if (categories[selected].moduleCount == 0) {
+		return;
+	}
+	for (int c = 0; c < categories[selected].moduleCount; c++) {
 		categories[selected].modules[c].selected = false;
 	}
-	for (int c = 0; c < 1024; c++) {
-		categories[selected].modules[c].selected = true;
-	}
+	categories[selected].modules[0].selected = true;
 }
 void deactivateSelectedCategory() {
 	byte selected = 0;
-	for (byte b = 0; b < 32; b++) {
+	for (byte b = 0; b < categoryCount; b++) {
 		if (categories[b].selected) {
 			selected = b;
 			break;
@@ -324,19 +329,19 @@ VOID OnPaint(HDC hdc)
 
 	Gdiplus::SolidBrush sBrush(Gdiplus::Color(255, 0, 255, 255));
 	Gdiplus::SolidBrush aBrush(Gdiplus::Color(255, 255, 0, 255));
-	for (byte b = 0; b < 32; b++) {
+	for (byte b = 0; b < categoryCount; b++) {
 		if (categories[b].selected) {
 			if (categories[b].active) {
 				graphics.FillRectangle(&aBrush, Gdiplus::Rect(desktop.left + 8, (desktop.top + 75) + (32 * b), 200, 32));
 				int z = 0;
-				for (int c = 0; c < getActiveCategory().moduleCount; c++) {
+				for (int c = 0; c < categories[b].moduleCount; c++) {
 					graphics.FillRectangle(&cPen, Gdiplus::Rect(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z), 200, 32));
-					if (getActiveCategory().modules[c].selected) {
+					if (categories[b].modules[c].selected) {
 						graphics.FillRectangle(&sBrush, Gdiplus::Rect(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z), 200, 32));
 					}
 					Gdiplus::PointF pointL(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z));
-					std::wstring wstr = std::wstring(getActiveCategory().modules[c].name.begin(), getActiveCategory().modules[c].name.end());
-					graphics.DrawString(wstr.c_str(), -1, &categoryFont, pointL, &tBrush);
+					std::wstring wstr = std::wstring(categories[b].modules[c].name.begin(), categories[b].modules[c].name.end());
+					graphics.DrawString(wstr.c_str(), wstr.length(), &categoryFont, pointL, &tBrush);
 					z++;
 				}
 			}
@@ -346,7 +351,7 @@ VOID OnPaint(HDC hdc)
 		}
 		Gdiplus::PointF pointL(desktop.left + 8, (desktop.top + 73) + (32 * b));
 		std::wstring wstr = std::wstring(categories[b].name.begin(), categories[b].name.end());
-		graphics.DrawString(wstr.c_str(), -1, &categoryFont, pointL, &tBrush);
+		graphics.DrawString(wstr.c_str(), wstr.length(), &categoryFont, pointL, &tBrush);
 	}
 
 	/*BLENDFUNCTION bf;
