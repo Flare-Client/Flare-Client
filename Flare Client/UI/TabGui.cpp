@@ -1,8 +1,5 @@
 #include "TabGui.h"
 
-#include <objidl.h>
-#include <gdiplus.h>
-#include <list>
 #pragma comment (lib,"Gdiplus.lib")
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -42,6 +39,7 @@ HWND hWnd;
 POINT winPos;
 SIZE winSize;
 Category categories[32];
+ModuleUI modules[1024];
 HWND topStyle = HWND_TOPMOST;
 bool render = true;
 static Lang activeLang = getEnglish();
@@ -66,6 +64,23 @@ void RegisterCategory(std::string categoryName, byte id)
 {
 	categories[id] = { categoryName, id==0 };
 }
+void RegisterModule(byte categoryID, int moduleID, std::string hackName, bool* moduleToggle) {
+	modules[moduleID].parent = categoryID;
+	modules[moduleID].name = hackName;
+	modules[moduleID].selected = false;
+	modules[moduleID].moduleToggle = moduleToggle;
+}
+int getActiveCategory() {
+	int active = -1;
+	for (byte b = 0; b < 32; b++) {
+		if (categories[b].active) {
+			active = b;
+			break;
+		}
+	}
+	return active;
+}
+
 
 void selectNextCategory() {
 	byte selected = 0;
@@ -100,6 +115,79 @@ void selectPrevCategory() {
 	}
 	categories[0].selected = true;
 }
+void selectNextModule() {
+	int selected = 0;
+	for (int b = 0; b < 1024; b++) {
+		if (modules[b].selected) {
+			selected = b;
+			break;
+		}
+	}
+	modules[selected].selected = false;
+	int validMin = 0;
+	int validMax = 0;
+	for (int b = 0; b < 1024; b++) {
+		if (modules[selected-b].parent == getActiveCategory()) {
+			validMin = selected - b;
+		}
+	}
+	for (int b = 0; b < 1024; b++) {
+		if (modules[selected + b].parent == getActiveCategory()) {
+			validMax = selected + b;
+		}
+	}
+	if (selected + 1 > validMax) {
+		selected = validMin;
+	}
+	modules[selected+1].selected = true;
+}
+void selectPrevModule() {
+	int selected = 0;
+	for (int b = 0; b < 32; b++) {
+		if (modules[b].selected) {
+			selected = b;
+			break;
+		}
+	}
+	modules[selected].selected = false;
+	if (modules[selected - 1].name != "") {
+		if (selected - 1 < 0) {
+			selected = 32;
+		}
+		modules[selected - 1].selected = true;
+		return;
+	}
+	categories[0].selected = true;
+}
+void activateSelectedCategory() {
+	byte selected = 0;
+	for (byte b = 0; b < 32; b++) {
+		if (categories[b].selected) {
+			selected = b;
+			break;
+		}
+	}
+	categories[selected].active = true;
+	for (int c = 0; c < 1024; c++) {
+		modules[c].selected = false;
+	}
+	for (int c = 0; c < 1024; c++) {
+		if (modules[c].parent == selected) {
+			modules[c].selected = true;
+			break;
+		}
+	}
+}
+void deactivateSelectedCategory() {
+	byte selected = 0;
+	for (byte b = 0; b < 32; b++) {
+		if (categories[b].selected) {
+			selected = b;
+			break;
+		}
+	}
+	categories[selected].active = false;
+}
 
 TabGui::TabGui() {
 	const wchar_t CLASS_NAME[] = L"Flare tab GUI";
@@ -125,10 +213,20 @@ TabGui::TabGui() {
 
 	Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
 
+	for (int a = 0; a < 1024; a++) {
+		modules[a].parent = -1;
+	}
+
+	//Register categories
 	RegisterCategory(activeLang.Combat,0);
 	RegisterCategory(activeLang.Movement,1);
 	RegisterCategory(activeLang.Misc, 2);
 	RegisterCategory(activeLang.Settings, 3);
+
+	//Register Modules
+	RegisterModule(0, 0, "Hitbox", &ModuleHandler::hitboxToggle);
+	RegisterModule(0, 1, "Triggerbot", &ModuleHandler::triggerbotToggle);
+	RegisterModule(1, 2, "Jetpack", &ModuleHandler::jetpackToggle);
 
 	MSG msg = { };
 	int keyBuf = 0;
@@ -140,6 +238,7 @@ TabGui::TabGui() {
 			::DispatchMessage(&msg);
 			continue;
 		}
+		std::cout << getActiveCategory();
 		int gayUwpTitlesize = 0;
 		WINDOWPLACEMENT wpsm;
 		GetWindowPlacement(windowHandleMC, &wpsm);
@@ -153,22 +252,59 @@ TabGui::TabGui() {
 		SetWindowPos(hWnd, topStyle, rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize, rectMC.right - rectMC.left - 8, rectMC.bottom - rectMC.top - 33, SWP_NOSIZE);
 
 		if (GetAsyncKeyState(VK_DOWN)) {
-			if (keyBuf < 4000) {
+			if (getActiveCategory() != -1) {
+				if (keyBuf > 0) {
+					continue;
+				}
 				keyBuf++;
+				selectNextModule();
+				InvalidateRect(hWnd, 0, TRUE);
+			}
+			else {
+				if (keyBuf > 0) {
+					continue;
+				}
+				keyBuf++;
+				selectNextCategory();
+				InvalidateRect(hWnd, 0, TRUE);
+			}
+		}
+		else if (GetAsyncKeyState(VK_UP)) {
+			if (getActiveCategory() != -1) {
+				if (keyBuf > 0) {
+					continue;
+				}
+				keyBuf++;
+				selectPrevModule();
+				InvalidateRect(hWnd, 0, TRUE);
+			}
+			else {
+				if (keyBuf > 0) {
+					continue;
+				}
+				keyBuf++;
+				selectPrevCategory();
+				InvalidateRect(hWnd, 0, TRUE);
+			}
+		}
+		else if (GetAsyncKeyState(VK_RIGHT)) {
+			if (keyBuf > 0) {
 				continue;
 			}
-			keyBuf = 0;
-			selectNextCategory();
+			keyBuf++;
+			activateSelectedCategory();
 			InvalidateRect(hWnd, 0, TRUE);
 		}
-		if (GetAsyncKeyState(VK_UP)) {
-			if (keyBuf < 4000) {
-				keyBuf++;
+		else if (GetAsyncKeyState(VK_LEFT)) {
+			if (keyBuf > 0) {
 				continue;
 			}
-			keyBuf = 0;
-			selectPrevCategory();
+			keyBuf++;
+			deactivateSelectedCategory();
 			InvalidateRect(hWnd, 0, TRUE);
+		}
+		else {
+			keyBuf = 0;
 		}
 
 		if (GetForegroundWindow() == windowHandleMC) {
@@ -189,13 +325,13 @@ VOID OnPaint(HDC hdc)
 	graphics.FillRectangle(&bBrush, Gdiplus::Rect(desktop.left, desktop.top, desktop.right, desktop.bottom));
 
 	Gdiplus::SolidBrush tBrush(Gdiplus::Color(255, 255, 100, 100));
-	Gdiplus::FontFamily titleFontFamily(L"Forte");
+	Gdiplus::FontFamily titleFontFamily(L"Arial");
 	Gdiplus::Font titleFont(&titleFontFamily, 72, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
 	Gdiplus::PointF pointF(desktop.left, desktop.top);
 	graphics.DrawString(L"Flare", -1, &titleFont, pointF, &tBrush);
 
 	Gdiplus::SolidBrush vBrush(Gdiplus::Color(255, 255, 100, 100));
-	Gdiplus::FontFamily verFontFamily(L"Forte");
+	Gdiplus::FontFamily verFontFamily(L"Arial");
 	Gdiplus::Font verFont(&verFontFamily, 16, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
 	Gdiplus::PointF verPointF(desktop.left+160, desktop.top+8);
 	graphics.DrawString(L"v0.0.6", -1, &verFont, verPointF, &vBrush);
@@ -207,9 +343,28 @@ VOID OnPaint(HDC hdc)
 	Gdiplus::Font categoryFont(&categoryFontFamily, 32, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
 
 	Gdiplus::SolidBrush sBrush(Gdiplus::Color(255, 0, 255, 255));
+	Gdiplus::SolidBrush aBrush(Gdiplus::Color(255, 255, 0, 255));
 	for (byte b = 0; b < 32; b++) {
 		if (categories[b].selected) {
-			graphics.FillRectangle(&sBrush, Gdiplus::Rect(desktop.left + 8, (desktop.top + 75) + (32 * b), 200, 32));
+			if (categories[b].active) {
+				graphics.FillRectangle(&aBrush, Gdiplus::Rect(desktop.left + 8, (desktop.top + 75) + (32 * b), 200, 32));
+				int z = 0;
+				for (int c = 0; c < 1024; c++) {
+					if (modules[c].parent == b) {
+						graphics.FillRectangle(&cPen, Gdiplus::Rect(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z), 200, 32));
+						if (modules[c].selected) {
+							graphics.FillRectangle(&sBrush, Gdiplus::Rect(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z), 200, 32));
+						}
+						Gdiplus::PointF pointL(desktop.left + 208, (desktop.top + 75) + (32 * b) + (32 * z));
+						std::wstring wstr = std::wstring(modules[c].name.begin(), modules[c].name.end());
+						graphics.DrawString(wstr.c_str(), -1, &categoryFont, pointL, &tBrush);
+						z++;
+					}
+				}
+			}
+			else {
+				graphics.FillRectangle(&sBrush, Gdiplus::Rect(desktop.left + 8, (desktop.top + 75) + (32 * b), 200, 32));
+			}
 		}
 		Gdiplus::PointF pointL(desktop.left + 8, (desktop.top + 73) + (32 * b));
 		std::wstring wstr = std::wstring(categories[b].name.begin(), categories[b].name.end());
