@@ -38,7 +38,7 @@ Gdiplus::GdiplusStartupInput gdiplusStartupInput;
 HWND hWnd;
 POINT winPos;
 SIZE winSize;
-Category categories[32];
+std::vector<Category> categories(32);
 HWND topStyle = HWND_TOPMOST;
 bool render = true;
 static Lang activeLang = getEnglish();
@@ -61,11 +61,11 @@ void GetDesktopRect(RECT* rect)
 
 void RegisterCategory(std::string categoryName, byte id)
 {
-	categories[id] = { categoryName, id==0 };
+	categories.at(id)={ categoryName, id==0 };
 }
 void RegisterModule(byte categoryID, int moduleID, std::string hackName, bool* moduleToggle) {
-	categories[categoryID].modules.push_back({ hackName, false, moduleToggle });
-	categories[categoryID].moduleCount++;
+	categories.at(categoryID).modules.at(moduleID) = { hackName, false, moduleToggle };
+	categories.at(categoryID).moduleCount++;
 }
 int getActiveCategoryID() {
 	int active = -1;
@@ -206,7 +206,7 @@ TabGui::TabGui() {
 	//Register Modules
 	RegisterModule(0, 0, "Hitbox", &ModuleHandler::hitboxToggle);
 	RegisterModule(0, 1, "Triggerbot", &ModuleHandler::triggerbotToggle);
-	RegisterModule(1, 2, "Jetpack", &ModuleHandler::jetpackToggle);
+	RegisterModule(1, 0, "Jetpack", &ModuleHandler::jetpackToggle);
 
 	MSG msg = { };
 	int keyBuf = 0;
