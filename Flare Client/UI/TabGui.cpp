@@ -35,6 +35,12 @@ static HWND find_main_window(unsigned long process_id)
 
 RECT rectMC;
 RECT rectThis;
+ULONG_PTR gdiplusToken;
+Gdiplus::GdiplusStartupInput gdiplusStartupInput;
+HWND hWnd;
+POINT winPos;
+SIZE winSize;
+
 TabGui::TabGui() {
 	const wchar_t CLASS_NAME[] = L"Flare tab GUI";
 	WNDCLASS wc = {};
@@ -44,14 +50,16 @@ TabGui::TabGui() {
 
 	RegisterClass(&wc);
 
-	HWND hwnd = CreateWindow(wc.lpszClassName, NULL, WS_BORDER, 0, 0, 420, 420, NULL, NULL, wc.hInstance, NULL);
-	if (hwnd == NULL) {
+	hWnd = CreateWindow(wc.lpszClassName, NULL, WS_POPUP, 0, 0, 420, 420, NULL, NULL, wc.hInstance, NULL);
+	if (hWnd == NULL) {
 		MessageBox(NULL, L"No HWND!", L"Failed to create window for Tab UI", MB_OK);
 		return;
 	}
-	ShowWindow(hwnd, SW_SHOW);
+	ShowWindow(hWnd, SW_SHOW);
 
 	HWND windowHandleMC = find_main_window(mem::frameId);
+
+	Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
 
 	MSG msg = { };
 	while (msg.message != WM_QUIT)
@@ -70,18 +78,21 @@ TabGui::TabGui() {
 		}
 
 		GetWindowRect(windowHandleMC, &rectMC);
-		GetWindowRect(hwnd, &rectThis);
-		SetWindowPos(hwnd, HWND_TOPMOST, rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize, rectMC.left, rectMC.bottom, SWP_NOSIZE);
+		GetWindowRect(hWnd, &rectThis);
+		winPos = POINT { rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize };
+		winSize = SIZE { rectMC.left, rectMC.bottom };
+		SetWindowPos(hWnd, HWND_TOPMOST, rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize, rectMC.right, rectMC.bottom, SWP_NOSIZE);
 
-		if (GetForegroundWindow() == hwnd) {
-			SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 1000, LWA_ALPHA);
+		if (GetForegroundWindow() == hWnd) {
+			SetLayeredWindowAttributes(hWnd, RGB(0, 0, 0), 1000, LWA_ALPHA);
 		}
 		else if (GetForegroundWindow() == windowHandleMC) {
-			SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 100, LWA_ALPHA);
+			SetLayeredWindowAttributes(hWnd, RGB(0, 0, 0), 100, LWA_ALPHA);
 		}
 		else {
-			SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 0, LWA_ALPHA);
+			SetLayeredWindowAttributes(hWnd, RGB(0, 0, 0), 0, LWA_ALPHA);
 		}
+		InvalidateRect(hWnd, &rectThis, FALSE);
 	}
 	return;
 }
@@ -90,10 +101,16 @@ TabGui::TabGui() {
 VOID OnPaint(HDC hdc)
 {
 	Gdiplus::Graphics graphics(hdc);
-	Gdiplus::Pen pen(Gdiplus::Color(255, 0, 0, 255));
-	Gdiplus::SolidBrush brush(Gdiplus::Color(255, 255, 0, 0));
-	graphics.DrawLine(&pen, 0, 0, 200, 100);
-	graphics.FillRectangle(&brush, 0,0,200,100);
+	Gdiplus::SolidBrush bBrush(Gdiplus::Color(255, 255, 255, 0));
+	//graphics.FillRectangle(&bBrush, Gdiplus::Rect(rectThis.left, rectThis.top, rectThis.right, rectThis.bottom));
+
+	Gdiplus::SolidBrush tBrush(Gdiplus::Color(255, 255, 255, 255));
+	Gdiplus::FontFamily fontFamily(L"Arial");
+	Gdiplus::Font font(&fontFamily, 72, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+	Gdiplus::PointF pointF(rectThis.left, rectThis.top);
+	graphics.DrawString(L"Flare", -1, &font, pointF, &tBrush);
+	BLENDFUNCTION bf = { AC_SRC_OVER, 0, 200, AC_SRC_ALPHA };
+	//UpdateLayeredWindow(hWnd, GetDC(NULL), &winPos, &winSize, hdc, &winPos, RGB(0,0,0), &bf, ULW_OPAQUE);
 }
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
