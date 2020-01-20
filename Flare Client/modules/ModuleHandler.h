@@ -7,6 +7,7 @@
 
 #include "../LittleHacker.h"
 #include "../UI/GuiLoader.h"
+#include "../UI/TabGui.h"
 #include "../mcSDK/LocalPlayer.h"
 #include "keybindhandler.h"
 #include "EntityList.h"
