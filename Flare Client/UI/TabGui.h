@@ -6,6 +6,11 @@
 #include "../LittleHacker.h"
 #include <strsafe.h>
 
+struct Category {
+	std::string name;
+	bool selected;
+};
+
 class TabGui
 {
 public:
