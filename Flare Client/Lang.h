@@ -14,6 +14,7 @@ static struct Lang {
 	const char* Movement;
 	const char* Misc;
 	const char* Settings;
+	const char* ClickUI;
 
 	/*
 		Combat
@@ -100,6 +101,7 @@ static Lang getEnglish() {
 		"Movement",
 		"Misc",
 		"Settings",
+		"ClickUI",
 
 		/*
 			Combat
@@ -188,6 +190,7 @@ static Lang getItalian() {
 		"Movimento",
 		"Varie",
 		"Impostaz.",
+		"ClickUI",
 
 		/*
 			Combat
@@ -276,6 +279,7 @@ static Lang getSpanish() {
 		"Movimiento",
 		"Miscelaneo",
 		"Config.",
+		"ClickUI",
 
 		/*
 			Combat

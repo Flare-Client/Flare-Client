@@ -71,6 +71,11 @@ void RegisterModule(byte categoryID, int moduleID, std::string hackName, bool* m
 	categories[categoryID].modules[moduleID] = { hackName, false, moduleToggle };
 	categories[categoryID].moduleCount++;
 }
+
+void RegisterSettingInt(int settingID, std::string settingName, int* value, int minimum, int maximum) {
+
+}
+
 int getActiveCategoryID() {
 	int active = -1;
 	for (byte b = 0; b < categoryCount; b++) {
@@ -206,6 +211,7 @@ TabGui::TabGui() {
 	RegisterCategory(activeLang.Movement, 1);
 	RegisterCategory(activeLang.Misc, 2);
 	RegisterCategory(activeLang.Settings, 3);
+	RegisterCategory(activeLang.ClickUI, 4);
 
 	//Register Modules
 	/* Combat */
@@ -254,6 +260,8 @@ TabGui::TabGui() {
 	ShowWindow(hWnd, SW_SHOW);
 
 	Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
+
+	ClickUI::ClickUI();
 
 	MSG msg = { };
 	int keyBuf = 0;
@@ -450,22 +458,7 @@ VOID OnPaint(HDC hdc)
 		graphics.DrawString(wstr.c_str(), wstr.length(), &categoryFont, pointL, &tBrush);
 	}
 
-	int v = 0;
-	for (byte b = 0; b < categoryCount; b++) {
-		if (categories[b].moduleCount <= 0) { continue; }
-		for (byte c = 0; b < categories[b].moduleCount; c++) {
-			if (*categories[b].modules[c].moduleToggle) {
-				std::wstring wstr = std::wstring(categories[b].modules[c].name.begin(), categories[b].modules[c].name.end());
-				Gdiplus::RectF rec;
-				graphics.MeasureString(wstr.c_str(), wstr.length(), &categoryFont, pointF, &rec);
-				float strW = rec.GetLeft() - rec.GetRight();
-				Gdiplus::PointF enHackPos(desktop.right - rec.GetRight(), desktop.top + ((32 * scale) * v));
-				graphics.DrawString(wstr.c_str(), wstr.length(), &categoryFont, enHackPos, &tBrush);
-			}
-		}
-	}
-
-	if (categories[3].active) {
+	if (categories[4].active) {
 		ClickUI::OnPaint(&graphics, &tBrush, &cPen, &sBrush, scale, desktopRect);
 	}
 
