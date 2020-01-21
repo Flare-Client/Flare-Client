@@ -201,29 +201,13 @@ TabGui::TabGui() {
 
 	RegisterClass(&wc);
 
-	HWND windowHandleMC = find_main_window(mem::frameId);
-	GetWindowRect(windowHandleMC, &rectMC);
-	GetDesktopRect(&desktop);
-
-	hWnd = CreateWindow(wc.lpszClassName, NULL, WS_POPUP, rectMC.left, rectMC.top, rectMC.right- rectMC.left-8, rectMC.bottom- rectMC.top-33, NULL, NULL, wc.hInstance, NULL);
-	if (hWnd == NULL) {
-		MessageBox(NULL, L"No HWND!", L"Failed to create window for Tab UI", MB_OK);
-		return;
-	}
-	SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLong(hWnd, GWL_EXSTYLE) | WS_EX_LAYERED | WS_EX_TRANSPARENT);
-	SetLayeredWindowAttributes(hWnd, RGB(77, 77, 77), 0, LWA_COLORKEY);
-	ShowWindow(hWnd, SW_SHOW);
-
-	Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
-
 	//Register categories
-	RegisterCategory(activeLang.Combat,0);
-	RegisterCategory(activeLang.Movement,1);
+	RegisterCategory(activeLang.Combat, 0);
+	RegisterCategory(activeLang.Movement, 1);
 	RegisterCategory(activeLang.Misc, 2);
 	RegisterCategory(activeLang.Settings, 3);
 
 	//Register Modules
-
 	/* Combat */
 	RegisterModule(0, 0, activeLang.Hitbox, &ModuleHandler::hitboxToggle);
 	RegisterModule(0, 1, activeLang.Triggerbot, &ModuleHandler::triggerbotToggle);
@@ -232,7 +216,7 @@ TabGui::TabGui() {
 	/* Movement */
 	RegisterModule(1, 0, activeLang.Jetpack, &ModuleHandler::jetpackToggle);
 	RegisterModule(1, 1, activeLang.AirJump, &ModuleHandler::airJumpToggle);
-	RegisterModule(1, 2, activeLang.NoSlowDown, & ModuleHandler::noslowdownToggle);
+	RegisterModule(1, 2, activeLang.NoSlowDown, &ModuleHandler::noslowdownToggle);
 	RegisterModule(1, 3, activeLang.NoKnockBack, &ModuleHandler::noknockbackToggle);
 	RegisterModule(1, 4, activeLang.PlayerSpeed, &ModuleHandler::playerspeedToggle);
 	RegisterModule(1, 5, activeLang.NoWater, &ModuleHandler::nowaterToggle);
@@ -255,6 +239,21 @@ TabGui::TabGui() {
 	RegisterModule(2, 8, activeLang.ServerCrasher, &ModuleHandler::servercrasherToggle);
 	RegisterModule(2, 9, activeLang.Coordinates, &ModuleHandler::coordinatesToggle);
 	RegisterModule(2, 10, activeLang.clickTP, &ModuleHandler::clicktpToggle);
+
+	HWND windowHandleMC = find_main_window(mem::frameId);
+	GetWindowRect(windowHandleMC, &rectMC);
+	GetDesktopRect(&desktop);
+
+	hWnd = CreateWindow(wc.lpszClassName, NULL, WS_POPUP, rectMC.left, rectMC.top, rectMC.right- rectMC.left-8, rectMC.bottom- rectMC.top-33, NULL, NULL, wc.hInstance, NULL);
+	if (hWnd == NULL) {
+		MessageBox(NULL, L"No HWND!", L"Failed to create window for Tab UI", MB_OK);
+		return;
+	}
+	SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLong(hWnd, GWL_EXSTYLE) | WS_EX_LAYERED | WS_EX_TRANSPARENT);
+	SetLayeredWindowAttributes(hWnd, RGB(77, 77, 77), 0, LWA_COLORKEY);
+	ShowWindow(hWnd, SW_SHOW);
+
+	Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
 
 	MSG msg = { };
 	int keyBuf = 0;
@@ -449,6 +448,21 @@ VOID OnPaint(HDC hdc)
 		Gdiplus::PointF pointL(desktop.left + 8, (desktop.top + (73 * scale)) + ((32 * scale) * b));
 		std::wstring wstr = std::wstring(categories[b].name.begin(), categories[b].name.end());
 		graphics.DrawString(wstr.c_str(), wstr.length(), &categoryFont, pointL, &tBrush);
+	}
+
+	int v = 0;
+	for (byte b = 0; b < categoryCount; b++) {
+		if (categories[b].moduleCount <= 0) { continue; }
+		for (byte c = 0; b < categories[b].moduleCount; c++) {
+			if (*categories[b].modules[c].moduleToggle) {
+				std::wstring wstr = std::wstring(categories[b].modules[c].name.begin(), categories[b].modules[c].name.end());
+				Gdiplus::RectF rec;
+				graphics.MeasureString(wstr.c_str(), wstr.length(), &categoryFont, pointF, &rec);
+				float strW = rec.GetLeft() - rec.GetRight();
+				Gdiplus::PointF enHackPos(desktop.right - rec.GetRight(), desktop.top + ((32 * scale) * v));
+				graphics.DrawString(wstr.c_str(), wstr.length(), &categoryFont, enHackPos, &tBrush);
+			}
+		}
 	}
 
 	if (categories[3].active) {
