@@ -13,17 +13,16 @@
 #include <vector>
 #include "ClickUI.h"
 
-enum SettingType {
-	Slider
-};
 struct ModuleUI {
 	std::string name;
 	bool selected;
 	bool* moduleToggle;
 };
+template<typename T>
 struct Setting {
-	SettingType type;
+	T* valuePtr;
 	std::string name;
+	bool selected;
 };
 struct Category {
 	std::string name;

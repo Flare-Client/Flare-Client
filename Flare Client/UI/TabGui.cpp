@@ -1,5 +1,4 @@
 #include "TabGui.h"
-
 #pragma comment (lib,"Gdiplus.lib")
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -40,6 +39,9 @@ POINT winPos;
 SIZE winSize;
 static std::vector<Category> categories;
 int categoryCount = 0;
+template<typename T>
+static std::vector<Setting<T>> settings;
+int settingCount = 0;
 HWND topStyle = HWND_TOPMOST;
 bool render = true;
 static Lang activeLang = getEnglish();
@@ -72,8 +74,11 @@ void RegisterModule(byte categoryID, int moduleID, std::string hackName, bool* m
 	categories[categoryID].moduleCount++;
 }
 
-void RegisterSettingInt(int settingID, std::string settingName, int* value, int minimum, int maximum) {
-
+template<typename T>
+void RegisterSetting(int settingID, std::string settingName, T* value) {
+	settings.push_back({});
+	settings[settingID] = { value, settingName, false };
+	settingCount++;
 }
 
 int getActiveCategoryID() {
@@ -245,6 +250,11 @@ TabGui::TabGui() {
 	RegisterModule(2, 8, activeLang.ServerCrasher, &ModuleHandler::servercrasherToggle);
 	RegisterModule(2, 9, activeLang.Coordinates, &ModuleHandler::coordinatesToggle);
 	RegisterModule(2, 10, activeLang.clickTP, &ModuleHandler::clicktpToggle);
+
+
+
+	/* Settings */
+	RegisterSetting<float>(0, "GUI Scale", &scale);
 
 	HWND windowHandleMC = find_main_window(mem::frameId);
 	GetWindowRect(windowHandleMC, &rectMC);
@@ -457,7 +467,6 @@ VOID OnPaint(HDC hdc)
 		std::wstring wstr = std::wstring(categories[b].name.begin(), categories[b].name.end());
 		graphics.DrawString(wstr.c_str(), wstr.length(), &categoryFont, pointL, &tBrush);
 	}
-
 	if (categories[4].active) {
 		ClickUI::OnPaint(&graphics, &tBrush, &cPen, &sBrush, scale, desktopRect);
 	}
