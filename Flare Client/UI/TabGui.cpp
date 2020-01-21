@@ -254,7 +254,7 @@ TabGui::TabGui() {
 
 
 	/* Settings */
-	RegisterSetting<float>(0, "GUI Scale", &scale);
+	//RegisterSetting<float>(0, "GUI Scale", &scale);
 
 	HWND windowHandleMC = find_main_window(mem::frameId);
 	GetWindowRect(windowHandleMC, &rectMC);

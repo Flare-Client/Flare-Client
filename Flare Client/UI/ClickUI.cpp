@@ -8,24 +8,7 @@ bool dragging = false;
 Gdiplus::Rect clickUIRect;
 Gdiplus::Rect clickUIDragRect;
 Gdiplus::Rect clickUIPanelRect;
-std::vector<Setting> settings;
 uint32_t currentLine = 0;
-
-
-interface Settings {
-public:
-	virtual void OnPaint();
-};
-
-class FSliderSetting : public Setting {
-	float value;
-	float min;
-	float max;
-public:
-	void OnPaint() {
-
-	}
-};
 
 void RegisterText(Gdiplus::Graphics* graphics, float scale, std::wstring text, Gdiplus::SolidBrush* brush) {
 	Gdiplus::FontFamily textFontFamily(L"Arial");
