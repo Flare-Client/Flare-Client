@@ -280,7 +280,17 @@ TabGui::TabGui() {
 		GetWindowRect(windowHandleMC, &rectMC);
 		winPos = POINT { rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize };
 		winSize = SIZE { rectMC.left, rectMC.bottom };
-		SetWindowPos(hWnd, topStyle, rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize, rectMC.right - rectMC.left - 8, rectMC.bottom - rectMC.top - 33, SWP_NOSIZE);
+		SetWindowPos(hWnd, topStyle, rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize, rectMC.right - rectMC.left - 8, rectMC.bottom - rectMC.top - 33, NULL);
+
+		if (GetAsyncKeyState(1)) {
+			POINT p;
+			GetCursorPos(&p);
+
+			ClickUI::HandleClick(true, p.x - (rectMC.left + 8), p.y - (rectMC.top + 33 + gayUwpTitlesize), hWnd);
+		}
+		else {
+			ClickUI::HandleUnClick(hWnd);
+		}
 
 		//std::cout << getActiveCategoryID();
 
