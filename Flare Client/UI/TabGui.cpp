@@ -247,7 +247,7 @@ void increaseSetting() {
 	switch (settings[selected].type) {
 	case 0:
 		valB = reinterpret_cast<bool*>(settings[selected].valuePtr);
-		*valB++;
+		*valB = true;
 	case 1:
 		valBB = reinterpret_cast<byte*>(settings[selected].valuePtr);
 		*valBB++;
@@ -274,7 +274,7 @@ void decreaseSetting() {
 	switch (settings[selected].type) {
 	case 0:
 		valB = reinterpret_cast<bool*>(settings[selected].valuePtr);
-		*valB--;
+		*valB = false;
 	case 1:
 		valBB = reinterpret_cast<byte*>(settings[selected].valuePtr);
 		*valBB--;
@@ -337,10 +337,11 @@ TabGui::TabGui() {
 	RegisterModule(2, 10, activeLang.clickTP, &ModuleHandler::clicktpToggle);
 
 	/* Settings */
+	//There is a special case for the first setting, it wont modify the value, it will just close the settings list always.
 	RegisterSetting(0, "Back", Bool, reinterpret_cast<uint64_t*>(&categories[3].active));
 	RegisterSetting(1, "GUI Scale", Float, reinterpret_cast<uint64_t*>(&scale));
-	RegisterSetting(2, "NULL", Byte, reinterpret_cast<uint64_t*>(NULL));
-	RegisterSetting(3, "NULL", Byte, reinterpret_cast<uint64_t*>(NULL));
+	//RegisterSetting(2, "NULL", Byte, reinterpret_cast<uint64_t*>(NULL));
+	//RegisterSetting(3, "NULL", Byte, reinterpret_cast<uint64_t*>(NULL));
 
 	settings[0].selected = true;
 
@@ -484,6 +485,10 @@ TabGui::TabGui() {
 					continue;
 				}
 				keyBuf++;
+				if (settings[0].selected) {
+					categories[3].active = false;
+					continue;
+				}
 				decreaseSetting();
 				InvalidateRect(hWnd, 0, TRUE);
 				continue;
