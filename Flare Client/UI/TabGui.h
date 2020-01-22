@@ -29,6 +29,8 @@ static enum SettingType {
 };
 struct Setting {
 	uint64_t* valuePtr;
+	uint64_t min;
+	uint64_t max;
 	SettingType type;
 	const char** name;
 	bool selected;

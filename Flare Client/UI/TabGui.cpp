@@ -75,9 +75,9 @@ void RegisterModule(byte categoryID, int moduleID, const char** hackName, bool* 
 	categories[categoryID].modules[moduleID] = { hackName, false, moduleToggle };
 	categories[categoryID].moduleCount++;
 }
-void RegisterSetting(int settingID, const char** settingName, SettingType type, uint64_t* value) {
+void RegisterSetting(int settingID, const char** settingName, SettingType type, uint64_t* value, uint64_t max, uint64_t min) {
 	settings.push_back({});
-	settings[settingID] = { value, type, settingName, false };
+	settings[settingID] = { value, (uint64_t)max, (uint64_t)min, type, settingName, false };
 	settingCount++;
 }
 
@@ -116,10 +116,7 @@ void selectPrevCategory() {
 		}
 	}
 	categories[selected].selected = false;
-	if (*categories[selected - 1].name != "") {
-		if (selected - 1 < 0) {
-			selected = 32;
-		}
+	if (selected - 1 >= 0) {
 		categories[selected - 1].selected = true;
 		return;
 	}
@@ -249,22 +246,24 @@ void increaseSetting() {
 	case 0:
 		valB = reinterpret_cast<bool*>(settings[selected].valuePtr);
 		*valB = true;
-		std::cout << "BOOL: " << *valB;
 		break;
 	case 1:
 		valBB = reinterpret_cast<byte*>(settings[selected].valuePtr);
-		*valBB++;
-		std::cout << "BYTE: " << *valBB;
+		if (*valBB < (byte)settings[selected].max) {
+			*valBB += 1;
+		}
 		break;
 	case 2:
 		valI = reinterpret_cast<int*>(settings[selected].valuePtr);
-		*valI += 1;
-		std::cout << "INT: " << *valI;
+		if (*valI < (int)settings[selected].max) {
+			*valI += 1;
+		}
 		break;
 	case 3:
 		valF = reinterpret_cast<float*>(settings[selected].valuePtr);
-		*valF+=0.1f;
-		std::cout << "FLOAT: " << *valF;
+		if (*valF < (float)settings[selected].max) {
+			*valF += 0.1f;
+		}
 		break;
 	}
 }
@@ -352,9 +351,9 @@ TabGui::TabGui() {
 
 	/* Settings */
 	//There is a special case for the first setting, it wont modify the value, it will just close the settings list always.
-	RegisterSetting(0, &activeLang.Back, Bool, reinterpret_cast<uint64_t*>(&categories[3].active));
-	RegisterSetting(1, &activeLang.GuiScale, Float, reinterpret_cast<uint64_t*>(&scale));
-	RegisterSetting(2, &activeLang.Language, Int, reinterpret_cast<uint64_t*>(&langID));
+	RegisterSetting(0, &activeLang.Back, Bool, reinterpret_cast<uint64_t*>(&categories[3].active), NULL, NULL);
+	RegisterSetting(1, &activeLang.GuiScale, Float, reinterpret_cast<uint64_t*>(&scale), 4.0f, 0.1f);
+	RegisterSetting(2, &activeLang.Language, Int, reinterpret_cast<uint64_t*>(&langID), 2, 0);
 
 	settings[0].selected = true;
 
@@ -518,10 +517,10 @@ TabGui::TabGui() {
 					continue;
 				}
 				keyBuf++;
-				if (settings[0].selected) {
+				/*if (settings[0].selected) {
 					categories[3].active = false;
 					continue;
-				}
+				}*/
 				decreaseSetting();
 				InvalidateRect(hWnd, 0, TRUE);
 				continue;
