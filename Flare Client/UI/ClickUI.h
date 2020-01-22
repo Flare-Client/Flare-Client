@@ -10,5 +10,7 @@ public:
 		Gdiplus::SolidBrush *ternary,
 		float scale,
 		Gdiplus::Rect desktop);
+	static void HandleClick(bool left, int X, int Y, HWND host);
+	static void HandleUnClick(HWND host);
 };
 

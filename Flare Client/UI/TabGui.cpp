@@ -1,5 +1,4 @@
 #include "TabGui.h"
-
 #pragma comment (lib,"Gdiplus.lib")
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -40,9 +39,12 @@ POINT winPos;
 SIZE winSize;
 static std::vector<Category> categories;
 int categoryCount = 0;
+static std::vector<Setting> settings;
+int settingCount = 0;
 HWND topStyle = HWND_TOPMOST;
 bool render = true;
 static Lang activeLang = getEnglish();
+float scale = 1.0f;
 
 void GetDesktopRect(RECT* rect)
 {
@@ -71,6 +73,13 @@ void RegisterModule(byte categoryID, int moduleID, std::string hackName, bool* m
 	categories[categoryID].modules[moduleID] = { hackName, false, moduleToggle };
 	categories[categoryID].moduleCount++;
 }
+
+void RegisterSetting(int settingID, std::string settingName, SettingType type, uint64_t* value) {
+	settings.push_back({});
+	settings[settingID] = { value, type, settingName, false };
+	settingCount++;
+}
+
 int getActiveCategoryID() {
 	int active = -1;
 	for (byte b = 0; b < categoryCount; b++) {
@@ -191,6 +200,92 @@ void toggleSelectedModule() {
 	}
 	*categories[active].modules[selected].moduleToggle = !*categories[active].modules[selected].moduleToggle;
 }
+void selectNextSetting() {
+	int selected = 0;
+	for (int b = 0; b < settingCount; b++) {
+		if (settings[b].selected) {
+			selected = b;
+			break;
+		}
+	}
+	settings[selected].selected = false;
+	if (settingCount <= selected + 1) {
+		settings[0].selected = true;
+	}
+	else {
+		settings[selected+1].selected = true;
+	}
+}
+void selectPrevSetting() {
+	int selected = 0;
+	for (int b = 0; b < settingCount; b++) {
+		if (settings[b].selected) {
+			selected = b;
+			break;
+		}
+	}
+	settings[selected].selected = false;
+	if (0 > selected - 1) {
+		settings[settingCount-1].selected = true;
+	}
+	else {
+		settings[selected - 1].selected = true;
+	}
+}
+void increaseSetting() {
+	int selected = 0;
+	for (int b = 0; b < settingCount; b++) {
+		if (settings[b].selected) {
+			selected = b;
+			break;
+		}
+	}
+	bool* valB;
+	byte* valBB;
+	int* valI;
+	float* valF;
+	switch (settings[selected].type) {
+	case 0:
+		valB = reinterpret_cast<bool*>(settings[selected].valuePtr);
+		*valB = true;
+	case 1:
+		valBB = reinterpret_cast<byte*>(settings[selected].valuePtr);
+		*valBB++;
+	case 2:
+		valI = reinterpret_cast<int*>(settings[selected].valuePtr);
+		*valI++;
+	case 3:
+		valF = reinterpret_cast<float*>(settings[selected].valuePtr);
+		*valF+=0.1f;
+	}
+}
+void decreaseSetting() {
+	int selected = 0;
+	for (int b = 0; b < settingCount; b++) {
+		if (settings[b].selected) {
+			selected = b;
+			break;
+		}
+	}
+	bool* valB;
+	byte* valBB;
+	int* valI;
+	float* valF;
+	switch (settings[selected].type) {
+	case 0:
+		valB = reinterpret_cast<bool*>(settings[selected].valuePtr);
+		*valB = false;
+	case 1:
+		valBB = reinterpret_cast<byte*>(settings[selected].valuePtr);
+		*valBB--;
+	case 2:
+		valI = reinterpret_cast<int*>(settings[selected].valuePtr);
+		*valI--;
+	case 3:
+		valF = reinterpret_cast<float*>(settings[selected].valuePtr);
+		*valF-=0.1f;
+	}
+}
 
 TabGui::TabGui() {
 	const wchar_t CLASS_NAME[] = L"Flare tab GUI";
@@ -201,29 +296,14 @@ TabGui::TabGui() {
 
 	RegisterClass(&wc);
 
-	HWND windowHandleMC = find_main_window(mem::frameId);
-	GetWindowRect(windowHandleMC, &rectMC);
-	GetDesktopRect(&desktop);
-
-	hWnd = CreateWindow(wc.lpszClassName, NULL, WS_POPUP, rectMC.left, rectMC.top, rectMC.right- rectMC.left-8, rectMC.bottom- rectMC.top-33, NULL, NULL, wc.hInstance, NULL);
-	if (hWnd == NULL) {
-		MessageBox(NULL, L"No HWND!", L"Failed to create window for Tab UI", MB_OK);
-		return;
-	}
-	SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLong(hWnd, GWL_EXSTYLE) | WS_EX_LAYERED | WS_EX_TRANSPARENT);
-	SetLayeredWindowAttributes(hWnd, RGB(77, 77, 77), 0, LWA_COLORKEY);
-	ShowWindow(hWnd, SW_SHOW);
-
-	Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
-
 	//Register categories
-	RegisterCategory(activeLang.Combat,0);
-	RegisterCategory(activeLang.Movement,1);
+	RegisterCategory(activeLang.Combat, 0);
+	RegisterCategory(activeLang.Movement, 1);
 	RegisterCategory(activeLang.Misc, 2);
 	RegisterCategory(activeLang.Settings, 3);
+	RegisterCategory(activeLang.ClickUI, 4);
 
 	//Register Modules
-
 	/* Combat */
 	RegisterModule(0, 0, activeLang.Hitbox, &ModuleHandler::hitboxToggle);
 	RegisterModule(0, 1, activeLang.Triggerbot, &ModuleHandler::triggerbotToggle);
@@ -232,7 +312,7 @@ TabGui::TabGui() {
 	/* Movement */
 	RegisterModule(1, 0, activeLang.Jetpack, &ModuleHandler::jetpackToggle);
 	RegisterModule(1, 1, activeLang.AirJump, &ModuleHandler::airJumpToggle);
-	RegisterModule(1, 2, activeLang.NoSlowDown, & ModuleHandler::noslowdownToggle);
+	RegisterModule(1, 2, activeLang.NoSlowDown, &ModuleHandler::noslowdownToggle);
 	RegisterModule(1, 3, activeLang.NoKnockBack, &ModuleHandler::noknockbackToggle);
 	RegisterModule(1, 4, activeLang.PlayerSpeed, &ModuleHandler::playerspeedToggle);
 	RegisterModule(1, 5, activeLang.NoWater, &ModuleHandler::nowaterToggle);
@@ -255,6 +335,32 @@ TabGui::TabGui() {
 	RegisterModule(2, 8, activeLang.ServerCrasher, &ModuleHandler::servercrasherToggle);
 	RegisterModule(2, 9, activeLang.Coordinates, &ModuleHandler::coordinatesToggle);
 	RegisterModule(2, 10, activeLang.clickTP, &ModuleHandler::clicktpToggle);
+
+	/* Settings */
+	//There is a special case for the first setting, it wont modify the value, it will just close the settings list always.
+	RegisterSetting(0, "Back", Bool, reinterpret_cast<uint64_t*>(&categories[3].active));
+	RegisterSetting(1, "GUI Scale", Float, reinterpret_cast<uint64_t*>(&scale));
+	//RegisterSetting(2, "NULL", Byte, reinterpret_cast<uint64_t*>(NULL));
+	//RegisterSetting(3, "NULL", Byte, reinterpret_cast<uint64_t*>(NULL));
+
+	settings[0].selected = true;
+
+	HWND windowHandleMC = find_main_window(mem::frameId);
+	GetWindowRect(windowHandleMC, &rectMC);
+	GetDesktopRect(&desktop);
+
+	hWnd = CreateWindow(wc.lpszClassName, NULL, WS_POPUP, rectMC.left, rectMC.top, rectMC.right- rectMC.left-8, rectMC.bottom- rectMC.top-33, NULL, NULL, wc.hInstance, NULL);
+	if (hWnd == NULL) {
+		MessageBox(NULL, L"No HWND!", L"Failed to create window for Tab UI", MB_OK);
+		return;
+	}
+	SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLong(hWnd, GWL_EXSTYLE) | WS_EX_LAYERED | WS_EX_TRANSPARENT);
+	SetLayeredWindowAttributes(hWnd, RGB(77, 77, 77), 0, LWA_COLORKEY);
+	ShowWindow(hWnd, SW_SHOW);
+
+	Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
+
+	ClickUI::ClickUI();
 
 	MSG msg = { };
 	int keyBuf = 0;
@@ -280,12 +386,30 @@ TabGui::TabGui() {
 		GetWindowRect(windowHandleMC, &rectMC);
 		winPos = POINT { rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize };
 		winSize = SIZE { rectMC.left, rectMC.bottom };
-		SetWindowPos(hWnd, topStyle, rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize, rectMC.right - rectMC.left - 8, rectMC.bottom - rectMC.top - 33, SWP_NOSIZE);
+		SetWindowPos(hWnd, topStyle, rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize, rectMC.right - rectMC.left - 8, rectMC.bottom - rectMC.top - 33, NULL);
 
-		//std::cout << getActiveCategoryID();
+		if (GetAsyncKeyState(1)) {
+			POINT p;
+			GetCursorPos(&p);
+
+			ClickUI::HandleClick(true, p.x - (rectMC.left + 8), p.y - (rectMC.top + 33 + gayUwpTitlesize), hWnd);
+		}
+		else {
+			ClickUI::HandleUnClick(hWnd);
+		}
+
+		std::cout << getActiveCategoryID();
 
 		if (GetAsyncKeyState(VK_DOWN)) {
-			if (getActiveCategoryID() != -1) {
+			if (getActiveCategoryID() == 3) {
+				if (keyBuf > 0) {
+					continue;
+				}
+				keyBuf++;
+				selectNextSetting();
+				InvalidateRect(hWnd, 0, TRUE);
+			}
+			else if (getActiveCategoryID() != -1) {
 				if (keyBuf > 0) {
 					continue;
 				}
@@ -303,6 +427,14 @@ TabGui::TabGui() {
 			}
 		}
 		else if (GetAsyncKeyState(VK_UP)) {
+			if (getActiveCategoryID() == 3) {
+				if (keyBuf > 0) {
+					continue;
+				}
+				keyBuf++;
+				selectPrevSetting();
+				InvalidateRect(hWnd, 0, TRUE);
+			}
 			if (getActiveCategoryID() != -1) {
 				if (keyBuf > 0) {
 					continue;
@@ -321,6 +453,15 @@ TabGui::TabGui() {
 			}
 		}
 		else if (GetAsyncKeyState(VK_RIGHT)) {
+			if (getActiveCategoryID() == 3) {
+				if (keyBuf > 0) {
+					continue;
+				}
+				keyBuf++;
+				increaseSetting();
+				InvalidateRect(hWnd, 0, TRUE);
+				continue;
+			}
 			if (getActiveCategoryID() != -1) {
 				if (keyBuf > 0) {
 					continue;
@@ -339,6 +480,19 @@ TabGui::TabGui() {
 			}
 		}
 		else if (GetAsyncKeyState(VK_LEFT)) {
+			if (getActiveCategoryID() == 3) {
+				if (keyBuf > 0) {
+					continue;
+				}
+				keyBuf++;
+				if (settings[0].selected) {
+					categories[3].active = false;
+					continue;
+				}
+				decreaseSetting();
+				InvalidateRect(hWnd, 0, TRUE);
+				continue;
+			}
 			if (keyBuf > 0) {
 				continue;
 			}
@@ -368,7 +522,6 @@ TabGui::TabGui() {
 	return;
 }
 
-float scale = 1.0f;
 VOID OnPaint(HDC hdc)
 {
 	//Main box, basically the screen ig. idk how to describe it but it makes it transparent
@@ -440,8 +593,21 @@ VOID OnPaint(HDC hdc)
 		std::wstring wstr = std::wstring(categories[b].name.begin(), categories[b].name.end());
 		graphics.DrawString(wstr.c_str(), wstr.length(), &categoryFont, pointL, &tBrush);
 	}
-
 	if (categories[3].active) {
+		//graphics.FillRectangle(&aBrush, Gdiplus::Rect(desktop.left + 8, (desktop.top + (75 * scale)) + (32 * scale), 200 * scale, 32 * scale));
+		for (int c = 0; c < settingCount; c++) {
+			//Draw rects for settings
+			graphics.FillRectangle(&cPen, Gdiplus::Rect((desktop.left + 208) * scale, (desktop.top + (75 * scale)) + ((32 * scale) * c), 200 * scale, 32 * scale));
+			if (settings[c].selected) {
+				graphics.FillRectangle(&sBrush, Gdiplus::Rect((desktop.left + 208)*scale, (desktop.top + (75 * scale)) + ((32 * scale) * c), 200 * scale, 32 * scale));
+			}
+			//Draw setting name
+			Gdiplus::PointF pointL((desktop.left + 208) * scale, (desktop.top + (75 * scale)) + ((32 * scale) * c));
+			std::wstring wstr = std::wstring(settings[c].name.begin(), settings[c].name.end());
+			graphics.DrawString(wstr.c_str(), wstr.length(), &categoryFont, pointL, &tBrush);
+		}
+	}
+	if (categories[4].active) {
 		ClickUI::OnPaint(&graphics, &tBrush, &cPen, &sBrush, scale, desktopRect);
 	}
 
