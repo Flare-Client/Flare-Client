@@ -105,7 +105,7 @@ void createReassign(const char* hackName, char *hackKey) {
 }
 
 int currentLang;
-Lang activeLang;
+static Lang activeLang;
 GuiLoader::GuiLoader() {
 	{
 		WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("Flare Client"), NULL };
