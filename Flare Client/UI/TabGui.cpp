@@ -247,7 +247,7 @@ void increaseSetting() {
 	switch (settings[selected].type) {
 	case 0:
 		valB = reinterpret_cast<bool*>(settings[selected].valuePtr);
-		*valB = true;
+		*valB++;
 	case 1:
 		valBB = reinterpret_cast<byte*>(settings[selected].valuePtr);
 		*valBB++;
@@ -274,7 +274,7 @@ void decreaseSetting() {
 	switch (settings[selected].type) {
 	case 0:
 		valB = reinterpret_cast<bool*>(settings[selected].valuePtr);
-		*valB = !*valB;
+		*valB--;
 	case 1:
 		valBB = reinterpret_cast<byte*>(settings[selected].valuePtr);
 		*valBB--;
