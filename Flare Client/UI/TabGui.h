@@ -18,9 +18,15 @@ struct ModuleUI {
 	bool selected;
 	bool* moduleToggle;
 };
-template<typename T>
+static enum SettingType {
+	Bool,
+	Byte,
+	Int,
+	Float
+};
 struct Setting {
-	T* valuePtr;
+	uint64_t* valuePtr;
+	SettingType type;
 	std::string name;
 	bool selected;
 };

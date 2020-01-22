@@ -39,12 +39,12 @@ POINT winPos;
 SIZE winSize;
 static std::vector<Category> categories;
 int categoryCount = 0;
-template<typename T>
-static std::vector<Setting<T>> settings;
+static std::vector<Setting> settings;
 int settingCount = 0;
 HWND topStyle = HWND_TOPMOST;
 bool render = true;
 static Lang activeLang = getEnglish();
+float scale = 1.0f;
 
 void GetDesktopRect(RECT* rect)
 {
@@ -74,10 +74,9 @@ void RegisterModule(byte categoryID, int moduleID, std::string hackName, bool* m
 	categories[categoryID].moduleCount++;
 }
 
-template<typename T>
-void RegisterSetting(int settingID, std::string settingName, T* value) {
+void RegisterSetting(int settingID, std::string settingName, SettingType type, uint64_t* value) {
 	settings.push_back({});
-	settings[settingID] = { value, settingName, false };
+	settings[settingID] = { value, type, settingName, false };
 	settingCount++;
 }
 
@@ -201,6 +200,92 @@ void toggleSelectedModule() {
 	}
 	*categories[active].modules[selected].moduleToggle = !*categories[active].modules[selected].moduleToggle;
 }
+void selectNextSetting() {
+	int selected = 0;
+	for (int b = 0; b < settingCount; b++) {
+		if (settings[b].selected) {
+			selected = b;
+			break;
+		}
+	}
+	settings[selected].selected = false;
+	if (settingCount <= selected + 1) {
+		settings[0].selected = true;
+	}
+	else {
+		settings[selected+1].selected = true;
+	}
+}
+void selectPrevSetting() {
+	int selected = 0;
+	for (int b = 0; b < settingCount; b++) {
+		if (settings[b].selected) {
+			selected = b;
+			break;
+		}
+	}
+	settings[selected].selected = false;
+	if (0 > selected - 1) {
+		settings[settingCount-1].selected = true;
+	}
+	else {
+		settings[selected - 1].selected = true;
+	}
+}
+void increaseSetting() {
+	int selected = 0;
+	for (int b = 0; b < settingCount; b++) {
+		if (settings[b].selected) {
+			selected = b;
+			break;
+		}
+	}
+	bool* valB;
+	byte* valBB;
+	int* valI;
+	float* valF;
+	switch (settings[selected].type) {
+	case 0:
+		valB = reinterpret_cast<bool*>(settings[selected].valuePtr);
+		*valB = true;
+	case 1:
+		valBB = reinterpret_cast<byte*>(settings[selected].valuePtr);
+		*valBB++;
+	case 2:
+		valI = reinterpret_cast<int*>(settings[selected].valuePtr);
+		*valI++;
+	case 3:
+		valF = reinterpret_cast<float*>(settings[selected].valuePtr);
+		*valF+=0.1f;
+	}
+}
+void decreaseSetting() {
+	int selected = 0;
+	for (int b = 0; b < settingCount; b++) {
+		if (settings[b].selected) {
+			selected = b;
+			break;
+		}
+	}
+	bool* valB;
+	byte* valBB;
+	int* valI;
+	float* valF;
+	switch (settings[selected].type) {
+	case 0:
+		valB = reinterpret_cast<bool*>(settings[selected].valuePtr);
+		*valB = !*valB;
+	case 1:
+		valBB = reinterpret_cast<byte*>(settings[selected].valuePtr);
+		*valBB--;
+	case 2:
+		valI = reinterpret_cast<int*>(settings[selected].valuePtr);
+		*valI--;
+	case 3:
+		valF = reinterpret_cast<float*>(settings[selected].valuePtr);
+		*valF-=0.1f;
+	}
+}
 
 TabGui::TabGui() {
 	const wchar_t CLASS_NAME[] = L"Flare tab GUI";
@@ -251,10 +336,13 @@ TabGui::TabGui() {
 	RegisterModule(2, 9, activeLang.Coordinates, &ModuleHandler::coordinatesToggle);
 	RegisterModule(2, 10, activeLang.clickTP, &ModuleHandler::clicktpToggle);
 
-
-
 	/* Settings */
-	//RegisterSetting<float>(0, "GUI Scale", &scale);
+	RegisterSetting(0, "Back", Bool, reinterpret_cast<uint64_t*>(&categories[3].active));
+	RegisterSetting(1, "GUI Scale", Float, reinterpret_cast<uint64_t*>(&scale));
+	RegisterSetting(2, "NULL", Byte, reinterpret_cast<uint64_t*>(NULL));
+	RegisterSetting(3, "NULL", Byte, reinterpret_cast<uint64_t*>(NULL));
+
+	settings[0].selected = true;
 
 	HWND windowHandleMC = find_main_window(mem::frameId);
 	GetWindowRect(windowHandleMC, &rectMC);
@@ -309,10 +397,18 @@ TabGui::TabGui() {
 			ClickUI::HandleUnClick(hWnd);
 		}
 
-		//std::cout << getActiveCategoryID();
+		std::cout << getActiveCategoryID();
 
 		if (GetAsyncKeyState(VK_DOWN)) {
-			if (getActiveCategoryID() != -1) {
+			if (getActiveCategoryID() == 3) {
+				if (keyBuf > 0) {
+					continue;
+				}
+				keyBuf++;
+				selectNextSetting();
+				InvalidateRect(hWnd, 0, TRUE);
+			}
+			else if (getActiveCategoryID() != -1) {
 				if (keyBuf > 0) {
 					continue;
 				}
@@ -330,6 +426,14 @@ TabGui::TabGui() {
 			}
 		}
 		else if (GetAsyncKeyState(VK_UP)) {
+			if (getActiveCategoryID() == 3) {
+				if (keyBuf > 0) {
+					continue;
+				}
+				keyBuf++;
+				selectPrevSetting();
+				InvalidateRect(hWnd, 0, TRUE);
+			}
 			if (getActiveCategoryID() != -1) {
 				if (keyBuf > 0) {
 					continue;
@@ -348,6 +452,15 @@ TabGui::TabGui() {
 			}
 		}
 		else if (GetAsyncKeyState(VK_RIGHT)) {
+			if (getActiveCategoryID() == 3) {
+				if (keyBuf > 0) {
+					continue;
+				}
+				keyBuf++;
+				increaseSetting();
+				InvalidateRect(hWnd, 0, TRUE);
+				continue;
+			}
 			if (getActiveCategoryID() != -1) {
 				if (keyBuf > 0) {
 					continue;
@@ -366,6 +479,15 @@ TabGui::TabGui() {
 			}
 		}
 		else if (GetAsyncKeyState(VK_LEFT)) {
+			if (getActiveCategoryID() == 3) {
+				if (keyBuf > 0) {
+					continue;
+				}
+				keyBuf++;
+				decreaseSetting();
+				InvalidateRect(hWnd, 0, TRUE);
+				continue;
+			}
 			if (keyBuf > 0) {
 				continue;
 			}
@@ -395,7 +517,6 @@ TabGui::TabGui() {
 	return;
 }
 
-float scale = 1.0f;
 VOID OnPaint(HDC hdc)
 {
 	//Main box, basically the screen ig. idk how to describe it but it makes it transparent
@@ -466,6 +587,20 @@ VOID OnPaint(HDC hdc)
 		Gdiplus::PointF pointL(desktop.left + 8, (desktop.top + (73 * scale)) + ((32 * scale) * b));
 		std::wstring wstr = std::wstring(categories[b].name.begin(), categories[b].name.end());
 		graphics.DrawString(wstr.c_str(), wstr.length(), &categoryFont, pointL, &tBrush);
+	}
+	if (categories[3].active) {
+		//graphics.FillRectangle(&aBrush, Gdiplus::Rect(desktop.left + 8, (desktop.top + (75 * scale)) + (32 * scale), 200 * scale, 32 * scale));
+		for (int c = 0; c < settingCount; c++) {
+			//Draw rects for settings
+			graphics.FillRectangle(&cPen, Gdiplus::Rect((desktop.left + 208) * scale, (desktop.top + (75 * scale)) + ((32 * scale) * c), 200 * scale, 32 * scale));
+			if (settings[c].selected) {
+				graphics.FillRectangle(&sBrush, Gdiplus::Rect((desktop.left + 208)*scale, (desktop.top + (75 * scale)) + ((32 * scale) * c), 200 * scale, 32 * scale));
+			}
+			//Draw setting name
+			Gdiplus::PointF pointL((desktop.left + 208) * scale, (desktop.top + (75 * scale)) + ((32 * scale) * c));
+			std::wstring wstr = std::wstring(settings[c].name.begin(), settings[c].name.end());
+			graphics.DrawString(wstr.c_str(), wstr.length(), &categoryFont, pointL, &tBrush);
+		}
 	}
 	if (categories[4].active) {
 		ClickUI::OnPaint(&graphics, &tBrush, &cPen, &sBrush, scale, desktopRect);
