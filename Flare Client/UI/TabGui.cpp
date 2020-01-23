@@ -47,7 +47,7 @@ Lang activeLang = getEnglish();
 uint64_t scaleI = 10;
 float scale = scaleI / 10;
 int pLangID = 0;
-int langID = 0;
+uint64_t langID = 0;
 
 void GetDesktopRect(RECT* rect)
 {
@@ -78,7 +78,6 @@ void RegisterModule(byte categoryID, int moduleID, const char** hackName, bool* 
 }
 void RegisterSetting(int settingID, const char** settingName, uint64_t* value, uint64_t max, uint64_t min) {
 	settings.push_back({});
-	std::cout << max;
 	settings[settingID] = { value, min, max, settingName, false };
 	settingCount++;
 }
@@ -310,7 +309,7 @@ TabGui::TabGui() {
 	//There is a special case for the first setting, it wont modify the value, it will just close the settings list always.
 	RegisterSetting(0, &activeLang.Back, reinterpret_cast<uint64_t*>(&categories[3].active), 1, 0);
 	RegisterSetting(1, &activeLang.GuiScale, &scaleI, 20, 5);
-	RegisterSetting(2, &activeLang.Language, reinterpret_cast<uint64_t*>(&langID), 2, 0);
+	RegisterSetting(2, &activeLang.Language, &langID, 2, 0);
 
 	settings[0].selected = true;
 
@@ -366,8 +365,6 @@ TabGui::TabGui() {
 		else {
 			ClickUI::HandleUnClick(hWnd);
 		}
-
-		//std::cout << "Scale MAX: " << settings[1].min << std::endl;
 
 		switch (langID) {
 		case 0:
@@ -588,16 +585,16 @@ VOID OnPaint(HDC hdc)
 				for (int c = 0; c < categories[b].moduleCount; c++) {
 					//Draw rects for modules
 					//Form module name
-					Gdiplus::PointF pointL(desktop.left + dcstrl+8, (desktop.top + (75 * scale)) + ((32 * scale) * b) + ((32 * scale) * z));
+					Gdiplus::PointF pointL((desktop.left + dcstrl+8) * scale, (desktop.top + (75 * scale)) + ((32 * scale) * b) + ((32 * scale) * z));
 					std::wstring wstr = char2String(*categories[b].modules[c].name);
-					graphics.FillRectangle(&cPen, Gdiplus::Rect(desktop.left + dcstrl+8, (desktop.top + (75 * scale)) + ((32 * scale) * b) + ((32 * scale) * z), dstrl * scale, 32 * scale));
+					graphics.FillRectangle(&cPen, Gdiplus::Rect((desktop.left + dcstrl + 8) * scale, (desktop.top + (75 * scale)) + ((32 * scale) * b) + ((32 * scale) * z), dstrl * scale, 32 * scale));
 					if (*categories[b].modules[c].moduleToggle && categories[b].modules[c].selected) {
-						graphics.FillRectangle(&oBrush, Gdiplus::Rect(desktop.left + dcstrl+8, (desktop.top + (75 * scale)) + ((32 * scale) * b) + ((32 * scale) * z), dstrl * scale, 32 * scale));
+						graphics.FillRectangle(&oBrush, Gdiplus::Rect((desktop.left + dcstrl + 8) * scale, (desktop.top + (75 * scale)) + ((32 * scale) * b) + ((32 * scale) * z), dstrl * scale, 32 * scale));
 					}
 					else if (*categories[b].modules[c].moduleToggle) {
-						graphics.FillRectangle(&aBrush, Gdiplus::Rect(desktop.left + dcstrl+8, (desktop.top + (75 * scale)) + ((32 * scale) * b) + ((32 * scale) * z), dstrl * scale, 32 * scale));
+						graphics.FillRectangle(&aBrush, Gdiplus::Rect((desktop.left + dcstrl + 8) * scale, (desktop.top + (75 * scale)) + ((32 * scale) * b) + ((32 * scale) * z), dstrl * scale, 32 * scale));
 					} else if (categories[b].modules[c].selected) {
-						graphics.FillRectangle(&sBrush, Gdiplus::Rect(desktop.left + dcstrl+8, (desktop.top + (75 * scale)) + ((32 * scale) * b) + ((32 * scale) * z), dstrl * scale, 32 * scale));
+						graphics.FillRectangle(&sBrush, Gdiplus::Rect((desktop.left + dcstrl + 8) * scale, (desktop.top + (75 * scale)) + ((32 * scale) * b) + ((32 * scale) * z), dstrl * scale, 32 * scale));
 					}
 					//Draw module name
 					graphics.DrawString(wstr.c_str(), wstr.length(), &categoryFont, pointL, &tBrush);
