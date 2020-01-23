@@ -21,17 +21,10 @@ struct ModuleUI {
 	bool selected;
 	bool* moduleToggle;
 };
-static enum SettingType {
-	Bool,
-	Byte,
-	Int,
-	Float
-};
 struct Setting {
 	uint64_t* valuePtr;
 	uint64_t min;
 	uint64_t max;
-	SettingType type;
 	const char** name;
 	bool selected;
 };

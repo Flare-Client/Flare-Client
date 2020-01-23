@@ -44,7 +44,8 @@ int settingCount = 0;
 HWND topStyle = HWND_TOPMOST;
 bool render = true;
 Lang activeLang = getEnglish();
-float scale = 1.0f;
+uint64_t scaleI = 10;
+float scale = scaleI / 10;
 int pLangID = 0;
 int langID = 0;
 
@@ -75,9 +76,10 @@ void RegisterModule(byte categoryID, int moduleID, const char** hackName, bool* 
 	categories[categoryID].modules[moduleID] = { hackName, false, moduleToggle };
 	categories[categoryID].moduleCount++;
 }
-void RegisterSetting(int settingID, const char** settingName, SettingType type, uint64_t* value, uint64_t max, uint64_t min) {
+void RegisterSetting(int settingID, const char** settingName, uint64_t* value, uint64_t max, uint64_t min) {
 	settings.push_back({});
-	settings[settingID] = { value, (uint64_t)max, (uint64_t)min, type, settingName, false };
+	std::cout << max;
+	settings[settingID] = { value, min, max, settingName, false };
 	settingCount++;
 }
 
@@ -238,33 +240,8 @@ void increaseSetting() {
 			break;
 		}
 	}
-	bool* valB;
-	byte* valBB;
-	int* valI;
-	float* valF;
-	switch (settings[selected].type) {
-	case 0:
-		valB = reinterpret_cast<bool*>(settings[selected].valuePtr);
-		*valB = true;
-		break;
-	case 1:
-		valBB = reinterpret_cast<byte*>(settings[selected].valuePtr);
-		if (*valBB < (byte)settings[selected].max) {
-			*valBB += 1;
-		}
-		break;
-	case 2:
-		valI = reinterpret_cast<int*>(settings[selected].valuePtr);
-		if (*valI < (int)settings[selected].max) {
-			*valI += 1;
-		}
-		break;
-	case 3:
-		valF = reinterpret_cast<float*>(settings[selected].valuePtr);
-		if (*valF < (float)settings[selected].max) {
-			*valF += 0.1f;
-		}
-		break;
+	if (*settings[selected].valuePtr < settings[selected].max) {
+		*settings[selected].valuePtr += 1;
 	}
 }
 void decreaseSetting() {
@@ -275,28 +252,8 @@ void decreaseSetting() {
 			break;
 		}
 	}
-	bool* valB;
-	byte* valBB;
-	int* valI;
-	float* valF;
-	switch (settings[selected].type) {
-	case 0:
-		valB = reinterpret_cast<bool*>(settings[selected].valuePtr);
-		*valB = false;
-		break;
-	case 1:
-		valBB = reinterpret_cast<byte*>(settings[selected].valuePtr);
-		*valBB--;
-		break;
-	case 2:
-		valI = reinterpret_cast<int*>(settings[selected].valuePtr);
-		*valI -= 1;
-		std::cout << "INT: " << *valI;
-		break;
-	case 3:
-		valF = reinterpret_cast<float*>(settings[selected].valuePtr);
-		*valF-=0.1f;
-		break;
+	if (*settings[selected].valuePtr > settings[selected].min) {
+		*settings[selected].valuePtr -= 1;
 	}
 }
 
@@ -351,9 +308,9 @@ TabGui::TabGui() {
 
 	/* Settings */
 	//There is a special case for the first setting, it wont modify the value, it will just close the settings list always.
-	RegisterSetting(0, &activeLang.Back, Bool, reinterpret_cast<uint64_t*>(&categories[3].active), NULL, NULL);
-	RegisterSetting(1, &activeLang.GuiScale, Float, reinterpret_cast<uint64_t*>(&scale), 4.0f, 0.1f);
-	RegisterSetting(2, &activeLang.Language, Int, reinterpret_cast<uint64_t*>(&langID), 2, 0);
+	RegisterSetting(0, &activeLang.Back, reinterpret_cast<uint64_t*>(&categories[3].active), 1, 0);
+	RegisterSetting(1, &activeLang.GuiScale, &scaleI, 20, 5);
+	RegisterSetting(2, &activeLang.Language, reinterpret_cast<uint64_t*>(&langID), 2, 0);
 
 	settings[0].selected = true;
 
@@ -410,7 +367,8 @@ TabGui::TabGui() {
 			ClickUI::HandleUnClick(hWnd);
 		}
 
-		//std::cout << "Lang ID: " << langID << std::endl;
+		//std::cout << "Scale MAX: " << settings[1].min << std::endl;
+
 		switch (langID) {
 		case 0:
 			activeLang = getEnglish();
@@ -426,7 +384,6 @@ TabGui::TabGui() {
 			InvalidateRect(hWnd, 0, TRUE);
 			pLangID = langID;
 		}
-		//std::cout << "Lang: " << activeLang.Language << std::endl;
 
 		if (GetAsyncKeyState(VK_DOWN)) {
 			if (getActiveCategoryID() == 3) {
@@ -486,10 +443,6 @@ TabGui::TabGui() {
 					continue;
 				}
 				keyBuf++;
-				if (settings[0].selected) {
-					categories[3].active = false;
-					continue;
-				}
 				increaseSetting();
 				InvalidateRect(hWnd, 0, TRUE);
 				continue;
@@ -517,10 +470,6 @@ TabGui::TabGui() {
 					continue;
 				}
 				keyBuf++;
-				/*if (settings[0].selected) {
-					categories[3].active = false;
-					continue;
-				}*/
 				decreaseSetting();
 				InvalidateRect(hWnd, 0, TRUE);
 				continue;
@@ -549,7 +498,6 @@ TabGui::TabGui() {
 			}
 			trig = false;
 		}
-		//InvalidateRect(hWnd, 0, TRUE);
 	}
 	return;
 }
@@ -590,6 +538,7 @@ int largestModNameLen(int catID, Gdiplus::Graphics* g, Gdiplus::Font* font) {
 
 VOID OnPaint(HDC hdc)
 {
+	scale = (float)scaleI / 10.0f;
 	//Main box, basically the screen ig. idk how to describe it but it makes it transparent
 	Gdiplus::Graphics graphics(hdc);
 	Gdiplus::SolidBrush bBrush(Gdiplus::Color(255, 77, 77, 77));
@@ -663,7 +612,6 @@ VOID OnPaint(HDC hdc)
 		graphics.DrawString(cwstr.c_str(), cwstr.length(), &categoryFont, pointL, &tBrush);
 	}
 	if (categories[3].active) {
-		//graphics.FillRectangle(&aBrush, Gdiplus::Rect(desktop.left + 8, (desktop.top + (75 * scale)) + (32 * scale), 200 * scale, 32 * scale));
 		for (int c = 0; c < settingCount; c++) {
 			//Draw rects for settings
 			graphics.FillRectangle(&cPen, Gdiplus::Rect((desktop.left + dcstrl+8) * scale, (desktop.top + (75 * scale)) + ((32 * scale) * c), 200 * scale, 32 * scale));
@@ -679,12 +627,6 @@ VOID OnPaint(HDC hdc)
 	if (categories[4].active) {
 		ClickUI::OnPaint(&graphics, &tBrush, &cPen, &sBrush, scale, desktopRect);
 	}
-
-	/*BLENDFUNCTION bf;
-	bf.BlendOp = AC_SRC_OVER;
-	bf.SourceConstantAlpha = 255;
-	bf.AlphaFormat = AC_SRC_ALPHA;
-	UpdateLayeredWindow(hWnd, hdc, &winPos, &winSize, hdc, &winPos, RGB(77,77,77), &bf, ULW_ALPHA);*/
 }
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
