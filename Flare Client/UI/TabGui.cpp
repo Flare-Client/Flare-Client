@@ -49,6 +49,16 @@ float scale = scaleI / 10;
 int pLangID = 0;
 uint64_t langID = 0;
 
+/* Module stuff */
+
+uint64_t hitboxValue = 60;
+uint64_t jetpackValue = 10;
+uint64_t playerSpeedValue = 02;
+uint64_t jesusValue = 10;
+uint64_t bunnyhopValue = 10;
+
+/* */
+
 void GetDesktopRect(RECT* rect)
 {
 	RECT desktop;
@@ -310,6 +320,11 @@ TabGui::TabGui() {
 	RegisterSetting(0, &activeLang.Back, reinterpret_cast<uint64_t*>(&categories[3].active), 1, 0);
 	RegisterSetting(1, &activeLang.GuiScale, &scaleI, 20, 5);
 	RegisterSetting(2, &activeLang.Language, &langID, 2, 0);
+	RegisterSetting(3, &activeLang.Hitbox, &hitboxValue, 60, 01);
+	RegisterSetting(4, &activeLang.Jetpack, &jetpackValue, 50, 01);
+	RegisterSetting(5, &activeLang.PlayerSpeed, &playerSpeedValue, 10, 01);
+	RegisterSetting(6, &activeLang.Jesus, &jesusValue, 50, 01);
+	RegisterSetting(7, &activeLang.Bhop, &bunnyhopValue, 50, 01);
 
 	settings[0].selected = true;
 
@@ -536,6 +551,12 @@ int largestModNameLen(int catID, Gdiplus::Graphics* g, Gdiplus::Font* font) {
 VOID OnPaint(HDC hdc)
 {
 	scale = (float)scaleI / 10.0f;
+	ModuleHandler::hitboxWidthFloat = (float)hitboxValue / 10.0f;
+	ModuleHandler::hitboxHeightFloat = (float)hitboxValue / 10.0f;
+	ModuleHandler::jetpackVal = (float)jetpackValue / 5.0f;
+	ModuleHandler::playerSpeedVal = (float)playerSpeedValue / 100.0f;
+	ModuleHandler::jesusVal = (float)jesusValue / 10.0f;
+	ModuleHandler::bhopVal = (float)bunnyhopValue / 10.0f;
 	//Main box, basically the screen ig. idk how to describe it but it makes it transparent
 	Gdiplus::Graphics graphics(hdc);
 	Gdiplus::SolidBrush bBrush(Gdiplus::Color(255, 77, 77, 77));
