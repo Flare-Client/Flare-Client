@@ -11,27 +11,25 @@
 #include <gdiplus.h>
 #include <list>
 #include <vector>
+#include <locale>
+#include <codecvt>
+#include <string>
 #include "ClickUI.h"
 
 struct ModuleUI {
-	std::string name;
+	const char** name;
 	bool selected;
 	bool* moduleToggle;
 };
-static enum SettingType {
-	Bool,
-	Byte,
-	Int,
-	Float
-};
 struct Setting {
 	uint64_t* valuePtr;
-	SettingType type;
-	std::string name;
+	uint64_t min;
+	uint64_t max;
+	const char** name;
 	bool selected;
 };
 struct Category {
-	std::string name;
+	const char** name;
 	bool selected;
 	bool active;
 	int moduleCount;

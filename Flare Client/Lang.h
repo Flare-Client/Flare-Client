@@ -15,6 +15,7 @@ static struct Lang {
 	const char* Misc;
 	const char* Settings;
 	const char* ClickUI;
+	const char* Back;
 
 	/*
 		Combat
@@ -75,6 +76,7 @@ static struct Lang {
 	const char* DrpSwitcher;
 	const char* DrpSaveButton;
 	const char* Keybinds;
+	const char* GuiScale;
 
 	/*
 		Etc
@@ -102,6 +104,7 @@ static Lang getEnglish() {
 		"Misc",
 		"Settings",
 		"ClickUI",
+		"Back",
 
 		/*
 			Combat
@@ -162,6 +165,7 @@ static Lang getEnglish() {
 		"DRP",
 		"Save DRP",
 		"Keybinds",
+		"Gui Scale",
 
 		/*
 			Etc
@@ -191,6 +195,7 @@ static Lang getItalian() {
 		"Varie",
 		"Impostaz.",
 		"ClickUI",
+		"Torna",
 
 		/*
 			Combat
@@ -251,6 +256,7 @@ static Lang getItalian() {
 		"DRP",
 		"Salva DRP",
 		"Keybinds",
+		"Gui Scale",
 
 		/*
 			Etc
@@ -280,6 +286,7 @@ static Lang getSpanish() {
 		"Miscelaneo",
 		"Config.",
 		"ClickUI",
+		"Back",
 
 		/*
 			Combat
@@ -340,6 +347,7 @@ static Lang getSpanish() {
 		"DRP",
 		"Salvar DRP",
 		"Keybinds",
+		"Gui Scale",
 
 		/*
 			Etc

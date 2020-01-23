@@ -43,8 +43,11 @@ static std::vector<Setting> settings;
 int settingCount = 0;
 HWND topStyle = HWND_TOPMOST;
 bool render = true;
-static Lang activeLang = getEnglish();
-float scale = 1.0f;
+Lang activeLang = getEnglish();
+uint64_t scaleI = 10;
+float scale = scaleI / 10;
+int pLangID = 0;
+int langID = 0;
 
 void GetDesktopRect(RECT* rect)
 {
@@ -62,21 +65,21 @@ void GetDesktopRect(RECT* rect)
 	rect->bottom = desktop.bottom;
 }
 
-void RegisterCategory(std::string categoryName, byte id)
+void RegisterCategory(const char** categoryName, byte id)
 {
 	categories.push_back({});
 	categories[id] = { categoryName, id == 0 };
 	categoryCount++;
 }
-void RegisterModule(byte categoryID, int moduleID, std::string hackName, bool* moduleToggle) {
-	categories[categoryID].modules.push_back({ "",false,0 });
+void RegisterModule(byte categoryID, int moduleID, const char** hackName, bool* moduleToggle) {
+	categories[categoryID].modules.push_back({});
 	categories[categoryID].modules[moduleID] = { hackName, false, moduleToggle };
 	categories[categoryID].moduleCount++;
 }
-
-void RegisterSetting(int settingID, std::string settingName, SettingType type, uint64_t* value) {
+void RegisterSetting(int settingID, const char** settingName, uint64_t* value, uint64_t max, uint64_t min) {
 	settings.push_back({});
-	settings[settingID] = { value, type, settingName, false };
+	std::cout << max;
+	settings[settingID] = { value, min, max, settingName, false };
 	settingCount++;
 }
 
@@ -100,7 +103,7 @@ void selectNextCategory() {
 		}
 	}
 	categories[selected].selected = false;
-	if (categories[selected + 1].name != "") {
+	if (*categories[selected + 1].name != "") {
 		categories[selected + 1].selected = true;
 		return;
 	}
@@ -115,10 +118,7 @@ void selectPrevCategory() {
 		}
 	}
 	categories[selected].selected = false;
-	if (categories[selected - 1].name != "") {
-		if (selected - 1 < 0) {
-			selected = 32;
-		}
+	if (selected - 1 >= 0) {
 		categories[selected - 1].selected = true;
 		return;
 	}
@@ -240,23 +240,8 @@ void increaseSetting() {
 			break;
 		}
 	}
-	bool* valB;
-	byte* valBB;
-	int* valI;
-	float* valF;
-	switch (settings[selected].type) {
-	case 0:
-		valB = reinterpret_cast<bool*>(settings[selected].valuePtr);
-		*valB = true;
-	case 1:
-		valBB = reinterpret_cast<byte*>(settings[selected].valuePtr);
-		*valBB++;
-	case 2:
-		valI = reinterpret_cast<int*>(settings[selected].valuePtr);
-		*valI++;
-	case 3:
-		valF = reinterpret_cast<float*>(settings[selected].valuePtr);
-		*valF+=0.1f;
+	if (*settings[selected].valuePtr < settings[selected].max) {
+		*settings[selected].valuePtr += 1;
 	}
 }
 void decreaseSetting() {
@@ -267,23 +252,8 @@ void decreaseSetting() {
 			break;
 		}
 	}
-	bool* valB;
-	byte* valBB;
-	int* valI;
-	float* valF;
-	switch (settings[selected].type) {
-	case 0:
-		valB = reinterpret_cast<bool*>(settings[selected].valuePtr);
-		*valB = false;
-	case 1:
-		valBB = reinterpret_cast<byte*>(settings[selected].valuePtr);
-		*valBB--;
-	case 2:
-		valI = reinterpret_cast<int*>(settings[selected].valuePtr);
-		*valI--;
-	case 3:
-		valF = reinterpret_cast<float*>(settings[selected].valuePtr);
-		*valF-=0.1f;
+	if (*settings[selected].valuePtr > settings[selected].min) {
+		*settings[selected].valuePtr -= 1;
 	}
 }
 
@@ -297,51 +267,50 @@ TabGui::TabGui() {
 	RegisterClass(&wc);
 
 	//Register categories
-	RegisterCategory(activeLang.Combat, 0);
-	RegisterCategory(activeLang.Movement, 1);
-	RegisterCategory(activeLang.Misc, 2);
-	RegisterCategory(activeLang.Settings, 3);
-	RegisterCategory(activeLang.ClickUI, 4);
+	RegisterCategory(&activeLang.Combat, 0);
+	RegisterCategory(&activeLang.Movement, 1);
+	RegisterCategory(&activeLang.Misc, 2);
+	RegisterCategory(&activeLang.Settings, 3);
+	RegisterCategory(&activeLang.ClickUI, 4);
 
 	//Register Modules
 	/* Combat */
-	RegisterModule(0, 0, activeLang.Hitbox, &ModuleHandler::hitboxToggle);
-	RegisterModule(0, 1, activeLang.Triggerbot, &ModuleHandler::triggerbotToggle);
-	RegisterModule(0, 2, activeLang.Criticals, &ModuleHandler::criticalsToggle);
-	RegisterModule(0, 3, activeLang.TpAura, &ModuleHandler::tpauraToggle);
+	RegisterModule(0, 0, &activeLang.Hitbox, &ModuleHandler::hitboxToggle);
+	RegisterModule(0, 1, &activeLang.Triggerbot, &ModuleHandler::triggerbotToggle);
+	RegisterModule(0, 2, &activeLang.Criticals, &ModuleHandler::criticalsToggle);
+	RegisterModule(0, 3, &activeLang.TpAura, &ModuleHandler::tpauraToggle);
 	/* Movement */
-	RegisterModule(1, 0, activeLang.Jetpack, &ModuleHandler::jetpackToggle);
-	RegisterModule(1, 1, activeLang.AirJump, &ModuleHandler::airJumpToggle);
-	RegisterModule(1, 2, activeLang.NoSlowDown, &ModuleHandler::noslowdownToggle);
-	RegisterModule(1, 3, activeLang.NoKnockBack, &ModuleHandler::noknockbackToggle);
-	RegisterModule(1, 4, activeLang.PlayerSpeed, &ModuleHandler::playerspeedToggle);
-	RegisterModule(1, 5, activeLang.NoWater, &ModuleHandler::nowaterToggle);
-	RegisterModule(1, 6, activeLang.Jesus, &ModuleHandler::jesusToggle);
-	RegisterModule(1, 7, activeLang.Bhop, &ModuleHandler::bhopToggle);
-	RegisterModule(1, 8, activeLang.Flight, &ModuleHandler::flightToggle);
-	RegisterModule(1, 9, activeLang.NoClip, &ModuleHandler::noClipToggle);
-	RegisterModule(1, 10, activeLang.StepAssist, &ModuleHandler::stepAssistToggle);
-	RegisterModule(1, 11, activeLang.AutoSprint, &ModuleHandler::autoSprintToggle);
+	RegisterModule(1, 0, &activeLang.Jetpack, &ModuleHandler::jetpackToggle);
+	RegisterModule(1, 1, &activeLang.AirJump, &ModuleHandler::airJumpToggle);
+	RegisterModule(1, 2, &activeLang.NoSlowDown, &ModuleHandler::noslowdownToggle);
+	RegisterModule(1, 3, &activeLang.NoKnockBack, &ModuleHandler::noknockbackToggle);
+	RegisterModule(1, 4, &activeLang.PlayerSpeed, &ModuleHandler::playerspeedToggle);
+	RegisterModule(1, 5, &activeLang.NoWater, &ModuleHandler::nowaterToggle);
+	RegisterModule(1, 6, &activeLang.Jesus, &ModuleHandler::jesusToggle);
+	RegisterModule(1, 7, &activeLang.Bhop, &ModuleHandler::bhopToggle);
+	RegisterModule(1, 8, &activeLang.Flight, &ModuleHandler::flightToggle);
+	RegisterModule(1, 9, &activeLang.NoClip, &ModuleHandler::noClipToggle);
+	RegisterModule(1, 10, &activeLang.StepAssist, &ModuleHandler::stepAssistToggle);
+	RegisterModule(1, 11, &activeLang.AutoSprint, &ModuleHandler::autoSprintToggle);
 
 	/* Other */
-	RegisterModule(2, 0, activeLang.NoWeb, &ModuleHandler::nowebToggle);
-	RegisterModule(2, 1, activeLang.VanillaNoFall, &ModuleHandler::nofallToggle);
-	RegisterModule(2, 2, activeLang.Gamemode, &ModuleHandler::gamemodeToggle);
-	RegisterModule(2, 3, activeLang.Instabreak, &ModuleHandler::instabreakToggle);
-	RegisterModule(2, 4, activeLang.Phase, &ModuleHandler::phaseToggle);
-	RegisterModule(2, 5, activeLang.Scaffold, &ModuleHandler::scaffoldToggle);
-	RegisterModule(2, 6, activeLang.NoPacket, &ModuleHandler::nopacketToggle);
-	RegisterModule(2, 7, activeLang.Freecam, &ModuleHandler::freecamToggle);
-	RegisterModule(2, 8, activeLang.ServerCrasher, &ModuleHandler::servercrasherToggle);
-	RegisterModule(2, 9, activeLang.Coordinates, &ModuleHandler::coordinatesToggle);
-	RegisterModule(2, 10, activeLang.clickTP, &ModuleHandler::clicktpToggle);
+	RegisterModule(2, 0, &activeLang.NoWeb, &ModuleHandler::nowebToggle);
+	RegisterModule(2, 1, &activeLang.VanillaNoFall, &ModuleHandler::nofallToggle);
+	RegisterModule(2, 2, &activeLang.Gamemode, &ModuleHandler::gamemodeToggle);
+	RegisterModule(2, 3, &activeLang.Instabreak, &ModuleHandler::instabreakToggle);
+	RegisterModule(2, 4, &activeLang.Phase, &ModuleHandler::phaseToggle);
+	RegisterModule(2, 5, &activeLang.Scaffold, &ModuleHandler::scaffoldToggle);
+	RegisterModule(2, 6, &activeLang.NoPacket, &ModuleHandler::nopacketToggle);
+	RegisterModule(2, 7, &activeLang.Freecam, &ModuleHandler::freecamToggle);
+	RegisterModule(2, 8, &activeLang.ServerCrasher, &ModuleHandler::servercrasherToggle);
+	RegisterModule(2, 9, &activeLang.Coordinates, &ModuleHandler::coordinatesToggle);
+	RegisterModule(2, 10, &activeLang.clickTP, &ModuleHandler::clicktpToggle);
 
 	/* Settings */
 	//There is a special case for the first setting, it wont modify the value, it will just close the settings list always.
-	RegisterSetting(0, "Back", Bool, reinterpret_cast<uint64_t*>(&categories[3].active));
-	RegisterSetting(1, "GUI Scale", Float, reinterpret_cast<uint64_t*>(&scale));
-	//RegisterSetting(2, "NULL", Byte, reinterpret_cast<uint64_t*>(NULL));
-	//RegisterSetting(3, "NULL", Byte, reinterpret_cast<uint64_t*>(NULL));
+	RegisterSetting(0, &activeLang.Back, reinterpret_cast<uint64_t*>(&categories[3].active), 1, 0);
+	RegisterSetting(1, &activeLang.GuiScale, &scaleI, 20, 5);
+	RegisterSetting(2, &activeLang.Language, reinterpret_cast<uint64_t*>(&langID), 2, 0);
 
 	settings[0].selected = true;
 
@@ -398,7 +367,23 @@ TabGui::TabGui() {
 			ClickUI::HandleUnClick(hWnd);
 		}
 
-		std::cout << getActiveCategoryID();
+		//std::cout << "Scale MAX: " << settings[1].min << std::endl;
+
+		switch (langID) {
+		case 0:
+			activeLang = getEnglish();
+			break;
+		case 1:
+			activeLang = getItalian();
+			break;
+		case 2:
+			activeLang = getSpanish();
+			break;
+		}
+		if (pLangID != langID) {
+			InvalidateRect(hWnd, 0, TRUE);
+			pLangID = langID;
+		}
 
 		if (GetAsyncKeyState(VK_DOWN)) {
 			if (getActiveCategoryID() == 3) {
@@ -485,10 +470,6 @@ TabGui::TabGui() {
 					continue;
 				}
 				keyBuf++;
-				if (settings[0].selected) {
-					categories[3].active = false;
-					continue;
-				}
 				decreaseSetting();
 				InvalidateRect(hWnd, 0, TRUE);
 				continue;
@@ -517,13 +498,47 @@ TabGui::TabGui() {
 			}
 			trig = false;
 		}
-		//InvalidateRect(hWnd, 0, TRUE);
 	}
 	return;
 }
 
+std::wstring char2String(const char* in) {
+	std::string str(in);
+	std::wstring wstr(str.begin(), str.end());
+	return wstr;
+}
+int drawnStringLen(std::wstring str, Gdiplus::Graphics* g, Gdiplus::Font* font) {
+	Gdiplus::PointF ptf;
+	Gdiplus::RectF rtf;
+	g->MeasureString(str.c_str(), str.length(), font, ptf, &rtf);
+	return rtf.Width;
+}
+int largestCatNameLen(Gdiplus::Graphics* g, Gdiplus::Font* font) {
+	int dcstrl = 0;
+	for (byte b = 0; b < categoryCount; b++) {
+		std::wstring cwstr = char2String(*categories[b].name);
+		int ndcstrl = drawnStringLen(cwstr, g, font);
+		if (ndcstrl > dcstrl) {
+			dcstrl = ndcstrl;
+		}
+	}
+	return dcstrl;
+}
+int largestModNameLen(int catID, Gdiplus::Graphics* g, Gdiplus::Font* font) {
+	int dcstrl = 0;
+	for (byte b = 0; b < categories[catID].moduleCount; b++) {
+		std::wstring cwstr = char2String(*categories[catID].modules[b].name);
+		int ndcstrl = drawnStringLen(cwstr, g, font);
+		if (ndcstrl > dcstrl) {
+			dcstrl = ndcstrl;
+		}
+	}
+	return dcstrl;
+}
+
 VOID OnPaint(HDC hdc)
 {
+	scale = (float)scaleI / 10.0f;
 	//Main box, basically the screen ig. idk how to describe it but it makes it transparent
 	Gdiplus::Graphics graphics(hdc);
 	Gdiplus::SolidBrush bBrush(Gdiplus::Color(255, 77, 77, 77));
@@ -558,64 +573,60 @@ VOID OnPaint(HDC hdc)
 	//Active brush. When the module or category is active
 	Gdiplus::SolidBrush aBrush(Gdiplus::Color(255, 255, 0, 255));
 	//for every category
+	int dcstrl = largestCatNameLen(&graphics, &categoryFont);
 	for (byte b = 0; b < categoryCount; b++) {
 		//Draw a rect for each category
-		graphics.FillRectangle(&cPen, Gdiplus::Rect(desktop.left + 8, desktop.top + (75 * scale) + ((32 * scale) * b), 200 * scale, 32 * scale));
+		Gdiplus::PointF pointL(desktop.left + 8, (desktop.top + (73 * scale)) + ((32 * scale) * b));
+		std::wstring cwstr = char2String(*categories[b].name);
+		graphics.FillRectangle(&cPen, Gdiplus::Rect(desktop.left + 8, desktop.top + (75 * scale) + ((32 * scale) * b), dcstrl * scale, 32 * scale));
 		if (categories[b].selected) {
 			if (categories[b].active) {
 				//Draw a diff color rect for active categories
-				graphics.FillRectangle(&aBrush, Gdiplus::Rect(desktop.left + 8, (desktop.top + (75 * scale)) + ((32 * scale) * b), 200 * scale, 32 * scale));
+				graphics.FillRectangle(&aBrush, Gdiplus::Rect(desktop.left + 8, (desktop.top + (75 * scale)) + ((32 * scale) * b), dcstrl * scale, 32 * scale));
 				int z = 0;
+				int dstrl = largestModNameLen(b, &graphics, &categoryFont);
 				for (int c = 0; c < categories[b].moduleCount; c++) {
 					//Draw rects for modules
-					graphics.FillRectangle(&cPen, Gdiplus::Rect(desktop.left + 208, (desktop.top + (75 * scale)) + ((32 * scale) * b) + ((32 * scale) * z), 200 * scale, 32 * scale));
+					//Form module name
+					Gdiplus::PointF pointL(desktop.left + dcstrl+8, (desktop.top + (75 * scale)) + ((32 * scale) * b) + ((32 * scale) * z));
+					std::wstring wstr = char2String(*categories[b].modules[c].name);
+					graphics.FillRectangle(&cPen, Gdiplus::Rect(desktop.left + dcstrl+8, (desktop.top + (75 * scale)) + ((32 * scale) * b) + ((32 * scale) * z), dstrl * scale, 32 * scale));
 					if (*categories[b].modules[c].moduleToggle && categories[b].modules[c].selected) {
-						graphics.FillRectangle(&oBrush, Gdiplus::Rect(desktop.left + 208, (desktop.top + (75 * scale)) + ((32 * scale) * b) + ((32 * scale) * z), 200 * scale, 32 * scale));
+						graphics.FillRectangle(&oBrush, Gdiplus::Rect(desktop.left + dcstrl+8, (desktop.top + (75 * scale)) + ((32 * scale) * b) + ((32 * scale) * z), dstrl * scale, 32 * scale));
 					}
 					else if (*categories[b].modules[c].moduleToggle) {
-						graphics.FillRectangle(&aBrush, Gdiplus::Rect(desktop.left + 208, (desktop.top + (75 * scale)) + ((32 * scale) * b) + ((32 * scale) * z), 200 * scale, 32 * scale));
+						graphics.FillRectangle(&aBrush, Gdiplus::Rect(desktop.left + dcstrl+8, (desktop.top + (75 * scale)) + ((32 * scale) * b) + ((32 * scale) * z), dstrl * scale, 32 * scale));
 					} else if (categories[b].modules[c].selected) {
-						graphics.FillRectangle(&sBrush, Gdiplus::Rect(desktop.left + 208, (desktop.top + (75 * scale)) + ((32 * scale) * b) + ((32 * scale) * z), 200 * scale, 32 * scale));
+						graphics.FillRectangle(&sBrush, Gdiplus::Rect(desktop.left + dcstrl+8, (desktop.top + (75 * scale)) + ((32 * scale) * b) + ((32 * scale) * z), dstrl * scale, 32 * scale));
 					}
 					//Draw module name
-					Gdiplus::PointF pointL(desktop.left + 208, (desktop.top + (75 * scale)) + ((32 * scale) * b) + ((32 * scale) * z));
-					std::wstring wstr = std::wstring(categories[b].modules[c].name.begin(), categories[b].modules[c].name.end());
 					graphics.DrawString(wstr.c_str(), wstr.length(), &categoryFont, pointL, &tBrush);
 					z++;
 				}
 			}
 			else {
 				//Only if we're just selected
-				graphics.FillRectangle(&sBrush, Gdiplus::Rect(desktop.left + 8, (desktop.top + (75 * scale)) + ((32 * scale) * b), 200 * scale, 32 * scale));
+				graphics.FillRectangle(&sBrush, Gdiplus::Rect(desktop.left + 8, (desktop.top + (75 * scale)) + ((32 * scale) * b), dcstrl * scale, 32 * scale));
 			}
 		}
-		Gdiplus::PointF pointL(desktop.left + 8, (desktop.top + (73 * scale)) + ((32 * scale) * b));
-		std::wstring wstr = std::wstring(categories[b].name.begin(), categories[b].name.end());
-		graphics.DrawString(wstr.c_str(), wstr.length(), &categoryFont, pointL, &tBrush);
+		graphics.DrawString(cwstr.c_str(), cwstr.length(), &categoryFont, pointL, &tBrush);
 	}
 	if (categories[3].active) {
-		//graphics.FillRectangle(&aBrush, Gdiplus::Rect(desktop.left + 8, (desktop.top + (75 * scale)) + (32 * scale), 200 * scale, 32 * scale));
 		for (int c = 0; c < settingCount; c++) {
 			//Draw rects for settings
-			graphics.FillRectangle(&cPen, Gdiplus::Rect((desktop.left + 208) * scale, (desktop.top + (75 * scale)) + ((32 * scale) * c), 200 * scale, 32 * scale));
+			graphics.FillRectangle(&cPen, Gdiplus::Rect((desktop.left + dcstrl+8) * scale, (desktop.top + (75 * scale)) + ((32 * scale) * c), 200 * scale, 32 * scale));
 			if (settings[c].selected) {
-				graphics.FillRectangle(&sBrush, Gdiplus::Rect((desktop.left + 208)*scale, (desktop.top + (75 * scale)) + ((32 * scale) * c), 200 * scale, 32 * scale));
+				graphics.FillRectangle(&sBrush, Gdiplus::Rect((desktop.left + dcstrl+8)*scale, (desktop.top + (75 * scale)) + ((32 * scale) * c), 200 * scale, 32 * scale));
 			}
 			//Draw setting name
-			Gdiplus::PointF pointL((desktop.left + 208) * scale, (desktop.top + (75 * scale)) + ((32 * scale) * c));
-			std::wstring wstr = std::wstring(settings[c].name.begin(), settings[c].name.end());
+			Gdiplus::PointF pointL((desktop.left + dcstrl+8) * scale, (desktop.top + (75 * scale)) + ((32 * scale) * c));
+			std::wstring wstr = char2String(*settings[c].name);
 			graphics.DrawString(wstr.c_str(), wstr.length(), &categoryFont, pointL, &tBrush);
 		}
 	}
 	if (categories[4].active) {
 		ClickUI::OnPaint(&graphics, &tBrush, &cPen, &sBrush, scale, desktopRect);
 	}
-
-	/*BLENDFUNCTION bf;
-	bf.BlendOp = AC_SRC_OVER;
-	bf.SourceConstantAlpha = 255;
-	bf.AlphaFormat = AC_SRC_ALPHA;
-	UpdateLayeredWindow(hWnd, hdc, &winPos, &winSize, hdc, &winPos, RGB(77,77,77), &bf, ULW_ALPHA);*/
 }
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
