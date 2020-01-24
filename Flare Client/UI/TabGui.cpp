@@ -305,8 +305,8 @@ TabGui::TabGui() {
 	RegisterModule(2, 7, &activeLang.Freecam, &ModuleHandler::freecamToggle);
 	RegisterModule(2, 8, &activeLang.ServerCrasher, &ModuleHandler::servercrasherToggle);
 	RegisterModule(2, 9, &activeLang.Coordinates, &ModuleHandler::coordinatesToggle);
-	RegisterModule(2, 10, &activeLang.clickTP, &ModuleHandler::clicktpToggle);
-	RegisterModule(2, 11, &activeLang.clickTP, &ModuleHandler::espToggle);
+	RegisterModule(2, 10, &activeLang.ClickTP, &ModuleHandler::clicktpToggle);
+	RegisterModule(2, 11, &activeLang.Esp, &ModuleHandler::espToggle);
 
 	/* Settings */
 	//There is a special case for the first setting, it wont modify the value, it will just close the settings list always.
@@ -400,6 +400,14 @@ TabGui::TabGui() {
 				selectNextSetting();
 				InvalidateRect(hWnd, 0, TRUE);
 			}
+			else if (getActiveCategoryID() == 4) {
+				if (keyBuf > 0) {
+					continue;
+				}
+				keyBuf++;
+				KeybindHandler::selectNextKeybind();
+				InvalidateRect(hWnd, 0, TRUE);
+			}
 			else if (getActiveCategoryID() != -1) {
 				if (keyBuf > 0) {
 					continue;
@@ -424,6 +432,14 @@ TabGui::TabGui() {
 				}
 				keyBuf++;
 				selectPrevSetting();
+				InvalidateRect(hWnd, 0, TRUE);
+			}
+			else if (getActiveCategoryID() == 4) {
+				if (keyBuf > 0) {
+					continue;
+				}
+				keyBuf++;
+				KeybindHandler::selectPrevKeybind();
 				InvalidateRect(hWnd, 0, TRUE);
 			}
 			if (getActiveCategoryID() != -1) {
@@ -452,6 +468,14 @@ TabGui::TabGui() {
 				increaseSetting();
 				InvalidateRect(hWnd, 0, TRUE);
 				continue;
+			}
+			else if (getActiveCategoryID() == 4) {
+				if (keyBuf > 0) {
+					continue;
+				}
+				keyBuf++;
+				KeybindHandler::changeKeybind();
+				InvalidateRect(hWnd, 0, TRUE);
 			}
 			if (getActiveCategoryID() != -1) {
 				if (keyBuf > 0) {

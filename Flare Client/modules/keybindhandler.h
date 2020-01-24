@@ -6,6 +6,8 @@ static struct Keybind {
 	char key;
 	const char** name;
 	bool* toggle;
+	bool selected;
+	bool changing;
 };
 
 class KeybindHandler {
@@ -20,5 +22,8 @@ public:
 		float scale,
 		int dcstrl,
 		Gdiplus::Rect desktop);
+	static void selectNextKeybind();
+	static void selectPrevKeybind();
+	static void changeKeybind();
 };
 
