@@ -142,7 +142,7 @@ ModuleHandler::ModuleHandler(HANDLE hProcess, HWND host) {
 	}
 
 	if (ModuleHandler::aimbotToggle) {
-		Aimbot::Aimbot(hProcess, EntityListArr);
+		Aimbot::Aimbot(hProcess);
 	}
 	if (ModuleHandler::hitboxToggle) {
 		Hitbox::Hitbox(hProcess, EntityListArr, ModuleHandler::hitboxWidthFloat, ModuleHandler::hitboxHeightFloat);

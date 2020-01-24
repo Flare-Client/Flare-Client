@@ -5,6 +5,6 @@
 
 class Aimbot {
 public:
-	Aimbot(HANDLE hProcess, std::vector<uintptr_t> EntityList);
+	Aimbot(HANDLE hProcess);
 };
 
