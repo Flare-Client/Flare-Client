@@ -35,22 +35,24 @@ Aimbot::Aimbot(HANDLE hProcess) {
 			distances.push_back(distance);
 		}
 	}
-	std::sort(distances.begin(), distances.end());
-	for (int I = 0; I < EntityListArr.size(); I++) {
-		float entityPosition[3];
-		ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, EntityListArr[I], { Player::currentX1 }), &entityPosition[0], sizeof(float), 0);
-		ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, EntityListArr[I], { Player::currentY1 }), &entityPosition[1], sizeof(float), 0);
-		ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, EntityListArr[I], { Player::currentZ1 }), &entityPosition[2], sizeof(float), 0);
-		float DX = localPosition[0] - entityPosition[0];
-		float DY = localPosition[1] - entityPosition[1];
-		float DZ = localPosition[2] - entityPosition[2];
-		double distance = sqrt(DX * DX + DY * DY + DZ * DZ);
-		if (distance == distances[0]) {
-			getRotationsToEnt(localPosition, entityPosition);
-			WriteProcessMemory(hProcess, (BYTE*)pointers::mousePitch(), &pitchAndYaw[0], sizeof(float), 0);
-			WriteProcessMemory(hProcess, (BYTE*)pointers::mouseYaw(), &pitchAndYaw[1], sizeof(float), 0);
-			break;
+	if (distances.size() > 0) {
+		std::sort(distances.begin(), distances.end());
+		for (int I = 0; I < EntityListArr.size(); I++) {
+			float entityPosition[3];
+			ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, EntityListArr[I], { Player::currentX1 }), &entityPosition[0], sizeof(float), 0);
+			ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, EntityListArr[I], { Player::currentY1 }), &entityPosition[1], sizeof(float), 0);
+			ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, EntityListArr[I], { Player::currentZ1 }), &entityPosition[2], sizeof(float), 0);
+			float DX = localPosition[0] - entityPosition[0];
+			float DY = localPosition[1] - entityPosition[1];
+			float DZ = localPosition[2] - entityPosition[2];
+			double distance = sqrt(DX * DX + DY * DY + DZ * DZ);
+			if (distance == distances[0]) {
+				getRotationsToEnt(localPosition, entityPosition);
+				WriteProcessMemory(hProcess, (BYTE*)pointers::mousePitch(), &pitchAndYaw[0], sizeof(float), 0);
+				WriteProcessMemory(hProcess, (BYTE*)pointers::mouseYaw(), &pitchAndYaw[1], sizeof(float), 0);
+				break;
+			}
 		}
+		distances.clear();
 	}
-	distances.clear();
 }
