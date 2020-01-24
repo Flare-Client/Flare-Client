@@ -50,6 +50,7 @@
     <ClCompile Include="modules\autosprint.cpp" />
     <ClCompile Include="UI\TabGui.cpp" />
     <ClCompile Include="UI\ClickUI.cpp" />
+    <ClCompile Include="modules\Esp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lang.h" />
@@ -109,6 +110,7 @@
     <ClInclude Include="modules\autosprint.h" />
     <ClInclude Include="UI\TabGui.h" />
     <ClInclude Include="UI\ClickUI.h" />
+    <ClInclude Include="modules\Esp.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources.rc" />

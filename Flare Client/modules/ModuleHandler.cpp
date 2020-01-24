@@ -32,6 +32,7 @@ bool ModuleHandler::coordinatesToggle = false;
 bool ModuleHandler::noClipToggle = false;
 bool ModuleHandler::clicktpToggle = false;
 bool ModuleHandler::autoSprintToggle = false;
+bool ModuleHandler::espToggle = false;
 
 float ModuleHandler::hitboxWidthFloat = 6.f;
 float ModuleHandler::hitboxHeightFloat = 3.f;
@@ -284,5 +285,8 @@ ModuleHandler::ModuleHandler(HANDLE hProcess, HWND host) {
 	}
 	else if (!ModuleHandler::autoSprintToggle) {
 		AutoSprint::AutoSprint(hProcess, 0);
+	}
+	if (ModuleHandler::espToggle) {
+		Esp::Esp(hProcess, EntityListArr);
 	}
 }

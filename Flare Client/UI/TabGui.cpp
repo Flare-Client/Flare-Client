@@ -306,6 +306,7 @@ TabGui::TabGui() {
 	RegisterModule(2, 8, &activeLang.ServerCrasher, &ModuleHandler::servercrasherToggle);
 	RegisterModule(2, 9, &activeLang.Coordinates, &ModuleHandler::coordinatesToggle);
 	RegisterModule(2, 10, &activeLang.clickTP, &ModuleHandler::clicktpToggle);
+	RegisterModule(2, 11, &activeLang.clickTP, &ModuleHandler::espToggle);
 
 	/* Settings */
 	//There is a special case for the first setting, it wont modify the value, it will just close the settings list always.
@@ -357,12 +358,12 @@ TabGui::TabGui() {
 			gayUwpTitlesize = 7;
 		}
 
-		ModuleHandler::ModuleHandler(mem::hProcess, hWnd);
-
 		GetWindowRect(windowHandleMC, &rectMC);
 		winPos = POINT { rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize };
 		winSize = SIZE { rectMC.left, rectMC.bottom };
 		SetWindowPos(hWnd, topStyle, rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize, rectMC.right - rectMC.left - 8, rectMC.bottom - rectMC.top - 33, NULL);
+
+		ModuleHandler::ModuleHandler(mem::hProcess, hWnd);
 
 		if (GetAsyncKeyState(1)) {
 			POINT p;
@@ -641,6 +642,9 @@ VOID OnPaint(HDC hdc)
 	}
 	if (categories[5].active) {
 		ClickUI::OnPaint(&graphics, &tBrush, &cPen, &sBrush, scale, desktopRect);
+	}
+	if (ModuleHandler::espToggle) {
+		Esp::OnPaint(&graphics, desktop.right, desktop.bottom);
 	}
 }
 
