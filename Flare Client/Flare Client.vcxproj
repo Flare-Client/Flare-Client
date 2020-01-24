@@ -154,6 +154,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <UACExecutionLevel>AsInvoker</UACExecutionLevel>
       <AdditionalDependencies>d3d9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

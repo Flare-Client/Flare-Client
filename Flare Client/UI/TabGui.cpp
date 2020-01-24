@@ -313,8 +313,10 @@ TabGui::TabGui() {
 	RegisterSetting(2, &activeLang.Language, &langID, 2, 0);
 
 	/* Keybinds */
-	RegisterKeybind(0, '-', &ModuleHandler::hitboxToggle);
-	RegisterKeybind(1, 'R', &ModuleHandler::triggerbotToggle);
+	KeybindHandler::RegisterKeybind(0, '-', &ModuleHandler::hitboxToggle);
+	KeybindHandler::RegisterKeybind(1, 'R', &ModuleHandler::triggerbotToggle);
+	KeybindHandler::RegisterKeybind(2, '-', &ModuleHandler::criticalsToggle);
+	KeybindHandler::RegisterKeybind(3, 'L', &ModuleHandler::tpauraToggle);
 
 	settings[0].selected = true;
 

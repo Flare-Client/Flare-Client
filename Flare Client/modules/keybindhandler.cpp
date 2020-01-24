@@ -2,29 +2,31 @@
 
 std::vector<Keybind> keybinds;
 
-static uint64_t keyBuf = 0;
+uint64_t keyBuff = 0;
 KeybindHandler::KeybindHandler(HWND host) {
 	uintptr_t UIOpen = pointers::UI();
-	int UI = 0;
+	int UI = 1;
 	ReadProcessMemory(mem::hProcess, (BYTE*)UIOpen, &UI, sizeof(int), 0);
-	if (UI) {
+	if (1) {
 		bool noKeys = true;
 		for (uint64_t key2chek = 0; key2chek < keybinds.size(); key2chek++) {
 			if (GetAsyncKeyState(keybinds[key2chek].key)) {
 				noKeys = false;
-				if (keyBuf > 0) {
+				if (keyBuff > 0) {
 					continue;
 				}
-				keyBuf++;
+				keyBuff++;
+				*keybinds[key2chek].toggle = !*keybinds[key2chek].toggle;
+				InvalidateRect(host, 0, TRUE);
 			}
 		}
 		if (noKeys) {
-			keyBuf = 0;
+			keyBuff = 0;
 		}
 	}
 }
 
-void RegisterKeybind(uint64_t id, char defaultKey, bool* toggle)
+void KeybindHandler::RegisterKeybind(uint64_t id, char defaultKey, bool* toggle)
 {
 	keybinds.push_back({});
 	keybinds[id] = { defaultKey, toggle };
