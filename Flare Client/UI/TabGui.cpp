@@ -271,7 +271,8 @@ TabGui::TabGui() {
 	RegisterCategory(&activeLang.Movement, 1);
 	RegisterCategory(&activeLang.Misc, 2);
 	RegisterCategory(&activeLang.Settings, 3);
-	RegisterCategory(&activeLang.ClickUI, 4);
+	RegisterCategory(&activeLang.Keybinds, 4);
+	RegisterCategory(&activeLang.ClickUI, 5);
 
 	//Register Modules
 	/* Combat */
@@ -313,10 +314,10 @@ TabGui::TabGui() {
 	RegisterSetting(2, &activeLang.Language, &langID, 2, 0);
 
 	/* Keybinds */
-	KeybindHandler::RegisterKeybind(0, '-', &ModuleHandler::hitboxToggle);
-	KeybindHandler::RegisterKeybind(1, 'R', &ModuleHandler::triggerbotToggle);
-	KeybindHandler::RegisterKeybind(2, '-', &ModuleHandler::criticalsToggle);
-	KeybindHandler::RegisterKeybind(3, 'L', &ModuleHandler::tpauraToggle);
+	KeybindHandler::RegisterKeybind(0, &activeLang.Hitbox, '-', &ModuleHandler::hitboxToggle);
+	KeybindHandler::RegisterKeybind(1, &activeLang.Triggerbot, 'R', &ModuleHandler::triggerbotToggle);
+	KeybindHandler::RegisterKeybind(2, &activeLang.Criticals, '-', &ModuleHandler::criticalsToggle);
+	KeybindHandler::RegisterKeybind(3, &activeLang.TpAura, 'L', &ModuleHandler::tpauraToggle);
 
 	settings[0].selected = true;
 
@@ -506,11 +507,11 @@ TabGui::TabGui() {
 	return;
 }
 
-std::wstring char2String(const char* in) {
-	std::string str(in);
-	std::wstring wstr(str.begin(), str.end());
-	return wstr;
-}
+//std::wstring char2String(const char* in) {
+//	std::string str(in);
+//	std::wstring wstr(str.begin(), str.end());
+//	return wstr;
+//}
 int drawnStringLen(std::wstring str, Gdiplus::Graphics* g, Gdiplus::Font* font) {
 	Gdiplus::PointF ptf;
 	Gdiplus::RectF rtf;
@@ -626,9 +627,19 @@ VOID OnPaint(HDC hdc)
 			Gdiplus::PointF pointL((desktop.left + dcstrl+8) * scale, (desktop.top + (75 * scale)) + ((32 * scale) * c));
 			std::wstring wstr = char2String(*settings[c].name);
 			graphics.DrawString(wstr.c_str(), wstr.length(), &categoryFont, pointL, &tBrush);
+			//Draw setting value
+			if (c != 0) {
+				std::wstring wstrV = char2String(std::to_string(*settings[c].valuePtr).c_str());
+				int vl = drawnStringLen(wstrV, &graphics, &categoryFont);
+				Gdiplus::PointF VpointL((((desktop.left + dcstrl + 8) + (200 - vl)) * scale), (desktop.top + (75 * scale)) + ((32 * scale) * c));
+				graphics.DrawString(wstrV.c_str(), wstrV.length(), &categoryFont, VpointL, &tBrush);
+			}
 		}
 	}
 	if (categories[4].active) {
+		KeybindHandler::OnPaint(&graphics, &cPen, &tBrush, &sBrush, &categoryFont, scale, dcstrl, desktopRect);
+	}
+	if (categories[5].active) {
 		ClickUI::OnPaint(&graphics, &tBrush, &cPen, &sBrush, scale, desktopRect);
 	}
 }

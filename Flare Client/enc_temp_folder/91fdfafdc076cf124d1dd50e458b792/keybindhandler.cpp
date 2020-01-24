@@ -63,7 +63,7 @@ void KeybindHandler::OnPaint(Gdiplus::Graphics* graphics,
 	for (uint64_t key2chek = 0; key2chek < keybinds.size(); key2chek++) {
 		int x = (desktop.GetLeft() + dcstrl + 8) * scale;
 		int y = desktop.GetTop() + ((32 * key2chek) * scale);
-		graphics->FillRectangle(primary, x, y, len, 32);
-		graphics->DrawString(char2String(*keybinds[key2chek].name).c_str(), -1, font, Gdiplus::PointF(x, y), secondary);
+		//graphics->FillRectangle(primary, x, y, len, 32);
+		//graphics->DrawString(char2String(*keybinds[key2chek].name).c_str(), -1, font, Gdiplus::PointF(x, y), secondary);
 	}
 }
