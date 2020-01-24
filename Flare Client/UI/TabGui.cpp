@@ -1,4 +1,5 @@
 #include "TabGui.h"
+#include "../modules/keybindhandler.cpp"
 #pragma comment (lib,"Gdiplus.lib")
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -311,6 +312,10 @@ TabGui::TabGui() {
 	RegisterSetting(1, &activeLang.GuiScale, &scaleI, 20, 5);
 	RegisterSetting(2, &activeLang.Language, &langID, 2, 0);
 
+	/* Keybinds */
+	RegisterKeybind(0, '-', &ModuleHandler::hitboxToggle);
+	RegisterKeybind(1, 'R', &ModuleHandler::triggerbotToggle);
+
 	settings[0].selected = true;
 
 	HWND windowHandleMC = find_main_window(mem::frameId);
@@ -331,7 +336,7 @@ TabGui::TabGui() {
 	ClickUI::ClickUI();
 
 	MSG msg = { };
-	int keyBuf = 0;
+	static int keyBuf = 0;
 	bool trig = false;
 	while (msg.message != WM_QUIT)
 	{

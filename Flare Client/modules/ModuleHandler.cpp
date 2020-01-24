@@ -113,7 +113,7 @@ ModuleHandler::ModuleHandler(HANDLE hProcess, HWND host) {
 
 	GuiLoaderTicker += 1;
 
-	if (GetAsyncKeyState(VK_F8)) {
+	/*if (GetAsyncKeyState(VK_F8)) {
 		if (GuiLoaderTicker > 60) {
 			if (GuiLoader::windowToggle) {
 				GuiLoader::windowToggle = false;
@@ -123,7 +123,7 @@ ModuleHandler::ModuleHandler(HANDLE hProcess, HWND host) {
 			}
 			GuiLoaderTicker = 0;
 		}
-	}
+	}*/
 
 	KeybindHandler::KeybindHandler(host);
 

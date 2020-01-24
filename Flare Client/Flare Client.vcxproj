@@ -183,7 +183,6 @@
     <ClCompile Include="modules\Hitbox.cpp" />
     <ClCompile Include="modules\EntityList.cpp" />
     <ClCompile Include="UI\TabGui.cpp" />
-    <ClCompile Include="UI\GuiLoader.cpp" />
     <ClCompile Include="UI\imgui\imgui.cpp" />
     <ClCompile Include="UI\imgui\imgui_draw.cpp" />
     <ClCompile Include="UI\imgui\imgui_impl_dx9.cpp" />
@@ -237,7 +236,6 @@
     <ClInclude Include="modules\Hitbox.h" />
     <ClInclude Include="modules\EntityList.h" />
     <ClInclude Include="UI\TabGui.h" />
-    <ClInclude Include="UI\GuiLoader.h" />
     <ClInclude Include="UI\imgui\imconfig.h" />
     <ClInclude Include="UI\imgui\imgui.h" />
     <ClInclude Include="UI\imgui\imgui_impl_dx9.h" />
