@@ -102,6 +102,14 @@ uintptr_t pointers::SprintInstruction() {
 	return mem::moduleBase + 0x1A5B8F0;
 }
 
+uintptr_t pointers::mousePitch() {
+	return mem::FindAddr(mem::hProcess, mem::moduleBase + 0x03016010, { 0x30, 0xE0, 0x28, 0x30, 0x168, 0x0, 0x14 });
+}
+
+uintptr_t pointers::mouseYaw() {
+	return mem::FindAddr(mem::hProcess, mem::moduleBase + 0x03016010, { 0x30, 0xE0, 0x28, 0x30, 0x168, 0x0, 0x10 });
+}
+
 /* Bytes */
 
 BYTE* gameBytes::SCAFFOLDBYTES = (BYTE*)"\x41\x88\x86\x54\x08\x00\x00";

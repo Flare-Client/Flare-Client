@@ -5,6 +5,7 @@ using namespace std;
 int GuiLoaderTicker = 0;
 
 bool ModuleHandler::jetpackToggle = false;
+bool ModuleHandler::aimbotToggle = false;
 bool ModuleHandler::hitboxToggle = false;
 bool ModuleHandler::triggerbotToggle = false; 
 bool ModuleHandler::airJumpToggle = false;
@@ -140,6 +141,9 @@ ModuleHandler::ModuleHandler(HANDLE hProcess, HWND host) {
 		ModuleHandler::jetpackToggle = false;
 	}
 
+	if (ModuleHandler::aimbotToggle) {
+		Aimbot::Aimbot(hProcess, EntityListArr);
+	}
 	if (ModuleHandler::hitboxToggle) {
 		Hitbox::Hitbox(hProcess, EntityListArr, ModuleHandler::hitboxWidthFloat, ModuleHandler::hitboxHeightFloat);
 	}

@@ -58,6 +58,8 @@ public:
 	static uintptr_t groundCollision();
 	static uintptr_t connectedServerIP();
 	static uintptr_t SprintInstruction();
+	static uintptr_t mousePitch();
+	static uintptr_t mouseYaw();
 };
 
 class gameBytes {

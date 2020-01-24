@@ -284,10 +284,11 @@ TabGui::TabGui() {
 
 	//Register Modules
 	/* Combat */
-	RegisterModule(0, 0, &activeLang.Hitbox, &ModuleHandler::hitboxToggle);
-	RegisterModule(0, 1, &activeLang.Triggerbot, &ModuleHandler::triggerbotToggle);
-	RegisterModule(0, 2, &activeLang.Criticals, &ModuleHandler::criticalsToggle);
-	RegisterModule(0, 3, &activeLang.TpAura, &ModuleHandler::tpauraToggle);
+	RegisterModule(0, 0, &activeLang.Aimbot, &ModuleHandler::aimbotToggle);
+	RegisterModule(0, 1, &activeLang.Hitbox, &ModuleHandler::hitboxToggle);
+	RegisterModule(0, 2, &activeLang.Triggerbot, &ModuleHandler::triggerbotToggle);
+	RegisterModule(0, 3, &activeLang.Criticals, &ModuleHandler::criticalsToggle);
+	RegisterModule(0, 4, &activeLang.TpAura, &ModuleHandler::tpauraToggle);
 	/* Movement */
 	RegisterModule(1, 0, &activeLang.Jetpack, &ModuleHandler::jetpackToggle);
 	RegisterModule(1, 1, &activeLang.AirJump, &ModuleHandler::airJumpToggle);
@@ -322,7 +323,7 @@ TabGui::TabGui() {
 	RegisterSetting(2, &activeLang.Language, &langID, 2, 0);
 	RegisterSetting(3, &activeLang.Hitbox, &hitboxValue, 60, 01);
 	RegisterSetting(4, &activeLang.Jetpack, &jetpackValue, 50, 01);
-	RegisterSetting(5, &activeLang.PlayerSpeed, &playerSpeedValue, 10, 01);
+	RegisterSetting(5, &activeLang.PlayerSpeed, &playerSpeedValue, 20, 01);
 	RegisterSetting(6, &activeLang.Jesus, &jesusValue, 50, 01);
 	RegisterSetting(7, &activeLang.Bhop, &bunnyhopValue, 50, 01);
 
@@ -554,7 +555,7 @@ VOID OnPaint(HDC hdc)
 	ModuleHandler::hitboxWidthFloat = (float)hitboxValue / 10.0f;
 	ModuleHandler::hitboxHeightFloat = (float)hitboxValue / 10.0f;
 	ModuleHandler::jetpackVal = (float)jetpackValue / 5.0f;
-	ModuleHandler::playerSpeedVal = (float)playerSpeedValue / 100.0f;
+	ModuleHandler::playerSpeedVal = (float)playerSpeedValue / 10.0f;
 	ModuleHandler::jesusVal = (float)jesusValue / 10.0f;
 	ModuleHandler::bhopVal = (float)bunnyhopValue / 10.0f;
 	//Main box, basically the screen ig. idk how to describe it but it makes it transparent
