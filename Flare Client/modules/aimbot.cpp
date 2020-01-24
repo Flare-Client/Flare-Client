@@ -18,15 +18,15 @@ Aimbot::Aimbot(HANDLE hProcess) {
 	std::vector<float> distances;
 
 	float localPosition[3];
-	ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, Player::LocalPlayer(), { Player::currentX1 }), &localPosition[0], sizeof(float), 0);
-	ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, Player::LocalPlayer(), { Player::currentY1 }), &localPosition[1], sizeof(float), 0);
-	ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, Player::LocalPlayer(), { Player::currentZ1 }), &localPosition[2], sizeof(float), 0);
+	ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, Player::LocalPlayer(), { Player::currentX3 }), &localPosition[0], sizeof(float), 0);
+	ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, Player::LocalPlayer(), { Player::currentY3 }), &localPosition[1], sizeof(float), 0);
+	ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, Player::LocalPlayer(), { Player::currentZ3 }), &localPosition[2], sizeof(float), 0);
 
 	for (int I = 0; I < EntityListArr.size(); I++) {
 		float entityPosition[3];
-		ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, EntityListArr[I], { Player::currentX1 }), &entityPosition[0], sizeof(float), 0);
-		ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, EntityListArr[I], { Player::currentY1 }), &entityPosition[1], sizeof(float), 0);
-		ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, EntityListArr[I], { Player::currentZ1 }), &entityPosition[2], sizeof(float), 0);
+		ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, EntityListArr[I], { Player::currentX3 }), &entityPosition[0], sizeof(float), 0);
+		ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, EntityListArr[I], { Player::currentY3 }), &entityPosition[1], sizeof(float), 0);
+		ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, EntityListArr[I], { Player::currentZ3 }), &entityPosition[2], sizeof(float), 0);
 		float DX = localPosition[0] - entityPosition[0];
 		float DY = localPosition[1] - entityPosition[1];
 		float DZ = localPosition[2] - entityPosition[2];
@@ -39,9 +39,9 @@ Aimbot::Aimbot(HANDLE hProcess) {
 		std::sort(distances.begin(), distances.end());
 		for (int I = 0; I < EntityListArr.size(); I++) {
 			float entityPosition[3];
-			ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, EntityListArr[I], { Player::currentX1 }), &entityPosition[0], sizeof(float), 0);
-			ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, EntityListArr[I], { Player::currentY1 }), &entityPosition[1], sizeof(float), 0);
-			ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, EntityListArr[I], { Player::currentZ1 }), &entityPosition[2], sizeof(float), 0);
+			ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, EntityListArr[I], { Player::currentX3 }), &entityPosition[0], sizeof(float), 0);
+			ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, EntityListArr[I], { Player::currentY3 }), &entityPosition[1], sizeof(float), 0);
+			ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, EntityListArr[I], { Player::currentZ3 }), &entityPosition[2], sizeof(float), 0);
 			float DX = localPosition[0] - entityPosition[0];
 			float DY = localPosition[1] - entityPosition[1];
 			float DZ = localPosition[2] - entityPosition[2];
