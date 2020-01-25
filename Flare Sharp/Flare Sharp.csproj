@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{10999BC0-FE6B-4339-80E8-C14A18A0C99B}</ProjectGuid>
+    <ProjectGuid>{CACF815B-6EE3-4B2A-BA69-014F06BBEA89}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Flare_Sharp</RootNamespace>
     <AssemblyName>Flare_Sharp</AssemblyName>
