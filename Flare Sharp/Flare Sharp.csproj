@@ -51,9 +51,11 @@
     <Compile Include="ClientBase\Categories\Categories\Combat.cs" />
     <Compile Include="ClientBase\Categories\CategoryHandler.cs" />
     <Compile Include="ClientBase\Keybinds\KeybindHandler.cs" />
+    <Compile Include="ClientBase\Modules\Modules\AirJump.cs" />
+    <Compile Include="Memory\CraftSDK\LocalPlayer.cs" />
     <Compile Include="Memory\MCM.cs" />
     <Compile Include="ClientBase\Categories\ICategory.cs" />
-    <Compile Include="ClientBase\Modules\IModule.cs" />
+    <Compile Include="ClientBase\Modules\Module.cs" />
     <Compile Include="ClientBase\Modules\ModuleHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -64,8 +66,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ClientBase\Modules\Modules\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

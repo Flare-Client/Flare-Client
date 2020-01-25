@@ -1,4 +1,5 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
+using Flare_Sharp.ClientBase.Modules;
 using Flare_Sharp.Memory;
 using System;
 using System.Collections.Generic;
@@ -88,13 +89,19 @@ namespace Flare_Sharp.UI
                     graphics.FillRectangle(ternary, x+8, y+tFontSize + (32 * scale) * c, 200, 32);
                 }
                 graphics.DrawString(category.getName(), textFont, primary, x+8, y+tFontSize + (32 * scale) * c);
-                //uint m = 0;
-                //foreach (IModule module in ModuleHandler.registry.modules)
-                //{
-                //    m++;
-                //}
                 c++;
             }
         }
     }
 }
+/*
+uint m = 0;
+                foreach (Module module in ModuleHandler.registry.modules)
+                {
+                    if (module.category.getActive())
+                    {
+
+                    }
+                    m++;
+                }
+*/
