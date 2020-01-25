@@ -47,14 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientBase\Categories\Categories\Movement.cs" />
-    <Compile Include="ClientBase\Categories\Categories\Combat.cs" />
     <Compile Include="ClientBase\Categories\CategoryHandler.cs" />
     <Compile Include="ClientBase\Keybinds\KeybindHandler.cs" />
     <Compile Include="ClientBase\Modules\Modules\AirJump.cs" />
     <Compile Include="Memory\CraftSDK\LocalPlayer.cs" />
     <Compile Include="Memory\MCM.cs" />
-    <Compile Include="ClientBase\Categories\ICategory.cs" />
+    <Compile Include="ClientBase\Categories\Category.cs" />
     <Compile Include="ClientBase\Modules\Module.cs" />
     <Compile Include="ClientBase\Modules\ModuleHandler.cs" />
     <Compile Include="Program.cs" />

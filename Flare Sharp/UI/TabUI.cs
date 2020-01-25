@@ -19,7 +19,8 @@ namespace Flare_Sharp.UI
         public static TabUI ui;
         SolidBrush primary = new SolidBrush(Color.FromArgb(255, 100, 100));
         SolidBrush secondary = new SolidBrush(Color.FromArgb(25, 25, 25));
-        SolidBrush ternary = new SolidBrush(Color.FromArgb(100, 255, 100));
+        SolidBrush tertiary = new SolidBrush(Color.FromArgb(100, 255, 100));
+        SolidBrush quaternary = new SolidBrush(Color.FromArgb(100, 100, 255));
 
         float scale = 1;
         int tFontSize = 72;
@@ -82,22 +83,26 @@ namespace Flare_Sharp.UI
             graphics.DrawString("Flare", titleFont, primary, x-16, y);
             uint c = 0;
             float catWidth = 0;
-            foreach (ICategory category in CategoryHandler.registry.categories)
+            foreach (Category category in CategoryHandler.registry.categories)
             {
-                float wid = graphics.MeasureString(category.getName(), textFont, 200).Width;
+                float wid = graphics.MeasureString(category.name, textFont, 200).Width;
                 if(wid > catWidth)
                 {
                     catWidth = wid;
                 }
             }
-            foreach (ICategory category in CategoryHandler.registry.categories)
+            foreach (Category category in CategoryHandler.registry.categories)
             {
                 graphics.FillRectangle(secondary, x, y + tFontSize + (32 * scale) * c, catWidth*scale, 32*scale);
-                if (category.getSelected())
+                if (category.active)
                 {
-                    graphics.FillRectangle(ternary, x, y+tFontSize + (32 * scale) * c, catWidth * scale, 32 * scale);
+                    graphics.FillRectangle(quaternary, x, y + tFontSize + (32 * scale) * c, catWidth * scale, 32 * scale);
                 }
-                graphics.DrawString(category.getName(), textFont, primary, x, y+tFontSize + (32 * scale) * c);
+                else if (category.selected)
+                {
+                    graphics.FillRectangle(tertiary, x, y+tFontSize + (32 * scale) * c, catWidth * scale, 32 * scale);
+                }
+                graphics.DrawString(category.name, textFont, primary, x, y+tFontSize + (32 * scale) * c);
                 c++;
             }
         }

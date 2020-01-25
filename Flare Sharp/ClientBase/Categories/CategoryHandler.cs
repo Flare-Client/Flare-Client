@@ -1,26 +1,20 @@
-﻿using Flare_Sharp.ClientBase.Categories.Categories;
-using Flare_Sharp.ClientBase.Keybinds;
+﻿using Flare_Sharp.ClientBase.Keybinds;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flare_Sharp.ClientBase.Categories
 {
     public class CategoryHandler
     {
         public static CategoryHandler registry;
-        public List<ICategory> categories = new List<ICategory>();
+        public List<Category> categories = new List<Category>();
         public CategoryHandler()
         {
             registry = this;
             Console.WriteLine("Starting category register...");
             /* Register categories here */
-            categories.Add(new Combat());
-            categories.Add(new Movement());
-            /* Post register categories */
-            categories[0].setSelected(true);
+            categories.Add(new Category("Combat", false, true));
+            categories.Add(new Category("Movement", false, false));
             Console.WriteLine("Categories registered!");
             KeybindHandler.clientKeyEvent += onKeyPress;
         }
@@ -28,44 +22,78 @@ namespace Flare_Sharp.ClientBase.Categories
         public void selectNextCategory()
         {
             int selected = 0;
-            foreach(ICategory category in categories)
+            foreach(Category category in categories)
             {
-                if (category.getSelected())
+                if (category.active)
+                {
+                    return;
+                }
+                if (category.selected)
                 {
                     break;
                 }
                 selected++;
             }
-            categories[selected].setSelected(false);
+            categories[selected].selected = false;
             if(selected+1>= categories.Count)
             {
-                categories[0].setSelected(true);
+                categories[0].selected = true;
             }
             else
             {
-                categories[selected + 1].setSelected(true);
+                categories[selected + 1].selected = true;
             }
         }
         public void selectPrevCategory()
         {
             int selected = 0;
-            foreach (ICategory category in categories)
+            foreach (Category category in categories)
             {
-                if (category.getSelected())
+                if (category.active)
+                {
+                    return;
+                }
+                if (category.selected)
                 {
                     break;
                 }
                 selected++;
             }
-            categories[selected].setSelected(false);
+            categories[selected].selected = false;
             if (selected - 1 < 0)
             {
-                categories[categories.Count-1].setSelected(true);
+                categories[categories.Count-1].selected = true;
             }
             else
             {
-                categories[selected - 1].setSelected(true);
+                categories[selected - 1].selected = true;
             }
+        }
+        public void activateSelectedCategory()
+        {
+            int selected = 0;
+            foreach (Category category in categories)
+            {
+                if (category.selected)
+                {
+                    break;
+                }
+                selected++;
+            }
+            categories[selected].active = true;
+        }
+        public void deactivateSelectedCategory()
+        {
+            int selected = 0;
+            foreach (Category category in categories)
+            {
+                if (category.selected)
+                {
+                    break;
+                }
+                selected++;
+            }
+            categories[selected].active = false;
         }
 
         public void onKeyPress(object sender, ClientKeyEvent e)
@@ -77,6 +105,14 @@ namespace Flare_Sharp.ClientBase.Categories
             if (e.key == 0x26)
             {
                 selectPrevCategory();
+            }
+            if (e.key == 0x27)
+            {
+                activateSelectedCategory();
+            }
+            if (e.key == 0x25)
+            {
+                deactivateSelectedCategory();
             }
         }
     }

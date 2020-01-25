@@ -10,11 +10,11 @@ namespace Flare_Sharp.ClientBase.Modules
 {
     public abstract class Module
     {
-        public ICategory category;
+        public Category category;
         public string name;
         public bool enabled;
         public char keybind;
-        public Module(string name, ICategory category, char keybind, bool enabled)
+        public Module(string name, Category category, char keybind, bool enabled)
         {
             this.name = name;
             this.category = category;
