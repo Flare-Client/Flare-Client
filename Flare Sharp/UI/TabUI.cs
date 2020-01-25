@@ -61,7 +61,7 @@ namespace Flare_Sharp.UI
                         {
                             lx = x;
                             ly = y;
-                            ui.Invalidate();
+                            ui.Refresh();
                         }
                     });
                     ui.Invoke(del);
