@@ -18,7 +18,7 @@ namespace Flare_Sharp.UI
 
         public static TabUI ui;
         SolidBrush primary = new SolidBrush(Color.FromArgb(255, 100, 100));
-        SolidBrush secondary = new SolidBrush(Color.FromArgb(100, 100, 100));
+        SolidBrush secondary = new SolidBrush(Color.FromArgb(25, 25, 25));
         SolidBrush ternary = new SolidBrush(Color.FromArgb(100, 255, 100));
 
         float scale = 1;
@@ -56,7 +56,7 @@ namespace Flare_Sharp.UI
                     fixSizeDel del = new fixSizeDel(() =>
                     {
                         MCM.RECT mcRect = MCM.getMinecraftRect();
-                        x = mcRect.Left;
+                        x = mcRect.Left+16;
                         y = mcRect.Top+30;
                         if (x != lx || y!= ly)
                         {
@@ -79,16 +79,25 @@ namespace Flare_Sharp.UI
             titleFont = new Font(new FontFamily("Arial"), tFontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
             textFont = new Font(new FontFamily("Arial"), fontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
 
-            graphics.DrawString("Flare", titleFont, primary, x, y);
+            graphics.DrawString("Flare", titleFont, primary, x-16, y);
             uint c = 0;
+            float catWidth = 0;
             foreach (ICategory category in CategoryHandler.registry.categories)
             {
-                graphics.FillRectangle(secondary, x+8, y+tFontSize + (32 * scale) * c, 200, 32);
+                float wid = graphics.MeasureString(category.getName(), textFont, 200).Width;
+                if(wid > catWidth)
+                {
+                    catWidth = wid;
+                }
+            }
+            foreach (ICategory category in CategoryHandler.registry.categories)
+            {
+                graphics.FillRectangle(secondary, x, y + tFontSize + (32 * scale) * c, catWidth*scale, 32*scale);
                 if (category.getSelected())
                 {
-                    graphics.FillRectangle(ternary, x+8, y+tFontSize + (32 * scale) * c, 200, 32);
+                    graphics.FillRectangle(ternary, x, y+tFontSize + (32 * scale) * c, catWidth * scale, 32 * scale);
                 }
-                graphics.DrawString(category.getName(), textFont, primary, x+8, y+tFontSize + (32 * scale) * c);
+                graphics.DrawString(category.getName(), textFont, primary, x, y+tFontSize + (32 * scale) * c);
                 c++;
             }
         }
