@@ -26,7 +26,7 @@ namespace Flare_Sharp.UI
             Console.WriteLine("Starting Tab GUI...");
             titleFont = new Font(new FontFamily("Arial"), tFontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
             textFont = new Font(new FontFamily("Arial"), fontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
-            Thread drawThread = new Thread(()=>
+            Thread posThread = new Thread(()=>
             {
                 while (true)
                 {
@@ -34,6 +34,7 @@ namespace Flare_Sharp.UI
                     textFont = new Font(new FontFamily("Arial"), fontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
                 }
             });
+            posThread.Start();
             Console.WriteLine("Tab GUI draw loop started!");
             this.Paint += OnPaint;
         }
