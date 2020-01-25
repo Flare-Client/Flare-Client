@@ -9,7 +9,7 @@ namespace Flare_Sharp.ClientBase.Modules
     public class ModuleHandler
     {
         public static ModuleHandler registry;
-        public List<IModule> modules;
+        public List<IModule> modules = new List<IModule>();
         public ModuleHandler()
         {
             registry = this;

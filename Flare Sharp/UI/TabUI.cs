@@ -12,6 +12,7 @@ namespace Flare_Sharp.UI
 {
     public class TabUI : Form
     {
+        public static TabUI ui;
         SolidBrush primary = new SolidBrush(Color.FromArgb(255, 100, 100));
         SolidBrush secondary = new SolidBrush(Color.FromArgb(100, 100, 100));
         SolidBrush ternary = new SolidBrush(Color.FromArgb(100, 255, 100));
@@ -21,8 +22,10 @@ namespace Flare_Sharp.UI
         int fontSize = 32;
         Font titleFont;
         Font textFont;
+
         public TabUI()
         {
+            ui = this;
             Console.WriteLine("Starting Tab GUI...");
             titleFont = new Font(new FontFamily("Arial"), tFontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
             textFont = new Font(new FontFamily("Arial"), fontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);

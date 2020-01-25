@@ -1,4 +1,5 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
+using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.ClientBase.Modules;
 using Flare_Sharp.UI;
 using System;
@@ -18,6 +19,7 @@ namespace Flare_Sharp
             Console.WriteLine("Flare port to C#");
             Console.WriteLine("Discord: https://discord.gg/Hz3Dxg8");
 
+            KeybindHandler kh = new KeybindHandler();
             CategoryHandler ch = new CategoryHandler();
             ModuleHandler mh = new ModuleHandler();
             TabUI ui = new TabUI();

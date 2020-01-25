@@ -10,6 +10,7 @@ namespace Flare_Sharp.ClientBase.Modules
     public interface IModule
     {
         ICategory getCategory();
+        char getKeybind();
         void onEnable();
         void onDisable();
         void onTick();
