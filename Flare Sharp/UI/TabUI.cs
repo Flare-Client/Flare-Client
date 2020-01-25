@@ -25,6 +25,8 @@ namespace Flare_Sharp.UI
         int fontSize = 32;
         Font titleFont;
         Font textFont;
+        int x = 0;
+        int y = 0;
 
         public TabUI()
         {
@@ -38,22 +40,28 @@ namespace Flare_Sharp.UI
             this.BackColor = this.TransparencyKey;
             this.Paint += OnPaint;
             this.Load += OnLoad;
+            this.Location = new Point(0, 0);
+            this.Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
         }
 
         public void OnLoad(object sender, EventArgs e)
         {
             Thread posThread = new Thread(() =>
             {
-                int leftC = 0;
+                int lx = 0;
+                int ly = 0;
                 while (true)
                 {
                     fixSizeDel del = new fixSizeDel(() =>
                     {
-                        if (MCM.getMinecraftRect().Left != leftC)
+                        MCM.RECT mcRect = MCM.getMinecraftRect();
+                        x = mcRect.Left;
+                        y = mcRect.Top+30;
+                        if (x != lx || y!= ly)
                         {
-                            this.Location = new Point(MCM.getMinecraftRect().Left, MCM.getMinecraftRect().Top);
-                            this.Size = new Size(MCM.getMinecraftRect().Right, MCM.getMinecraftRect().Bottom);
-                            leftC = MCM.getMinecraftRect().Left;
+                            lx = x;
+                            ly = y;
+                            ui.Invalidate();
                         }
                     });
                     ui.Invoke(del);
@@ -70,16 +78,16 @@ namespace Flare_Sharp.UI
             titleFont = new Font(new FontFamily("Arial"), tFontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
             textFont = new Font(new FontFamily("Arial"), fontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
 
-            graphics.DrawString("Flare", titleFont, primary, 0, 0);
+            graphics.DrawString("Flare", titleFont, primary, x, y);
             uint c = 0;
             foreach (ICategory category in CategoryHandler.registry.categories)
             {
-                graphics.FillRectangle(secondary, 8, tFontSize + (32 * scale) * c, 200, 32);
+                graphics.FillRectangle(secondary, x+8, y+tFontSize + (32 * scale) * c, 200, 32);
                 if (category.getSelected())
                 {
-                    graphics.FillRectangle(ternary, 8, tFontSize + (32 * scale) * c, 200, 32);
+                    graphics.FillRectangle(ternary, x+8, y+tFontSize + (32 * scale) * c, 200, 32);
                 }
-                graphics.DrawString(category.getName(), textFont, primary, 8, tFontSize + (32 * scale) * c);
+                graphics.DrawString(category.getName(), textFont, primary, x+8, y+tFontSize + (32 * scale) * c);
                 //uint m = 0;
                 //foreach (IModule module in ModuleHandler.registry.modules)
                 //{
