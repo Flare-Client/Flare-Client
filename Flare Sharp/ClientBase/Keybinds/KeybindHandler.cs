@@ -45,6 +45,7 @@ namespace Flare_Sharp.ClientBase.Keybinds
                     {
                         keyBuff = 0;
                     }
+                    Thread.Sleep(10);
                 }
             });
             keyThread.Start();

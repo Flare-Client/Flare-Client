@@ -23,9 +23,27 @@ namespace Flare_Sharp.Memory
         );
         [DllImport("kernel32.dll")]
         public static extern IntPtr OpenProcess(int dwDesiredAccess, bool bInheritHandle, int dwProcessId);
+        [DllImport("user32.dll")]
+        static extern IntPtr GetForegroundWindow();
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern bool GetWindow(IntPtr hWnd, uint uCmd);
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern bool IsWindowVisible(IntPtr hWnd);
+        [StructLayout(LayoutKind.Sequential)]
+        public struct RECT
+        {
+            public int Left;
+            public int Top;
+            public int Right;
+            public int Bottom;
+        }
+
         public static IntPtr mcProcHandle;
         public static ProcessModule mcMainModule;
         public static IntPtr mcBaseAddress;
+        public static IntPtr mcWinHandle;
 
         public static void openGame()
         {
@@ -35,6 +53,18 @@ namespace Flare_Sharp.Memory
             mcProcHandle = proc;
             mcMainModule = mcw10.MainModule;
             mcBaseAddress = mcMainModule.BaseAddress;
+        }
+        public static void openWindowHost()
+        {
+            Process[] procs = Process.GetProcessesByName("ApplicationFrameHost");
+            mcWinHandle = procs[0].MainWindowHandle;
+        }
+
+        public static RECT getMinecraftRect()
+        {
+            RECT rectMC = new RECT();
+            GetWindowRect(mcWinHandle, out rectMC);
+            return rectMC;
         }
 
         public static void unprotectMemory(IntPtr address, int bytesToUnprotect)
