@@ -24,6 +24,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new Triggerbot();
             new AirJump();
             new AutoSprint();
+            new PlayerSpeed();
             Console.WriteLine("Modules registered!");
             startModuleThread();
         }
