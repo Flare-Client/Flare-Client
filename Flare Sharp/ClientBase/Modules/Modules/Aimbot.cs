@@ -36,7 +36,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             List<Entity> Entity = EntityList.getEntityList();
             List<float> distances = new List<float>();
             float playerX, playerY, playerZ;
-            float[] localPosition = { SDK.instance.player.currentX1, SDK.instance.player.currentY1, SDK.instance.player.currentZ1 };
+            float[] localPosition = { SDK.instance.player.X1, SDK.instance.player.Y1, SDK.instance.player.Z1 };
             foreach(Entity e in Entity)
             {
                 float[] targetPosition = { e.currentX1, e.currentY1, e.currentZ1 };
@@ -63,11 +63,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                     MCM.writeFloat(Pointers.mouseYaw(), staringPos[1]);
                 }
             }
-        }
-
-        public override void onDisable()
-        {
-            base.onDisable();
         }
     }
 }
