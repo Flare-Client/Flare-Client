@@ -1,5 +1,6 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.ClientBase.Modules;
+using Flare_Sharp.Memory;
 using Flare_Sharp.UI;
 using System;
 using System.Collections.Generic;
@@ -30,26 +31,29 @@ namespace Flare_Sharp.ClientBase.Keybinds
             {
                 while (true)
                 {
-                    for (char c = (char)0; c < 0xFF; c++)
+                    if (MCM.isMinecraftFocused())
                     {
-                        noKey[c] = true;
-                        if (GetAsyncKeyState(c))
+                        for (char c = (char)0; c < 0xFF; c++)
                         {
-                            noKey[c] = false;
-                            if (keyBuffs[c] > 0)
+                            noKey[c] = true;
+                            if (GetAsyncKeyState(c))
                             {
-                                continue;
+                                noKey[c] = false;
+                                if (keyBuffs[c] > 0)
+                                {
+                                    continue;
+                                }
+                                keyBuffs[c]++;
+                                TabUI.ui.Invalidate();
+                                clientKeyEvent.Invoke(this, new ClientKeyEvent(c));
                             }
-                            keyBuffs[c]++;
-                            TabUI.ui.Invalidate();
-                            clientKeyEvent.Invoke(this, new ClientKeyEvent(c));
-                        }
-                        if (noKey[c])
-                        {
-                            keyBuffs[c] = 0;
+                            if (noKey[c])
+                            {
+                                keyBuffs[c] = 0;
+                            }
                         }
                     }
-                    Thread.Sleep(Program.threadSleep/10);
+                    Thread.Sleep(Program.threadSleep / 10);
                 }
             });
             keyThread.Start();
