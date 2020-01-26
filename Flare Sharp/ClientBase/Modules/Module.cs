@@ -10,16 +10,16 @@ namespace Flare_Sharp.ClientBase.Modules
 {
     public abstract class Module
     {
-        public Category category;
         public string name;
         public bool enabled;
+        public bool selected;
         public char keybind;
         public Module(string name, Category category, char keybind, bool enabled)
         {
             this.name = name;
-            this.category = category;
             this.keybind = keybind;
             this.enabled = enabled;
+            category.modules.Add(this);
         }
 
         public virtual void onEnable()

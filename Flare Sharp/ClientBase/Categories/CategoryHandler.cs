@@ -1,4 +1,5 @@
 ﻿using Flare_Sharp.ClientBase.Keybinds;
+using Flare_Sharp.ClientBase.Modules;
 using System;
 using System.Collections.Generic;
 
@@ -17,6 +18,18 @@ namespace Flare_Sharp.ClientBase.Categories
             categories.Add(new Category("Movement", false, false));
             Console.WriteLine("Categories registered!");
             KeybindHandler.clientKeyEvent += onKeyPress;
+        }
+
+        public Category activeCategory()
+        {
+            foreach(Category cat in categories)
+            {
+                if (cat.active)
+                {
+                    return cat;
+                }
+            }
+            return null;
         }
 
         public void selectNextCategory()
@@ -81,6 +94,14 @@ namespace Flare_Sharp.ClientBase.Categories
                 selected++;
             }
             categories[selected].active = true;
+            if (categories[selected].modules.Count > 0)
+            {
+                foreach(Module m in categories[selected].modules)
+                {
+                    m.selected = false;
+                }
+                categories[selected].modules[0].selected = true;
+            }
         }
         public void deactivateSelectedCategory()
         {

@@ -44,6 +44,8 @@ namespace Flare_Sharp.UI
             this.Load += OnLoad;
             this.Location = new Point(0, 0);
             this.Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
 
         public void OnLoad(object sender, EventArgs e)
@@ -65,6 +67,7 @@ namespace Flare_Sharp.UI
                             ly = y;
                             ui.Refresh();
                         }
+                        ui.TopMost = MCM.isMinecraftFocused();
                     });
                     ui.Invoke(del);
                 }
@@ -93,14 +96,40 @@ namespace Flare_Sharp.UI
             }
             foreach (Category category in CategoryHandler.registry.categories)
             {
+                //Draw category
                 graphics.FillRectangle(secondary, x, y + tFontSize + (32 * scale) * c, catWidth*scale, 32*scale);
                 if (category.active)
                 {
                     graphics.FillRectangle(quaternary, x, y + tFontSize + (32 * scale) * c, catWidth * scale, 32 * scale);
+                    //Draw modules
+                    float modWidth = 0;
+                    foreach (Module module in category.modules)
+                    {
+                        float wid = graphics.MeasureString(module.name, textFont, 200).Width;
+                        if (wid > modWidth)
+                        {
+                            modWidth = wid;
+                        }
+                    }
+                    uint m = 0;
+                    foreach (Module module in category.modules)
+                    {
+                        graphics.FillRectangle(secondary, x + catWidth, y + tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
+                        if (module.enabled)
+                        {
+                            graphics.FillRectangle(quaternary, x + catWidth, y + tFontSize + (32 * scale) * m, catWidth * scale, 32 * scale);
+                        }
+                        else if (module.selected)
+                        {
+                            graphics.FillRectangle(tertiary, x + catWidth, y + tFontSize + (32 * scale) * m, catWidth * scale, 32 * scale);
+                        }
+                        graphics.DrawString(module.name, textFont, primary, x + catWidth, y + tFontSize + (32 * scale) * m);
+                        m++;
+                    }
                 }
                 else if (category.selected)
                 {
-                    graphics.FillRectangle(tertiary, x, y+tFontSize + (32 * scale) * c, catWidth * scale, 32 * scale);
+                    graphics.FillRectangle(tertiary, x, y + tFontSize + (32 * scale) * c, catWidth * scale, 32 * scale);
                 }
                 graphics.DrawString(category.name, textFont, primary, x, y+tFontSize + (32 * scale) * c);
                 c++;
@@ -108,14 +137,3 @@ namespace Flare_Sharp.UI
         }
     }
 }
-/*
-uint m = 0;
-                foreach (Module module in ModuleHandler.registry.modules)
-                {
-                    if (module.category.getActive())
-                    {
-
-                    }
-                    m++;
-                }
-*/

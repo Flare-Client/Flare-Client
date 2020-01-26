@@ -31,6 +31,8 @@ namespace Flare_Sharp.Memory
         static extern bool GetWindow(IntPtr hWnd, uint uCmd);
         [DllImport("user32.dll", SetLastError = true)]
         static extern bool IsWindowVisible(IntPtr hWnd);
+        [DllImport("user32.dll")]
+        static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
         [StructLayout(LayoutKind.Sequential)]
         public struct RECT
         {
@@ -65,6 +67,12 @@ namespace Flare_Sharp.Memory
             RECT rectMC = new RECT();
             GetWindowRect(mcWinHandle, out rectMC);
             return rectMC;
+        }
+        public static bool isMinecraftFocused()
+        {
+            StringBuilder sb = new StringBuilder("Minecraft".Length + 1);
+            GetWindowText(GetForegroundWindow(), sb, "Minecraft".Length + 1);
+            return sb.ToString() == "Minecraft";
         }
 
         public static void unprotectMemory(IntPtr address, int bytesToUnprotect)

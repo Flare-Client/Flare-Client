@@ -11,7 +11,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class AirJump : Module
     {
-        public AirJump() : base("AirJump", CategoryHandler.registry.categories[0], '-', false)
+        public AirJump() : base("AirJump", CategoryHandler.registry.categories[1], '-', false)
         {
         }
 
