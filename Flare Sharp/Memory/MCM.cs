@@ -184,7 +184,7 @@ namespace Flare_Sharp.Memory
         }
 
         //Read direct
-        public static int readByte(UInt64 address)
+        public static byte readByte(UInt64 address)
         {
             UInt64 buffer = 0;
             ReadProcessMemory(mcProcHandle, address, ref buffer, sizeof(byte), 0);
@@ -195,6 +195,12 @@ namespace Flare_Sharp.Memory
             UInt64 buffer = 0;
             ReadProcessMemory(mcProcHandle, address, ref buffer, sizeof(int), 0);
             return (int)buffer;
+        }
+        public static float readFloat(UInt64 address)
+        {
+            UInt64 buffer = 0;
+            ReadProcessMemory(mcProcHandle, address, ref buffer, sizeof(float), 0);
+            return buffer;
         }
         public static UInt64 readInt64(UInt64 address)
         {

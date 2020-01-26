@@ -14,6 +14,33 @@ namespace Flare_Sharp.Memory.CraftSDK
             this.addr = addr;
         }
 
+        public int hitboxWidth
+        {
+            get
+            {
+                UInt64[] offs = { 0x44C };
+                return MCM.readInt(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x44C };
+                MCM.writeInt(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
+        public int hitboxHeight
+        {
+            get
+            {
+                UInt64[] offs = { 0x450 };
+                return MCM.readInt(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x450 };
+                MCM.writeInt(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
+
         public int movedTick
         {
             get
