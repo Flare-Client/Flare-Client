@@ -14,33 +14,71 @@ namespace Flare_Sharp.Memory.CraftSDK
             this.addr = addr;
         }
 
-        public int hitboxWidth
+        public float hitboxWidth
         {
             get
             {
                 UInt64[] offs = { 0x44C };
-                return MCM.readInt(MCM.evaluatePointer(addr, offs));
+                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
             }
             set
             {
                 UInt64[] offs = { 0x44C };
-                MCM.writeInt(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
             }
         }
-        public int hitboxHeight
+        public float hitboxHeight
         {
             get
             {
                 UInt64[] offs = { 0x450 };
-                return MCM.readInt(MCM.evaluatePointer(addr, offs));
+                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
             }
             set
             {
                 UInt64[] offs = { 0x450 };
-                MCM.writeInt(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
             }
         }
-
+        public float currentX1
+        {
+            get
+            {
+                UInt64[] offs = { 0x454 };
+                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x454 };
+                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
+        public float currentY1
+        {
+            get
+            {
+                UInt64[] offs = { 0x458 };
+                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x458 };
+                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
+        public float currentZ1
+        {
+            get
+            {
+                UInt64[] offs = { 0x45C };
+                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x45C };
+                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
         public int movedTick
         {
             get

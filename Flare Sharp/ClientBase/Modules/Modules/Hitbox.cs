@@ -18,17 +18,23 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            List<Entity> entityList = EntityList.getEntityList();
-            for(var I = 0; I < entityList.Count(); I++)
+            List<Entity> Entity = EntityList.getEntityList();
+            foreach(Entity e in Entity)
             {
-                //
+                e.hitboxHeight = 6f;
+                e.hitboxWidth = 4f;
             }
         }
 
         public override void onDisable()
         {
             base.onDisable();
-            //
+            List<Entity> Entity = EntityList.getEntityList();
+            foreach (Entity e in Entity)
+            {
+                e.hitboxHeight = 0.6f;
+                e.hitboxWidth = 1.8f;
+            }
         }
     }
 }

@@ -20,6 +20,7 @@ namespace Flare_Sharp.ClientBase.Modules
             Console.WriteLine("Starting module register...");
             /* Register modules here */
             new Hitbox();
+            new Aimbot();
             new Triggerbot();
             new AirJump();
             new AutoSprint();
