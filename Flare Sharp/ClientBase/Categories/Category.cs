@@ -74,7 +74,7 @@ namespace Flare_Sharp.ClientBase.Categories
                 selected++;
             }
             modules[selected].selected = false;
-            if (selected - 1 <= 0)
+            if (selected - 1 < 0)
             {
                 modules[modules.Count-1].selected = true;
             }

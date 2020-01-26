@@ -98,7 +98,10 @@ namespace Flare_Sharp.ClientBase.Categories
             {
                 foreach(Module m in categories[selected].modules)
                 {
-                    m.selected = false;
+                    if (m.selected)
+                    {
+                        return;
+                    }
                 }
                 categories[selected].modules[0].selected = true;
             }
