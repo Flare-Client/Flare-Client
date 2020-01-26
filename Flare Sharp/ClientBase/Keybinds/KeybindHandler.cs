@@ -17,33 +17,35 @@ namespace Flare_Sharp.ClientBase.Keybinds
         public static KeybindHandler handler;
         public static EventHandler<ClientKeyEvent> clientKeyEvent;
 
+        Dictionary<char, uint> keyBuffs = new Dictionary<char, uint>();
+        Dictionary<char, bool> noKey = new Dictionary<char, bool>();
+
         public KeybindHandler()
         {
             handler = this;
             Console.WriteLine("Starting key thread");
             Thread keyThread = new Thread(()=>
             {
-                uint keyBuff = 0;
                 while (true)
                 {
-                    bool noKeys = true;
                     for (char c = (char)0; c < 0xFF; c++)
                     {
+                        noKey[c] = true;
                         if (GetAsyncKeyState(c))
                         {
-                            noKeys = false;
-                            if (keyBuff > 0)
+                            noKey[c] = false;
+                            if (keyBuffs[c] > 0)
                             {
                                 continue;
                             }
-                            keyBuff++;
+                            keyBuffs[c]++;
                             TabUI.ui.Invalidate();
                             clientKeyEvent.Invoke(this, new ClientKeyEvent(c));
                         }
-                    }
-                    if (noKeys)
-                    {
-                        keyBuff = 0;
+                        if (noKey[c])
+                        {
+                            keyBuffs[c] = 0;
+                        }
                     }
                     Thread.Sleep(10);
                 }
