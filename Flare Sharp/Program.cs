@@ -2,6 +2,7 @@
 using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.ClientBase.Modules;
 using Flare_Sharp.Memory;
+using Flare_Sharp.Memory.CraftSDK;
 using Flare_Sharp.UI;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace Flare_Sharp
                 MCM.openGame();
                 MCM.openWindowHost();
 
+                SDK sdk = new SDK();
                 CategoryHandler ch = new CategoryHandler();
                 ModuleHandler mh = new ModuleHandler();
                 TabUI ui = new TabUI();

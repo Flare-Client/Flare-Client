@@ -6,18 +6,25 @@ using System.Threading.Tasks;
 
 namespace Flare_Sharp.Memory.CraftSDK
 {
-    class LocalPlayer
+    public class LocalPlayer
     {
-        public static Int64 player()
+        public UInt64 addr;
+        public LocalPlayer(UInt64 addr)
         {
-            int[] offs = { 0xA8, 0x10, 0x40, 0x0 };
-            return MCM.evaluatePointer(0x02FEE4B0, offs);
+            this.addr = addr;
         }
 
-        public static Int64 onGround()
+        public int onGround
         {
-            int[] offs = { 0xA8, 0x10, 0x40, 0x0, 0x178 };
-            return MCM.evaluatePointer(0x02FEE4B0, offs);
+            get {
+                UInt64[] offs = { 0x178 };
+                return MCM.readInt(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x178 };
+                MCM.writeInt(MCM.evaluatePointer(addr, offs), value);
+            }
         }
     }
 }
