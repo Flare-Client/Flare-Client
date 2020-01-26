@@ -39,26 +39,23 @@ namespace Flare_Sharp.ClientBase.Keybinds
                 {
                     if (MCM.isMinecraftFocused())
                     {
-                        if (MCM.readInt(Pointers.UI()) > 0)
+                        for (char c = (char)0; c < 0xFF; c++)
                         {
-                            for (char c = (char)0; c < 0xFF; c++)
+                            noKey[c] = true;
+                            if (GetAsyncKeyState(c))
                             {
-                                noKey[c] = true;
-                                if (GetAsyncKeyState(c))
+                                noKey[c] = false;
+                                if (keyBuffs[c] > 0)
                                 {
-                                    noKey[c] = false;
-                                    if (keyBuffs[c] > 0)
-                                    {
-                                        continue;
-                                    }
-                                    keyBuffs[c]++;
-                                    TabUI.ui.Invalidate();
-                                    clientKeyEvent.Invoke(this, new ClientKeyEvent(c));
+                                    continue;
                                 }
-                                if (noKey[c])
-                                {
-                                    keyBuffs[c] = 0;
-                                }
+                                keyBuffs[c]++;
+                                TabUI.ui.Invalidate();
+                                clientKeyEvent.Invoke(this, new ClientKeyEvent(c));
+                            }
+                            if (noKey[c])
+                            {
+                                keyBuffs[c] = 0;
                             }
                         }
                     }
