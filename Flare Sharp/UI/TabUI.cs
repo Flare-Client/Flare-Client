@@ -125,7 +125,7 @@ namespace Flare_Sharp.UI
                         {
                             graphics.FillRectangle(quaternary, x + catWidth, y + tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
                         }
-                        graphics.DrawString(module.name, textFont, primary, x + modWidth, y + tFontSize + (32 * scale) * m);
+                        graphics.DrawString(module.name, textFont, primary, x + catWidth, y + tFontSize + (32 * scale) * m);
                         float kwid = graphics.MeasureString(module.keybind.ToString(), textFont, 200).Width;
                         graphics.FillRectangle(secondary, x + catWidth + modWidth, y + tFontSize + (32 * scale) * m, kwid * scale, 32 * scale);
                         graphics.DrawString(module.keybind.ToString(), textFont, primary, x + catWidth + modWidth, y + tFontSize + (32 * scale) * m);
