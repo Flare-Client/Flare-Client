@@ -22,9 +22,11 @@ namespace Flare_Sharp.ClientBase.Modules
             new Hitbox();
             new Aimbot();
             new Triggerbot();
+            new Criticals();
             new AirJump();
             new AutoSprint();
             new PlayerSpeed();
+            new Coordinates();
             Console.WriteLine("Modules registered!");
             startModuleThread();
         }
