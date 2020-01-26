@@ -18,7 +18,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onEnable()
         {
             base.onEnable();
-            SDK.instance.player.teleport(0, 5, 0);
         }
 
         public override void onDisable()

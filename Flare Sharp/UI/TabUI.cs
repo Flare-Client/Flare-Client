@@ -121,13 +121,13 @@ namespace Flare_Sharp.UI
                         graphics.FillRectangle(secondary, x + catWidth, y + tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
                         if (module.enabled)
                         {
-                            graphics.FillRectangle(quaternary, x + catWidth, y + tFontSize + (32 * scale) * m, catWidth * scale, 32 * scale);
+                            graphics.FillRectangle(quaternary, x + catWidth, y + tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
                         }
-                        else if (module.selected)
+                        graphics.DrawString(module.name, textFont, primary, x + modWidth, y + tFontSize + (32 * scale) * m);
+                        if (module.selected)
                         {
-                            graphics.FillRectangle(tertiary, x + catWidth, y + tFontSize + (32 * scale) * m, catWidth * scale, 32 * scale);
+                            graphics.DrawRectangle(new Pen(tertiary.Color, 2), x + catWidth, y + tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
                         }
-                        graphics.DrawString(module.name, textFont, primary, x + catWidth, y + tFontSize + (32 * scale) * m);
                         m++;
                     }
                 }
@@ -137,10 +137,8 @@ namespace Flare_Sharp.UI
                 }
                 graphics.DrawString(category.name, textFont, primary, x, y+tFontSize + (32 * scale) * c);
                 c++;
-
-                //Draw enabled modules
-                
             }
+            //Draw enabled modules
             uint yOff = 0;
             foreach (Category cat in CategoryHandler.registry.categories)
             {
