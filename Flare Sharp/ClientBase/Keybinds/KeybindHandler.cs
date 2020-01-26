@@ -19,7 +19,8 @@ namespace Flare_Sharp.ClientBase.Keybinds
         public static extern bool GetAsyncKeyState(char vKey);
 
         public static KeybindHandler handler;
-        public static EventHandler<ClientKeyEvent> clientKeyEvent;
+        public static EventHandler<clientKeyDownEvent> clientKeyDownEvent;
+        public static EventHandler<clientKeyDownEvent> clientKeyHeldEvent;
 
         Dictionary<char, uint> keyBuffs = new Dictionary<char, uint>();
         Dictionary<char, bool> noKey = new Dictionary<char, bool>();
@@ -28,7 +29,7 @@ namespace Flare_Sharp.ClientBase.Keybinds
         {
             handler = this;
             Console.WriteLine("Starting key thread");
-            Thread keyThread = new Thread(()=>
+            Thread keyDownThread = new Thread(()=>
             {
                 for(char c = (char)0; c < 0xFF; c++)
                 {
@@ -51,7 +52,7 @@ namespace Flare_Sharp.ClientBase.Keybinds
                                 }
                                 keyBuffs[c]++;
                                 TabUI.ui.Invalidate();
-                                clientKeyEvent.Invoke(this, new ClientKeyEvent(c));
+                                clientKeyDownEvent.Invoke(this, new clientKeyDownEvent(c));
                             }
                             if (noKey[c])
                             {
@@ -62,12 +63,31 @@ namespace Flare_Sharp.ClientBase.Keybinds
                     Thread.Sleep(Program.threadSleep / 10);
                 }
             });
-            keyThread.Start();
-            clientKeyEvent += dispatchKeybinds;
+            keyDownThread.Start();
+            Thread keyHeldThread = new Thread(() =>
+            {
+                while (true)
+                {
+                    if (MCM.isMinecraftFocused())
+                    {
+                        for (char c = (char)0; c < 0xFF; c++)
+                        {
+                            if (GetAsyncKeyState(c))
+                            {
+                                clientKeyHeldEvent.Invoke(this, new clientKeyDownEvent(c));
+                            }
+                        }
+                    }
+                    Thread.Sleep(Program.threadSleep / 10);
+                }
+            });
+            keyHeldThread.Start();
+
+            clientKeyDownEvent += dispatchKeybinds;
             Console.WriteLine("key thread started");
         }
 
-        public void dispatchKeybinds(object sender, ClientKeyEvent e)
+        public void dispatchKeybinds(object sender, clientKeyDownEvent e)
         {
             foreach(Category cat in CategoryHandler.registry.categories)
             {
@@ -81,10 +101,10 @@ namespace Flare_Sharp.ClientBase.Keybinds
             }
         }
     }
-    public class ClientKeyEvent : EventArgs
+    public class clientKeyDownEvent : EventArgs
     {
         public char key;
-        public ClientKeyEvent(char key)
+        public clientKeyDownEvent(char key)
         {
             this.key = key;
         }
