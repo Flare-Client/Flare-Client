@@ -20,13 +20,13 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
             base.onEnable();
             byte[] write = { 0x90, 0x90, 0x90, 0x90, 0x74, 0x07 };
-            MCM.writeBytes(Pointers.showCoordinates(), write);
+            MCM.writeBaseBytes(Pointers.showCoordinates, write);
         }
         public override void onDisable()
         {
             base.onDisable();
             byte[] write = { 0x80, 0x78, 0x04, 0x00, 0x74, 0x07 };
-            MCM.writeBytes(Pointers.showCoordinates(), write);
+            MCM.writeBaseBytes(Pointers.showCoordinates, write);
         }
     }
 }
