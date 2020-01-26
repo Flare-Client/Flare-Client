@@ -29,6 +29,8 @@ namespace Flare_Sharp.UI
         Font textFont;
         int x = 0;
         int y = 0;
+        int width = 0;
+        int height = 0;
 
         public TabUI()
         {
@@ -61,6 +63,8 @@ namespace Flare_Sharp.UI
                         MCM.RECT mcRect = MCM.getMinecraftRect();
                         x = mcRect.Left+16;
                         y = mcRect.Top+30;
+                        width = mcRect.Right;
+                        height = mcRect.Bottom;
                         if (x != lx || y!= ly)
                         {
                             lx = x;
@@ -133,6 +137,22 @@ namespace Flare_Sharp.UI
                 }
                 graphics.DrawString(category.name, textFont, primary, x, y+tFontSize + (32 * scale) * c);
                 c++;
+
+                //Draw enabled modules
+                
+            }
+            uint yOff = 0;
+            foreach (Category cat in CategoryHandler.registry.categories)
+            {
+                foreach (Module mod in cat.modules)
+                {
+                    if (mod.enabled)
+                    {
+                        float wid = graphics.MeasureString(mod.name, textFont, 200).Width;
+                        graphics.DrawString(mod.name, textFont, primary, width - wid, y + tFontSize + (32 * scale) * yOff);
+                        yOff++;
+                    }
+                }
             }
         }
     }

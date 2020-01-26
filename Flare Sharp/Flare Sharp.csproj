@@ -51,7 +51,9 @@
     <Compile Include="ClientBase\Keybinds\KeybindHandler.cs" />
     <Compile Include="ClientBase\Modules\Modules\AirJump.cs" />
     <Compile Include="ClientBase\Modules\Modules\AutoSprint.cs" />
+    <Compile Include="ClientBase\Modules\Modules\Triggerbot.cs" />
     <Compile Include="Memory\CraftSDK\LocalPlayer.cs" />
+    <Compile Include="Memory\CraftSDK\Pointers.cs" />
     <Compile Include="Memory\MCM.cs" />
     <Compile Include="ClientBase\Categories\Category.cs" />
     <Compile Include="ClientBase\Modules\Module.cs" />

@@ -20,14 +20,22 @@ namespace Flare_Sharp
             Console.WriteLine("Flare port to C#");
             Console.WriteLine("Discord: https://discord.gg/Hz3Dxg8");
 
-            MCM.openGame();
-            MCM.openWindowHost();
+            try
+            {
+                MCM.openGame();
+                MCM.openWindowHost();
 
-            CategoryHandler ch = new CategoryHandler();
-            ModuleHandler mh = new ModuleHandler();
-            TabUI ui = new TabUI();
-            KeybindHandler kh = new KeybindHandler();
-            Application.Run(ui);
+                CategoryHandler ch = new CategoryHandler();
+                ModuleHandler mh = new ModuleHandler();
+                TabUI ui = new TabUI();
+                KeybindHandler kh = new KeybindHandler();
+                Application.Run(ui);
+            } catch (Exception ex)
+            {
+                Console.WriteLine("Message: " + ex.Message);
+                Console.WriteLine("Stacktrace: " + ex.StackTrace);
+                MessageBox.Show("Flare crashed! Check the console for error details. Click 'Ok' to quit.");
+            }
         }
     }
 }

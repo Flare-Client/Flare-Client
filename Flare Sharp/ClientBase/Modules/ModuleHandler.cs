@@ -20,6 +20,7 @@ namespace Flare_Sharp.ClientBase.Modules
             /* Register modules here */
             new AirJump();
             new AutoSprint();
+            new Triggerbot();
             Console.WriteLine("Modules registered!");
             startModuleThread();
         }
