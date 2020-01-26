@@ -14,6 +14,9 @@ namespace Flare_Sharp.ClientBase.Modules
         public bool enabled;
         public bool selected;
         public char keybind;
+
+        private bool wasEnabled = false;
+
         public Module(string name, Category category, char keybind, bool enabled)
         {
             this.name = name;
@@ -30,9 +33,30 @@ namespace Flare_Sharp.ClientBase.Modules
         {
             this.enabled = false;
         }
+        //Called like a loop when enabled
         public virtual void onTick()
         {
-
+            
+        }
+        //Called no matter what
+        public virtual void onLoop()
+        {
+            if (wasEnabled != enabled)
+            {
+                if (enabled == false)
+                {
+                    onDisable();
+                }
+                else
+                {
+                    onEnable();
+                }
+                wasEnabled = enabled;
+            }
+            if (enabled)
+            {
+                onTick();
+            }
         }
     }
 }

@@ -34,10 +34,7 @@ namespace Flare_Sharp.ClientBase.Modules
                     {
                         foreach (Module module in category.modules)
                         {
-                            if (module.enabled)
-                            {
-                                module.onTick();
-                            }
+                            module.onLoop();
                         }
                     }
                 }
