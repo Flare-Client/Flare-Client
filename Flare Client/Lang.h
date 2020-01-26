@@ -20,6 +20,7 @@ static struct Lang {
 	/*
 		Combat
 	*/
+	const char* Aimbot;
 	const char* Hitbox;
 	const char* Triggerbot;
 	const char* Criticals;
@@ -110,6 +111,7 @@ static Lang getEnglish() {
 		/*
 			Combat
 		*/
+		"Aimbot",
 		"Hitbox",
 		"Triggerbot",
 		"Criticals",
@@ -202,6 +204,7 @@ static Lang getItalian() {
 		/*
 			Combat
 		*/
+		"Aimbot",
 		"Hitbox",
 		"Triggerbot",
 		"Critici",
@@ -294,6 +297,7 @@ static Lang getSpanish() {
 		/*
 			Combat
 		*/
+		"Aimbot",
 		"Hitbox",
 		"Gatillo",
 		"Criticos",

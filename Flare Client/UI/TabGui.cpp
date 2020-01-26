@@ -50,6 +50,16 @@ float scale = scaleI / 10;
 int pLangID = 0;
 uint64_t langID = 0;
 
+/* Module stuff */
+
+uint64_t hitboxValue = 60;
+uint64_t jetpackValue = 10;
+uint64_t playerSpeedValue = 02;
+uint64_t jesusValue = 10;
+uint64_t bunnyhopValue = 10;
+
+/* */
+
 void GetDesktopRect(RECT* rect)
 {
 	RECT desktop;
@@ -276,10 +286,11 @@ TabGui::TabGui() {
 
 	//Register Modules
 	/* Combat */
-	RegisterModule(0, 0, &activeLang.Hitbox, &ModuleHandler::hitboxToggle);
-	RegisterModule(0, 1, &activeLang.Triggerbot, &ModuleHandler::triggerbotToggle);
-	RegisterModule(0, 2, &activeLang.Criticals, &ModuleHandler::criticalsToggle);
-	RegisterModule(0, 3, &activeLang.TpAura, &ModuleHandler::tpauraToggle);
+	RegisterModule(0, 0, &activeLang.Aimbot, &ModuleHandler::aimbotToggle);
+	RegisterModule(0, 1, &activeLang.Hitbox, &ModuleHandler::hitboxToggle);
+	RegisterModule(0, 2, &activeLang.Triggerbot, &ModuleHandler::triggerbotToggle);
+	RegisterModule(0, 3, &activeLang.Criticals, &ModuleHandler::criticalsToggle);
+	RegisterModule(0, 4, &activeLang.TpAura, &ModuleHandler::tpauraToggle);
 	/* Movement */
 	RegisterModule(1, 0, &activeLang.Jetpack, &ModuleHandler::jetpackToggle);
 	RegisterModule(1, 1, &activeLang.AirJump, &ModuleHandler::airJumpToggle);
@@ -313,6 +324,11 @@ TabGui::TabGui() {
 	RegisterSetting(0, &activeLang.Back, reinterpret_cast<uint64_t*>(&categories[3].active), 1, 0);
 	RegisterSetting(1, &activeLang.GuiScale, &scaleI, 20, 5);
 	RegisterSetting(2, &activeLang.Language, &langID, 2, 0);
+	RegisterSetting(3, &activeLang.Hitbox, &hitboxValue, 60, 01);
+	RegisterSetting(4, &activeLang.Jetpack, &jetpackValue, 50, 01);
+	RegisterSetting(5, &activeLang.PlayerSpeed, &playerSpeedValue, 20, 01);
+	RegisterSetting(6, &activeLang.Jesus, &jesusValue, 50, 01);
+	RegisterSetting(7, &activeLang.Bhop, &bunnyhopValue, 50, 01);
 
 	/* Keybinds */
 	KeybindHandler::RegisterKeybind(0, &activeLang.Hitbox, '-', &ModuleHandler::hitboxToggle);
@@ -569,6 +585,12 @@ int largestModNameLen(int catID, Gdiplus::Graphics* g, Gdiplus::Font* font) {
 VOID OnPaint(HDC hdc)
 {
 	scale = (float)scaleI / 10.0f;
+	ModuleHandler::hitboxWidthFloat = (float)hitboxValue / 10.0f;
+	ModuleHandler::hitboxHeightFloat = (float)hitboxValue / 10.0f;
+	ModuleHandler::jetpackVal = (float)jetpackValue / 5.0f;
+	ModuleHandler::playerSpeedVal = (float)playerSpeedValue / 10.0f;
+	ModuleHandler::jesusVal = (float)jesusValue / 10.0f;
+	ModuleHandler::bhopVal = (float)bunnyhopValue / 10.0f;
 	//Main box, basically the screen ig. idk how to describe it but it makes it transparent
 	Gdiplus::Graphics graphics(hdc);
 	Gdiplus::SolidBrush bBrush(Gdiplus::Color(255, 77, 77, 77));

@@ -102,6 +102,14 @@ uintptr_t pointers::SprintInstruction() {
 	return mem::moduleBase + 0x1A5B8F0;
 }
 
+uintptr_t pointers::mousePitch() {
+	return mem::FindAddr(mem::hProcess, mem::moduleBase + 0x03016010, { 0x30, 0xE0, 0x28, 0x30, 0x168, 0x0, 0x14 });
+}
+
+uintptr_t pointers::mouseYaw() {
+	return mem::FindAddr(mem::hProcess, mem::moduleBase + 0x03016010, { 0x30, 0xE0, 0x28, 0x30, 0x168, 0x0, 0x10 });
+}
+
 /* Bytes */
 
 BYTE* gameBytes::SCAFFOLDBYTES = (BYTE*)"\x41\x88\x86\x54\x08\x00\x00";
@@ -142,6 +150,9 @@ unsigned int Player::currentY1 = 0x434;
 unsigned int Player::currentY2 = 0x440;
 unsigned int Player::currentZ1 = 0x438;
 unsigned int Player::currentZ2 = 0x444;
+unsigned int Player::currentX3 = 0x454;
+unsigned int Player::currentY3 = 0x458;
+unsigned int Player::currentZ3 = 0x45C;
 unsigned int Player::currentUsername = 0x9E8;
 unsigned int Player::currentPitch = 0xF0;
 unsigned int Player::currentYaw = 0xF4;

@@ -25,6 +25,9 @@ public:
 		currentY2,
 		currentZ1,
 		currentZ2,
+		currentX3,
+		currentY3,
+		currentZ3,
 		currentUsername,
 		currentPitch,
 		currentYaw,
@@ -58,6 +61,8 @@ public:
 	static uintptr_t groundCollision();
 	static uintptr_t connectedServerIP();
 	static uintptr_t SprintInstruction();
+	static uintptr_t mousePitch();
+	static uintptr_t mouseYaw();
 };
 
 class gameBytes {
