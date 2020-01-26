@@ -15,17 +15,24 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
         }
 
-        public override void onDisable()
+        public override void onTick()
         {
-            base.onDisable();
-            if (MCM.readInt64((UInt64)Pointers.entityFacing()) > 0)
+            base.onTick();
+            Int64 facing = MCM.readInt64((UInt64)Pointers.entityFacing());
+            if (facing > 0)
             {
-                MCM.writeByte(Pointers.attackSwing(), 0);
+                MCM.writeBaseByte((int)Pointers.attackSwing(), 0);
             }
             else
             {
-                MCM.writeByte(Pointers.attackSwing(), 1);
+                MCM.writeBaseByte((int)Pointers.attackSwing(), 1);
             }
+        }
+
+        public override void onDisable()
+        {
+            base.onDisable();
+            MCM.writeBaseByte((int)Pointers.attackSwing(), 1);
         }
     }
 }
