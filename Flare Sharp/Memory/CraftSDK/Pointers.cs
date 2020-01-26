@@ -35,7 +35,7 @@ namespace Flare_Sharp.Memory.CraftSDK
         public static UInt64 UI()
         {
             UInt64[] offs = { 0x200, 0x128, 0x40, 0x8, 0x248 };
-            return MCM.evaluatePointer(0x02FA94F0, offs);
+            return MCM.baseEvaluatePointer(0x02FA94F0, offs);
         }
     }
 }
