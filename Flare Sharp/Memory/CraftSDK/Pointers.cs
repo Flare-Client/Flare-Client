@@ -17,5 +17,15 @@ namespace Flare_Sharp.Memory.CraftSDK
         {
             return 0x102460E;
         }
+        public static UInt64 mousePitch()
+        {
+            UInt64[] offs = { 0x30, 0xE0, 0x28, 0x30, 0x168, 0x0, 0x14 };
+            return MCM.baseEvaluatePointer(0x03016010, offs);
+        }
+        public static UInt64 mouseYaw()
+        {
+            UInt64[] offs = { 0x30, 0xE0, 0x28, 0x30, 0x168, 0x0, 0x10 };
+            return MCM.baseEvaluatePointer(0x03016010, offs);
+        }
     }
 }
