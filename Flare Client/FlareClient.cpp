@@ -12,7 +12,6 @@ using namespace std;
 
 int main()
 {
-
 	g_Discord->Initialize();
 	g_Discord->Update((char*)"On the main menu", 0, -1);
 	DWORD procID;

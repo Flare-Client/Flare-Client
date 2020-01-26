@@ -1,32 +1,29 @@
 #pragma once
 #include "ModuleHandler.h"
+#include <gdiplus.h>
+
+static struct Keybind {
+	char key;
+	const char** name;
+	bool* toggle;
+	bool selected;
+	bool changing;
+};
 
 class KeybindHandler {
 public:
 	KeybindHandler(HWND hWnd);
-
-	static char jetpackKey;
-	static char hitboxKey;
-	static char scaffoldKey;
-	static char triggerbotKey;
-	static char airjumpKey;
-	static char airaccKey;
-	static char noslowdownKey;
-	static char nowebKey;
-	static char noknockbackKey;
-	static char nofallKey;
-	static char gamemodeKey;
-	static char instabreakKey;
-	static char playerspeedKey;
-	static char phaseKey;
-	static char nowaterKey;
-	static char jesusKey;
-	static char bhopKey;
-	static char criticalsKey;
-	static char flightKey;
-	static char tpauraKey;
-	
-
-	static int keybindTick;
+	static void RegisterKeybind(uint64_t id, const char** name, char defaultKey, bool* toggle);
+	static void OnPaint(Gdiplus::Graphics* graphics,
+		Gdiplus::SolidBrush* primary,
+		Gdiplus::SolidBrush* secondary,
+		Gdiplus::SolidBrush* ternary,
+		Gdiplus::Font* font,
+		float scale,
+		int dcstrl,
+		Gdiplus::Rect desktop);
+	static void selectNextKeybind();
+	static void selectPrevKeybind();
+	static void changeKeybind();
 };
 

@@ -1,4 +1,5 @@
 #include "TabGui.h"
+#include "../modules/keybindhandler.cpp"
 #pragma comment (lib,"Gdiplus.lib")
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -280,7 +281,8 @@ TabGui::TabGui() {
 	RegisterCategory(&activeLang.Movement, 1);
 	RegisterCategory(&activeLang.Misc, 2);
 	RegisterCategory(&activeLang.Settings, 3);
-	RegisterCategory(&activeLang.ClickUI, 4);
+	RegisterCategory(&activeLang.Keybinds, 4);
+	RegisterCategory(&activeLang.ClickUI, 5);
 
 	//Register Modules
 	/* Combat */
@@ -314,7 +316,8 @@ TabGui::TabGui() {
 	RegisterModule(2, 7, &activeLang.Freecam, &ModuleHandler::freecamToggle);
 	RegisterModule(2, 8, &activeLang.ServerCrasher, &ModuleHandler::servercrasherToggle);
 	RegisterModule(2, 9, &activeLang.Coordinates, &ModuleHandler::coordinatesToggle);
-	RegisterModule(2, 10, &activeLang.clickTP, &ModuleHandler::clicktpToggle);
+	RegisterModule(2, 10, &activeLang.ClickTP, &ModuleHandler::clicktpToggle);
+	RegisterModule(2, 11, &activeLang.Esp, &ModuleHandler::espToggle);
 
 	/* Settings */
 	//There is a special case for the first setting, it wont modify the value, it will just close the settings list always.
@@ -326,6 +329,12 @@ TabGui::TabGui() {
 	RegisterSetting(5, &activeLang.PlayerSpeed, &playerSpeedValue, 20, 01);
 	RegisterSetting(6, &activeLang.Jesus, &jesusValue, 50, 01);
 	RegisterSetting(7, &activeLang.Bhop, &bunnyhopValue, 50, 01);
+
+	/* Keybinds */
+	KeybindHandler::RegisterKeybind(0, &activeLang.Hitbox, '-', &ModuleHandler::hitboxToggle);
+	KeybindHandler::RegisterKeybind(1, &activeLang.Triggerbot, 'R', &ModuleHandler::triggerbotToggle);
+	KeybindHandler::RegisterKeybind(2, &activeLang.Criticals, '-', &ModuleHandler::criticalsToggle);
+	KeybindHandler::RegisterKeybind(3, &activeLang.TpAura, 'L', &ModuleHandler::tpauraToggle);
 
 	settings[0].selected = true;
 
@@ -347,7 +356,7 @@ TabGui::TabGui() {
 	ClickUI::ClickUI();
 
 	MSG msg = { };
-	int keyBuf = 0;
+	static int keyBuf = 0;
 	bool trig = false;
 	while (msg.message != WM_QUIT)
 	{
@@ -365,12 +374,12 @@ TabGui::TabGui() {
 			gayUwpTitlesize = 7;
 		}
 
-		ModuleHandler::ModuleHandler(mem::hProcess, hWnd);
-
 		GetWindowRect(windowHandleMC, &rectMC);
 		winPos = POINT { rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize };
 		winSize = SIZE { rectMC.left, rectMC.bottom };
 		SetWindowPos(hWnd, topStyle, rectMC.left + 8, rectMC.top + 33 + gayUwpTitlesize, rectMC.right - rectMC.left - 8, rectMC.bottom - rectMC.top - 33, NULL);
+
+		ModuleHandler::ModuleHandler(mem::hProcess, hWnd);
 
 		if (GetAsyncKeyState(1)) {
 			POINT p;
@@ -407,6 +416,14 @@ TabGui::TabGui() {
 				selectNextSetting();
 				InvalidateRect(hWnd, 0, TRUE);
 			}
+			else if (getActiveCategoryID() == 4) {
+				if (keyBuf > 0) {
+					continue;
+				}
+				keyBuf++;
+				KeybindHandler::selectNextKeybind();
+				InvalidateRect(hWnd, 0, TRUE);
+			}
 			else if (getActiveCategoryID() != -1) {
 				if (keyBuf > 0) {
 					continue;
@@ -431,6 +448,14 @@ TabGui::TabGui() {
 				}
 				keyBuf++;
 				selectPrevSetting();
+				InvalidateRect(hWnd, 0, TRUE);
+			}
+			else if (getActiveCategoryID() == 4) {
+				if (keyBuf > 0) {
+					continue;
+				}
+				keyBuf++;
+				KeybindHandler::selectPrevKeybind();
 				InvalidateRect(hWnd, 0, TRUE);
 			}
 			if (getActiveCategoryID() != -1) {
@@ -459,6 +484,14 @@ TabGui::TabGui() {
 				increaseSetting();
 				InvalidateRect(hWnd, 0, TRUE);
 				continue;
+			}
+			else if (getActiveCategoryID() == 4) {
+				if (keyBuf > 0) {
+					continue;
+				}
+				keyBuf++;
+				KeybindHandler::changeKeybind();
+				InvalidateRect(hWnd, 0, TRUE);
 			}
 			if (getActiveCategoryID() != -1) {
 				if (keyBuf > 0) {
@@ -515,11 +548,11 @@ TabGui::TabGui() {
 	return;
 }
 
-std::wstring char2String(const char* in) {
-	std::string str(in);
-	std::wstring wstr(str.begin(), str.end());
-	return wstr;
-}
+//std::wstring char2String(const char* in) {
+//	std::string str(in);
+//	std::wstring wstr(str.begin(), str.end());
+//	return wstr;
+//}
 int drawnStringLen(std::wstring str, Gdiplus::Graphics* g, Gdiplus::Font* font) {
 	Gdiplus::PointF ptf;
 	Gdiplus::RectF rtf;
@@ -641,10 +674,23 @@ VOID OnPaint(HDC hdc)
 			Gdiplus::PointF pointL((desktop.left + dcstrl+8) * scale, (desktop.top + (75 * scale)) + ((32 * scale) * c));
 			std::wstring wstr = char2String(*settings[c].name);
 			graphics.DrawString(wstr.c_str(), wstr.length(), &categoryFont, pointL, &tBrush);
+			//Draw setting value
+			if (c != 0) {
+				std::wstring wstrV = char2String(std::to_string(*settings[c].valuePtr).c_str());
+				int vl = drawnStringLen(wstrV, &graphics, &categoryFont);
+				Gdiplus::PointF VpointL((((desktop.left + dcstrl + 8) + (200 - vl)) * scale), (desktop.top + (75 * scale)) + ((32 * scale) * c));
+				graphics.DrawString(wstrV.c_str(), wstrV.length(), &categoryFont, VpointL, &tBrush);
+			}
 		}
 	}
 	if (categories[4].active) {
+		KeybindHandler::OnPaint(&graphics, &cPen, &tBrush, &sBrush, &categoryFont, scale, dcstrl, desktopRect);
+	}
+	if (categories[5].active) {
 		ClickUI::OnPaint(&graphics, &tBrush, &cPen, &sBrush, scale, desktopRect);
+	}
+	if (ModuleHandler::espToggle) {
+		Esp::OnPaint(&graphics, desktop.right, desktop.bottom);
 	}
 }
 

@@ -56,7 +56,8 @@ static struct Lang {
 	const char* Freecam;
 	const char* ServerCrasher;
 	const char* Coordinates;
-	const char* clickTP;
+	const char* ClickTP;
+	const char* Esp;
 
 	/*
 		Settings
@@ -147,6 +148,7 @@ static Lang getEnglish() {
 		"Server Crasher",
 		"Coordinates",
 		"ClickTP",
+		"Esp",
 
 		/*
 			Settings
@@ -239,6 +241,7 @@ static Lang getItalian() {
 		"Server schianto",
 		"Coordinate",
 		"ClickTP",
+		"Esp",
 
 		/*
 			Settings
@@ -331,6 +334,7 @@ static Lang getSpanish() {
 		"Estrellarse servidor",
 		"Coordinates",
 		"ClickTP",
+		"Esp",
 
 		/*
 			Settings

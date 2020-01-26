@@ -154,9 +154,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <UACExecutionLevel>AsInvoker</UACExecutionLevel>
       <AdditionalDependencies>d3d9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="modules\Esp.cpp" />
     <ClCompile Include="modules\aimbot.cpp" />
     <ClCompile Include="UI\ClickUI.cpp" />
     <ClCompile Include="modules\autosprint.cpp" />
@@ -184,7 +186,6 @@
     <ClCompile Include="modules\Hitbox.cpp" />
     <ClCompile Include="modules\EntityList.cpp" />
     <ClCompile Include="UI\TabGui.cpp" />
-    <ClCompile Include="UI\GuiLoader.cpp" />
     <ClCompile Include="UI\imgui\imgui.cpp" />
     <ClCompile Include="UI\imgui\imgui_draw.cpp" />
     <ClCompile Include="UI\imgui\imgui_impl_dx9.cpp" />
@@ -209,6 +210,7 @@
     <ClCompile Include="modules\noclip.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="modules\Esp.h" />
     <ClInclude Include="modules\aimbot.h" />
     <ClInclude Include="UI\ClickUI.h" />
     <ClInclude Include="modules\autosprint.h" />
@@ -239,7 +241,6 @@
     <ClInclude Include="modules\Hitbox.h" />
     <ClInclude Include="modules\EntityList.h" />
     <ClInclude Include="UI\TabGui.h" />
-    <ClInclude Include="UI\GuiLoader.h" />
     <ClInclude Include="UI\imgui\imconfig.h" />
     <ClInclude Include="UI\imgui\imgui.h" />
     <ClInclude Include="UI\imgui\imgui_impl_dx9.h" />

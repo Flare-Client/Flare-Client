@@ -33,6 +33,7 @@ bool ModuleHandler::coordinatesToggle = false;
 bool ModuleHandler::noClipToggle = false;
 bool ModuleHandler::clicktpToggle = false;
 bool ModuleHandler::autoSprintToggle = false;
+bool ModuleHandler::espToggle = false;
 
 float ModuleHandler::hitboxWidthFloat = 6.f;
 float ModuleHandler::hitboxHeightFloat = 3.f;
@@ -113,7 +114,7 @@ ModuleHandler::ModuleHandler(HANDLE hProcess, HWND host) {
 
 	GuiLoaderTicker += 1;
 
-	if (GetAsyncKeyState(VK_F8)) {
+	/*if (GetAsyncKeyState(VK_F8)) {
 		if (GuiLoaderTicker > 60) {
 			if (GuiLoader::windowToggle) {
 				GuiLoader::windowToggle = false;
@@ -123,7 +124,7 @@ ModuleHandler::ModuleHandler(HANDLE hProcess, HWND host) {
 			}
 			GuiLoaderTicker = 0;
 		}
-	}
+	}*/
 
 	KeybindHandler::KeybindHandler(host);
 
@@ -287,5 +288,8 @@ ModuleHandler::ModuleHandler(HANDLE hProcess, HWND host) {
 	}
 	else if (!ModuleHandler::autoSprintToggle) {
 		AutoSprint::AutoSprint(hProcess, 0);
+	}
+	if (ModuleHandler::espToggle) {
+		Esp::Esp(hProcess, EntityListArr);
 	}
 }
