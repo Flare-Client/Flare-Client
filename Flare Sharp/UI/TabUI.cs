@@ -17,10 +17,10 @@ namespace Flare_Sharp.UI
         public delegate void fixSizeDel();
 
         public static TabUI ui;
-        SolidBrush primary = new SolidBrush(Color.FromArgb(255, 100, 100));
-        SolidBrush secondary = new SolidBrush(Color.FromArgb(25, 25, 25));
-        SolidBrush tertiary = new SolidBrush(Color.FromArgb(100, 255, 100));
-        SolidBrush quaternary = new SolidBrush(Color.FromArgb(100, 100, 255));
+        public SolidBrush primary = new SolidBrush(Color.FromArgb(255, 100, 100));
+        public SolidBrush secondary = new SolidBrush(Color.FromArgb(25, 25, 25));
+        public SolidBrush tertiary = new SolidBrush(Color.FromArgb(100, 255, 100));
+        public SolidBrush quaternary = new SolidBrush(Color.FromArgb(100, 100, 255));
 
         float scale = 1;
         int tFontSize = 72;
@@ -31,6 +31,7 @@ namespace Flare_Sharp.UI
         int y = 0;
         int width = 0;
         int height = 0;
+        public float catWidth = 0;
 
         public TabUI()
         {
@@ -90,7 +91,7 @@ namespace Flare_Sharp.UI
 
             graphics.DrawString("Flare", titleFont, primary, x-16, y);
             uint c = 0;
-            float catWidth = 0;
+            catWidth = 0;
             foreach (Category category in CategoryHandler.registry.categories)
             {
                 float wid = graphics.MeasureString(category.name, textFont, 200).Width;
@@ -125,6 +126,9 @@ namespace Flare_Sharp.UI
                             graphics.FillRectangle(quaternary, x + catWidth, y + tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
                         }
                         graphics.DrawString(module.name, textFont, primary, x + modWidth, y + tFontSize + (32 * scale) * m);
+                        float kwid = graphics.MeasureString(module.keybind.ToString(), textFont, 200).Width;
+                        graphics.FillRectangle(secondary, x + catWidth + modWidth, y + tFontSize + (32 * scale) * m, kwid * scale, 32 * scale);
+                        graphics.DrawString(module.keybind.ToString(), textFont, primary, x + catWidth + modWidth, y + tFontSize + (32 * scale) * m);
                         if (module.selected)
                         {
                             graphics.DrawRectangle(new Pen(tertiary.Color, 2), x + catWidth, y + tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
@@ -147,8 +151,8 @@ namespace Flare_Sharp.UI
                 {
                     if (mod.enabled)
                     {
-                        float wid = graphics.MeasureString(mod.name, textFont, 200).Width;
-                        graphics.DrawString(mod.name, textFont, primary, width - wid, y + tFontSize + (32 * scale) * yOff);
+                        float mwid = graphics.MeasureString(mod.name, textFont, 200).Width;
+                        graphics.DrawString(mod.name, textFont, primary, width - mwid, y + tFontSize + (32 * scale) * yOff);
                         yOff++;
                     }
                 }

@@ -16,6 +16,9 @@ namespace Flare_Sharp.Memory.CraftSDK
 
         public void teleport(float x, float y, float z)
         {
+            currentX1 = x;
+            currentY1 = y;
+            currentZ1 = z;
             X1 = x;
             X2 = x;
             Y1 = y;
