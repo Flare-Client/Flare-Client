@@ -19,8 +19,8 @@ namespace Flare_Sharp.ClientBase.Keybinds
         public static extern bool GetAsyncKeyState(char vKey);
 
         public static KeybindHandler handler;
-        public static EventHandler<clientKeyDownEvent> clientKeyDownEvent;
-        public static EventHandler<clientKeyDownEvent> clientKeyHeldEvent;
+        public static EventHandler<clientKeyEvent> clientKeyDownEvent;
+        public static EventHandler<clientKeyEvent> clientKeyHeldEvent;
 
         Dictionary<char, uint> keyBuffs = new Dictionary<char, uint>();
         Dictionary<char, bool> noKey = new Dictionary<char, bool>();
@@ -54,7 +54,7 @@ namespace Flare_Sharp.ClientBase.Keybinds
                                 TabUI.ui.Invalidate();
                                 try
                                 {
-                                    clientKeyDownEvent.Invoke(this, new clientKeyDownEvent(c));
+                                    clientKeyDownEvent.Invoke(this, new clientKeyEvent(c));
                                 }
                                 catch (Exception) { }
                             }
@@ -80,7 +80,7 @@ namespace Flare_Sharp.ClientBase.Keybinds
                             {
                                 try
                                 {
-                                    clientKeyHeldEvent.Invoke(this, new clientKeyDownEvent(c));
+                                    clientKeyHeldEvent.Invoke(this, new clientKeyEvent(c));
                                 } catch (Exception) { }
                             }
                         }
@@ -94,7 +94,7 @@ namespace Flare_Sharp.ClientBase.Keybinds
             Console.WriteLine("key thread started");
         }
 
-        public void dispatchKeybinds(object sender, clientKeyDownEvent e)
+        public void dispatchKeybinds(object sender, clientKeyEvent e)
         {
             foreach(Category cat in CategoryHandler.registry.categories)
             {
@@ -108,10 +108,10 @@ namespace Flare_Sharp.ClientBase.Keybinds
             }
         }
     }
-    public class clientKeyDownEvent : EventArgs
+    public class clientKeyEvent : EventArgs
     {
         public char key;
-        public clientKeyDownEvent(char key)
+        public clientKeyEvent(char key)
         {
             this.key = key;
         }

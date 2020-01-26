@@ -22,7 +22,7 @@ namespace Flare_Sharp.ClientBase.Categories
             KeybindHandler.clientKeyDownEvent += OnKey;
         }
 
-        private void OnKey(object sender, clientKeyDownEvent e)
+        private void OnKey(object sender, clientKeyEvent e)
         {
             if (active)
             {

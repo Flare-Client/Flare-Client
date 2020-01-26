@@ -122,7 +122,7 @@ namespace Flare_Sharp.ClientBase.Categories
             categories[selected].active = false;
         }
 
-        public void onKeyPress(object sender, clientKeyDownEvent e)
+        public void onKeyPress(object sender, clientKeyEvent e)
         {
             if(e.key == 0x28)
             {
