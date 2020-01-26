@@ -37,5 +37,13 @@ namespace Flare_Sharp.Memory.CraftSDK
             UInt64[] offs = { 0x200, 0x128, 0x40, 0x8, 0x248 };
             return MCM.baseEvaluatePointer(0x02FA94F0, offs);
         }
+        public static UInt64 criticalsPacket()
+        {
+            return 0xFD1E56;
+        }
+        public static UInt64 showCoordinates()
+        {
+            return 0x5FF84D;
+        }
     }
 }
