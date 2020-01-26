@@ -1,4 +1,5 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
+using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.Memory;
 using Flare_Sharp.Memory.CraftSDK;
 using System;
