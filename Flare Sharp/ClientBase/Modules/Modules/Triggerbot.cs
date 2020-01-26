@@ -18,7 +18,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            Int64 facing = MCM.readInt64((UInt64)Pointers.entityFacing());
+            UInt64 facing = SDK.instance.entityFacing;
             if (facing > 0)
             {
                 MCM.writeBaseByte((int)Pointers.attackSwing(), 0);

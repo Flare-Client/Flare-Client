@@ -28,7 +28,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            MCM.writeInt(LocalPlayer.onGround(), 1);
+            SDK.instance.player.onGround = 1;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Flare_Sharp.Memory
     public class MCM
     {
         [DllImport("kernel32", SetLastError = true)]
-        public static extern int ReadProcessMemory(IntPtr hProcess, UInt64 lpBase, ref Int64 lpBuffer, int nSize, int lpNumberOfBytesRead);
+        public static extern int ReadProcessMemory(IntPtr hProcess, UInt64 lpBase, ref UInt64 lpBuffer, int nSize, int lpNumberOfBytesRead);
         [DllImport("kernel32", SetLastError = true)]
         public static extern int WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, ref byte lpBuffer, int nSize, int lpNumberOfBytesWritten);
         [DllImport("kernel32", SetLastError = true)]
@@ -107,10 +107,20 @@ namespace Flare_Sharp.Memory
             return ints;
         }
 
-        public static Int64 evaluatePointer(int offset, int[] offsets)
+        public static UInt64 baseEvaluatePointer(UInt64 offset, UInt64[] offsets)
         {
-            Int64 buffer = 0;
-            ReadProcessMemory(mcProcHandle, (UInt64)(mcBaseAddress + offset), ref buffer, sizeof(UInt64), 0);
+            UInt64 buffer = 0;
+            ReadProcessMemory(mcProcHandle, (UInt64)mcBaseAddress + offset, ref buffer, sizeof(UInt64), 0);
+            for (int i = 0; i < offsets.Length - 1; i++)
+            {
+                ReadProcessMemory(mcProcHandle, (UInt64)(buffer + offsets[i]), ref buffer, sizeof(UInt64), 0);
+            }
+            return buffer + offsets[offsets.Length - 1];
+        }
+        public static UInt64 evaluatePointer(UInt64 addr, UInt64[] offsets)
+        {
+            UInt64 buffer = 0;
+            ReadProcessMemory(mcProcHandle, addr, ref buffer, sizeof(UInt64), 0);
             for (int i = 0; i < offsets.Length - 1; i++)
             {
                 ReadProcessMemory(mcProcHandle, (UInt64)(buffer + offsets[i]), ref buffer, sizeof(UInt64), 0);
@@ -121,19 +131,19 @@ namespace Flare_Sharp.Memory
         //Read base
         public static int readBaseByte(int offset)
         {
-            Int64 buffer = 0;
+            UInt64 buffer = 0;
             ReadProcessMemory(mcProcHandle, (UInt64)(mcBaseAddress + offset), ref buffer, sizeof(byte), 0);
             return (byte)buffer;
         }
         public static int readBaseInt(int offset)
         {
-            Int64 buffer = 0;
+            UInt64 buffer = 0;
             ReadProcessMemory(mcProcHandle, (UInt64)(mcBaseAddress + offset), ref buffer, sizeof(int), 0);
             return (int)buffer;
         }
-        public static Int64 readBaseInt64(int offset)
+        public static UInt64 readBaseInt64(int offset)
         {
-            Int64 buffer = 0;
+            UInt64 buffer = 0;
             ReadProcessMemory(mcProcHandle, (UInt64)(mcBaseAddress + offset), ref buffer, sizeof(Int64), 0);
             return buffer;
         }
@@ -176,54 +186,54 @@ namespace Flare_Sharp.Memory
         //Read direct
         public static int readByte(UInt64 address)
         {
-            Int64 buffer = 0;
+            UInt64 buffer = 0;
             ReadProcessMemory(mcProcHandle, address, ref buffer, sizeof(byte), 0);
             return (byte)buffer;
         }
         public static int readInt(UInt64 address)
         {
-            Int64 buffer = 0;
+            UInt64 buffer = 0;
             ReadProcessMemory(mcProcHandle, address, ref buffer, sizeof(int), 0);
             return (int)buffer;
         }
-        public static Int64 readInt64(UInt64 address)
+        public static UInt64 readInt64(UInt64 address)
         {
-            Int64 buffer = 0;
+            UInt64 buffer = 0;
             ReadProcessMemory(mcProcHandle, address, ref buffer, sizeof(int), 0);
             return buffer;
         }
 
         //Write direct
-        public static void writeByte(Int64 address, byte value)
+        public static void writeByte(UInt64 address, byte value)
         {
             WriteProcessMemory(mcProcHandle, (IntPtr)address, ref value, sizeof(byte), 0);
         }
-        public static void writeBytes(int address, byte[] value)
+        public static void writeBytes(UInt64 address, byte[] value)
         {
             int inc = 0;
             foreach (byte b in value)
             {
-                writeByte(address + inc, b);
+                writeByte(address + (UInt64)inc, b);
                 inc++;
             }
         }
-        public static void writeInt(Int64 address, int value)
+        public static void writeInt(UInt64 address, int value)
         {
             byte[] intByte = BitConverter.GetBytes(value);
             int inc = 0;
             foreach (byte b in intByte)
             {
-                writeByte(address + inc, b);
+                writeByte(address + (UInt64)inc, b);
                 inc++;
             }
         }
-        public static void writeFloat(Int64 address, float value)
+        public static void writeFloat(UInt64 address, float value)
         {
             byte[] intByte = BitConverter.GetBytes(value);
             int inc = 0;
             foreach (byte b in intByte)
             {
-                writeByte(address + inc, b);
+                writeByte(address + (UInt64)inc, b);
                 inc++;
             }
         }

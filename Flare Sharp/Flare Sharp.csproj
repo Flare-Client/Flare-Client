@@ -52,8 +52,12 @@
     <Compile Include="ClientBase\Modules\Modules\AirJump.cs" />
     <Compile Include="ClientBase\Modules\Modules\AutoSprint.cs" />
     <Compile Include="ClientBase\Modules\Modules\Triggerbot.cs" />
+    <Compile Include="Memory\CraftSDK\Entity.cs" />
+    <Compile Include="Memory\CraftSDK\EntityList.cs" />
     <Compile Include="Memory\CraftSDK\LocalPlayer.cs" />
     <Compile Include="Memory\CraftSDK\Pointers.cs" />
+    <Compile Include="Memory\CraftSDK\SDK.cs" />
+    <Compile Include="Memory\CraftSDK\Teleport.cs" />
     <Compile Include="Memory\MCM.cs" />
     <Compile Include="ClientBase\Categories\Category.cs" />
     <Compile Include="ClientBase\Modules\Module.cs" />
