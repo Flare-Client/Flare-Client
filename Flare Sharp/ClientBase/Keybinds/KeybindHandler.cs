@@ -1,4 +1,6 @@
-﻿using Flare_Sharp.UI;
+﻿using Flare_Sharp.ClientBase.Categories;
+using Flare_Sharp.ClientBase.Modules;
+using Flare_Sharp.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,16 +49,26 @@ namespace Flare_Sharp.ClientBase.Keybinds
                             keyBuffs[c] = 0;
                         }
                     }
-                    Thread.Sleep(10);
+                    Thread.Sleep(Program.threadSleep/10);
                 }
             });
             keyThread.Start();
+            clientKeyEvent += dispatchKeybinds;
             Console.WriteLine("key thread started");
         }
 
-        public void onKey(object sender, ClientKeyEvent e)
+        public void dispatchKeybinds(object sender, ClientKeyEvent e)
         {
-            
+            foreach(Category cat in CategoryHandler.registry.categories)
+            {
+                foreach(Module mod in cat.modules)
+                {
+                    if(mod.keybind == e.key)
+                    {
+                        mod.enabled = !mod.enabled;
+                    }
+                }
+            }
         }
     }
     public class ClientKeyEvent : EventArgs
