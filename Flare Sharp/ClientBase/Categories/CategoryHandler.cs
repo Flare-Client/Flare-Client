@@ -19,7 +19,7 @@ namespace Flare_Sharp.ClientBase.Categories
             categories.Add(new Category("Player", false, false));
             categories.Add(new Category("Misc", false, false));
             Console.WriteLine("Categories registered!");
-            KeybindHandler.clientKeyEvent += onKeyPress;
+            KeybindHandler.clientKeyDownEvent += onKeyPress;
         }
 
         public Category activeCategory()
@@ -122,7 +122,7 @@ namespace Flare_Sharp.ClientBase.Categories
             categories[selected].active = false;
         }
 
-        public void onKeyPress(object sender, ClientKeyEvent e)
+        public void onKeyPress(object sender, clientKeyDownEvent e)
         {
             if(e.key == 0x28)
             {

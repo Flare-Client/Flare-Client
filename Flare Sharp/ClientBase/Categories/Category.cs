@@ -19,10 +19,10 @@ namespace Flare_Sharp.ClientBase.Categories
             this.name = name;
             this.active = active;
             this.selected = selected;
-            KeybindHandler.clientKeyEvent += OnKey;
+            KeybindHandler.clientKeyDownEvent += OnKey;
         }
 
-        private void OnKey(object sender, ClientKeyEvent e)
+        private void OnKey(object sender, clientKeyDownEvent e)
         {
             if (active)
             {

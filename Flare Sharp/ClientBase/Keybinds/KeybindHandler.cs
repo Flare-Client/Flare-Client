@@ -52,7 +52,11 @@ namespace Flare_Sharp.ClientBase.Keybinds
                                 }
                                 keyBuffs[c]++;
                                 TabUI.ui.Invalidate();
-                                clientKeyDownEvent.Invoke(this, new clientKeyDownEvent(c));
+                                try
+                                {
+                                    clientKeyDownEvent.Invoke(this, new clientKeyDownEvent(c));
+                                }
+                                catch (Exception) { }
                             }
                             if (noKey[c])
                             {
@@ -74,7 +78,10 @@ namespace Flare_Sharp.ClientBase.Keybinds
                         {
                             if (GetAsyncKeyState(c))
                             {
-                                clientKeyHeldEvent.Invoke(this, new clientKeyDownEvent(c));
+                                try
+                                {
+                                    clientKeyHeldEvent.Invoke(this, new clientKeyDownEvent(c));
+                                } catch (Exception) { }
                             }
                         }
                     }
