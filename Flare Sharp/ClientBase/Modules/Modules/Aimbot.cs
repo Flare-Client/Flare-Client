@@ -33,7 +33,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                 float dY = playerY - entityY;
                 float dZ = playerZ - entityZ;
                 double distance = Math.Sqrt(dX * dX + dY * dY + dZ * dZ);
-                Console.WriteLine(playerY);
                 if (distance <= 12)
                 {
                     distances.Add((float)distance);

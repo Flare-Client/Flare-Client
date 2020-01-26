@@ -16,6 +16,8 @@ namespace Flare_Sharp.ClientBase.Categories
             /* Register categories here */
             categories.Add(new Category("Combat", false, true));
             categories.Add(new Category("Movement", false, false));
+            categories.Add(new Category("Player", false, false));
+            categories.Add(new Category("Misc", false, false));
             Console.WriteLine("Categories registered!");
             KeybindHandler.clientKeyEvent += onKeyPress;
         }
