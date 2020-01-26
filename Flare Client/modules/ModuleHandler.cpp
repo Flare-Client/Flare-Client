@@ -5,6 +5,7 @@ using namespace std;
 int GuiLoaderTicker = 0;
 
 bool ModuleHandler::jetpackToggle = false;
+bool ModuleHandler::aimbotToggle = false;
 bool ModuleHandler::hitboxToggle = false;
 bool ModuleHandler::triggerbotToggle = false; 
 bool ModuleHandler::airJumpToggle = false;
@@ -45,10 +46,9 @@ float ModuleHandler::jesusVal = 0.2;
 float ModuleHandler::bhopVal = 0.2;
 float ModuleHandler::tpauraRange = 24;
 int ModuleHandler::tpauraSkips = 10;
+float ModuleHandler::jetpackVal = 1.0f;
 
 int ModuleHandler::gamemodeVal = 1;
-
-
 
 int discordPresenceTick;
 int ModuleHandler::drpDisplayName = 0;
@@ -132,16 +132,19 @@ ModuleHandler::ModuleHandler(HANDLE hProcess, HWND host) {
 		float vect[3], pitch, yaw;
 		ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { Player::currentPitch }), &pitch, sizeof(pitch), 0);
 		ReadProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { Player::currentYaw }), &yaw, sizeof(yaw), 0);
-		ModuleHandler::directionalVector(vect, (yaw + 90) * 3.141592653589793 / 180, pitch * 3.141592653589793 / 180);
-		float X = 1.2 * vect[0];
-		float Y = 1.2 * -vect[1];
-		float Z = 1.2 * vect[2];
+		ModuleHandler::directionalVector(vect, (yaw + 89.f) * 3.141592653589793 / 178, pitch * 3.141592653589793 / 178);
+		float X = ModuleHandler::jetpackVal * vect[0];
+		float Y = ModuleHandler::jetpackVal * -vect[1];
+		float Z = ModuleHandler::jetpackVal * vect[2];
 		WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { Player::velocityX }), &X, sizeof(X), 0);
 		WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { Player::velocityY }), &Y, sizeof(Y), 0);
 		WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, LocalPlayer, { Player::velocityZ }), &Z, sizeof(Z), 0);
 		ModuleHandler::jetpackToggle = false;
 	}
 
+	if (ModuleHandler::aimbotToggle) {
+		Aimbot::Aimbot(hProcess);
+	}
 	if (ModuleHandler::hitboxToggle) {
 		Hitbox::Hitbox(hProcess, EntityListArr, ModuleHandler::hitboxWidthFloat, ModuleHandler::hitboxHeightFloat);
 	}

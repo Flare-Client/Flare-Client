@@ -159,6 +159,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="modules\Esp.cpp" />
+    <ClCompile Include="modules\aimbot.cpp" />
     <ClCompile Include="UI\ClickUI.cpp" />
     <ClCompile Include="modules\autosprint.cpp" />
     <ClCompile Include="modules\clicktp.cpp" />
@@ -210,6 +211,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="modules\Esp.h" />
+    <ClInclude Include="modules\aimbot.h" />
     <ClInclude Include="UI\ClickUI.h" />
     <ClInclude Include="modules\autosprint.h" />
     <ClInclude Include="modules\clicktp.h" />
