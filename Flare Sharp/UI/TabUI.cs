@@ -45,7 +45,7 @@ namespace Flare_Sharp.UI
             this.Paint += OnPaint;
             this.Load += OnLoad;
             this.Location = new Point(0, 0);
-            this.Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            this.Size = new Size(0xFFFF, 0xFFFF);
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
@@ -74,6 +74,7 @@ namespace Flare_Sharp.UI
                         ui.TopMost = MCM.isMinecraftFocused();
                     });
                     ui.Invoke(del);
+                    Thread.Sleep(Program.threadSleep);
                 }
             });
             posThread.Start();

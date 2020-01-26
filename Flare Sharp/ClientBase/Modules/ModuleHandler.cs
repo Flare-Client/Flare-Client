@@ -42,6 +42,7 @@ namespace Flare_Sharp.ClientBase.Modules
                         }
                     }
                     new SDK();
+                    Thread.Sleep(Program.threadSleep / 100);
                 }
             });
             moduleThread.Start();

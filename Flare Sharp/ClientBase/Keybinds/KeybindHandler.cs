@@ -49,7 +49,7 @@ namespace Flare_Sharp.ClientBase.Keybinds
                             keyBuffs[c] = 0;
                         }
                     }
-                    Thread.Sleep(10);
+                    Thread.Sleep(Program.threadSleep/10);
                 }
             });
             keyThread.Start();

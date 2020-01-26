@@ -15,6 +15,7 @@ namespace Flare_Sharp
 {
     class Program
     {
+        public static int threadSleep = 1;
         static void Main(string[] args)
         {
             Console.WriteLine("Flare# Client");
