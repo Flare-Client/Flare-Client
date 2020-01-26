@@ -200,7 +200,8 @@ namespace Flare_Sharp.Memory
         {
             UInt64 buffer = 0;
             ReadProcessMemory(mcProcHandle, address, ref buffer, sizeof(float), 0);
-            return buffer;
+            byte[] raw = BitConverter.GetBytes(buffer);
+            return BitConverter.ToSingle(raw, 0);
         }
         public static UInt64 readInt64(UInt64 address)
         {
