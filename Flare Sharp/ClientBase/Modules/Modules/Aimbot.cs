@@ -33,34 +33,37 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            List<Entity> Entity = EntityList.getEntityList();
-            List<float> distances = new List<float>();
-            float playerX, playerY, playerZ;
             float[] localPosition = { SDK.instance.player.currentX1, SDK.instance.player.currentY1, SDK.instance.player.currentZ1 };
-            foreach(Entity e in Entity)
+            List<Entity> Entity = EntityList.getEntityList();
+            List<double> distances = new List<double>();
+            foreach (Entity e in Entity)
             {
                 float[] targetPosition = { e.currentX1, e.currentY1, e.currentZ1 };
                 float dX = localPosition[0] - targetPosition[0];
+                float dY = localPosition[1] - targetPosition[1];
                 float dZ = localPosition[2] - targetPosition[2];
-                double distance = Math.Sqrt(dX * dX + dZ * dZ);
+                double distance = Math.Sqrt(dX * dX + dY * dY + dZ * dZ);
                 if (distance <= 12)
                 {
-                    distances.Add((float)distance);
+                    distances.Add(distance);
                 }
             }
             if(distances.Count() > 0)
             {
                 distances.Sort();
-                foreach (Entity e in Entity)
+                foreach(Entity e in Entity)
                 {
-                    float[] targetPosition = { e.currentX1, e.currentY1, e.currentZ1};
+                    float[] targetPosition = { e.currentX1, e.currentY1, e.currentZ1 };
                     float dX = localPosition[0] - targetPosition[0];
-                    float dZ = localPosition[0] - targetPosition[2];
-                    double distance = Math.Sqrt(dX * dX + dZ * dZ);
-                    if (distances[0] == (float)distance) Console.WriteLine("!");
-                    List<float> staringPos = getCalculationsToPos(localPosition, targetPosition);
-                    MCM.writeFloat(Pointers.mousePitch(), staringPos[0]);
-                    MCM.writeFloat(Pointers.mouseYaw(), staringPos[1]);
+                    float dY = localPosition[1] - targetPosition[1];
+                    float dZ = localPosition[2] - targetPosition[2];
+                    double distance = Math.Sqrt(dX * dX + dY * dY + dZ * dZ);
+                    if(distance == distances[0])
+                    {
+                        List<float> staringPos = getCalculationsToPos(localPosition, targetPosition);
+                        MCM.writeFloat(Pointers.mousePitch(), staringPos[0]);
+                        MCM.writeFloat(Pointers.mouseYaw(), staringPos[1]);
+                    }
                 }
             }
         }
