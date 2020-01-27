@@ -1,4 +1,4 @@
-#include "jesus.h"
+#include "Jesus.h"
 
 Jesus::Jesus(HANDLE hProcess, uintptr_t localPlayer, float value) {
 	uintptr_t inWaterAddr = mem::FindAddr(hProcess, localPlayer, { Player::isInWater });

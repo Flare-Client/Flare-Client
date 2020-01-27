@@ -1,6 +1,6 @@
-#include "servercrasher.h"
+#include "Crasher.h"
 
-ServerCrasher::ServerCrasher(HANDLE hProcess, char option) {
+Crasher::Crasher(HANDLE hProcess, char option) {
 	switch (option) {
 	
 	case 'N':

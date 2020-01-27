@@ -1,4 +1,4 @@
-#include "gamemode.h"
+#include "Gamemode.h"
 
 using namespace std;
 

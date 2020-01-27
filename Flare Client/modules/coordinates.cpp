@@ -1,4 +1,4 @@
-#include "coordinates.h"
+#include "Coordinates.h"
 
 Coordinates::Coordinates(HANDLE hProcess, int toggle) {
 	

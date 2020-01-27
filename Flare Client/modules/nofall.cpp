@@ -1,4 +1,4 @@
-#include "nofall.h"
+#include "NoFall.h"
 
 NoFall::NoFall(HANDLE hProcess, uintptr_t LocalPlayer) {
 	uintptr_t noFallAddr = mem::FindAddr(hProcess, LocalPlayer, { Player::isFalling });

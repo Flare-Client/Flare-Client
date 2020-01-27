@@ -1,6 +1,6 @@
-#include "noknockback.h"
+#include "NoKnockback.h"
 
-NoKnockBack::NoKnockBack(HANDLE hProcess, char option) {
+NoKnockback::NoKnockback(HANDLE hProcess, char option) {
 	switch (option) {
 	case 'N':
 		mem::NopEx((BYTE*)pointers::knockBackX(), 6, hProcess);

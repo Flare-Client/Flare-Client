@@ -1,4 +1,4 @@
-#include "criticals.h"
+#include "Criticals.h"
 
 Criticals::Criticals(HANDLE hProcess, char option) {
 	switch (option) {

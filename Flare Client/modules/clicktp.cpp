@@ -1,4 +1,4 @@
-#include "clicktp.h"
+#include "ClickTP.h"
 
 ClickTP::ClickTP(HANDLE hProcess, uintptr_t LocalPlayer) {
 	if (GetAsyncKeyState(VK_RBUTTON)) {

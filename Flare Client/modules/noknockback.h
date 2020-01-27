@@ -1,8 +1,8 @@
 #pragma once
 #include "ModuleHandler.h"
 
-class NoKnockBack {
+class NoKnockback {
 public:
-	NoKnockBack(HANDLE hProcess, char option);
+	NoKnockback(HANDLE hProcess, char option);
 };
 

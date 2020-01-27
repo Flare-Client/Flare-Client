@@ -1,4 +1,4 @@
-#include "aimbot.h"
+#include "AimBot.h"
 
 float pitchAndYaw[2];
 
@@ -13,7 +13,7 @@ void getRotationsToEnt(float playerPosition[], float entityPosition[]) {
 	pitchAndYaw[1] = -yaw;
 }
 
-Aimbot::Aimbot(HANDLE hProcess) {
+AimBot::AimBot(HANDLE hProcess) {
 	std::vector<uintptr_t> EntityListArr = EntityList::EntityListHandler(hProcess, Player::LocalPlayer());
 	std::vector<float> distances;
 

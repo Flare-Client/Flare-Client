@@ -1,4 +1,4 @@
-#include "instabreak.h"
+#include "InstaBreak.h"
 
 bool Instabreak::oneTimePatch = true;
 

@@ -1,6 +1,6 @@
-#include "bhop.h"
+#include "BunnyHop.h"
 
-BHOP::BHOP(HANDLE hProcess, uintptr_t localPlayer, float value) {
+BunnyHop::BunnyHop(HANDLE hProcess, uintptr_t localPlayer, float value) {
 	uintptr_t isOnGroundAddr = mem::FindAddr(hProcess, localPlayer, { Player::onGround });
 	uintptr_t velocityYAddr = mem::FindAddr(hProcess, localPlayer, { Player::velocityY });
 	int isOnGround;

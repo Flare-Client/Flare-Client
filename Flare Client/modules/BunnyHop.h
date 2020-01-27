@@ -2,8 +2,8 @@
 #include "../LittleHacker.h"
 #include "ModuleHandler.h"
 
-class BHOP {
+class BunnyHop {
 public:
-	BHOP(HANDLE hProcess, uintptr_t localPlayer, float value);
+	BunnyHop(HANDLE hProcess, uintptr_t localPlayer, float value);
 };
 

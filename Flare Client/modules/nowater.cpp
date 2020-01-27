@@ -1,4 +1,4 @@
-#include "nowater.h"
+#include "NoWater.h"
 
 NoWater::NoWater(HANDLE hProcess, char option) {
 	switch (option) {

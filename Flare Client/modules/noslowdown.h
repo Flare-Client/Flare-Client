@@ -1,8 +1,8 @@
 #pragma once
 #include "ModuleHandler.h"
 
-class NoSlowDown {
+class NoSlowdown {
 public:
-	NoSlowDown(HANDLE hProcess, char option);
+	NoSlowdown(HANDLE hProcess, char option);
 };
 
