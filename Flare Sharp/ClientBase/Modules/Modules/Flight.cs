@@ -9,24 +9,27 @@ using System.Threading.Tasks;
 
 namespace Flare_Sharp.ClientBase.Modules.Modules
 {
-    public class AutoSprint : Module
+    public class Flight : Module
     {
-        public AutoSprint() : base("AutoSprint", CategoryHandler.registry.categories[1], '-', false)
+        public Flight() : base("Flight", CategoryHandler.registry.categories[2], '-', false)
         {
-
         }
 
         public override void onEnable()
         {
             base.onEnable();
-            byte[] write = { 0x90, 0x90, 0x90, 0x90, 0x90 };
-            MCM.writeBaseBytes(Pointers.autoSprint, write);
         }
+
         public override void onDisable()
         {
             base.onDisable();
-            byte[] write = { 0x44,0x0F,0x2F,0x66,0x0C };
-            MCM.writeBaseBytes(Pointers.autoSprint, write);
+            SDK.instance.player.isFlying = 0;
+        }
+
+        public override void onTick()
+        {
+            base.onTick();
+            SDK.instance.player.isFlying = 1;
         }
     }
 }

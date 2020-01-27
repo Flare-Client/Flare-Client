@@ -37,7 +37,18 @@ namespace Flare_Sharp.Memory.CraftSDK
             UInt64[] offs = { 0x200, 0x128, 0x40, 0x8, 0x248 };
             return MCM.baseEvaluatePointer(0x02FA94F0, offs);
         }
+        public static int autoSprint = 0x1A5B8F0;
         public static int criticalsPacket = 0xFD1E56;
         public static int showCoordinates = 0x5FF84D;
+        public static int blockFace = 0x5D2412;
+        public static int noPacket = 0xF984ED;
+        public static int movementPacket = 0xF9508B;
+        public static int invalidMovementPacket = 0xFD1E2B;
+        public static int NoSlowDown1 = 0x1A5B9F9;
+        public static int NoSlowDown2 = 0xF72506;
+        public static int NoKnockBackX = 0x1210362;
+        public static int NoKnockBackY = 0x121036B;
+        public static int NoKnockBackZ = 0x1210374;
+        public static int webTick = 0x12073A5;
     }
 }
