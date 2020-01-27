@@ -20,9 +20,23 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
             base.onEnable();
             byte[] write1 = { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 };
-            byte[] write2 = { 0x41, 0x80, 0x38, 0x01, 0x74, 0x76 };
             MCM.writeBaseBytes(Pointers.blockFace, write1);
-            MCM.writeBaseBytes(Pointers.rapidPlace, write2);
+        }
+
+        public override void onTick()
+        {
+            base.onTick();
+            UInt64 facing = SDK.instance.entityFacing;
+            if (facing > 0)
+            {
+                byte[] write2 = { 0x41, 0x80, 0x38, 0x00, 0x74, 0x76 };
+                MCM.writeBaseBytes(Pointers.rapidPlace, write2);
+            }
+            else
+            {
+                byte[] write2 = { 0x41, 0x80, 0x38, 0x01, 0x74, 0x76 };
+                MCM.writeBaseBytes(Pointers.rapidPlace, write2);
+            }
         }
 
         public override void onDisable()
