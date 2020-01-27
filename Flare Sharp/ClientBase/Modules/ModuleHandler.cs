@@ -26,7 +26,15 @@ namespace Flare_Sharp.ClientBase.Modules
             new AirJump();
             new AutoSprint();
             new PlayerSpeed();
+            new NoSlowDown();
+            new NoKnockBack();
+            new NoWeb();
             new Coordinates();
+            new Flight();
+            new Scaffold();
+            new NoPacket();
+            new Freecam();
+            new ServerCrasher();
             Console.WriteLine("Modules registered!");
             startModuleThread();
         }
