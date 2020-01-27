@@ -1,4 +1,4 @@
-#include "nopacket.h"
+#include "NoPacket.h"
 
 NoPacket::NoPacket(HANDLE hProcess, char option) {
 	switch (option) {

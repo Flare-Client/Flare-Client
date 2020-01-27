@@ -1,20 +1,20 @@
-#include "playerspeed.h"
+#include "Speed.h"
 
-bool playerSpeedToggle;
+bool speedToggle;
 float originalSpeed;
 
-PlayerSpeed::PlayerSpeed(HANDLE hProcess, float value, int toggle) {
+Speed::Speed(HANDLE hProcess, float value, int toggle) {
 	if (toggle) {
-		if (!playerSpeedToggle) {
+		if (!speedToggle) {
 			ReadProcessMemory(hProcess, (BYTE*)pointers::playerSpeed(), &originalSpeed, sizeof(float), 0);
-			playerSpeedToggle = true;
+			speedToggle = true;
 		}
 		WriteProcessMemory(hProcess, (BYTE*)pointers::playerSpeed(), &value, sizeof(float), 0);
 	}
 	else {
-		if (playerSpeedToggle) {
+		if (speedToggle) {
 			WriteProcessMemory(hProcess, (BYTE*)pointers::playerSpeed(), &originalSpeed, sizeof(float), 0);
-			playerSpeedToggle = false;
+			speedToggle = false;
 		}
 	}
 }

@@ -1,4 +1,4 @@
-#include "freecam.h"
+#include "Freecam.h"
 
 bool freecamToggle;
 float originX, originY, originZ;

@@ -1,5 +1,5 @@
-#include "tpaura.h"
-#include "teleport.h"
+#include "TPAura.h"
+#include "Teleport.h"
 #include "EntityList.h"
 #include "ModuleHandler.h"
 

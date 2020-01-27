@@ -1,4 +1,4 @@
-#include "autosprint.h"
+#include "AutoSprint.h"
 
 AutoSprint::AutoSprint(HANDLE hProcess, int toggle) {
 	if (toggle) {

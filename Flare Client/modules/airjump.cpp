@@ -1,4 +1,4 @@
-#include "airjump.h"
+#include "AirJump.h"
 
 using namespace std;
 

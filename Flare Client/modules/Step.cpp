@@ -1,20 +1,20 @@
-#include "stepassist.h"
+#include "Step.h"
 
-bool stepAssistToggle;
+bool stepToggle;
 
-StepAssist::StepAssist(HANDLE hProcess, uintptr_t localPlayer, int toggle) {
+Step::Step(HANDLE hProcess, uintptr_t localPlayer, int toggle) {
 	float newFloatVal = 2;
 	float val = 0.5625;
 	switch (toggle) {
 	case 1:
 		WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, Player::LocalPlayer(), { Player::stepAssist }), &newFloatVal, sizeof(float), 0);
-		stepAssistToggle = true;
+		stepToggle = true;
 	break;
 
 	case 0:
-		if (stepAssistToggle) {
+		if (stepToggle) {
 			WriteProcessMemory(hProcess, (BYTE*)mem::FindAddr(hProcess, Player::LocalPlayer(), { Player::stepAssist }), &val, sizeof(float), 0);
-			stepAssistToggle = false;
+			stepToggle = false;
 		}
 	break;
 	}

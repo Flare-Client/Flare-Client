@@ -1,8 +1,8 @@
-#include "noslowdown.h"
+#include "NoSlowdown.h"
 
 using namespace std;
 
-NoSlowDown::NoSlowDown(HANDLE hProcess, char option) {
+NoSlowdown::NoSlowdown(HANDLE hProcess, char option) {
 	switch (option) {
 	case 'N':
 		mem::NopEx((BYTE*)pointers::noSlowDownOne(), 5, hProcess);

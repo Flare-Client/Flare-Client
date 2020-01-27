@@ -1,4 +1,4 @@
-#include "keybindhandler.h"
+#include "KeybindHandler.h"
 
 std::vector<Keybind> keybinds;
 

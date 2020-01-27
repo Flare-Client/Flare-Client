@@ -1,4 +1,4 @@
-#include "scaffold.h"
+#include "Scaffold.h"
 
 bool rapidBuildToggle;
 

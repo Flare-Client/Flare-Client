@@ -1,4 +1,4 @@
-#include "teleport.h"
+#include "Teleport.h"
 
 Teleport::Teleport(HANDLE hProcess, float X, float Y, float Z) {
 

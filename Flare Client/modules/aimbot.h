@@ -3,8 +3,8 @@
 #include <algorithm>
 #include "ModuleHandler.h"
 
-class Aimbot {
+class AimBot {
 public:
-	Aimbot(HANDLE hProcess);
+	AimBot(HANDLE hProcess);
 };
 
