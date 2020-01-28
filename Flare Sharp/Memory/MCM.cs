@@ -46,12 +46,15 @@ namespace Flare_Sharp.Memory
         public static ProcessModule mcMainModule;
         public static IntPtr mcBaseAddress;
         public static IntPtr mcWinHandle;
+        public static uint mcProcId;
+        public static uint mcWinProcId;
 
         public static void openGame()
         {
             Process[] procs = Process.GetProcessesByName("Minecraft.Windows");
             Process mcw10 = procs[0];
             IntPtr proc = OpenProcess(0x1F0FFF, false, mcw10.Id);
+            mcProcId = (uint)mcw10.Id;
             mcProcHandle = proc;
             mcMainModule = mcw10.MainModule;
             mcBaseAddress = mcMainModule.BaseAddress;
@@ -60,6 +63,7 @@ namespace Flare_Sharp.Memory
         {
             Process[] procs = Process.GetProcessesByName("ApplicationFrameHost");
             mcWinHandle = procs[0].MainWindowHandle;
+            mcWinProcId = (uint)procs[0].Id;
         }
 
         public static RECT getMinecraftRect()
@@ -84,7 +88,7 @@ namespace Flare_Sharp.Memory
             }
             else
             {
-                return (IntPtr)(-2);
+                return (IntPtr)(1);
             }
         }
 

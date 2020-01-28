@@ -90,6 +90,7 @@
     <Compile Include="UI\TabUI.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UI\WinHooks.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
