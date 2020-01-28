@@ -37,6 +37,7 @@ namespace Flare_Sharp.Memory.CraftSDK
             UInt64[] offs = { 0x200, 0x128, 0x40, 0x8, 0x248 };
             return MCM.baseEvaluatePointer(0x02FA94F0, offs);
         }
+        public static int handSwingPacket = 0x8A7244;
         public static int rapidPlace = 0x1024590;
         public static int autoSprint = 0x1A5B8F0;
         public static int criticalsPacket = 0xFD1E56;
