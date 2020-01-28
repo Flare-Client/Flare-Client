@@ -60,7 +60,6 @@ namespace Flare_Sharp.UI
             this.TransparencyKey = Color.FromArgb(77, 77, 77);
             this.BackColor = this.TransparencyKey;
             this.Paint += OnPaint;
-            //this.Load += OnLoad;
             this.Location = new Point(0, 0);
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -68,25 +67,12 @@ namespace Flare_Sharp.UI
             overDel = new WinEventDelegate(adjustOverlay);
             IntPtr result = SetWinEventHook((uint)SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE, (uint)SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE, IntPtr.Zero, overDel, (uint)MCM.mcWinProcId, GetWindowThreadProcessId(MCM.mcWinHandle, IntPtr.Zero), (uint)SWEH_dwFlags.WINEVENT_OUTOFCONTEXT | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNPROCESS | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNTHREAD);
             Console.WriteLine("Overlay hooked the win event! {0}",result.ToInt64().ToString("X"));
+            Program.mainLoop += (object nill, EventArgs e) =>
+            {
+                adjustOverlay(IntPtr.Zero, 0, IntPtr.Zero, 0, 0, 0, 0);
+            };
         }
 
-        public void OnLoad(object sender, EventArgs e)
-        {
-            Thread posThread = new Thread(() =>
-            {
-                while (true)
-                {
-                    fixSizeDel del = new fixSizeDel(() =>
-                    {
-                        ui.Refresh();
-                    });
-                    ui.Invoke(del);
-                    Thread.Sleep(Program.threadSleep);
-                }
-            });
-            posThread.Start();
-            Console.WriteLine("Tab GUI overlay loop started!");
-        }
 
         public void adjustOverlay(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
         {
@@ -94,7 +80,7 @@ namespace Flare_Sharp.UI
             MCM.RECT mcRect = MCM.getMinecraftRect();
             x = mcRect.Left + 16;
             y = mcRect.Top + 30;
-            width = mcRect.Right - mcRect.Left - 16;
+            width = mcRect.Right - mcRect.Left - 25;
             height = mcRect.Bottom - mcRect.Top - 30;
             SetWindowPos(hWnd, MCM.isMinecraftFocusedInsert(), x, y, width, height, 0x0040);
         }
@@ -112,7 +98,7 @@ namespace Flare_Sharp.UI
             catWidth = 0;
             foreach (Category category in CategoryHandler.registry.categories)
             {
-                float wid = graphics.MeasureString(category.name, textFont, 200).Width;
+                float wid = graphics.MeasureString(category.name, textFont, 600).Width;
                 if(wid > catWidth)
                 {
                     catWidth = wid;
@@ -169,7 +155,7 @@ namespace Flare_Sharp.UI
                 {
                     if (mod.enabled)
                     {
-                        float mwid = graphics.MeasureString(mod.name, textFont, 200).Width;
+                        float mwid = graphics.MeasureString(mod.name, textFont, 600).Width;
                         graphics.DrawString(mod.name, textFont, primary, width - mwid, tFontSize + (32 * scale) * yOff);
                         yOff++;
                     }

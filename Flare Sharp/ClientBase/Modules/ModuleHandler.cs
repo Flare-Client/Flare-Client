@@ -46,22 +46,17 @@ namespace Flare_Sharp.ClientBase.Modules
         public void startModuleThread()
         {
             Console.WriteLine("Starting module thread..");
-            Thread moduleThread = new Thread(() =>
+            Program.mainLoop += (object sen, EventArgs e) =>
             {
-                while (true)
+                foreach (Category category in CategoryHandler.registry.categories)
                 {
-                    foreach(Category category in CategoryHandler.registry.categories)
+                    foreach (Module module in category.modules)
                     {
-                        foreach (Module module in category.modules)
-                        {
-                            module.onLoop();
-                        }
+                        module.onLoop();
                     }
-                    new SDK();
-                    Thread.Sleep(Program.threadSleep / 100);
                 }
-            });
-            moduleThread.Start();
+                new SDK();
+            };
             Console.WriteLine("Module thread started!");
         }
     }
