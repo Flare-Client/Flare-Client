@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,6 +15,9 @@ namespace Flare_Sharp.UI
 {
     public class TabUI : Form
     {
+        [DllImport("user32.dll")]
+        public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
+
         public delegate void fixSizeDel();
 
         public static TabUI ui;
@@ -33,6 +37,7 @@ namespace Flare_Sharp.UI
         int height = 0;
         public float catWidth = 0;
         public Graphics graphics;
+        IntPtr hWnd;
 
         public TabUI()
         {
@@ -47,9 +52,9 @@ namespace Flare_Sharp.UI
             this.Paint += OnPaint;
             this.Load += OnLoad;
             this.Location = new Point(0, 0);
-            this.Size = new Size(0xFFFF, 0xFFFF);
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            hWnd = this.Handle;
         }
 
         public void OnLoad(object sender, EventArgs e)
@@ -69,23 +74,16 @@ namespace Flare_Sharp.UI
             posThread.Start();
             Console.WriteLine("Tab GUI overlay loop started!");
         }
-        int lx = 0;
-        int ly = 0;
         public void OnPaint(object sender, PaintEventArgs args)
         {
             //Adust window position
             MCM.RECT mcRect = MCM.getMinecraftRect();
             x = mcRect.Left + 16;
             y = mcRect.Top + 30;
-            width = mcRect.Right;
-            height = mcRect.Bottom;
-            if (x != lx || y != ly)
-            {
-                lx = x;
-                ly = y;
-                //ui.Refresh();
-            }
-            ui.TopMost = MCM.isMinecraftFocused();
+            width = mcRect.Right-mcRect.Left;
+            height = mcRect.Bottom- mcRect.Top;
+            Console.WriteLine(width);
+            SetWindowPos(hWnd, MCM.isMinecraftFocusedInsert(), x, y, width, height, 0x0040);
 
             //Render
             graphics = args.Graphics;
@@ -93,7 +91,7 @@ namespace Flare_Sharp.UI
             titleFont = new Font(new FontFamily("Arial"), tFontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
             textFont = new Font(new FontFamily("Arial"), fontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
 
-            graphics.DrawString("Flare", titleFont, primary, x-16, y);
+            graphics.DrawString("Flare", titleFont, primary, -10, 0);
             uint c = 0;
             catWidth = 0;
             foreach (Category category in CategoryHandler.registry.categories)
@@ -107,10 +105,10 @@ namespace Flare_Sharp.UI
             foreach (Category category in CategoryHandler.registry.categories)
             {
                 //Draw category
-                graphics.FillRectangle(secondary, x, y + tFontSize + (32 * scale) * c, catWidth*scale, 32*scale);
+                graphics.FillRectangle(secondary, 0, tFontSize + (32 * scale) * c, catWidth*scale, 32*scale);
                 if (category.active)
                 {
-                    graphics.FillRectangle(quaternary, x, y + tFontSize + (32 * scale) * c, catWidth * scale, 32 * scale);
+                    graphics.FillRectangle(quaternary, 0, tFontSize + (32 * scale) * c, catWidth * scale, 32 * scale);
                     //Draw modules
                     float modWidth = 0;
                     foreach (Module module in category.modules)
@@ -124,27 +122,27 @@ namespace Flare_Sharp.UI
                     uint m = 0;
                     foreach (Module module in category.modules)
                     {
-                        graphics.FillRectangle(secondary, x + catWidth, y + tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
+                        graphics.FillRectangle(secondary, catWidth, tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
                         if (module.enabled)
                         {
-                            graphics.FillRectangle(quaternary, x + catWidth, y + tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
+                            graphics.FillRectangle(quaternary, catWidth, tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
                         }
-                        graphics.DrawString(module.name, textFont, primary, x + catWidth, y + tFontSize + (32 * scale) * m);
+                        graphics.DrawString(module.name, textFont, primary, catWidth, tFontSize + (32 * scale) * m);
                         float kwid = graphics.MeasureString(module.keybind.ToString(), textFont, 200).Width;
-                        graphics.FillRectangle(secondary, x + catWidth + modWidth, y + tFontSize + (32 * scale) * m, kwid * scale, 32 * scale);
-                        graphics.DrawString(module.keybind.ToString(), textFont, primary, x + catWidth + modWidth, y + tFontSize + (32 * scale) * m);
+                        graphics.FillRectangle(secondary, catWidth + modWidth, tFontSize + (32 * scale) * m, kwid * scale, 32 * scale);
+                        graphics.DrawString(module.keybind.ToString(), textFont, primary, catWidth + modWidth, tFontSize + (32 * scale) * m);
                         if (module.selected)
                         {
-                            graphics.DrawRectangle(new Pen(tertiary.Color, 2), x + catWidth, y + tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
+                            graphics.DrawRectangle(new Pen(tertiary.Color, 2), catWidth, tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
                         }
                         m++;
                     }
                 }
                 else if (category.selected)
                 {
-                    graphics.FillRectangle(tertiary, x, y + tFontSize + (32 * scale) * c, catWidth * scale, 32 * scale);
+                    graphics.FillRectangle(tertiary, 0, tFontSize + (32 * scale) * c, catWidth * scale, 32 * scale);
                 }
-                graphics.DrawString(category.name, textFont, primary, x, y+tFontSize + (32 * scale) * c);
+                graphics.DrawString(category.name, textFont, primary, 0, tFontSize + (32 * scale) * c);
                 c++;
             }
             //Draw enabled modules
@@ -156,7 +154,7 @@ namespace Flare_Sharp.UI
                     if (mod.enabled)
                     {
                         float mwid = graphics.MeasureString(mod.name, textFont, 200).Width;
-                        graphics.DrawString(mod.name, textFont, primary, width - mwid, y + tFontSize + (32 * scale) * yOff);
+                        graphics.DrawString(mod.name, textFont, primary, width - mwid, tFontSize + (32 * scale) * yOff);
                         yOff++;
                     }
                 }

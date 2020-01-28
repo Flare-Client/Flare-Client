@@ -74,6 +74,19 @@ namespace Flare_Sharp.Memory
             GetWindowText(GetForegroundWindow(), sb, "Minecraft".Length + 1);
             return sb.ToString() == "Minecraft";
         }
+        public static IntPtr isMinecraftFocusedInsert()
+        {
+            StringBuilder sb = new StringBuilder("Minecraft".Length + 1);
+            GetWindowText(GetForegroundWindow(), sb, "Minecraft".Length + 1);
+            if(sb.ToString() == "Minecraft")
+            {
+                return (IntPtr)(-1);
+            }
+            else
+            {
+                return (IntPtr)(-2);
+            }
+        }
 
         public static void unprotectMemory(IntPtr address, int bytesToUnprotect)
         {
