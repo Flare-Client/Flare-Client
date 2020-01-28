@@ -29,9 +29,12 @@ namespace Flare_Sharp.ClientBase.Modules
             new NoSlowDown();
             new NoKnockBack();
             new NoWeb();
+            new Step();
             new Coordinates();
             new Flight();
             new Scaffold();
+            new Gamemode();
+            new NoFall();
             new NoPacket();
             new Freecam();
             new ServerCrasher();

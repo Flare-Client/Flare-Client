@@ -19,15 +19,33 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onEnable()
         {
             base.onEnable();
-            byte[] write = { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 };
-            MCM.writeBaseBytes(Pointers.blockFace, write);
+            byte[] write1 = { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 };
+            MCM.writeBaseBytes(Pointers.blockFace, write1);
+        }
+
+        public override void onTick()
+        {
+            base.onTick();
+            UInt64 facing = SDK.instance.entityFacing;
+            if (facing > 0)
+            {
+                byte[] write2 = { 0x41, 0x80, 0x38, 0x00, 0x74, 0x76 };
+                MCM.writeBaseBytes(Pointers.rapidPlace, write2);
+            }
+            else
+            {
+                byte[] write2 = { 0x41, 0x80, 0x38, 0x01, 0x74, 0x76 };
+                MCM.writeBaseBytes(Pointers.rapidPlace, write2);
+            }
         }
 
         public override void onDisable()
         {
             base.onDisable();
-            byte[] write = { 0x41, 0x88, 0x86, 0x54, 0x08, 0x00, 0x00 };
-            MCM.writeBaseBytes(Pointers.blockFace, write);
+            byte[] write1 = { 0x41, 0x88, 0x86, 0x54, 0x08, 0x00, 0x00 };
+            byte[] write2 = { 0x41, 0x80, 0x38, 0x00, 0x74, 0x76 };
+            MCM.writeBaseBytes(Pointers.blockFace, write1);
+            MCM.writeBaseBytes(Pointers.rapidPlace, write2);
         }
     }
 }

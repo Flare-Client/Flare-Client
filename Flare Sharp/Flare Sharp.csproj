@@ -64,7 +64,9 @@
     <Compile Include="ClientBase\Modules\Modules\ClickUI.cs" />
     <Compile Include="ClientBase\Modules\Modules\Criticals.cs" />
     <Compile Include="ClientBase\Modules\Modules\Freecam.cs" />
+    <Compile Include="ClientBase\Modules\Modules\Gamemode.cs" />
     <Compile Include="ClientBase\Modules\Modules\Hitbox.cs" />
+    <Compile Include="ClientBase\Modules\Modules\NoFall.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoKnockBack.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoPacket.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoSlowDown.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="ClientBase\Modules\Modules\PlayerSpeed.cs" />
     <Compile Include="ClientBase\Modules\Modules\Scaffold.cs" />
     <Compile Include="ClientBase\Modules\Modules\ServerCrasher.cs" />
+    <Compile Include="ClientBase\Modules\Modules\Step.cs" />
     <Compile Include="ClientBase\Modules\Modules\Triggerbot.cs" />
     <Compile Include="ClientBase\Modules\Modules\Coordinates.cs" />
     <Compile Include="Memory\CraftSDK\Entity.cs" />

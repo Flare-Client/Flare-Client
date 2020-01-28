@@ -183,5 +183,31 @@ namespace Flare_Sharp.Memory.CraftSDK
                 MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
             }
         }
+        public int isFalling
+        {
+            get
+            {
+                UInt64[] offs = { 0x194 };
+                return MCM.readInt(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x194 };
+                MCM.writeInt(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
+        public float blockCollisionStep
+        {
+            get
+            {
+                UInt64[] offs = { 0x220 };
+                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x220 };
+                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
     }
 }
