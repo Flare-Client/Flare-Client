@@ -80,7 +80,10 @@ namespace Flare_Sharp.ClientBase.Keybinds
                             {
                                 try
                                 {
-                                    clientKeyHeldEvent.Invoke(this, new clientKeyEvent(c));
+                                    if(clientKeyHeldEvent != null)
+                                    {
+                                        clientKeyHeldEvent.Invoke(this, new clientKeyEvent(c));
+                                    }
                                 } catch (Exception) { }
                             }
                         }

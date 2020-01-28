@@ -46,12 +46,15 @@ namespace Flare_Sharp.Memory
         public static ProcessModule mcMainModule;
         public static IntPtr mcBaseAddress;
         public static IntPtr mcWinHandle;
+        public static uint mcProcId;
+        public static uint mcWinProcId;
 
         public static void openGame()
         {
             Process[] procs = Process.GetProcessesByName("Minecraft.Windows");
             Process mcw10 = procs[0];
             IntPtr proc = OpenProcess(0x1F0FFF, false, mcw10.Id);
+            mcProcId = (uint)mcw10.Id;
             mcProcHandle = proc;
             mcMainModule = mcw10.MainModule;
             mcBaseAddress = mcMainModule.BaseAddress;
@@ -60,6 +63,7 @@ namespace Flare_Sharp.Memory
         {
             Process[] procs = Process.GetProcessesByName("ApplicationFrameHost");
             mcWinHandle = procs[0].MainWindowHandle;
+            mcWinProcId = (uint)procs[0].Id;
         }
 
         public static RECT getMinecraftRect()
@@ -73,6 +77,19 @@ namespace Flare_Sharp.Memory
             StringBuilder sb = new StringBuilder("Minecraft".Length + 1);
             GetWindowText(GetForegroundWindow(), sb, "Minecraft".Length + 1);
             return sb.ToString() == "Minecraft";
+        }
+        public static IntPtr isMinecraftFocusedInsert()
+        {
+            StringBuilder sb = new StringBuilder("Minecraft".Length + 1);
+            GetWindowText(GetForegroundWindow(), sb, "Minecraft".Length + 1);
+            if(sb.ToString() == "Minecraft")
+            {
+                return (IntPtr)(-1);
+            }
+            else
+            {
+                return (IntPtr)(1);
+            }
         }
 
         public static void unprotectMemory(IntPtr address, int bytesToUnprotect)

@@ -33,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <PlatformTarget>x64</PlatformTarget>
@@ -60,6 +61,7 @@
     <Compile Include="ClientBase\Modules\Modules\Aimbot.cs" />
     <Compile Include="ClientBase\Modules\Modules\AirJump.cs" />
     <Compile Include="ClientBase\Modules\Modules\AutoSprint.cs" />
+    <Compile Include="ClientBase\Modules\Modules\ClickUI.cs" />
     <Compile Include="ClientBase\Modules\Modules\Criticals.cs" />
     <Compile Include="ClientBase\Modules\Modules\Freecam.cs" />
     <Compile Include="ClientBase\Modules\Modules\Gamemode.cs" />
@@ -91,6 +93,7 @@
     <Compile Include="UI\TabUI.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UI\WinHooks.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
