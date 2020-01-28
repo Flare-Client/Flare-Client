@@ -32,6 +32,7 @@ namespace Flare_Sharp.UI
         int width = 0;
         int height = 0;
         public float catWidth = 0;
+        public Graphics graphics;
 
         public TabUI()
         {
@@ -55,24 +56,11 @@ namespace Flare_Sharp.UI
         {
             Thread posThread = new Thread(() =>
             {
-                int lx = 0;
-                int ly = 0;
                 while (true)
                 {
                     fixSizeDel del = new fixSizeDel(() =>
                     {
-                        MCM.RECT mcRect = MCM.getMinecraftRect();
-                        x = mcRect.Left+16;
-                        y = mcRect.Top+30;
-                        width = mcRect.Right;
-                        height = mcRect.Bottom;
-                        if (x != lx || y!= ly)
-                        {
-                            lx = x;
-                            ly = y;
-                            ui.Refresh();
-                        }
-                        ui.TopMost = MCM.isMinecraftFocused();
+                        ui.Refresh();
                     });
                     ui.Invoke(del);
                     Thread.Sleep(Program.threadSleep);
@@ -81,10 +69,26 @@ namespace Flare_Sharp.UI
             posThread.Start();
             Console.WriteLine("Tab GUI overlay loop started!");
         }
-
+        int lx = 0;
+        int ly = 0;
         public void OnPaint(object sender, PaintEventArgs args)
         {
-            Graphics graphics = args.Graphics;
+            //Adust window position
+            MCM.RECT mcRect = MCM.getMinecraftRect();
+            x = mcRect.Left + 16;
+            y = mcRect.Top + 30;
+            width = mcRect.Right;
+            height = mcRect.Bottom;
+            if (x != lx || y != ly)
+            {
+                lx = x;
+                ly = y;
+                //ui.Refresh();
+            }
+            ui.TopMost = MCM.isMinecraftFocused();
+
+            //Render
+            graphics = args.Graphics;
             //Adjust fonts
             titleFont = new Font(new FontFamily("Arial"), tFontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
             textFont = new Font(new FontFamily("Arial"), fontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -111,7 +115,7 @@ namespace Flare_Sharp.UI
                     float modWidth = 0;
                     foreach (Module module in category.modules)
                     {
-                        float wid = graphics.MeasureString(module.name, textFont, 200).Width;
+                        float wid = graphics.MeasureString(module.name, textFont, 400).Width;
                         if (wid > modWidth)
                         {
                             modWidth = wid;

@@ -35,6 +35,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new NoPacket();
             new Freecam();
             new ServerCrasher();
+            new ClickUI();
             Console.WriteLine("Modules registered!");
             startModuleThread();
         }
