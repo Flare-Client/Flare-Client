@@ -94,8 +94,8 @@ namespace Flare_Sharp.UI
             MCM.RECT mcRect = MCM.getMinecraftRect();
             x = mcRect.Left + 16;
             y = mcRect.Top + 30;
-            width = mcRect.Right - mcRect.Left;
-            height = mcRect.Bottom - mcRect.Top;
+            width = mcRect.Right - mcRect.Left - 16;
+            height = mcRect.Bottom - mcRect.Top - 30;
             SetWindowPos(hWnd, MCM.isMinecraftFocusedInsert(), x, y, width, height, 0x0040);
         }
 
