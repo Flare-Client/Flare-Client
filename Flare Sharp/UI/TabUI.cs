@@ -25,15 +25,20 @@ namespace Flare_Sharp.UI
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, IntPtr voidProcessId);
         [DllImport("user32.dll", SetLastError = true)]
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
+        [DllImport("user32.dll")]
+        public static extern UInt64 GetWindowLong(IntPtr hWnd, int nIndex);
+        [DllImport("user32.dll")]
+        public static extern UInt64 SetWindowLong(IntPtr hWnd,int nIndex, UInt64 dwNewLong);
 
 
         public delegate void fixSizeDel();
 
         public static TabUI ui;
-        public SolidBrush primary = new SolidBrush(Color.FromArgb(255, 100, 100));
+        public SolidBrush primary = new SolidBrush(Color.FromArgb(255, 255, 255));
         public SolidBrush secondary = new SolidBrush(Color.FromArgb(25, 25, 25));
-        public SolidBrush tertiary = new SolidBrush(Color.FromArgb(100, 255, 100));
-        public SolidBrush quaternary = new SolidBrush(Color.FromArgb(100, 100, 255));
+        public SolidBrush tertiary = new SolidBrush(Color.FromArgb(255, 0, 100));
+        public SolidBrush quaternary = new SolidBrush(Color.FromArgb(255, 0, 255));
+        public SolidBrush rainbow = new SolidBrush(Color.FromArgb(255, 255, 255));
 
         float scale = 1;
         int tFontSize = 72;
@@ -48,6 +53,8 @@ namespace Flare_Sharp.UI
         public Graphics graphics;
         IntPtr hWnd;
         WinEventDelegate overDel;
+        float rbProg = 0;
+        bool rainbowUI = false;
 
         public TabUI()
         {
@@ -60,7 +67,6 @@ namespace Flare_Sharp.UI
             this.TransparencyKey = Color.FromArgb(77, 77, 77);
             this.BackColor = this.TransparencyKey;
             this.Paint += OnPaint;
-            //this.Load += OnLoad;
             this.Location = new Point(0, 0);
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -68,25 +74,20 @@ namespace Flare_Sharp.UI
             overDel = new WinEventDelegate(adjustOverlay);
             IntPtr result = SetWinEventHook((uint)SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE, (uint)SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE, IntPtr.Zero, overDel, (uint)MCM.mcWinProcId, GetWindowThreadProcessId(MCM.mcWinHandle, IntPtr.Zero), (uint)SWEH_dwFlags.WINEVENT_OUTOFCONTEXT | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNPROCESS | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNTHREAD);
             Console.WriteLine("Overlay hooked the win event! {0}",result.ToInt64().ToString("X"));
+            Program.mainLoop += (object nill, EventArgs e) =>
+            {
+                adjustOverlay(IntPtr.Zero, 0, IntPtr.Zero, 0, 0, 0, 0);
+                if (rainbowUI)
+                {
+                    rainbow = new SolidBrush(Rainbow(rbProg));
+                    rbProg += 0.005f;
+                    ui.Invalidate(new Rectangle(width - 600, 0, 600, height));
+                }
+            };
+            UInt64 initialStyle = GetWindowLong(this.Handle, -20);
+            SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
         }
 
-        public void OnLoad(object sender, EventArgs e)
-        {
-            Thread posThread = new Thread(() =>
-            {
-                while (true)
-                {
-                    fixSizeDel del = new fixSizeDel(() =>
-                    {
-                        ui.Refresh();
-                    });
-                    ui.Invoke(del);
-                    Thread.Sleep(Program.threadSleep);
-                }
-            });
-            posThread.Start();
-            Console.WriteLine("Tab GUI overlay loop started!");
-        }
 
         public void adjustOverlay(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
         {
@@ -94,9 +95,32 @@ namespace Flare_Sharp.UI
             MCM.RECT mcRect = MCM.getMinecraftRect();
             x = mcRect.Left + 16;
             y = mcRect.Top + 30;
-            width = mcRect.Right - mcRect.Left;
-            height = mcRect.Bottom - mcRect.Top;
+            width = mcRect.Right - mcRect.Left - 25;
+            height = mcRect.Bottom - mcRect.Top - 30;
             SetWindowPos(hWnd, MCM.isMinecraftFocusedInsert(), x, y, width, height, 0x0040);
+        }
+
+        public static Color Rainbow(float progress)
+        {
+            float div = (Math.Abs(progress % 1) * 6);
+            int ascending = (int)((div % 1) * 255);
+            int descending = 255 - ascending;
+
+            switch ((int)div)
+            {
+                case 0:
+                    return Color.FromArgb(255, 255, ascending, 0);
+                case 1:
+                    return Color.FromArgb(255, descending, 255, 0);
+                case 2:
+                    return Color.FromArgb(255, 0, 255, ascending);
+                case 3:
+                    return Color.FromArgb(255, 0, descending, 255);
+                case 4:
+                    return Color.FromArgb(255, ascending, 0, 255);
+                default: // case 5:
+                    return Color.FromArgb(255, 255, 0, descending);
+            }
         }
 
         public void OnPaint(object sender, PaintEventArgs args)
@@ -112,7 +136,7 @@ namespace Flare_Sharp.UI
             catWidth = 0;
             foreach (Category category in CategoryHandler.registry.categories)
             {
-                float wid = graphics.MeasureString(category.name, textFont, 200).Width;
+                float wid = graphics.MeasureString(category.name, textFont, 600).Width;
                 if(wid > catWidth)
                 {
                     catWidth = wid;
@@ -169,8 +193,8 @@ namespace Flare_Sharp.UI
                 {
                     if (mod.enabled)
                     {
-                        float mwid = graphics.MeasureString(mod.name, textFont, 200).Width;
-                        graphics.DrawString(mod.name, textFont, primary, width - mwid, tFontSize + (32 * scale) * yOff);
+                        float mwid = graphics.MeasureString(mod.name, textFont, 600).Width;
+                        graphics.DrawString(mod.name, textFont, rainbow, width - mwid, tFontSize + (32 * scale) * yOff);
                         yOff++;
                     }
                 }

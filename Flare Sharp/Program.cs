@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,6 +18,7 @@ namespace Flare_Sharp
     class Program
     {
         public static int threadSleep = 1;
+        public static EventHandler<EventArgs> mainLoop;
         static void Main(string[] args)
         {
             Console.WriteLine("Flare# Client");
@@ -33,9 +35,21 @@ namespace Flare_Sharp
                 SDK sdk = new SDK();
                 CategoryHandler ch = new CategoryHandler();
                 ModuleHandler mh = new ModuleHandler();
-                TabUI ui = new TabUI();
+                Thread uiApp = new Thread(() => { TabUI ui = new TabUI(); Application.Run(ui); });
+                uiApp.Start();
                 KeybindHandler kh = new KeybindHandler();
-                Application.Run(ui);
+                while (true)
+                {
+                    try
+                    {
+                        mainLoop.Invoke(null, new EventArgs());
+                        Thread.Sleep(threadSleep);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
             } catch (Exception ex)
             {
                 Console.WriteLine("Message: " + ex.Message);

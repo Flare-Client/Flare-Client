@@ -29,72 +29,62 @@ namespace Flare_Sharp.ClientBase.Keybinds
         {
             handler = this;
             Console.WriteLine("Starting key thread");
-            Thread keyDownThread = new Thread(()=>
+            for (char c = (char)0; c < 0xFF; c++)
             {
-                for(char c = (char)0; c < 0xFF; c++)
+                keyBuffs.Add(c, 0);
+                noKey.Add(c, true);
+            }
+            Program.mainLoop += (object sen, EventArgs e)=>
+            {
+                if (MCM.isMinecraftFocused())
                 {
-                    keyBuffs.Add(c, 0);
-                    noKey.Add(c, true);
-                }
-                while (true)
-                {
-                    if (MCM.isMinecraftFocused())
+                    for (char c = (char)0; c < 0xFF; c++)
                     {
-                        for (char c = (char)0; c < 0xFF; c++)
+                        noKey[c] = true;
+                        if (GetAsyncKeyState(c))
                         {
-                            noKey[c] = true;
-                            if (GetAsyncKeyState(c))
+                            noKey[c] = false;
+                            if (keyBuffs[c] > 0)
                             {
-                                noKey[c] = false;
-                                if (keyBuffs[c] > 0)
-                                {
-                                    continue;
-                                }
-                                keyBuffs[c]++;
-                                TabUI.ui.Invalidate();
-                                try
-                                {
-                                    clientKeyDownEvent.Invoke(this, new clientKeyEvent(c));
-                                }
-                                catch (Exception) { }
+                                continue;
                             }
-                            if (noKey[c])
+                            keyBuffs[c]++;
+                            TabUI.ui.Invalidate();
+                            try
                             {
-                                keyBuffs[c] = 0;
+                                clientKeyDownEvent.Invoke(this, new clientKeyEvent(c));
                             }
+                            catch (Exception) { }
+                        }
+                        if (noKey[c])
+                        {
+                            keyBuffs[c] = 0;
                         }
                     }
-                    Thread.Sleep(Program.threadSleep / 10);
                 }
-            });
-            keyDownThread.Start();
-            Thread keyHeldThread = new Thread(() =>
+            };
+            Program.mainLoop += (object sen, EventArgs e) =>
             {
-                while (true)
+                if (MCM.isMinecraftFocused())
                 {
-                    if (MCM.isMinecraftFocused())
+                    for (char c = (char)0; c < 0xFF; c++)
                     {
-                        for (char c = (char)0; c < 0xFF; c++)
+                        if (GetAsyncKeyState(c))
                         {
-                            if (GetAsyncKeyState(c))
+                            try
                             {
-                                try
+                                if(clientKeyHeldEvent != null)
                                 {
-                                    if(clientKeyHeldEvent != null)
-                                    {
-                                        clientKeyHeldEvent.Invoke(this, new clientKeyEvent(c));
-                                    }
-                                } catch (Exception) { }
-                            }
+                                    clientKeyHeldEvent.Invoke(this, new clientKeyEvent(c));
+                                }
+                            } catch (Exception) { }
                         }
                     }
-                    Thread.Sleep(Program.threadSleep / 10);
                 }
-            });
-            keyHeldThread.Start();
+            };
 
             clientKeyDownEvent += dispatchKeybinds;
-            Console.WriteLine("key thread started");
+            Console.WriteLine("key shit started");
         }
 
         public void dispatchKeybinds(object sender, clientKeyEvent e)
