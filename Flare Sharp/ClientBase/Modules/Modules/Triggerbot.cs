@@ -21,18 +21,18 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             UInt64 facing = SDK.instance.entityFacing;
             if (facing > 0)
             {
-                MCM.writeBaseByte((int)Pointers.attackSwing(), 0);
+                MCM.writeBaseByte(Pointers.attackSwing, 0);
             }
             else
             {
-                MCM.writeBaseByte((int)Pointers.attackSwing(), 1);
+                MCM.writeBaseByte(Pointers.attackSwing, 1);
             }
         }
 
         public override void onDisable()
         {
             base.onDisable();
-            MCM.writeBaseByte((int)Pointers.attackSwing(), 1);
+            MCM.writeBaseByte(Pointers.attackSwing, 1);
         }
     }
 }

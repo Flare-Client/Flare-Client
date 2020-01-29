@@ -43,12 +43,12 @@ namespace Flare_Sharp.Memory.CraftSDK
         {
             get
             {
-                UInt64[] offs = { 0xA88 };
+                UInt64[] offs = { 0xA90 };
                 return MCM.readByte(MCM.evaluatePointer(addr, offs));
             }
             set
             {
-                UInt64[] offs = { 0xA88 };
+                UInt64[] offs = { 0xA90 };
                 MCM.writeByte(MCM.evaluatePointer(addr, offs), value);
             }
         }
@@ -69,12 +69,12 @@ namespace Flare_Sharp.Memory.CraftSDK
         {
             get
             {
-                UInt64[] offs = { 0x1D9C };
+                UInt64[] offs = { 0x1DB4 };
                 return MCM.readInt(MCM.evaluatePointer(addr, offs));
             }
             set
             {
-                UInt64[] offs = { 0x1D9C };
+                UInt64[] offs = { 0x1DB4 };
                 MCM.writeInt(MCM.evaluatePointer(addr, offs), value);
             }
         }
@@ -82,12 +82,12 @@ namespace Flare_Sharp.Memory.CraftSDK
         {
             get
             {
-                UInt64[] offs = { 0xAA0 };
+                UInt64[] offs = { 0xAA8 };
                 return MCM.readInt(MCM.evaluatePointer(addr, offs));
             }
             set
             {
-                UInt64[] offs = { 0xAA0 };
+                UInt64[] offs = { 0xAA8 };
                 MCM.writeInt(MCM.evaluatePointer(addr, offs), value);
             }
         }
