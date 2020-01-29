@@ -25,15 +25,20 @@ namespace Flare_Sharp.UI
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, IntPtr voidProcessId);
         [DllImport("user32.dll", SetLastError = true)]
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
+        [DllImport("user32.dll")]
+        public static extern UInt64 GetWindowLong(IntPtr hWnd, int nIndex);
+        [DllImport("user32.dll")]
+        public static extern UInt64 SetWindowLong(IntPtr hWnd,int nIndex, UInt64 dwNewLong);
 
 
         public delegate void fixSizeDel();
 
         public static TabUI ui;
-        public SolidBrush primary = new SolidBrush(Color.FromArgb(255, 100, 100));
+        public SolidBrush primary = new SolidBrush(Color.FromArgb(255, 255, 255));
         public SolidBrush secondary = new SolidBrush(Color.FromArgb(25, 25, 25));
-        public SolidBrush tertiary = new SolidBrush(Color.FromArgb(100, 255, 100));
-        public SolidBrush quaternary = new SolidBrush(Color.FromArgb(100, 100, 255));
+        public SolidBrush tertiary = new SolidBrush(Color.FromArgb(255, 0, 100));
+        public SolidBrush quaternary = new SolidBrush(Color.FromArgb(255, 0, 255));
+        public SolidBrush rainbow = new SolidBrush(Color.FromArgb(255, 255, 255));
 
         float scale = 1;
         int tFontSize = 72;
@@ -48,6 +53,8 @@ namespace Flare_Sharp.UI
         public Graphics graphics;
         IntPtr hWnd;
         WinEventDelegate overDel;
+        float rbProg = 0;
+        bool rainbowUI = false;
 
         public TabUI()
         {
@@ -70,7 +77,15 @@ namespace Flare_Sharp.UI
             Program.mainLoop += (object nill, EventArgs e) =>
             {
                 adjustOverlay(IntPtr.Zero, 0, IntPtr.Zero, 0, 0, 0, 0);
+                if (rainbowUI)
+                {
+                    rainbow = new SolidBrush(Rainbow(rbProg));
+                    rbProg += 0.005f;
+                    ui.Invalidate(new Rectangle(width - 600, 0, 600, height));
+                }
             };
+            UInt64 initialStyle = GetWindowLong(this.Handle, -20);
+            SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
         }
 
 
@@ -83,6 +98,29 @@ namespace Flare_Sharp.UI
             width = mcRect.Right - mcRect.Left - 25;
             height = mcRect.Bottom - mcRect.Top - 30;
             SetWindowPos(hWnd, MCM.isMinecraftFocusedInsert(), x, y, width, height, 0x0040);
+        }
+
+        public static Color Rainbow(float progress)
+        {
+            float div = (Math.Abs(progress % 1) * 6);
+            int ascending = (int)((div % 1) * 255);
+            int descending = 255 - ascending;
+
+            switch ((int)div)
+            {
+                case 0:
+                    return Color.FromArgb(255, 255, ascending, 0);
+                case 1:
+                    return Color.FromArgb(255, descending, 255, 0);
+                case 2:
+                    return Color.FromArgb(255, 0, 255, ascending);
+                case 3:
+                    return Color.FromArgb(255, 0, descending, 255);
+                case 4:
+                    return Color.FromArgb(255, ascending, 0, 255);
+                default: // case 5:
+                    return Color.FromArgb(255, 255, 0, descending);
+            }
         }
 
         public void OnPaint(object sender, PaintEventArgs args)
@@ -156,7 +194,7 @@ namespace Flare_Sharp.UI
                     if (mod.enabled)
                     {
                         float mwid = graphics.MeasureString(mod.name, textFont, 600).Width;
-                        graphics.DrawString(mod.name, textFont, primary, width - mwid, tFontSize + (32 * scale) * yOff);
+                        graphics.DrawString(mod.name, textFont, rainbow, width - mwid, tFontSize + (32 * scale) * yOff);
                         yOff++;
                     }
                 }
