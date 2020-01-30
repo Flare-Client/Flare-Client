@@ -72,6 +72,7 @@
     <Compile Include="ClientBase\Modules\Modules\NoSlowDown.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoSwing.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoWeb.cs" />
+    <Compile Include="ClientBase\Modules\Modules\Phase.cs" />
     <Compile Include="ClientBase\Modules\Modules\PlayerSpeed.cs" />
     <Compile Include="ClientBase\Modules\Modules\Scaffold.cs" />
     <Compile Include="ClientBase\Modules\Modules\ServerCrasher.cs" />

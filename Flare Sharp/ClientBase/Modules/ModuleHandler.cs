@@ -35,6 +35,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new Scaffold();
             new Gamemode();
             new NoFall();
+            new Phase();
             new NoSwing();
             new NoPacket();
             new Freecam();
