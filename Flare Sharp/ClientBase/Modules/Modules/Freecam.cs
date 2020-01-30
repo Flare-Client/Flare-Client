@@ -20,7 +20,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
             base.onEnable();
             savedCoordinates.Add(SDK.instance.player.currentX1);
-            savedCoordinates.Add(SDK.instance.player.currentY1);
+            savedCoordinates.Add(SDK.instance.player.currentY1 - 1);
             savedCoordinates.Add(SDK.instance.player.currentZ1);
             byte[] write = { 0x90, 0x90, 0x90 };
             MCM.writeBaseBytes(Pointers.movementPacket, write);

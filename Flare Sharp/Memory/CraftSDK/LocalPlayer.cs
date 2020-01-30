@@ -20,11 +20,11 @@ namespace Flare_Sharp.Memory.CraftSDK
             currentY1 = y;
             currentZ1 = z;
             X1 = x;
-            X2 = x;
+            X2 = x + 0.6f;
             Y1 = y;
-            Y2 = y;
+            Y2 = y + 1.8f;
             Z1 = z;
-            Z2 = z;
+            Z2 = z + 0.6f;
         }
 
         public int onGround
