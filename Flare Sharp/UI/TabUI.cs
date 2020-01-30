@@ -72,18 +72,8 @@ namespace Flare_Sharp.UI
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             hWnd = this.Handle;
             overDel = new WinEventDelegate(adjustOverlay);
-            IntPtr result = SetWinEventHook((uint)SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE, (uint)SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE, IntPtr.Zero, overDel, (uint)MCM.mcWinProcId, GetWindowThreadProcessId(MCM.mcWinHandle, IntPtr.Zero), (uint)SWEH_dwFlags.WINEVENT_OUTOFCONTEXT | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNPROCESS | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNTHREAD);
-            Console.WriteLine("Overlay hooked the win event! {0}",result.ToInt64().ToString("X"));
-            Program.mainLoop += (object nill, EventArgs e) =>
-            {
-                adjustOverlay(IntPtr.Zero, 0, IntPtr.Zero, 0, 0, 0, 0);
-                if (rainbowUI)
-                {
-                    rainbow = new SolidBrush(Rainbow(rbProg));
-                    rbProg += 0.005f;
-                    ui.Invalidate(new Rectangle(width - 600, 0, 600, height));
-                }
-            };
+            SetWinEventHook((uint)SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE, (uint)SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE, IntPtr.Zero, overDel, (uint)MCM.mcWinProcId, GetWindowThreadProcessId(MCM.mcWinHandle, IntPtr.Zero), (uint)SWEH_dwFlags.WINEVENT_OUTOFCONTEXT | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNPROCESS | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNTHREAD);
+            SetWinEventHook((uint)SWEH_Events.EVENT_SYSTEM_FOREGROUND, (uint)SWEH_Events.EVENT_SYSTEM_FOREGROUND, IntPtr.Zero, overDel, 0, 0, (uint)SWEH_dwFlags.WINEVENT_OUTOFCONTEXT | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNPROCESS | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNTHREAD);
             UInt64 initialStyle = GetWindowLong(this.Handle, -20);
             SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
         }
@@ -96,7 +86,7 @@ namespace Flare_Sharp.UI
             x = mcRect.Left + 16;
             y = mcRect.Top + 30;
             width = mcRect.Right - mcRect.Left - 25;
-            height = mcRect.Bottom - mcRect.Top - 30;
+            height = mcRect.Bottom - mcRect.Top - 45;
             SetWindowPos(hWnd, MCM.isMinecraftFocusedInsert(), x, y, width, height, 0x0040);
         }
 
@@ -194,7 +184,7 @@ namespace Flare_Sharp.UI
                     if (mod.enabled)
                     {
                         float mwid = graphics.MeasureString(mod.name, textFont, 600).Width;
-                        graphics.DrawString(mod.name, textFont, rainbow, width - mwid, tFontSize + (32 * scale) * yOff);
+                        graphics.DrawString(mod.name, textFont, rainbow, width - mwid, (32 * scale) * yOff);
                         yOff++;
                     }
                 }
