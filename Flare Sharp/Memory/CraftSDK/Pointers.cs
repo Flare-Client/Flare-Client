@@ -25,11 +25,11 @@ namespace Flare_Sharp.Memory.CraftSDK
         }
         public static UInt64 playerSpeed()
         {
-            UInt64[] offs = { 0x120, 0x1D8, 0x410, 0x18, 0x1F0, 0x9C };
-            return MCM.baseEvaluatePointer(0x03004440, offs);
+            UInt64[] offs = { 0x30, 0xF8, 0x410, 0x18, 0x1F0, 0x9C };
+            return MCM.baseEvaluatePointer(0x03020990, offs);
         }
         public static UInt64 UI()
-        {
+        { 
             UInt64[] offs = { 0x200, 0x128, 0x40, 0x8, 0x248 };
             return MCM.baseEvaluatePointer(0x02FA94F0, offs); //Not being used
         }
@@ -41,7 +41,7 @@ namespace Flare_Sharp.Memory.CraftSDK
         public static int showCoordinates = 0x6015BD; //v1.14.2
         public static int blockFace = 0x5D3F82; //v1.14.2
         public static int noPacket = 0xF9F7DD; //v1.14.2
-        public static int movementPacket = 0x0; //Can't Find :/ - V1.14.2
+        public static int movementPacket = 0x8AB7E7; //V1.14.2
         public static int invalidMovementPacket = 0xFD923B; //v1.14.2
         public static int NoSlowDown1 = 0x1A629C9; //v1.14.2
         public static int NoSlowDown2 = 0xF79976; //v1.14.2
