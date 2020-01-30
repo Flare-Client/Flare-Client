@@ -209,5 +209,44 @@ namespace Flare_Sharp.Memory.CraftSDK
                 MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
             }
         }
+        public float velX
+        {
+            get
+            {
+                UInt64[] offs = { 0x46C };
+                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x46C };
+                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
+        public float velY
+        {
+            get
+            {
+                UInt64[] offs = { 0x470 };
+                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x470 };
+                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
+        public float velZ
+        {
+            get
+            {
+                UInt64[] offs = { 0x474 };
+                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x474 };
+                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
     }
 }
