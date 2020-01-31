@@ -108,11 +108,14 @@ namespace Flare_Sharp.ClientBase.Keybinds
                             }
                             releaseBuffs[c]++;
                             TabUI.ui.Invalidate();
-                            try
+                            if(clientKeyUpEvent != null)
                             {
-                                clientKeyUpEvent.Invoke(this, new clientKeyEvent(c));
+                                try
+                                {
+                                    clientKeyUpEvent.Invoke(this, new clientKeyEvent(c));
+                                }
+                                catch (Exception) { }
                             }
-                            catch (Exception) { }
                         }
                         if (!yesKey[c])
                         {

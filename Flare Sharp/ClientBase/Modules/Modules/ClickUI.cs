@@ -11,14 +11,23 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class ClickUI : Module
     {
+        delegate void DrawDel(Graphics graphics);
+        DrawDel drawDel;
         public ClickUI() : base("ClickGUI", CategoryHandler.registry.categories[3], (char)0xA1, false)
         {
+            drawDel = new DrawDel(drawUI);
         }
 
         public override void onTick()
         {
             base.onTick();
-            Graphics graphics = TabUI.ui.graphics;
+            Graphics graphics = TabUI.ui.CreateGraphics();
+            //Make sure its rendering on the same thread!
+            TabUI.ui.Invoke(drawDel, graphics);
+        }
+
+        public void drawUI(Graphics graphics)
+        {
             graphics.FillRectangle(TabUI.ui.primary, 0, 0, 100, 100);
         }
     }

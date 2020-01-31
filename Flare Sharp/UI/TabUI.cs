@@ -50,7 +50,6 @@ namespace Flare_Sharp.UI
         int width = 0;
         int height = 0;
         public float catWidth = 0;
-        public Graphics graphics;
         IntPtr hWnd;
         WinEventDelegate overDel;
         float rbProg = 0;
@@ -115,7 +114,7 @@ namespace Flare_Sharp.UI
         public void OnPaint(object sender, PaintEventArgs args)
         {
             //Render
-            graphics = args.Graphics;
+            Graphics graphics = args.Graphics;
             //Adjust fonts
             titleFont = new Font(new FontFamily("Arial"), tFontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
             textFont = new Font(new FontFamily("Arial"), fontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
