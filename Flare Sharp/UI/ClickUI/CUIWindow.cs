@@ -79,6 +79,7 @@ namespace Flare_Sharp.UI.ClickUI
                         GetCursorPos(out p);
                         x = p.X - dx;
                         y = p.Y - dy;
+                        TabUI.ui.Invalidate();
                     }
                 }
             }
