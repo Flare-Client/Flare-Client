@@ -7,29 +7,26 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class ClickUI : Module
     {
-        delegate void DrawDel(Graphics graphics);
-        DrawDel drawDel;
         public ClickUI() : base("ClickGUI", CategoryHandler.registry.categories[3], (char)0xA1, false)
         {
-            drawDel = new DrawDel(drawUI);
         }
-
-        public override void onTick()
+        public override void onEnable()
         {
-            base.onTick();
-            Graphics graphics = TabUI.ui.CreateGraphics();
-            //Make sure its rendering on the same thread!
-            TabUI.ui.Invoke(drawDel, graphics);
+            base.onEnable();
+            TabUI.ui.Paint += drawUI;
         }
-
-        public void drawUI(Graphics graphics)
+        public void drawUI(object sender, PaintEventArgs args)
         {
-            ClickUiHandler.instance.renderCUI(graphics);
+            if (enabled)
+            {
+                ClickUiHandler.instance.renderCUI(args.Graphics);
+            }
         }
     }
 }

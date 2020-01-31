@@ -95,6 +95,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\ClickUI\ClickUiHandler.cs" />
+    <Compile Include="UI\ClickUI\Controls\CUILabel.cs" />
     <Compile Include="UI\ClickUI\CUIControl.cs" />
     <Compile Include="UI\ClickUI\CUIWindow.cs" />
     <Compile Include="UI\ClickUI\TestWindow.cs" />

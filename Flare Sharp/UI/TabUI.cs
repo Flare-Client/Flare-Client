@@ -1,5 +1,6 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.ClientBase.Modules;
+using Flare_Sharp.ClientBase.Modules.Modules;
 using Flare_Sharp.Memory;
 using System;
 using System.Collections.Generic;
@@ -82,7 +83,7 @@ namespace Flare_Sharp.UI
             //Adust window position
             MCM.RECT mcRect = MCM.getMinecraftRect();
             x = mcRect.Left + 16;
-            y = mcRect.Top + 30;
+            y = mcRect.Top + 34;
             width = mcRect.Right - mcRect.Left - 25;
             height = mcRect.Bottom - mcRect.Top - 45;
             SetWindowPos(hWnd, MCM.isMinecraftFocusedInsert(), x, y, width, height, 0x0040);

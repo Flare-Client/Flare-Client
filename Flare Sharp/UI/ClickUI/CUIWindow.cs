@@ -1,5 +1,6 @@
 ﻿using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.Memory;
+using Flare_Sharp.UI.ClickUI.Controls;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -98,7 +99,7 @@ namespace Flare_Sharp.UI.ClickUI
         {
             if (visible)
             {
-                graphics.FillRectangle(TabUI.ui.tertiary, x, y, width, height);
+                graphics.FillRectangle(TabUI.ui.secondary, x, y, width, height);
                 foreach (CUIControl control in controls)
                 {
                     control.OnPaint(graphics);
