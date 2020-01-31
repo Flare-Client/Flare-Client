@@ -1,5 +1,6 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.UI;
+using Flare_Sharp.UI.ClickUI;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -28,7 +29,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 
         public void drawUI(Graphics graphics)
         {
-            graphics.FillRectangle(TabUI.ui.primary, 0, 0, 100, 100);
+            ClickUiHandler.instance.renderCUI(graphics);
         }
     }
 }

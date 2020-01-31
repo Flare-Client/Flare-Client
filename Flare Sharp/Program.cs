@@ -4,6 +4,7 @@ using Flare_Sharp.ClientBase.Modules;
 using Flare_Sharp.Memory;
 using Flare_Sharp.Memory.CraftSDK;
 using Flare_Sharp.UI;
+using Flare_Sharp.UI.ClickUI;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -33,6 +34,7 @@ namespace Flare_Sharp
                 MCM.openWindowHost();
 
                 SDK sdk = new SDK();
+                ClickUiHandler cuih = new ClickUiHandler();
                 CategoryHandler ch = new CategoryHandler();
                 ModuleHandler mh = new ModuleHandler();
                 Thread uiApp = new Thread(() => { TabUI ui = new TabUI(); Application.Run(ui); });

@@ -1,21 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Flare_Sharp.UI.ClickUI
 {
-    public abstract class CUIControl
+    public class TestWindow : CUIWindow
     {
-        public CUIControl()
+        public TestWindow() : base()
         {
-        }
-
-        public virtual void OnPaint(Graphics graphics)
-        {
-
+            visible = true;
         }
     }
 }
