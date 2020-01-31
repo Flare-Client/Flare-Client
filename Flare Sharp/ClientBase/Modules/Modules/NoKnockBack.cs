@@ -12,8 +12,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class NoKnockBack : Module
     {
-        private bool writeOnce;
-
         public NoKnockBack() : base("NoKnockBack", CategoryHandler.registry.categories[1], '-', false)
         {
         }

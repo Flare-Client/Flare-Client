@@ -27,6 +27,22 @@ namespace Flare_Sharp.Memory.CraftSDK
             Z2 = z + 0.6f;
         }
 
+        public double velocityXZ
+        {
+            get
+            {
+                return Math.Sqrt(velX * velX + velZ * velZ);
+            }
+        }
+
+        public double velocityXYZ
+        {
+            get
+            {
+                return Math.Sqrt(velX * velX + velY * velY + velZ * velZ);
+            }
+        }
+
         public int onGround
         {
             get {
@@ -245,6 +261,32 @@ namespace Flare_Sharp.Memory.CraftSDK
             set
             {
                 UInt64[] offs = { 0x474 };
+                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
+        public float yaw
+        {
+            get
+            {
+                UInt64[] offs = { 0xF4 };
+                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0xF4 };
+                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
+        public float pitch
+        {
+            get
+            {
+                UInt64[] offs = { 0xF0 };
+                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0xF0 };
                 MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
             }
         }

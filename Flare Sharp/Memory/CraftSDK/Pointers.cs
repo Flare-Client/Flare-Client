@@ -33,6 +33,71 @@ namespace Flare_Sharp.Memory.CraftSDK
             UInt64[] offs = { 0x200, 0x128, 0x40, 0x8, 0x248 };
             return MCM.baseEvaluatePointer(0x02FA94F0, offs); //Not being used
         }
+        public static int blockPlaceFlag
+        {
+            get
+            {
+                UInt64[] offs = { 0xA8, 0x18, 0x130, 0x540, 0x0, 0x850 };
+                return MCM.readInt(MCM.baseEvaluatePointer(0x02FF8E38, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0xA8, 0x18, 0x130, 0x540, 0x0, 0x850 };
+                MCM.writeInt(MCM.baseEvaluatePointer(0x02FF8E38, offs), value);
+            }
+        }
+        public static int blockSide
+        {
+            get
+            {
+                UInt64[] offs = { 0xA8, 0x18, 0x130, 0x540, 0x0, 0x854 };
+                return MCM.readInt(MCM.baseEvaluatePointer(0x02FF8E38, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0xA8, 0x18, 0x130, 0x540, 0x0, 0x854 };
+                MCM.writeInt(MCM.baseEvaluatePointer(0x02FF8E38, offs), value);
+            }
+        }
+        public static int blockPosX
+        {
+            get
+            {
+                UInt64[] offs = { 0xA8, 0x18, 0x130, 0x540, 0x0, 0x858 };
+                return MCM.readInt(MCM.baseEvaluatePointer(0x02FF8E38, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0xA8, 0x18, 0x130, 0x540, 0x0, 0x858 };
+                MCM.writeInt(MCM.baseEvaluatePointer(0x02FF8E38, offs), value);
+            }
+        }
+        public static int blockPosY
+        {
+            get
+            {
+                UInt64[] offs = { 0xA8, 0x18, 0x130, 0x540, 0x0, 0x85C };
+                return MCM.readInt(MCM.baseEvaluatePointer(0x02FF8E38, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0xA8, 0x18, 0x130, 0x540, 0x0, 0x85C };
+                MCM.writeInt(MCM.baseEvaluatePointer(0x02FF8E38, offs), value);
+            }
+        }
+        public static int blockPosZ
+        {
+            get
+            {
+                UInt64[] offs = { 0xA8, 0x18, 0x130, 0x540, 0x0, 0x860 };
+                return MCM.readInt(MCM.baseEvaluatePointer(0x02FF8E38, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0xA8, 0x18, 0x130, 0x540, 0x0, 0x860 };
+                MCM.writeInt(MCM.baseEvaluatePointer(0x02FF8E38, offs), value);
+            }
+        }
         public static int attackSwing = 0x102B81E; //v1.14.2
         public static int handSwingPacket = 0x8A8E84; //v1.14.2
         public static int rapidPlace = 0x102B7A0; //v1.14.2
