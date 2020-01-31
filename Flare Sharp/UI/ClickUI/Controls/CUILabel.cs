@@ -15,10 +15,10 @@ namespace Flare_Sharp.UI.ClickUI.Controls
         int x;
         int y;
         CUIWindow parent;
-        public CUILabel(string text, Font font, Color color, int x, int y, CUIWindow parent) : base()
+        public CUILabel(string text, string fontFamily, float fontSize, FontStyle fontStyle, Color color, int x, int y, CUIWindow parent) : base()
         {
             this.text = text;
-            this.font = font;
+            this.font = new Font(fontFamily, fontSize, fontStyle, GraphicsUnit.Pixel);
             this.brush = new SolidBrush(color);
             this.x = x;
             this.y = y;

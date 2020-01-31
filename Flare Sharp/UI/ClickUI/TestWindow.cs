@@ -12,7 +12,7 @@ namespace Flare_Sharp.UI.ClickUI
     {
         public TestWindow() : base()
         {
-            controls.Add(new CUILabel("Test", SystemFonts.DefaultFont, Color.FromArgb(255, 255, 255), 10, 10, this));
+            controls.Add(new CUILabel("Settings", "Arial", 32, FontStyle.Underline, Color.FromArgb(255, 255, 255), 10, 10, this));
             visible = true;
         }
     }
