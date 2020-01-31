@@ -67,6 +67,7 @@
     <Compile Include="ClientBase\Modules\Modules\Freecam.cs" />
     <Compile Include="ClientBase\Modules\Modules\Gamemode.cs" />
     <Compile Include="ClientBase\Modules\Modules\Hitbox.cs" />
+    <Compile Include="ClientBase\Modules\Modules\Jetpack.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoFall.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoKnockBack.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoPacket.cs" />
