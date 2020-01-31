@@ -20,11 +20,11 @@ namespace Flare_Sharp.Memory.CraftSDK
             currentY1 = y;
             currentZ1 = z;
             X1 = x;
-            X2 = x;
+            X2 = x + 0.6f;
             Y1 = y;
-            Y2 = y;
+            Y2 = y + 1.8f;
             Z1 = z;
-            Z2 = z;
+            Z2 = z + 0.6f;
         }
 
         public int onGround
@@ -206,6 +206,45 @@ namespace Flare_Sharp.Memory.CraftSDK
             set
             {
                 UInt64[] offs = { 0x220 };
+                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
+        public float velX
+        {
+            get
+            {
+                UInt64[] offs = { 0x46C };
+                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x46C };
+                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
+        public float velY
+        {
+            get
+            {
+                UInt64[] offs = { 0x470 };
+                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x470 };
+                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
+        public float velZ
+        {
+            get
+            {
+                UInt64[] offs = { 0x474 };
+                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x474 };
                 MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
             }
         }
