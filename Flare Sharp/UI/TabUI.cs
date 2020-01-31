@@ -78,7 +78,6 @@ namespace Flare_Sharp.UI
             SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
         }
 
-
         public void adjustOverlay(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
         {
             //Adust window position
