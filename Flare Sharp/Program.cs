@@ -22,6 +22,7 @@ namespace Flare_Sharp
         public static EventHandler<EventArgs> mainLoop;
         static void Main(string[] args)
         {
+            Dont.Be.A.Scumbag.And.Remove.This.Warn.warn();
             Console.WriteLine("Flare# Client");
             Console.WriteLine("Flare port to C#");
             Console.WriteLine("Discord: https://discord.gg/Hz3Dxg8");

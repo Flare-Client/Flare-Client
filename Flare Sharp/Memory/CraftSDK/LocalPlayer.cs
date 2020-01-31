@@ -68,6 +68,19 @@ namespace Flare_Sharp.Memory.CraftSDK
                 MCM.writeByte(MCM.evaluatePointer(addr, offs), value);
             }
         }
+        public byte isInAir
+        {
+            get
+            {
+                UInt64[] offs = { 0x8FC };
+                return MCM.readByte(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x8FC };
+                MCM.writeByte(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
         public int isInWater
         {
             get
