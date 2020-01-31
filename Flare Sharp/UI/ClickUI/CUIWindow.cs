@@ -1,4 +1,5 @@
 ﻿using Flare_Sharp.ClientBase.Keybinds;
+using Flare_Sharp.Memory;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -17,11 +18,28 @@ namespace Flare_Sharp.UI.ClickUI
         public List<CUIControl> controls = new List<CUIControl>();
         public int x;
         public int y;
+        public int r2dX
+        {
+            get
+            {
+                MCM.RECT mcr = MCM.getMinecraftRect();
+                return x + mcr.Left;
+            }
+        }
+        public int r2dY
+        {
+            get
+            {
+                MCM.RECT mcr = MCM.getMinecraftRect();
+                return y + mcr.Top;
+            }
+        }
         public int width = 400;
         public int height = 300;
         int dx;
         int dy;
         public bool visible;
+        bool dragging;
 
         public CUIWindow()
         {
@@ -39,10 +57,11 @@ namespace Flare_Sharp.UI.ClickUI
                 {
                     Point p;
                     GetCursorPos(out p);
-                    if (p.X > x && p.Y > y && p.X < width + x && p.Y < height + y)
+                    if (p.X > r2dX && p.Y > r2dY && p.X < width + r2dX && p.Y < height + r2dY)
                     {
                         dx = p.X - x;
                         dy = p.Y - y;
+                        dragging = true;
                     }
                 }
             }
@@ -51,12 +70,15 @@ namespace Flare_Sharp.UI.ClickUI
         {
             if (visible)
             {
-                if (e.key == 0x1)
+                if (dragging)
                 {
-                    Point p;
-                    GetCursorPos(out p);
-                    x = p.X - dx;
-                    y = p.Y - dy;
+                    if (e.key == 0x1)
+                    {
+                        Point p;
+                        GetCursorPos(out p);
+                        x = p.X - dx;
+                        y = p.Y - dy;
+                    }
                 }
             }
         }
@@ -66,6 +88,7 @@ namespace Flare_Sharp.UI.ClickUI
             {
                 if (e.key == 0x1)
                 {
+                    dragging = false;
                     TabUI.ui.Invalidate();
                 }
             }
