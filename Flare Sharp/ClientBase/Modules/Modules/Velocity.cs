@@ -35,7 +35,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                     {
                     }
                 }
-                Console.WriteLine("!");
+                //Console.WriteLine("!");
                 await multiplyVelocity();
             }
         }
