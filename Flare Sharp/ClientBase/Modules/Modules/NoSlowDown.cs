@@ -12,7 +12,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class NoSlowDown : Module
     {
-        private bool writeOnce;
 
         public NoSlowDown() : base("NoSlowDown", CategoryHandler.registry.categories[1], '-', false)
         {

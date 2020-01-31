@@ -37,6 +37,37 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                 byte[] write2 = { 0x41, 0x80, 0x38, 0x01, 0x74, 0x76 };
                 MCM.writeBaseBytes(Pointers.rapidPlace, write2);
             }
+
+            /*Pointers.blockPlaceFlag = 0;
+            Pointers.blockPosX = (int)SDK.instance.player.currentX1;
+            Pointers.blockPosY = (int)SDK.instance.player.currentY1 - 2;
+            Pointers.blockPosZ = (int)SDK.instance.player.currentZ1;*/
+
+            /*if(SDK.instance.entityFacing == 0)
+            {
+                Pointers.blockPlaceFlag = 0;
+                Pointers.blockPosX = (int)SDK.instance.player.currentX1;
+                Pointers.blockPosY = (int)SDK.instance.player.currentY1 - 2;
+                Pointers.blockPosZ = (int)SDK.instance.player.currentZ1;
+                float yaw = SDK.instance.player.yaw;
+
+                if(yaw >= -135 && yaw <= -90 | yaw >= -90 && yaw <= -45)
+                {
+                    Pointers.blockSide = 5;
+                } 
+                else if(yaw <= 135 && yaw >= 90 | yaw <= 90 && yaw >= 45)
+                {
+                    Pointers.blockSide = 4;
+                }
+                else if(yaw <= 45 && yaw >= 0 | yaw <= 0 && yaw >= -45)
+                {
+                    Pointers.blockSide = 3;
+                } else
+                {
+                    Pointers.blockSide = 2;
+                }
+            }*/
+
         }
 
         public override void onDisable()
