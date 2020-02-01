@@ -29,21 +29,14 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                     float lpY = SDK.instance.player.Y1;
                     float lpZ = SDK.instance.player.Z1;
 
-                    Console.WriteLine("Player:    " + lpX + ", " + lpY + ", " + lpZ);
-
                     float eX = e.currentX3;
                     float eY = e.currentY3;
                     float eZ = e.currentZ3;
 
-                    Console.WriteLine("Target:    " + eX + ", " + eY + ", " + eZ);
-
                     float mpX = (lpX + eX) / 2;
+                    float mpY = ((lpY + eY) / 2)-1;
                     float mpZ = (lpZ + eZ) / 2;
-
-                    Console.WriteLine("ToPos:    " + mpX + ", " + eY + ", " + mpZ);
-
-                    Console.WriteLine("TargetAddress: " + e.addr.ToString("X"));
-                    e.teleportE(mpX, lpY, mpZ);
+                    e.teleportE(mpX, mpY, mpZ);
                 }
             }
         }

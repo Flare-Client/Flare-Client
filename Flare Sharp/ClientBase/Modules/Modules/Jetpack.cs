@@ -12,13 +12,13 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class Jetpack : Module
     {
-        public Jetpack() : base("Jetpack", CategoryHandler.registry.categories[1], '-', true)
+        public Jetpack() : base("Jetpack", CategoryHandler.registry.categories[1], 'F', true)
         {
             KeybindHandler.clientKeyHeldEvent += OnKeyHeld;
         }
         public void OnKeyHeld(object sender, clientKeyEvent e)
         {
-            if (e.key == 'F') enabled = true;
+            if (e.key == keybind) enabled = true;
         }
         public override void onTick()
         {
