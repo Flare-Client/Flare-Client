@@ -35,12 +35,12 @@ namespace Flare_Sharp
                 MCM.openWindowHost();
 
                 SDK sdk = new SDK();
-                ClickUiHandler cuih = new ClickUiHandler();
                 CategoryHandler ch = new CategoryHandler();
                 ModuleHandler mh = new ModuleHandler();
+                KeybindHandler kh = new KeybindHandler();
+                ClickUiHandler cuih = new ClickUiHandler();
                 Thread uiApp = new Thread(() => { TabUI ui = new TabUI(); Application.Run(ui); });
                 uiApp.Start();
-                KeybindHandler kh = new KeybindHandler();
                 while (true)
                 {
                     try

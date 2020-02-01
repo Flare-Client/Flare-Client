@@ -9,20 +9,12 @@ namespace Flare_Sharp.UI.ClickUI.Controls
 {
     public class CUILabel : CUIControl
     {
-        string text = "";
-        Font font;
-        Brush brush;
-        int x;
-        int y;
-        CUIWindow parent;
-        public CUILabel(string text, string fontFamily, float fontSize, FontStyle fontStyle, Color color, int x, int y, CUIWindow parent) : base()
+        public string text = "";
+        public Font font;
+        public CUILabel(string text, string fontFamily, float fontSize, FontStyle fontStyle, Color color, int x, int y, CUIWindow parent) : base(color, x, y, parent)
         {
             this.text = text;
             this.font = new Font(fontFamily, fontSize, fontStyle, GraphicsUnit.Pixel);
-            this.brush = new SolidBrush(color);
-            this.x = x;
-            this.y = y;
-            this.parent = parent;
         }
 
         public override void OnPaint(Graphics graphics)

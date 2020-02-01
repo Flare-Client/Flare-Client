@@ -29,7 +29,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             if (e.key == keybind)
             {
                 enabled = false;
-                Console.WriteLine(enabled);
             }
         }
         public override void onTick()

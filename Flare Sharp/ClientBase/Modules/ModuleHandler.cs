@@ -45,6 +45,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new ClickUI();
             new Misplace();
             new Jetpack();
+            new YPort();
             Console.WriteLine("Modules registered!");
             startModuleThread();
         }

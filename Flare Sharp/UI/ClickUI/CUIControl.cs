@@ -9,8 +9,16 @@ namespace Flare_Sharp.UI.ClickUI
 {
     public abstract class CUIControl
     {
-        public CUIControl()
+        public int x;
+        public int y;
+        public Brush brush;
+        public CUIWindow parent;
+        public CUIControl(Color color, int x, int y, CUIWindow parent)
         {
+            this.x = x;
+            this.y = y;
+            this.parent = parent;
+            this.brush = new SolidBrush(color);
         }
 
         public virtual void OnPaint(Graphics graphics)
