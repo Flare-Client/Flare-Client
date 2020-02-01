@@ -199,6 +199,16 @@ namespace Flare_Sharp.Memory
                 inc++;
             }
         }
+        public static void writeBaseInt64(int offset, UInt64 value)
+        {
+            byte[] intByte = BitConverter.GetBytes(value);
+            int inc = 0;
+            foreach (byte b in intByte)
+            {
+                writeBaseByte(offset + inc, b);
+                inc++;
+            }
+        }
 
         //Read direct
         public static byte readByte(UInt64 address)
@@ -263,6 +273,16 @@ namespace Flare_Sharp.Memory
             }
         }
         public static void writeFloat(UInt64 address, float value)
+        {
+            byte[] intByte = BitConverter.GetBytes(value);
+            int inc = 0;
+            foreach (byte b in intByte)
+            {
+                writeByte(address + (UInt64)inc, b);
+                inc++;
+            }
+        }
+        public static void writeInt64(UInt64 address, UInt64 value)
         {
             byte[] intByte = BitConverter.GetBytes(value);
             int inc = 0;

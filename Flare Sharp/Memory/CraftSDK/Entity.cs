@@ -8,7 +8,7 @@ namespace Flare_Sharp.Memory.CraftSDK
 {
     public class Entity
     {
-        UInt64 addr;
+        public UInt64 addr;
         public Entity(UInt64 addr)
         {
             this.addr = addr;
@@ -76,6 +76,84 @@ namespace Flare_Sharp.Memory.CraftSDK
             set
             {
                 UInt64[] offs = { 0x45C };
+                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
+        public float currentX2
+        {
+            get
+            {
+                UInt64[] offs = { 0x460 };
+                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x460 };
+                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
+        public float currentY2
+        {
+            get
+            {
+                UInt64[] offs = { 0x464 };
+                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x464 };
+                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
+        public float currentZ2
+        {
+            get
+            {
+                UInt64[] offs = { 0x468 };
+                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x468 };
+                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
+        public float currentX3
+        {
+            get
+            {
+                UInt64[] offs = { 0x8C4 };
+                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x8C4 };
+                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
+        public float currentY3
+        {
+            get
+            {
+                UInt64[] offs = { 0x8C8 };
+                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x8C8 };
+                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
+        public float currentZ3
+        {
+            get
+            {
+                UInt64[] offs = { 0x8CC };
+                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x8CC };
                 MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
             }
         }

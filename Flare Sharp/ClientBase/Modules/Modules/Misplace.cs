@@ -20,8 +20,23 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             base.onTick();
             foreach (Entity e in EntityList.getEntityList())
             {
+                if (e.distanceTo(SDK.instance.player) < 2)
+                {
+                    continue;
+                }
                 if (e.distanceTo(SDK.instance.player) <= 12) {
-                    e.teleportE(SDK.instance.player.X1, SDK.instance.player.Y1, SDK.instance.player.Z1);
+                    float lpX = SDK.instance.player.X1;
+                    float lpY = SDK.instance.player.Y1;
+                    float lpZ = SDK.instance.player.Z1;
+
+                    float eX = e.currentX3;
+                    float eY = e.currentY3;
+                    float eZ = e.currentZ3;
+
+                    float mpX = (lpX + eX) / 2;
+                    float mpY = ((lpY + eY) / 2)-1;
+                    float mpZ = (lpZ + eZ) / 2;
+                    e.teleportE(mpX, mpY, mpZ);
                 }
             }
         }

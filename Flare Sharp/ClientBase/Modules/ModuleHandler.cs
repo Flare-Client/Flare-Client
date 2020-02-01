@@ -23,7 +23,6 @@ namespace Flare_Sharp.ClientBase.Modules
             new Aimbot();
             new Triggerbot();
             new Criticals();
-            new Jetpack();
             new AirJump();
             new AutoSprint();
             new PlayerSpeed();
@@ -45,6 +44,8 @@ namespace Flare_Sharp.ClientBase.Modules
             new ServerCrasher();
             new ClickUI();
             new Misplace();
+            new Jetpack();
+            new YPort();
             Console.WriteLine("Modules registered!");
             startModuleThread();
         }

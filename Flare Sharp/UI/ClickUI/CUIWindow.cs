@@ -24,7 +24,7 @@ namespace Flare_Sharp.UI.ClickUI
             get
             {
                 MCM.RECT mcr = MCM.getMinecraftRect();
-                return x + mcr.Left;
+                return x + mcr.Left + 16;
             }
         }
         public int r2dY
@@ -32,7 +32,7 @@ namespace Flare_Sharp.UI.ClickUI
             get
             {
                 MCM.RECT mcr = MCM.getMinecraftRect();
-                return y + mcr.Top;
+                return y + mcr.Top + 34;
             }
         }
         public int width = 400;
