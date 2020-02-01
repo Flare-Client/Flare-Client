@@ -21,7 +21,11 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             foreach (Entity e in EntityList.getEntityList())
             {
                 if (e.distanceTo(SDK.instance.player) <= 12) {
-                    e.teleportE(SDK.instance.player.X1, SDK.instance.player.Y1, SDK.instance.player.Z1);
+                    float lpX = SDK.instance.player.X1;
+                    float lpY = SDK.instance.player.Y1;
+                    float lpZ = SDK.instance.player.Z1;
+
+                    e.teleportE(, , );
                 }
             }
         }
