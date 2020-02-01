@@ -12,18 +12,34 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class Jetpack : Module
     {
+        public List<float> directionalVector(float yaw, float pitch)
+        {
+            List<float> calculations = new List<float>();
+            calculations.Add((float)Math.Cos(yaw) * (float)Math.Cos(pitch));
+            calculations.Add((float)Math.Sin(pitch));
+            calculations.Add((float)Math.Sin(yaw) * (float)Math.Cos(pitch));
+            return calculations;
+        }
         public Jetpack() : base("Jetpack", CategoryHandler.registry.categories[1], '-', true)
         {
-            KeybindHandler.clientKeyHeldEvent += OnKeyHeld;
+            KeybindHandler.clientKeyDownEvent += DownKeyHeld;
+            KeybindHandler.clientKeyUpEvent += UpKeyHeld;
         }
-        public void OnKeyHeld(object sender, clientKeyEvent e)
+        public void DownKeyHeld(object sender, clientKeyEvent e)
         {
             if (e.key == 'F') enabled = true;
+        }
+        public void UpKeyHeld(object sender, clientKeyEvent e)
+        {
+            if (e.key == 'F') enabled = false;
         }
         public override void onTick()
         {
             base.onTick();
-            if(!KeybindHandler.isKeyDown('F')) enabled = false;
+            List<float> directionalVec = directionalVector((SDK.instance.player.yaw + 89f) * (float)Math.PI / 178, SDK.instance.player.pitch * (float)Math.PI / 178);
+            SDK.instance.player.velX = 1.2F * directionalVec[0];
+            SDK.instance.player.velY = 1.2F * -directionalVec[1];
+            SDK.instance.player.velZ = 1.2F * directionalVec[2];
         }
     }
 }
