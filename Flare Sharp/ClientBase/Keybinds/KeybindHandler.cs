@@ -22,9 +22,13 @@ namespace Flare_Sharp.ClientBase.Keybinds
         public static KeybindHandler handler;
         public static EventHandler<clientKeyEvent> clientKeyDownEvent;
         public static EventHandler<clientKeyEvent> clientKeyHeldEvent;
+        public static EventHandler<clientKeyEvent> clientKeyUpEvent;
 
-        Dictionary<char, uint> keyBuffs = new Dictionary<char, uint>();
+        Dictionary<char, uint> downBuffs = new Dictionary<char, uint>();
         Dictionary<char, bool> noKey = new Dictionary<char, bool>();
+
+        Dictionary<char, uint> releaseBuffs = new Dictionary<char, uint>();
+        Dictionary<char, bool> yesKey = new Dictionary<char, bool>();
 
         public KeybindHandler()
         {
@@ -32,8 +36,13 @@ namespace Flare_Sharp.ClientBase.Keybinds
             Console.WriteLine("Starting key thread");
             for (char c = (char)0; c < 0xFF; c++)
             {
-                keyBuffs.Add(c, 0);
+                downBuffs.Add(c, 0);
                 noKey.Add(c, true);
+            }
+            for (char c = (char)0; c < 0xFF; c++)
+            {
+                releaseBuffs.Add(c, 0);
+                yesKey.Add(c, true);
             }
             Program.mainLoop += (object sen, EventArgs e)=>
             {
@@ -45,11 +54,11 @@ namespace Flare_Sharp.ClientBase.Keybinds
                         if (GetAsyncKeyState(c))
                         {
                             noKey[c] = false;
-                            if (keyBuffs[c] > 0)
+                            if (downBuffs[c] > 0)
                             {
                                 continue;
                             }
-                            keyBuffs[c]++;
+                            downBuffs[c]++;
                             TabUI.ui.Invalidate();
                             try
                             {
@@ -59,7 +68,7 @@ namespace Flare_Sharp.ClientBase.Keybinds
                         }
                         if (noKey[c])
                         {
-                            keyBuffs[c] = 0;
+                            downBuffs[c] = 0;
                         }
                     }
                 }
@@ -79,6 +88,38 @@ namespace Flare_Sharp.ClientBase.Keybinds
                                     clientKeyHeldEvent.Invoke(this, new clientKeyEvent(c));
                                 }
                             } catch (Exception) { }
+                        }
+                    }
+                }
+            };
+            Program.mainLoop += (object sen, EventArgs e) =>
+            {
+                if (MCM.isMinecraftFocused())
+                {
+                    for (char c = (char)0; c < 0xFF; c++)
+                    {
+                        yesKey[c] = false;
+                        if (!GetAsyncKeyState(c))
+                        {
+                            yesKey[c] = true;
+                            if (releaseBuffs[c] > 0)
+                            {
+                                continue;
+                            }
+                            releaseBuffs[c]++;
+                            TabUI.ui.Invalidate();
+                            if(clientKeyUpEvent != null)
+                            {
+                                try
+                                {
+                                    clientKeyUpEvent.Invoke(this, new clientKeyEvent(c));
+                                }
+                                catch (Exception) { }
+                            }
+                        }
+                        if (!yesKey[c])
+                        {
+                            releaseBuffs[c] = 0;
                         }
                     }
                 }

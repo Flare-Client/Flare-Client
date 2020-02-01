@@ -92,5 +92,19 @@ namespace Flare_Sharp.Memory.CraftSDK
                 MCM.writeInt(MCM.evaluatePointer(addr, movedTic), value);
             }
         }
+
+        public void teleportE(float x, float y, float z)
+        {
+            currentX1 = x + 0.6f;
+            currentY1 = y + 1.8f;
+            currentZ1 = z + 0.6f;
+        }
+        public double distanceTo(Entity e)
+        {
+            float dX = currentX1 - e.currentX1;
+            float dY = currentY1 - e.currentY1;
+            float dZ = currentZ1 - e.currentZ1;
+            return Math.Sqrt(dX * dX + dY * dY + dZ * dZ);
+        }
     }
 }

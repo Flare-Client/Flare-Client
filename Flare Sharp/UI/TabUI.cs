@@ -1,5 +1,6 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.ClientBase.Modules;
+using Flare_Sharp.ClientBase.Modules.Modules;
 using Flare_Sharp.Memory;
 using System;
 using System.Collections.Generic;
@@ -50,7 +51,6 @@ namespace Flare_Sharp.UI
         int width = 0;
         int height = 0;
         public float catWidth = 0;
-        public Graphics graphics;
         IntPtr hWnd;
         WinEventDelegate overDel;
         float rbProg = 0;
@@ -78,13 +78,12 @@ namespace Flare_Sharp.UI
             SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
         }
 
-
         public void adjustOverlay(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
         {
             //Adust window position
             MCM.RECT mcRect = MCM.getMinecraftRect();
             x = mcRect.Left + 16;
-            y = mcRect.Top + 30;
+            y = mcRect.Top + 34;
             width = mcRect.Right - mcRect.Left - 25;
             height = mcRect.Bottom - mcRect.Top - 45;
             SetWindowPos(hWnd, MCM.isMinecraftFocusedInsert(), x, y, width, height, 0x0040);
@@ -116,7 +115,7 @@ namespace Flare_Sharp.UI
         public void OnPaint(object sender, PaintEventArgs args)
         {
             //Render
-            graphics = args.Graphics;
+            Graphics graphics = args.Graphics;
             //Adjust fonts
             titleFont = new Font(new FontFamily("Arial"), tFontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
             textFont = new Font(new FontFamily("Arial"), fontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);

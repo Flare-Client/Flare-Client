@@ -4,6 +4,7 @@ using Flare_Sharp.ClientBase.Modules;
 using Flare_Sharp.Memory;
 using Flare_Sharp.Memory.CraftSDK;
 using Flare_Sharp.UI;
+using Flare_Sharp.UI.ClickUI;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,6 +22,7 @@ namespace Flare_Sharp
         public static EventHandler<EventArgs> mainLoop;
         static void Main(string[] args)
         {
+            Dont.Be.A.Scumbag.And.Remove.This.Warn.warn();
             Console.WriteLine("Flare# Client");
             Console.WriteLine("Flare port to C#");
             Console.WriteLine("Discord: https://discord.gg/Hz3Dxg8");
@@ -33,6 +35,7 @@ namespace Flare_Sharp
                 MCM.openWindowHost();
 
                 SDK sdk = new SDK();
+                ClickUiHandler cuih = new ClickUiHandler();
                 CategoryHandler ch = new CategoryHandler();
                 ModuleHandler mh = new ModuleHandler();
                 Thread uiApp = new Thread(() => { TabUI ui = new TabUI(); Application.Run(ui); });

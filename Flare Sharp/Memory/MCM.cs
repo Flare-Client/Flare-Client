@@ -88,7 +88,7 @@ namespace Flare_Sharp.Memory
             }
             else
             {
-                return (IntPtr)(1);
+                return (IntPtr)(-2);
             }
         }
 
