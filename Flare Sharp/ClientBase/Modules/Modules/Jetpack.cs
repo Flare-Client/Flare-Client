@@ -20,18 +20,17 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             calculations.Add((float)Math.Sin(yaw) * (float)Math.Cos(pitch));
             return calculations;
         }
-        public Jetpack() : base("Jetpack", CategoryHandler.registry.categories[1], '-', true)
+        public Jetpack() : base("Jetpack", CategoryHandler.registry.categories[1], 'F', false)
         {
-            KeybindHandler.clientKeyDownEvent += DownKeyHeld;
             KeybindHandler.clientKeyUpEvent += UpKeyHeld;
-        }
-        public void DownKeyHeld(object sender, clientKeyEvent e)
-        {
-            if (e.key == keybind) enabled = true;
         }
         public void UpKeyHeld(object sender, clientKeyEvent e)
         {
-            if (e.key == 'F') enabled = false;
+            if (e.key == keybind)
+            {
+                enabled = false;
+                Console.WriteLine(enabled);
+            }
         }
         public override void onTick()
         {
