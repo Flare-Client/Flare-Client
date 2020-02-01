@@ -23,6 +23,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new Aimbot();
             new Triggerbot();
             new Criticals();
+            new Jetpack();
             new AirJump();
             new AutoSprint();
             new PlayerSpeed();
