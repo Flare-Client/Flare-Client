@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Flare_Sharp.ClientBase.Categories;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -14,8 +15,12 @@ namespace Flare_Sharp.UI.ClickUI
         public ClickUiHandler()
         {
             instance = this;
-            new CombatKeybindsWindow();
-            new MovementKeybindsWindow().x+=500;
+            int z = 0;
+            foreach(Category cat in CategoryHandler.registry.categories)
+            {
+                new KeybindWindow(cat).x += (z*500);
+                z++;
+            }
         }
 
         public void renderCUI(Graphics graphics)
