@@ -14,7 +14,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     public class Velocity : Module
     {
         public int velocityCounter;
-        public Velocity() : base("Velocity", CategoryHandler.registry.categories[1], '-', false)
+        public Velocity() : base("Velocity", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
         }
 

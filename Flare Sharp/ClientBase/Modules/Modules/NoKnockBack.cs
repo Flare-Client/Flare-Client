@@ -12,7 +12,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class NoKnockBack : Module
     {
-        public NoKnockBack() : base("NoKnockBack", CategoryHandler.registry.categories[1], '-', false)
+        public NoKnockBack() : base("NoKnockBack", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
         }
 

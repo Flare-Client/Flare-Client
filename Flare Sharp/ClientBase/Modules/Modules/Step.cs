@@ -11,7 +11,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class Step : Module
     {
-        public Step() : base("Step", CategoryHandler.registry.categories[1], '-', false)
+        public Step() : base("Step", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
         }
 

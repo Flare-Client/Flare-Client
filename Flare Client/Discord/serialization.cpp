@@ -11,7 +11,7 @@ void NumberToString(char* dest, T number)
         return;
     }
     if (number < 0) {
-        *dest++ = '-';
+        *dest++ = (char)0x07;
         number = -number;
     }
     char temp[32];

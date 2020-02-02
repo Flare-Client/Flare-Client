@@ -11,7 +11,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class AutoSprint : Module
     {
-        public AutoSprint() : base("AutoSprint", CategoryHandler.registry.categories[1], '-', false)
+        public AutoSprint() : base("AutoSprint", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
 
         }

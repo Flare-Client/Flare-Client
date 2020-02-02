@@ -12,7 +12,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class Phase : Module
     {
-        public Phase() : base("Phase", CategoryHandler.registry.categories[2], '-', false)
+        public Phase() : base("Phase", CategoryHandler.registry.categories[2], (char)0x07, false)
         {
         }
 

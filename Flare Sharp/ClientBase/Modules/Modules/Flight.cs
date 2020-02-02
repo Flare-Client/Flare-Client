@@ -11,7 +11,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class Flight : Module
     {
-        public Flight() : base("Flight", CategoryHandler.registry.categories[2], '-', false)
+        public Flight() : base("Flight", CategoryHandler.registry.categories[2], (char)0x07, false)
         {
         }
 

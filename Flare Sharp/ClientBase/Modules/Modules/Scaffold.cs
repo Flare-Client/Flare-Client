@@ -12,7 +12,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class Scaffold : Module
     {
-        public Scaffold() : base("Scaffold", CategoryHandler.registry.categories[2], '-', false)
+        public Scaffold() : base("Scaffold", CategoryHandler.registry.categories[2], (char)0x07, false)
         {
         }
 

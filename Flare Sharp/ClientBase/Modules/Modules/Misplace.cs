@@ -10,7 +10,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class Misplace : Module
     {
-        public Misplace() : base("Misplace", CategoryHandler.registry.categories[0], '-', false)
+        public Misplace() : base("Misplace", CategoryHandler.registry.categories[0], (char)0x07, false)
         {
 
         }

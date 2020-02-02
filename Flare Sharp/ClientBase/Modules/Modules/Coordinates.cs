@@ -11,7 +11,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class Coordinates : Module
     {
-        public Coordinates() : base("Coords", CategoryHandler.registry.categories[2], '-', false)
+        public Coordinates() : base("Coords", CategoryHandler.registry.categories[2], (char)0x07, false)
         {
 
         }

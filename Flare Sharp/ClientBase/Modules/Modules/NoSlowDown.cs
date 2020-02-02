@@ -13,7 +13,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     public class NoSlowDown : Module
     {
 
-        public NoSlowDown() : base("NoSlowDown", CategoryHandler.registry.categories[1], '-', false)
+        public NoSlowDown() : base("NoSlowDown", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
         }
 

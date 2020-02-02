@@ -11,7 +11,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class PlayerSpeed : Module
     {
-        public PlayerSpeed() : base("Speed", CategoryHandler.registry.categories[1], '-', false)
+        public PlayerSpeed() : base("Speed", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
         }
 

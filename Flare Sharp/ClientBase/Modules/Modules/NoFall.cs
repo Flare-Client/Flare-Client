@@ -11,7 +11,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class NoFall : Module
     {
-        public NoFall() : base("NoFall", CategoryHandler.registry.categories[2], '-', false)
+        public NoFall() : base("NoFall", CategoryHandler.registry.categories[2], (char)0x07, false)
         {
         }
 

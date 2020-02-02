@@ -15,11 +15,17 @@ namespace Flare_Sharp.UI.ClickUI
         public ClickUiHandler()
         {
             instance = this;
-            int z = 0;
-            foreach(Category cat in CategoryHandler.registry.categories)
+            for(int z = 0; z < CategoryHandler.registry.categories.Count; z++)
             {
-                new KeybindWindow(cat).x += (z*500);
-                z++;
+                if (z-1 >= 0)
+                {
+                    new KeybindWindow(CategoryHandler.registry.categories[z]).x += windows[z-1].x+ windows[z - 1].width;
+                }
+                else
+                {
+                    new KeybindWindow(CategoryHandler.registry.categories[z]);
+                }
+                
             }
         }
 

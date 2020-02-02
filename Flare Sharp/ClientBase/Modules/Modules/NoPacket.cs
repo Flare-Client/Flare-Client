@@ -11,7 +11,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class NoPacket : Module
     {
-        public NoPacket() : base("NoPacket", CategoryHandler.registry.categories[3], '-', false)
+        public NoPacket() : base("NoPacket", CategoryHandler.registry.categories[3], (char)0x07, false)
         {
         }
 
