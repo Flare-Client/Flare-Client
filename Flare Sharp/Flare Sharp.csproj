@@ -66,6 +66,7 @@
     <Compile Include="ClientBase\Modules\Modules\FastLadder.cs" />
     <Compile Include="ClientBase\Modules\Modules\Freecam.cs" />
     <Compile Include="ClientBase\Modules\Modules\Gamemode.cs" />
+    <Compile Include="ClientBase\Modules\Modules\HiveFly.cs" />
     <Compile Include="ClientBase\Modules\Modules\Hitbox.cs" />
     <Compile Include="ClientBase\Modules\Modules\Misplace.cs" />
     <Compile Include="ClientBase\Modules\Modules\Jetpack.cs" />
@@ -99,12 +100,13 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\ClickUI\ClickUiHandler.cs" />
+    <Compile Include="UI\ClickUI\MovementKeybindsWindow.cs" />
     <Compile Include="UI\ClickUI\Controls\CUIButton.cs" />
     <Compile Include="UI\ClickUI\Controls\CUILabel.cs" />
     <Compile Include="UI\ClickUI\CUIControl.cs" />
     <Compile Include="UI\ClickUI\CUIWindow.cs" />
     <Compile Include="UI\ClickUI\KeybindButton.cs" />
-    <Compile Include="UI\ClickUI\TestWindow.cs" />
+    <Compile Include="UI\ClickUI\CombatKeybindsWindow.cs" />
     <Compile Include="UI\TabUI.cs">
       <SubType>Form</SubType>
     </Compile>

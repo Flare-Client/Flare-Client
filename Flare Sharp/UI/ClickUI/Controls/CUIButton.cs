@@ -39,10 +39,6 @@ namespace Flare_Sharp.UI.ClickUI.Controls
             {
                 Point p;
                 GetCursorPos(out p);
-                Console.WriteLine(p.X > x + parent.r2dX);
-                Console.WriteLine(p.Y > y + parent.r2dY);
-                Console.WriteLine(p.X < size.Width + x + parent.r2dX);
-                Console.WriteLine(p.Y < size.Height + y + parent.r2dY);
                 if (p.X > x + parent.r2dX && p.Y > y + parent.r2dY && p.X < size.Width + x + parent.r2dX && p.Y < size.Height + y + parent.r2dY)
                 {
                     currentBrushBG = bgClickedBrush;

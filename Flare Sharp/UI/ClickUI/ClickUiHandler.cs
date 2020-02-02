@@ -14,7 +14,8 @@ namespace Flare_Sharp.UI.ClickUI
         public ClickUiHandler()
         {
             instance = this;
-            new TestWindow();
+            new CombatKeybindsWindow();
+            new MovementKeybindsWindow().x+=500;
         }
 
         public void renderCUI(Graphics graphics)
