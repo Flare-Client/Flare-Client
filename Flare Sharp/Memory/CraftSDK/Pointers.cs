@@ -8,11 +8,6 @@ namespace Flare_Sharp.Memory.CraftSDK
 {
     public class Pointers
     {
-        public static UInt64 entityFacing()
-        {
-            UInt64[] offs = { 0xA8, 0x18, 0x130, 0x540, 0x0, 0x870 };
-            return MCM.readInt64(MCM.baseEvaluatePointer(0x02FF8E38, offs));
-        }
         public static UInt64 mousePitch()
         {
             UInt64[] offs = { 0x30, 0xE0, 0x28, 0x30, 0x168, 0x0, 0x14 };

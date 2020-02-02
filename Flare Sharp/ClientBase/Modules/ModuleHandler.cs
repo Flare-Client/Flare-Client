@@ -46,7 +46,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new Misplace();
             new Jetpack();
             new YPort();
-            //new HiveFly(); <--will be added back for next release
+            //new HiveFly();// <--will be added back for next release
             Console.WriteLine("Modules registered!");
             startModuleThread();
         }

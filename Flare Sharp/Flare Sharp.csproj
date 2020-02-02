@@ -99,6 +99,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\ClickUI\ClickUiHandler.cs" />
+    <Compile Include="UI\ClickUI\Controls\CUICheckBox.cs" />
     <Compile Include="UI\ClickUI\KeybindWindow.cs" />
     <Compile Include="UI\ClickUI\Controls\CUIButton.cs" />
     <Compile Include="UI\ClickUI\Controls\CUILabel.cs" />
