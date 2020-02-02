@@ -13,7 +13,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     {
         public int inventoryState = SDK.instance.player.viewCreativeItems;
         public int savedGamemode;
-        public Gamemode() : base("Gamemode", CategoryHandler.registry.categories[2], '-', false)
+        public Gamemode() : base("Gamemode", CategoryHandler.registry.categories[2], (char)0x07, false)
         {
         }
 

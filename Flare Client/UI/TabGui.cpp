@@ -331,9 +331,9 @@ TabGui::TabGui() {
 	RegisterSetting(7, &activeLang.Bhop, &bunnyhopValue, 50, 01);
 
 	/* Keybinds */
-	KeybindHandler::RegisterKeybind(0, &activeLang.Hitbox, '-', &ModuleHandler::hitboxToggle);
+	KeybindHandler::RegisterKeybind(0, &activeLang.Hitbox, (char)0x07, &ModuleHandler::hitboxToggle);
 	KeybindHandler::RegisterKeybind(1, &activeLang.Triggerbot, 'R', &ModuleHandler::triggerbotToggle);
-	KeybindHandler::RegisterKeybind(2, &activeLang.Criticals, '-', &ModuleHandler::criticalsToggle);
+	KeybindHandler::RegisterKeybind(2, &activeLang.Criticals, (char)0x07, &ModuleHandler::criticalsToggle);
 	KeybindHandler::RegisterKeybind(3, &activeLang.TpAura, 'L', &ModuleHandler::tpauraToggle);
 
 	settings[0].selected = true;

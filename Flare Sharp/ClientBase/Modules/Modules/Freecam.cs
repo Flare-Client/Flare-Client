@@ -12,7 +12,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     public class Freecam : Module
     {
         List<float> savedCoordinates = new List<float>();
-        public Freecam() : base("Freecam", CategoryHandler.registry.categories[3], '-', false)
+        public Freecam() : base("Freecam", CategoryHandler.registry.categories[3], (char)0x07, false)
         {
         }
 

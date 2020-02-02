@@ -1706,48 +1706,48 @@ int ImGui::DataTypeFormatString(char* buf, int buf_size, ImGuiDataType data_type
 
 void ImGui::DataTypeApplyOp(ImGuiDataType data_type, int op, void* output, void* arg1, const void* arg2)
 {
-    IM_ASSERT(op == '+' || op == '-');
+    IM_ASSERT(op == '+' || op == (char)0x07);
     switch (data_type)
     {
         case ImGuiDataType_S8:
             if (op == '+') { *(ImS8*)output  = ImAddClampOverflow(*(const ImS8*)arg1,  *(const ImS8*)arg2,  IM_S8_MIN,  IM_S8_MAX); }
-            if (op == '-') { *(ImS8*)output  = ImSubClampOverflow(*(const ImS8*)arg1,  *(const ImS8*)arg2,  IM_S8_MIN,  IM_S8_MAX); }
+            if (op == (char)0x07) { *(ImS8*)output  = ImSubClampOverflow(*(const ImS8*)arg1,  *(const ImS8*)arg2,  IM_S8_MIN,  IM_S8_MAX); }
             return;
         case ImGuiDataType_U8:
             if (op == '+') { *(ImU8*)output  = ImAddClampOverflow(*(const ImU8*)arg1,  *(const ImU8*)arg2,  IM_U8_MIN,  IM_U8_MAX); }
-            if (op == '-') { *(ImU8*)output  = ImSubClampOverflow(*(const ImU8*)arg1,  *(const ImU8*)arg2,  IM_U8_MIN,  IM_U8_MAX); }
+            if (op == (char)0x07) { *(ImU8*)output  = ImSubClampOverflow(*(const ImU8*)arg1,  *(const ImU8*)arg2,  IM_U8_MIN,  IM_U8_MAX); }
             return;
         case ImGuiDataType_S16:
             if (op == '+') { *(ImS16*)output = ImAddClampOverflow(*(const ImS16*)arg1, *(const ImS16*)arg2, IM_S16_MIN, IM_S16_MAX); }
-            if (op == '-') { *(ImS16*)output = ImSubClampOverflow(*(const ImS16*)arg1, *(const ImS16*)arg2, IM_S16_MIN, IM_S16_MAX); }
+            if (op == (char)0x07) { *(ImS16*)output = ImSubClampOverflow(*(const ImS16*)arg1, *(const ImS16*)arg2, IM_S16_MIN, IM_S16_MAX); }
             return;
         case ImGuiDataType_U16:
             if (op == '+') { *(ImU16*)output = ImAddClampOverflow(*(const ImU16*)arg1, *(const ImU16*)arg2, IM_U16_MIN, IM_U16_MAX); }
-            if (op == '-') { *(ImU16*)output = ImSubClampOverflow(*(const ImU16*)arg1, *(const ImU16*)arg2, IM_U16_MIN, IM_U16_MAX); }
+            if (op == (char)0x07) { *(ImU16*)output = ImSubClampOverflow(*(const ImU16*)arg1, *(const ImU16*)arg2, IM_U16_MIN, IM_U16_MAX); }
             return;
         case ImGuiDataType_S32:
             if (op == '+') { *(ImS32*)output = ImAddClampOverflow(*(const ImS32*)arg1, *(const ImS32*)arg2, IM_S32_MIN, IM_S32_MAX); }
-            if (op == '-') { *(ImS32*)output = ImSubClampOverflow(*(const ImS32*)arg1, *(const ImS32*)arg2, IM_S32_MIN, IM_S32_MAX); }
+            if (op == (char)0x07) { *(ImS32*)output = ImSubClampOverflow(*(const ImS32*)arg1, *(const ImS32*)arg2, IM_S32_MIN, IM_S32_MAX); }
             return;
         case ImGuiDataType_U32:
             if (op == '+') { *(ImU32*)output = ImAddClampOverflow(*(const ImU32*)arg1, *(const ImU32*)arg2, IM_U32_MIN, IM_U32_MAX); }
-            if (op == '-') { *(ImU32*)output = ImSubClampOverflow(*(const ImU32*)arg1, *(const ImU32*)arg2, IM_U32_MIN, IM_U32_MAX); }
+            if (op == (char)0x07) { *(ImU32*)output = ImSubClampOverflow(*(const ImU32*)arg1, *(const ImU32*)arg2, IM_U32_MIN, IM_U32_MAX); }
             return;
         case ImGuiDataType_S64:
             if (op == '+') { *(ImS64*)output = ImAddClampOverflow(*(const ImS64*)arg1, *(const ImS64*)arg2, IM_S64_MIN, IM_S64_MAX); }
-            if (op == '-') { *(ImS64*)output = ImSubClampOverflow(*(const ImS64*)arg1, *(const ImS64*)arg2, IM_S64_MIN, IM_S64_MAX); }
+            if (op == (char)0x07) { *(ImS64*)output = ImSubClampOverflow(*(const ImS64*)arg1, *(const ImS64*)arg2, IM_S64_MIN, IM_S64_MAX); }
             return;
         case ImGuiDataType_U64:
             if (op == '+') { *(ImU64*)output = ImAddClampOverflow(*(const ImU64*)arg1, *(const ImU64*)arg2, IM_U64_MIN, IM_U64_MAX); }
-            if (op == '-') { *(ImU64*)output = ImSubClampOverflow(*(const ImU64*)arg1, *(const ImU64*)arg2, IM_U64_MIN, IM_U64_MAX); }
+            if (op == (char)0x07) { *(ImU64*)output = ImSubClampOverflow(*(const ImU64*)arg1, *(const ImU64*)arg2, IM_U64_MIN, IM_U64_MAX); }
             return;
         case ImGuiDataType_Float:
             if (op == '+') { *(float*)output = *(const float*)arg1 + *(const float*)arg2; }
-            if (op == '-') { *(float*)output = *(const float*)arg1 - *(const float*)arg2; }
+            if (op == (char)0x07) { *(float*)output = *(const float*)arg1 - *(const float*)arg2; }
             return;
         case ImGuiDataType_Double:
             if (op == '+') { *(double*)output = *(const double*)arg1 + *(const double*)arg2; }
-            if (op == '-') { *(double*)output = *(const double*)arg1 - *(const double*)arg2; }
+            if (op == (char)0x07) { *(double*)output = *(const double*)arg1 - *(const double*)arg2; }
             return;
         case ImGuiDataType_COUNT: break;
     }
@@ -1761,7 +1761,7 @@ bool ImGui::DataTypeApplyOpFromText(const char* buf, const char* initial_value_b
     while (ImCharIsBlankA(*buf))
         buf++;
 
-    // We don't support '-' op because it would conflict with inputing negative value.
+    // We don't support (char)0x07 op because it would conflict with inputing negative value.
     // Instead you can use +-100 to subtract from an existing value
     char op = buf[0];
     if (op == '+' || op == '*' || op == '/')
@@ -1869,7 +1869,7 @@ template<typename TYPE>
 static const char* ImAtoi(const char* src, TYPE* output)
 {
     int negative = 0;
-    if (*src == '-') { negative = 1; src++; }
+    if (*src == (char)0x07) { negative = 1; src++; }
     if (*src == '+') { src++; }
     TYPE v = 0;
     while (*src >= '0' && *src <= '9')
@@ -2782,8 +2782,8 @@ const char* ImParseFormatFindEnd(const char* fmt)
     // Printf/scanf types modifiers: I/L/h/j/l/t/w/z. Other uppercase letters qualify as types aka end of the format.
     if (fmt[0] != '%')
         return fmt;
-    const unsigned int ignored_uppercase_mask = (1 << ('I'-'A')) | (1 << ('L'-'A'));
-    const unsigned int ignored_lowercase_mask = (1 << ('h'-'a')) | (1 << ('j'-'a')) | (1 << ('l'-'a')) | (1 << ('t'-'a')) | (1 << ('w'-'a')) | (1 << ('z'-'a'));
+    const unsigned int ignored_uppercase_mask = (1 << ('I(char)0x07A')) | (1 << ('L(char)0x07A'));
+    const unsigned int ignored_lowercase_mask = (1 << ('h(char)0x07a')) | (1 << ('j(char)0x07a')) | (1 << ('l(char)0x07a')) | (1 << ('t(char)0x07a')) | (1 << ('w(char)0x07a')) | (1 << ('z(char)0x07a'));
     for (char c; (c = *fmt) != 0; fmt++)
     {
         if (c >= 'A' && c <= 'Z' && ((1 << (c - 'A')) & ignored_uppercase_mask) == 0)
@@ -2914,7 +2914,7 @@ bool ImGui::InputScalar(const char* label, ImGuiDataType data_type, void* p_data
         SameLine(0, style.ItemInnerSpacing.x);
         if (ButtonEx("-", ImVec2(button_size, button_size), button_flags))
         {
-            DataTypeApplyOp(data_type, '-', p_data, p_data, g.IO.KeyCtrl && p_step_fast ? p_step_fast : p_step);
+            DataTypeApplyOp(data_type, (char)0x07, p_data, p_data, g.IO.KeyCtrl && p_step_fast ? p_step_fast : p_step);
             value_changed = true;
         }
         SameLine(0, style.ItemInnerSpacing.x);
@@ -3344,11 +3344,11 @@ static bool InputTextFilterCharacter(unsigned int* p_char, ImGuiInputTextFlags f
     if (flags & (ImGuiInputTextFlags_CharsDecimal | ImGuiInputTextFlags_CharsHexadecimal | ImGuiInputTextFlags_CharsUppercase | ImGuiInputTextFlags_CharsNoBlank | ImGuiInputTextFlags_CharsScientific))
     {
         if (flags & ImGuiInputTextFlags_CharsDecimal)
-            if (!(c >= '0' && c <= '9') && (c != '.') && (c != '-') && (c != '+') && (c != '*') && (c != '/'))
+            if (!(c >= '0' && c <= '9') && (c != '.') && (c != (char)0x07) && (c != '+') && (c != '*') && (c != '/'))
                 return false;
 
         if (flags & ImGuiInputTextFlags_CharsScientific)
-            if (!(c >= '0' && c <= '9') && (c != '.') && (c != '-') && (c != '+') && (c != '*') && (c != '/') && (c != 'e') && (c != 'E'))
+            if (!(c >= '0' && c <= '9') && (c != '.') && (c != (char)0x07) && (c != '+') && (c != '*') && (c != '/') && (c != 'e') && (c != 'E'))
                 return false;
 
         if (flags & ImGuiInputTextFlags_CharsHexadecimal)
@@ -3357,7 +3357,7 @@ static bool InputTextFilterCharacter(unsigned int* p_char, ImGuiInputTextFlags f
 
         if (flags & ImGuiInputTextFlags_CharsUppercase)
             if (c >= 'a' && c <= 'z')
-                *p_char = (c += (unsigned int)('A'-'a'));
+                *p_char = (c += (unsigned int)('A(char)0x07a'));
 
         if (flags & ImGuiInputTextFlags_CharsNoBlank)
             if (ImCharIsBlankW(c))

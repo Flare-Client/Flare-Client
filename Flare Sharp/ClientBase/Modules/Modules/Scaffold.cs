@@ -12,7 +12,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class Scaffold : Module
     {
-        public Scaffold() : base("Scaffold", CategoryHandler.registry.categories[2], '-', false)
+        public Scaffold() : base("Scaffold", CategoryHandler.registry.categories[2], (char)0x07, false)
         {
         }
 
@@ -26,7 +26,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            UInt64 facing = SDK.instance.entityFacing;
+            UInt64 facing = SDK.instance.entityFacingMP + SDK.instance.entityFacingSP;
             if (facing > 0)
             {
                 byte[] write2 = { 0x41, 0x80, 0x38, 0x00, 0x74, 0x76 };

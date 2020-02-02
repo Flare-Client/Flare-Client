@@ -11,7 +11,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class ServerCrasher : Module
     {
-        public ServerCrasher() : base("Crasher", CategoryHandler.registry.categories[3], '-', false)
+        public ServerCrasher() : base("Crasher", CategoryHandler.registry.categories[3], (char)0x07, false)
         {
         }
 

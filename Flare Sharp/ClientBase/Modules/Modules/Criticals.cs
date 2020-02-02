@@ -11,7 +11,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class Criticals : Module
     {
-        public Criticals() : base("Criticals", CategoryHandler.registry.categories[0], '-', false)
+        public Criticals() : base("Criticals", CategoryHandler.registry.categories[0], (char)0x07, false)
         {
 
         }

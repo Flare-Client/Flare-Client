@@ -1929,7 +1929,7 @@ void ImGuiTextFilter::Build()
             f.e--;
         if (f.empty())
             continue;
-        if (Filters[i].b[0] != '-')
+        if (Filters[i].b[0] != (char)0x07)
             CountGrep += 1;
     }
 }
@@ -1947,7 +1947,7 @@ bool ImGuiTextFilter::PassFilter(const char* text, const char* text_end) const
         const ImGuiTextRange& f = Filters[i];
         if (f.empty())
             continue;
-        if (f.b[0] == '-')
+        if (f.b[0] == (char)0x07)
         {
             // Subtract
             if (ImStristr(text, text_end, f.b + 1, f.e) != NULL)

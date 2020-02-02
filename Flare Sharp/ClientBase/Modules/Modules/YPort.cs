@@ -11,7 +11,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     public class YPort : Module
     {
         float boostBy = 1;
-        public YPort() : base("YPort", CategoryHandler.registry.categories[1], '-', false)
+        public YPort() : base("YPort", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
         }
 
