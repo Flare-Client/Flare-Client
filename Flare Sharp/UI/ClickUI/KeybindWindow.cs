@@ -15,7 +15,7 @@ namespace Flare_Sharp.UI.ClickUI
         public KeybindWindow(Category cat)
         {
             this.width = 200;
-            controls.Add(new CUILabel(cat.name+" Keybinds", "Arial", 32, FontStyle.Underline, Color.FromArgb(255, 255, 255), 10, 10, this));
+            controls.Add(new CUILabel(cat.name, "Arial", 32, FontStyle.Underline, Color.FromArgb(255, 255, 255), 10, 10, this));
             byte Z = 0;
             foreach (Module mod in cat.modules)
             {
