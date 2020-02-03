@@ -15,6 +15,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 
         }
 
+        bool doubleMp = false;
         public override void onTick()
         {
             base.onTick();
@@ -24,18 +25,26 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                 {
                     continue;
                 }
+
+                float lpX = SDK.instance.player.X1;
+                float lpY = SDK.instance.player.Y1;
+                float lpZ = SDK.instance.player.Z1;
+
+                float eX = e.currentX3;
+                float eY = e.currentY3;
+                float eZ = e.currentZ3;
+
+                float mpX = (lpX + eX) / 2;
+                float mpY = ((lpY + eY) / 2) - 1;
+                float mpZ = (lpZ + eZ) / 2;
+
+                if (doubleMp)
+                {
+                    mpX = (mpX + lpX) / 2;
+                    mpY = ((mpY + lpY) / 2);
+                    mpZ = (mpZ + lpZ) / 2;
+                }
                 if (e.distanceTo(SDK.instance.player) <= 12) {
-                    float lpX = SDK.instance.player.X1;
-                    float lpY = SDK.instance.player.Y1;
-                    float lpZ = SDK.instance.player.Z1;
-
-                    float eX = e.currentX3;
-                    float eY = e.currentY3;
-                    float eZ = e.currentZ3;
-
-                    float mpX = (lpX + eX) / 2;
-                    float mpY = ((lpY + eY) / 2)-1;
-                    float mpZ = (lpZ + eZ) / 2;
                     e.teleportE(mpX, mpY, mpZ);
                 }
             }

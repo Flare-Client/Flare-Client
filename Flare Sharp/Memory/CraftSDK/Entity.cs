@@ -170,6 +170,14 @@ namespace Flare_Sharp.Memory.CraftSDK
                 MCM.writeInt(MCM.evaluatePointer(addr, movedTic), value);
             }
         }
+        public string type
+        {
+            get
+            {
+                UInt64[] offs = { 0x388 };
+                return MCM.readString(MCM.evaluatePointer(addr, offs), 16);
+            }
+        }
 
         public void teleportE(float x, float y, float z)
         {
