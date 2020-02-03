@@ -51,7 +51,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             staringPos.Add(MCM.readFloat(Pointers.mousePitch()));
             staringPos.Add(MCM.readFloat(Pointers.mouseYaw()));
 
-            for (int I = 0; I < 8; I++)
+            for (int I = 0; I < 10; I++)
             {
                 prevPositions.Add(position);
                 prevStaring.Add(staringPos);

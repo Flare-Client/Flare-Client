@@ -34,7 +34,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            List<float> directionalVec = directionalVector((SDK.instance.player.yaw + 89f) * (float)Math.PI / 178, SDK.instance.player.pitch * (float)Math.PI / 178);
+            List<float> directionalVec = directionalVector((SDK.instance.player.yaw + 89.9f) * (float)Math.PI / 178F, SDK.instance.player.pitch * (float)Math.PI / 178F);
             SDK.instance.player.velX = 1.2F * directionalVec[0];
             SDK.instance.player.velY = 1.2F * -directionalVec[1];
             SDK.instance.player.velZ = 1.2F * directionalVec[2];
