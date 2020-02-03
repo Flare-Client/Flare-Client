@@ -111,5 +111,9 @@ namespace Flare_Sharp.Memory.CraftSDK
         public static int webTick = 0x120ECA5; //v1.14.2
         public static int ladderUp = 0x13D47D0; //V1.14.2
         public static int ladderDown = 0x13CA405; //V1.14.2
+
+        //Killaura checks
+        public static int killauraCheck1 = 0x5D50F0;
+        public static int killauraCheck2 = 0x5D5305;
     }
 }
