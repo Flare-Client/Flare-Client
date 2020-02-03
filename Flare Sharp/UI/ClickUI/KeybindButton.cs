@@ -25,9 +25,16 @@ namespace Flare_Sharp.UI.ClickUI
         {
             if (changing)
             {
-                if(e.key != 0x1)
+                if (e.key != 0x1)
                 {
-                    module.keybind = e.key;
+                    if (e.key == 0x1B)
+                    {
+                        module.keybind = (char)0x07;
+                    }
+                    else
+                    {
+                        module.keybind = e.key;
+                    }
                     this.text = e.key.ToString();
                     changing = false;
                 }

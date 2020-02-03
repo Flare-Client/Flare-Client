@@ -101,6 +101,7 @@ namespace Flare_Sharp.UI.ClickUI
             if (visible)
             {
                 graphics.FillRectangle(TabUI.ui.secondary, x, y, width, height);
+                graphics.DrawRectangle(new Pen(TabUI.ui.primary), x, y, width, height);
                 foreach (CUIControl control in controls)
                 {
                     control.OnPaint(graphics);
