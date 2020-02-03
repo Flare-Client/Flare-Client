@@ -77,6 +77,7 @@
     <Compile Include="ClientBase\Modules\Modules\NoWeb.cs" />
     <Compile Include="ClientBase\Modules\Modules\Phase.cs" />
     <Compile Include="ClientBase\Modules\Modules\PlayerSpeed.cs" />
+    <Compile Include="ClientBase\Modules\Modules\Recall.cs" />
     <Compile Include="ClientBase\Modules\Modules\Scaffold.cs" />
     <Compile Include="ClientBase\Modules\Modules\ServerCrasher.cs" />
     <Compile Include="ClientBase\Modules\Modules\Step.cs" />

@@ -10,7 +10,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class YPort : Module
     {
-        float boostBy = 1;
         public YPort() : base("YPort", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
         }
@@ -18,7 +17,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onEnable()
         {
             base.onEnable();
-            SDK.instance.player.velY += boostBy;
+            SDK.instance.player.velY += 1F;
             this.enabled = false;
         }
     }

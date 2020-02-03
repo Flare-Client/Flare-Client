@@ -32,11 +32,5 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             SDK.instance.player.currentGamemode = savedGamemode;
             SDK.instance.player.viewCreativeItems = inventoryState;
         }
-
-        public override void onTick()
-        {
-            base.onTick();
-            //
-        }
     }
 }
