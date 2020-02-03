@@ -179,6 +179,15 @@ namespace Flare_Sharp.Memory.CraftSDK
             }
         }
 
+        public string username
+        {
+            get
+            {
+                UInt64[] offs = { 0x9E8 };
+                return MCM.readString(MCM.evaluatePointer(addr, offs), 20);
+            }
+        }
+
         public void teleportE(float x, float y, float z)
         {
             currentX1 = x + 0.6f;
