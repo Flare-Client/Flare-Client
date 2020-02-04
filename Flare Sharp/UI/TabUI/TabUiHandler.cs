@@ -27,6 +27,25 @@ namespace Flare_Sharp.UI.TabUI
             textFont = new Font(new FontFamily("Arial"), fontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
         }
 
+        internal void renderMLUI(Graphics graphics)
+        {
+
+            //Draw enabled modules
+            uint yOff = 0;
+            foreach (Category cat in CategoryHandler.registry.categories)
+            {
+                foreach (Module mod in cat.modules)
+                {
+                    if (mod.enabled)
+                    {
+                        float mwid = graphics.MeasureString(mod.name, textFont, 600).Width;
+                        graphics.DrawString(mod.name, textFont, OverlayHost.ui.rainbow, OverlayHost.ui.width - mwid, (32 * scale) * yOff);
+                        yOff++;
+                    }
+                }
+            }
+        }
+
         internal void renderTUI(Graphics graphics)
         {
             //Adjust fonts
@@ -86,20 +105,6 @@ namespace Flare_Sharp.UI.TabUI
                 }
                 graphics.DrawString(category.name, textFont, OverlayHost.ui.primary, 0, tFontSize + (32 * scale) * c);
                 c++;
-            }
-            //Draw enabled modules
-            uint yOff = 0;
-            foreach (Category cat in CategoryHandler.registry.categories)
-            {
-                foreach (Module mod in cat.modules)
-                {
-                    if (mod.enabled)
-                    {
-                        float mwid = graphics.MeasureString(mod.name, textFont, 600).Width;
-                        graphics.DrawString(mod.name, textFont, OverlayHost.ui.rainbow, OverlayHost.ui.width - mwid, (32 * scale) * yOff);
-                        yOff++;
-                    }
-                }
             }
         }
     }

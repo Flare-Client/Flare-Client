@@ -48,6 +48,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new Jetpack();
             new YBoost();
             new TabGUI();
+            new ModuleList();
             //new HiveFly();// <--will be added back for next release
             Console.WriteLine("Modules registered!");
             startModuleThread();
