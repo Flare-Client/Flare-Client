@@ -16,6 +16,7 @@ namespace Flare_Sharp.ClientBase.Modules
         public char keybind;
 
         private bool wasEnabled = false;
+        public EventHandler toggleEvent;
 
         public Module(string name, Category category, char keybind, bool enabled)
         {
@@ -46,10 +47,20 @@ namespace Flare_Sharp.ClientBase.Modules
                 if (enabled == false)
                 {
                     onDisable();
+                    try
+                    {
+                        toggleEvent.Invoke(this, new EventArgs());
+                    }
+                    catch (Exception) { }
                 }
                 else
                 {
                     onEnable();
+                    try
+                    {
+                        toggleEvent.Invoke(this, new EventArgs());
+                    }
+                    catch (Exception) { }
                 }
                 wasEnabled = enabled;
             }

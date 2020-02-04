@@ -292,5 +292,15 @@ namespace Flare_Sharp.Memory
                 inc++;
             }
         }
+        public static void writeString(UInt64 address, string str)
+        {
+            byte[] intByte = Encoding.ASCII.GetBytes(str);
+            int inc = 0;
+            foreach (byte b in intByte)
+            {
+                writeByte(address + (UInt64)inc, b);
+                inc++;
+            }
+        }
     }
 }

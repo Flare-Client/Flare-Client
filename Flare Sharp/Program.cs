@@ -5,6 +5,7 @@ using Flare_Sharp.Memory;
 using Flare_Sharp.Memory.CraftSDK;
 using Flare_Sharp.UI;
 using Flare_Sharp.UI.ClickUI;
+using Flare_Sharp.UI.TabUI;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -36,10 +37,11 @@ namespace Flare_Sharp
 
                 SDK sdk = new SDK();
                 CategoryHandler ch = new CategoryHandler();
+                TabUiHandler tuih = new TabUiHandler();
                 ModuleHandler mh = new ModuleHandler();
                 KeybindHandler kh = new KeybindHandler();
                 ClickUiHandler cuih = new ClickUiHandler();
-                Thread uiApp = new Thread(() => { TabUI ui = new TabUI(); Application.Run(ui); });
+                Thread uiApp = new Thread(() => { OverlayHost ui = new OverlayHost(); Application.Run(ui); });
                 uiApp.Start();
                 while (true)
                 {

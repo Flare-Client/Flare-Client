@@ -1,9 +1,8 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.UI;
-using Flare_Sharp.UI.ClickUI;
+using Flare_Sharp.UI.TabUI;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Flare_Sharp.ClientBase.Modules.Modules
 {
-    public class ClickUI : Module
+    public class ModuleList : Module
     {
-        public ClickUI() : base("ClickGUI", CategoryHandler.registry.categories[3], (char)0xA1, false)
+        public ModuleList() : base("ModuleList", CategoryHandler.registry.categories[3], (char)0x07, true)
         {
         }
         public override void onEnable()
@@ -21,11 +20,11 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             base.onEnable();
             OverlayHost.ui.Paint += drawUI;
         }
-        public void drawUI(object sender, PaintEventArgs args)
+        private void drawUI(object sender, PaintEventArgs e)
         {
             if (enabled)
             {
-                ClickUiHandler.instance.renderCUI(args.Graphics);
+                TabUiHandler.instance.renderMLUI(e.Graphics);
             }
         }
     }

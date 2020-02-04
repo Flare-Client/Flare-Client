@@ -30,7 +30,7 @@ namespace Flare_Sharp.UI.ClickUI.Controls
         private void onKeyUp(object sender, clientKeyEvent e)
         {
             currentBrushBG = bgBrush;
-            TabUI.ui.Invalidate();
+            OverlayHost.ui.Invalidate();
         }
 
         public void onKeyDown(object sender, clientKeyEvent e)
@@ -44,7 +44,7 @@ namespace Flare_Sharp.UI.ClickUI.Controls
                     currentBrushBG = bgClickedBrush;
                     if (onClick != null)
                     {
-                        TabUI.ui.Invalidate();
+                        OverlayHost.ui.Invalidate();
                         try
                         {
                             onClick.Invoke(this, new EventArgs());

@@ -46,7 +46,9 @@ namespace Flare_Sharp.ClientBase.Modules
             new ClickUI();
             new Misplace();
             new Jetpack();
-            new YPort();
+            new YBoost();
+            new TabGUI();
+            new ModuleList();
             //new HiveFly();// <--will be added back for next release
             Console.WriteLine("Modules registered!");
             startModuleThread();

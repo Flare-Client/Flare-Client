@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace Flare_Sharp.UI
 {
-    public class TabUI : Form
+    public class OverlayHost : Form
     {
         [DllImport("user32.dll")]
         public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
@@ -34,39 +34,29 @@ namespace Flare_Sharp.UI
 
         public delegate void fixSizeDel();
 
-        public static TabUI ui;
+        public static OverlayHost ui;
+
+        WinEventDelegate overDel;
+        IntPtr hWnd;
+        public int x = 0;
+        public int y = 0;
+        public int width = 0;
+        public int height = 0;
+        
         public SolidBrush primary = new SolidBrush(Color.FromArgb(255, 255, 255));
         public SolidBrush secondary = new SolidBrush(Color.FromArgb(25, 25, 25));
         public SolidBrush tertiary = new SolidBrush(Color.FromArgb(255, 0, 100));
         public SolidBrush quaternary = new SolidBrush(Color.FromArgb(255, 0, 255));
         public SolidBrush rainbow = new SolidBrush(Color.FromArgb(255, 255, 255));
 
-        float scale = 1;
-        int tFontSize = 72;
-        int fontSize = 32;
-        Font titleFont;
-        Font textFont;
-        int x = 0;
-        int y = 0;
-        int width = 0;
-        int height = 0;
-        public float catWidth = 0;
-        IntPtr hWnd;
-        WinEventDelegate overDel;
-        float rbProg = 0;
-        bool rainbowUI = false;
-
-        public TabUI()
+        public OverlayHost()
         {
             ui = this;
             this.TopMost = true;
             Console.WriteLine("Starting Tab GUI...");
-            titleFont = new Font(new FontFamily("Arial"), tFontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
-            textFont = new Font(new FontFamily("Arial"), fontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
             this.FormBorderStyle = FormBorderStyle.None;
             this.TransparencyKey = Color.FromArgb(77, 77, 77);
             this.BackColor = this.TransparencyKey;
-            this.Paint += OnPaint;
             this.Location = new Point(0, 0);
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -109,84 +99,6 @@ namespace Flare_Sharp.UI
                     return Color.FromArgb(255, ascending, 0, 255);
                 default: // case 5:
                     return Color.FromArgb(255, 255, 0, descending);
-            }
-        }
-
-        public void OnPaint(object sender, PaintEventArgs args)
-        {
-            //Render
-            Graphics graphics = args.Graphics;
-            //Adjust fonts
-            titleFont = new Font(new FontFamily("Arial"), tFontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
-            textFont = new Font(new FontFamily("Arial"), fontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
-
-            graphics.DrawString("Flare", titleFont, primary, -10, 0);
-            uint c = 0;
-            catWidth = 0;
-            foreach (Category category in CategoryHandler.registry.categories)
-            {
-                float wid = graphics.MeasureString(category.name, textFont, 600).Width;
-                if(wid > catWidth)
-                {
-                    catWidth = wid;
-                }
-            }
-            foreach (Category category in CategoryHandler.registry.categories)
-            {
-                //Draw category
-                graphics.FillRectangle(secondary, 0, tFontSize + (32 * scale) * c, catWidth*scale, 32*scale);
-                if (category.active)
-                {
-                    graphics.FillRectangle(quaternary, 0, tFontSize + (32 * scale) * c, catWidth * scale, 32 * scale);
-                    //Draw modules
-                    float modWidth = 0;
-                    foreach (Module module in category.modules)
-                    {
-                        float wid = graphics.MeasureString(module.name, textFont, 400).Width;
-                        if (wid > modWidth)
-                        {
-                            modWidth = wid;
-                        }
-                    }
-                    uint m = 0;
-                    foreach (Module module in category.modules)
-                    {
-                        graphics.FillRectangle(secondary, catWidth, tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
-                        if (module.enabled)
-                        {
-                            graphics.FillRectangle(quaternary, catWidth, tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
-                        }
-                        graphics.DrawString(module.name, textFont, primary, catWidth, tFontSize + (32 * scale) * m);
-                        float kwid = graphics.MeasureString(module.keybind.ToString(), textFont, 200).Width;
-                        graphics.FillRectangle(secondary, catWidth + modWidth, tFontSize + (32 * scale) * m, kwid * scale, 32 * scale);
-                        graphics.DrawString(module.keybind.ToString(), textFont, primary, catWidth + modWidth, tFontSize + (32 * scale) * m);
-                        if (module.selected)
-                        {
-                            graphics.DrawRectangle(new Pen(tertiary.Color, 2), catWidth, tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
-                        }
-                        m++;
-                    }
-                }
-                else if (category.selected)
-                {
-                    graphics.FillRectangle(tertiary, 0, tFontSize + (32 * scale) * c, catWidth * scale, 32 * scale);
-                }
-                graphics.DrawString(category.name, textFont, primary, 0, tFontSize + (32 * scale) * c);
-                c++;
-            }
-            //Draw enabled modules
-            uint yOff = 0;
-            foreach (Category cat in CategoryHandler.registry.categories)
-            {
-                foreach (Module mod in cat.modules)
-                {
-                    if (mod.enabled)
-                    {
-                        float mwid = graphics.MeasureString(mod.name, textFont, 600).Width;
-                        graphics.DrawString(mod.name, textFont, rainbow, width - mwid, (32 * scale) * yOff);
-                        yOff++;
-                    }
-                }
             }
         }
     }

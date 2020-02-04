@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Flare_Sharp.ClientBase.Modules.Modules
 {
-    public class YPort : Module
+    public class YBoost : Module
     {
-        public YPort() : base("YPort", CategoryHandler.registry.categories[1], (char)0x07, false)
+        public YBoost() : base("YBoost", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
         }
 
