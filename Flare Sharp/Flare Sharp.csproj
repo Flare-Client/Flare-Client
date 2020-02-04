@@ -84,7 +84,7 @@
     <Compile Include="ClientBase\Modules\Modules\Coordinates.cs" />
     <Compile Include="ClientBase\Modules\Modules\Velocity.cs" />
     <Compile Include="ClientBase\Modules\Modules\YPort.cs" />
-	<Compile Include="ClientBase\Modules\Modules\Recall.cs" />
+    <Compile Include="ClientBase\Modules\Modules\Recall.cs" />
     <Compile Include="Memory\CraftSDK\Entity.cs" />
     <Compile Include="Memory\CraftSDK\EntityList.cs" />
     <Compile Include="ClientBase\Modules\Modules\Flight.cs" />
@@ -101,6 +101,7 @@
     <Compile Include="UI\ClickUI\ClickUiHandler.cs" />
     <Compile Include="UI\ClickUI\Controls\CUICheckBox.cs" />
     <Compile Include="UI\ClickUI\Controls\CUIModuleItem.cs" />
+    <Compile Include="UI\ClickUI\Controls\CUIModuleToggle.cs" />
     <Compile Include="UI\ClickUI\KeybindWindow.cs" />
     <Compile Include="UI\ClickUI\Controls\CUIButton.cs" />
     <Compile Include="UI\ClickUI\Controls\CUILabel.cs" />

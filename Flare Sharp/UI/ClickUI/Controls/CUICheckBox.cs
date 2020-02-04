@@ -15,12 +15,12 @@ namespace Flare_Sharp.UI.ClickUI.Controls
         static extern bool GetCursorPos(out Point point);
 
         public EventHandler<EventArgs> onClick;
-        bool toggle = false;
+        public bool toggle = false;
         public Brush currentBrush;
         public Brush uncheckedBrush;
         public Brush checkedBrush;
         Size size;
-        int off = 3;
+        //int off = 3;
 
         public CUICheckBox(int size, Color uncheckedColor, Color checkedColor, Color color, int x, int y, CUIWindow parent) : base(color, x, y, parent)
         {
@@ -49,6 +49,15 @@ namespace Flare_Sharp.UI.ClickUI.Controls
                 {
                     if (onClick != null)
                     {
+                        toggle = !toggle;
+                        if (toggle)
+                        {
+                            currentBrush = checkedBrush;
+                        }
+                        else
+                        {
+                            currentBrush = uncheckedBrush;
+                        }
                         TabUI.ui.Invalidate();
                         try
                         {
@@ -61,7 +70,6 @@ namespace Flare_Sharp.UI.ClickUI.Controls
         }
         private void onKeyUp(object sender, clientKeyEvent e)
         {
-            toggle = !toggle;
             TabUI.ui.Invalidate();
         }
     }

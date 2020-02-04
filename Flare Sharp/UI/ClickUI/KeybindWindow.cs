@@ -19,9 +19,7 @@ namespace Flare_Sharp.UI.ClickUI
             byte Z = 0;
             foreach (Module mod in cat.modules)
             {
-                controls.Add(new CUILabel(mod.name, "Arial", 16, FontStyle.Regular, Color.White, 15, (Z * 20) + 50, this));
-                controls.Add(new KeybindButton(mod, mod.keybind.ToString(), "Arial", 16, FontStyle.Regular, Color.White, Color.FromArgb(50, 50, 50), Color.FromArgb(80, 80, 80), this.width - 32, (Z * 20) + 50, this));
-                controls.Add(new CUICheckBox(16, Color.FromArgb(255, 0, 0), Color.FromArgb(0, 255, 0), Color.FromArgb(0, 0, 0), this.width - 32 - 18, (Z * 20) + 50, this));
+                controls.Add(new CUIModuleItem(mod, Color.FromArgb(0, 0, 0), 0, (Z * 20) + 50, this));
                 Z++;
             }
             visible = true;
