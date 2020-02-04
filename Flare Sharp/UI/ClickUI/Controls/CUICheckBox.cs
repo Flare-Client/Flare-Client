@@ -58,7 +58,7 @@ namespace Flare_Sharp.UI.ClickUI.Controls
                         {
                             currentBrush = uncheckedBrush;
                         }
-                        TabUI.ui.Invalidate();
+                        OverlayHost.ui.Invalidate();
                         try
                         {
                             onClick.Invoke(this, new EventArgs());
@@ -70,7 +70,7 @@ namespace Flare_Sharp.UI.ClickUI.Controls
         }
         private void onKeyUp(object sender, clientKeyEvent e)
         {
-            TabUI.ui.Invalidate();
+            OverlayHost.ui.Invalidate();
         }
     }
 }

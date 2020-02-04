@@ -79,7 +79,7 @@ namespace Flare_Sharp.UI.ClickUI
                         GetCursorPos(out p);
                         x = p.X - dx;
                         y = p.Y - dy;
-                        TabUI.ui.Invalidate();
+                        OverlayHost.ui.Invalidate();
                     }
                 }
             }
@@ -91,7 +91,7 @@ namespace Flare_Sharp.UI.ClickUI
                 if (e.key == 0x1)
                 {
                     dragging = false;
-                    TabUI.ui.Invalidate();
+                    OverlayHost.ui.Invalidate();
                 }
             }
         }
@@ -100,8 +100,8 @@ namespace Flare_Sharp.UI.ClickUI
         {
             if (visible)
             {
-                graphics.FillRectangle(TabUI.ui.secondary, x, y, width, height);
-                graphics.DrawRectangle(new Pen(TabUI.ui.primary), x, y, width, height);
+                graphics.FillRectangle(OverlayHost.ui.secondary, x, y, width, height);
+                graphics.DrawRectangle(new Pen(OverlayHost.ui.primary), x, y, width, height);
                 foreach (CUIControl control in controls)
                 {
                     control.OnPaint(graphics);

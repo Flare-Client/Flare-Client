@@ -29,7 +29,7 @@ namespace Flare_Sharp.UI.ClickUI.Controls
         {
             mod.enabled = !mod.enabled;
             mod.enabled = modToggle.toggle;
-            TabUI.ui.Invalidate();
+            OverlayHost.ui.Invalidate();
         }
 
 

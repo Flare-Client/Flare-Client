@@ -80,6 +80,7 @@
     <Compile Include="ClientBase\Modules\Modules\Scaffold.cs" />
     <Compile Include="ClientBase\Modules\Modules\ServerCrasher.cs" />
     <Compile Include="ClientBase\Modules\Modules\Step.cs" />
+    <Compile Include="ClientBase\Modules\Modules\TabGUI.cs" />
     <Compile Include="ClientBase\Modules\Modules\Triggerbot.cs" />
     <Compile Include="ClientBase\Modules\Modules\Coordinates.cs" />
     <Compile Include="ClientBase\Modules\Modules\Velocity.cs" />
@@ -108,9 +109,10 @@
     <Compile Include="UI\ClickUI\CUIControl.cs" />
     <Compile Include="UI\ClickUI\CUIWindow.cs" />
     <Compile Include="UI\ClickUI\KeybindButton.cs" />
-    <Compile Include="UI\TabUI.cs">
+    <Compile Include="UI\OverlayHost.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UI\TabUI\TabUiHandler.cs" />
     <Compile Include="UI\WinHooks.cs" />
   </ItemGroup>
   <ItemGroup>
