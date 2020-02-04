@@ -84,7 +84,7 @@
     <Compile Include="ClientBase\Modules\Modules\Triggerbot.cs" />
     <Compile Include="ClientBase\Modules\Modules\Coordinates.cs" />
     <Compile Include="ClientBase\Modules\Modules\Velocity.cs" />
-    <Compile Include="ClientBase\Modules\Modules\YPort.cs" />
+    <Compile Include="ClientBase\Modules\Modules\YBoost.cs" />
     <Compile Include="ClientBase\Modules\Modules\Recall.cs" />
     <Compile Include="Memory\CraftSDK\Entity.cs" />
     <Compile Include="Memory\CraftSDK\EntityList.cs" />
