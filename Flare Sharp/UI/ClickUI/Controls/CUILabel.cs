@@ -20,7 +20,7 @@ namespace Flare_Sharp.UI.ClickUI.Controls
         public override void OnPaint(Graphics graphics)
         {
             base.OnPaint(graphics);
-            graphics.DrawString(text, font, brush, x+parent.x, y+parent.y);
+            graphics.DrawString(text, font, brush, x+parent.x, y+parent.y+2);
         }
     }
 }

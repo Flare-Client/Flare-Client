@@ -23,6 +23,9 @@ namespace Flare_Sharp.UI.ClickUI.Controls
             modToggle.onClick += toggleModule;
             modToggle.toggle = mod.enabled;
             parent.controls.Add(modToggle);
+            byte[] str = { 0xE2, 0x9A, 0x99 };
+            CUIButton modSettingButton = new CUIButton(Encoding.UTF8.GetString(str), "Arial", 16, FontStyle.Regular, Color.White, Color.FromArgb(50, 50, 50), Color.FromArgb(80, 80, 80), parent.width - 32 - 18 -20, y, parent);
+            parent.controls.Add(modSettingButton);
         }
 
         private void toggleModule(object sender, EventArgs e)
