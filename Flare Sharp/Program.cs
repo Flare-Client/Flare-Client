@@ -37,10 +37,10 @@ namespace Flare_Sharp
 
                 SDK sdk = new SDK();
                 CategoryHandler ch = new CategoryHandler();
-                ClickUiHandler cuih = new ClickUiHandler();
                 TabUiHandler tuih = new TabUiHandler();
                 ModuleHandler mh = new ModuleHandler();
                 KeybindHandler kh = new KeybindHandler();
+                ClickUiHandler cuih = new ClickUiHandler();
                 Thread uiApp = new Thread(() => { OverlayHost ui = new OverlayHost(); Application.Run(ui); });
                 uiApp.Start();
                 while (true)
