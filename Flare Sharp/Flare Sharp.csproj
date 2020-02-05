@@ -79,7 +79,6 @@
     <Compile Include="ClientBase\Modules\Modules\Phase.cs" />
     <Compile Include="ClientBase\Modules\Modules\PlayerSpeed.cs" />
     <Compile Include="ClientBase\Modules\Modules\Scaffold.cs" />
-    <Compile Include="ClientBase\Modules\Modules\ServerCrasher.cs" />
     <Compile Include="ClientBase\Modules\Modules\Step.cs" />
     <Compile Include="ClientBase\Modules\Modules\TabGUI.cs" />
     <Compile Include="ClientBase\Modules\Modules\Triggerbot.cs" />
@@ -104,12 +103,14 @@
     <Compile Include="UI\ClickUI\Controls\CUICheckBox.cs" />
     <Compile Include="UI\ClickUI\Controls\CUIModuleItem.cs" />
     <Compile Include="UI\ClickUI\Controls\CUIModuleToggle.cs" />
+    <Compile Include="UI\ClickUI\CUIClosableWindow.cs" />
     <Compile Include="UI\ClickUI\KeybindWindow.cs" />
     <Compile Include="UI\ClickUI\Controls\CUIButton.cs" />
     <Compile Include="UI\ClickUI\Controls\CUILabel.cs" />
     <Compile Include="UI\ClickUI\CUIControl.cs" />
     <Compile Include="UI\ClickUI\CUIWindow.cs" />
     <Compile Include="UI\ClickUI\KeybindButton.cs" />
+    <Compile Include="UI\ClickUI\ModuleSettingsWindow.cs" />
     <Compile Include="UI\OverlayHost.cs">
       <SubType>Form</SubType>
     </Compile>

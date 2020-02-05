@@ -27,6 +27,7 @@ namespace Flare_Sharp.UI.ClickUI
                 }
                 
             }
+            new CUIClosableWindow(true);
         }
 
         public void renderCUI(Graphics graphics)
