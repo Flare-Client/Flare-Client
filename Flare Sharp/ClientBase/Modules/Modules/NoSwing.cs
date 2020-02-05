@@ -26,7 +26,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onDisable()
         {
             base.onDisable();
-            byte[] write = { 0xC6, 0x83, 0x8C, 0x08, 0x00, 0x00, 0x01 };
+            byte[] write = { 0x80, 0xB9, 0x8C, 0x08, 0x00, 0x00, 0x00 };
             MCM.writeBaseBytes(Pointers.handSwingPacket, write);
         }
     }

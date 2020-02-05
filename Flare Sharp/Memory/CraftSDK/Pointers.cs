@@ -94,7 +94,7 @@ namespace Flare_Sharp.Memory.CraftSDK
             }
         }
         public static int attackSwing = 0x102B81E; //v1.14.2
-        public static int handSwingPacket = 0x8A8E84; //v1.14.2
+        public static int handSwingPacket = 0x8A8E59; //v1.14.2
         public static int rapidPlace = 0x102B7A0; //v1.14.2
         public static int autoSprint = 0x1A628C0; //v1.14.2
         public static int criticalsPacket = 0xFD9266; //v1.14.2
