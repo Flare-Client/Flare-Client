@@ -13,7 +13,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     {
         public Criticals() : base("Criticals", CategoryHandler.registry.categories[0], (char)0x07, false)
         {
-
         }
 
         public override void onEnable()

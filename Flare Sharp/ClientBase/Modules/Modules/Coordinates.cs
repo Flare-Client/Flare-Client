@@ -13,7 +13,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     {
         public Coordinates() : base("Coords", CategoryHandler.registry.categories[2], (char)0x07, false)
         {
-
         }
 
         public override void onEnable()

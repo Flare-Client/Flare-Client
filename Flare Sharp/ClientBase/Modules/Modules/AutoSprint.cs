@@ -13,7 +13,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     {
         public AutoSprint() : base("AutoSprint", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
-
         }
 
         public override void onEnable()

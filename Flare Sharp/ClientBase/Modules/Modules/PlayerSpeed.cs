@@ -15,11 +15,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
         }
 
-        public override void onEnable()
-        {
-            base.onEnable();
-        }
-
         public override void onDisable()
         {
             base.onDisable();

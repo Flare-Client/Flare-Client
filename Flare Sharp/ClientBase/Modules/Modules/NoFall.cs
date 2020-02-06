@@ -14,18 +14,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public NoFall() : base("NoFall", CategoryHandler.registry.categories[2], (char)0x07, false)
         {
         }
-
-        public override void onEnable()
-        {
-            base.onEnable();
-            
-        }
-
-        public override void onDisable()
-        {
-            base.onDisable();
-        }
-
         public override void onTick()
         {
             base.onTick();
