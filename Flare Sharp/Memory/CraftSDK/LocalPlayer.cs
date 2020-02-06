@@ -120,17 +120,17 @@ namespace Flare_Sharp.Memory.CraftSDK
                 MCM.writeInt(MCM.evaluatePointer(addr, offs), value);
             }
         }
-        public int airAcceleration
+        public float airAcceleration
         {
             get
             {
                 UInt64[] offs = { 0x8A4 };
-                return MCM.readInt(MCM.evaluatePointer(addr, offs));
+                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
             }
             set
             {
                 UInt64[] offs = { 0x8A4 };
-                MCM.writeInt(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
             }
         }
 

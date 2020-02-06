@@ -29,11 +29,13 @@ namespace Flare_Sharp.ClientBase.Modules
             new AutoSprint();
             new PlayerSpeed();
             new Jesus();
+            new BHOP();
             new NoSlowDown();
             new NoKnockBack();
             new NoWeb();
             new Step();
             new FastLadder();
+            new AirAcceleration();
             new Velocity();
             new Jetpack();
             new YBoost();
