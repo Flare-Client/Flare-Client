@@ -13,7 +13,7 @@ namespace Flare_Sharp.UI.VObjs
     {
         List<VModuleItem> moduleObjects = new List<VModuleItem>();
         public Category category;
-        public VCatgoryWindow(Category category) : base()
+        public VCatgoryWindow(Category category, int x) : base(x)
         {
             this.category = category;
             this.text = category.name;

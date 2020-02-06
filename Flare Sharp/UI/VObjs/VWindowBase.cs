@@ -15,8 +15,9 @@ namespace Flare_Sharp.UI.VObjs
         int dx = 0;
         int dy = 0;
 
-        public VWindowBase() : base()
+        public VWindowBase(int x) : base()
         {
+            this.x = x;
             this.width = 200;
             this.height = 25;
         }
