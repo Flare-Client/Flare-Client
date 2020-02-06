@@ -12,33 +12,20 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class HighJump : Module
     {
-        public HighJump() : base("HighJump", CategoryHandler.registry.categories[1], (char)0x20, false)
+        public HighJump() : base("HighJump", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
-            KeybindHandler.clientKeyUpEvent += UpKeyHeld;
+            KeybindHandler.clientKeyHeldEvent += KeyHeldEvent;
         }
 
-        public void UpKeyHeld(object sender, clientKeyEvent e)
+        public void KeyHeldEvent(object sender, clientKeyEvent e)
         {
-            if (e.key == keybind)
+            if (e.key == (char)0x20)
             {
-                enabled = false;
+                if (enabled)
+                {
+                    if (SDK.instance.player.isInAir > 1 | SDK.instance.player.onGround > 0) SDK.instance.player.velY = 0.6F;
+                }
             }
-        }
-
-        public override void onEnable()
-        {
-            base.onEnable();
-        }
-
-        public override void onDisable()
-        {
-            base.onDisable();
-        }
-
-        public override void onTick()
-        {
-            base.onTick();
-            if (SDK.instance.player.isInAir > 1 | SDK.instance.player.onGround > 0) SDK.instance.player.velY = 0.5F;
         }
     }
 }

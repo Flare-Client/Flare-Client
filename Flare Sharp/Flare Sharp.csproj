@@ -61,6 +61,7 @@
     <Compile Include="ClientBase\Modules\Modules\Aimbot.cs" />
     <Compile Include="ClientBase\Modules\Modules\AirJump.cs" />
     <Compile Include="ClientBase\Modules\Modules\AutoSprint.cs" />
+    <Compile Include="ClientBase\Modules\Modules\BounceFly.cs" />
     <Compile Include="ClientBase\Modules\Modules\ClickUI.cs" />
     <Compile Include="ClientBase\Modules\Modules\Criticals.cs" />
     <Compile Include="ClientBase\Modules\Modules\FastLadder.cs" />

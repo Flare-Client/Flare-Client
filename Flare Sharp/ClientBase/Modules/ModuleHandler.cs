@@ -38,6 +38,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new YBoost();
             new Coordinates();
             new Flight();
+            new BounceFly();
             new Scaffold();
             new Gamemode();
             new NoFall();
