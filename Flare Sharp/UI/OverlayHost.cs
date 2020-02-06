@@ -31,6 +31,7 @@ namespace Flare_Sharp.UI
         [DllImport("user32.dll")]
         public static extern UInt64 SetWindowLong(IntPtr hWnd,int nIndex, UInt64 dwNewLong);
 
+        public static event EventHandler postOverlayLoad;
 
         public delegate void fixSizeDel();
 
@@ -66,6 +67,10 @@ namespace Flare_Sharp.UI
             SetWinEventHook((uint)SWEH_Events.EVENT_SYSTEM_FOREGROUND, (uint)SWEH_Events.EVENT_SYSTEM_FOREGROUND, IntPtr.Zero, overDel, 0, 0, (uint)SWEH_dwFlags.WINEVENT_OUTOFCONTEXT | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNPROCESS | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNTHREAD);
             UInt64 initialStyle = GetWindowLong(this.Handle, -20);
             SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
+            if(postOverlayLoad != null)
+            {
+                postOverlayLoad.Invoke(this, new EventArgs());
+            }
         }
 
         public void adjustOverlay(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)

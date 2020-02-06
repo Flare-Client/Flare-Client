@@ -26,6 +26,12 @@ namespace Flare_Sharp.ClientBase.Modules
             category.modules.Add(this);
         }
 
+        Dictionary<string, int> settings = new Dictionary<string, int>();
+        public void RegisterSetting(string settingKey, ref int value)
+        {
+            settings.Add(settingKey, value);
+        }
+
         public virtual void onEnable()
         {
             this.enabled = true;
