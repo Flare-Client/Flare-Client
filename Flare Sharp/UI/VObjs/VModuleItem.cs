@@ -12,9 +12,11 @@ namespace Flare_Sharp.UI.VObjs
 {
     public class VModuleItem : VShelfItem
     {
+        public VCatgoryWindow parent;
         public Module module;
-        public VModuleItem(Module module):base(24)
+        public VModuleItem(Module module, VCatgoryWindow parent):base(24)
         {
+            this.parent = parent;
             this.module = module;
             this.text = module.name;
         }
@@ -32,13 +34,16 @@ namespace Flare_Sharp.UI.VObjs
         public override void OnInteractDown(clientKeyEvent a)
         {
             base.OnInteractDown(a);
-
-            if (a.key == 0x1)
+            visible = parent.visible;
+            if (visible)
             {
-                Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
-                if (objRect.Contains(p))
+                if (a.key == 0x1)
                 {
-                    module.enabled = !module.enabled;
+                    Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
+                    if (objRect.Contains(p))
+                    {
+                        module.enabled = !module.enabled;
+                    }
                 }
             }
         }

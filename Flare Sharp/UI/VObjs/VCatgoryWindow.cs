@@ -1,4 +1,5 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
+using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.ClientBase.Modules;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace Flare_Sharp.UI.VObjs
 
             foreach(Module module in category.modules)
             {
-                moduleObjects.Add(new VModuleItem(module));
+                moduleObjects.Add(new VModuleItem(module, this));
             }
 
             //We have to register this manually
