@@ -1,5 +1,4 @@
 ﻿using Flare_Sharp.ClientBase.Keybinds;
-using Flare_Sharp.Memory;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,13 +7,32 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Flare_Sharp.UI.ClickUI
+namespace Flare_Sharp.UI.VObjs
 {
     public abstract class VObject
     {
         public string text = "Object";
         public bool visible = false;
         public Font font = new Font("Arial", 16, FontStyle.Regular);
+
+        public Rectangle objRect
+        {
+            get
+            {
+                return new Rectangle(x, y, width, height);
+            }
+            set
+            {
+                x = value.X;
+                y = value.Y;
+                width = value.Width;
+                height = value.Height;
+            }
+        }
+        public int x;
+        public int y;
+        public int width;
+        public int height;
 
         public SolidBrush primary;
         public SolidBrush secondary;
@@ -29,32 +47,37 @@ namespace Flare_Sharp.UI.ClickUI
             tertiary = OverlayHost.ui.tertiary;
             quaternary = OverlayHost.ui.quaternary;
             rainbow = OverlayHost.ui.rainbow;
-            OverlayHost.ui.Paint += (object sender, PaintEventArgs e) =>
+            KeybindHandler.clientKeyDownEvent += (object s, clientKeyEvent a) =>
             {
                 if (visible)
                 {
-                    OnPaint(e);
+                    Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
+                    if (objRect.Contains(p))
+                    {
+                        OnInteractDown(a);
+                    }
                 }
             };
-            KeybindHandler.clientKeyDownEvent += (object s, clientKeyEvent a) =>
-              {
-                  if (visible)
-                  {
-                      OnInteractDown(a);
-                  }
-              };
             KeybindHandler.clientKeyHeldEvent += (object s, clientKeyEvent a) =>
             {
                 if (visible)
                 {
-                    OnInteractHeld(a);
+                    Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
+                    if (objRect.Contains(p))
+                    {
+                        OnInteractHeld(a);
+                    }
                 }
             };
             KeybindHandler.clientKeyUpEvent += (object s, clientKeyEvent a) =>
             {
                 if (visible)
                 {
-                    OnInteractUp(a);
+                    Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
+                    if (objRect.Contains(p))
+                    {
+                        OnInteractUp(a);
+                    }
                 }
             };
         }

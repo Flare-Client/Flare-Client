@@ -1,5 +1,4 @@
 ﻿using Flare_Sharp.ClientBase.Keybinds;
-using Flare_Sharp.ClientBase.Modules;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,56 +7,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Flare_Sharp.UI.ClickUI
+namespace Flare_Sharp.UI.VObjs
 {
-    public abstract class VWindowBase : VObject
+    public class VWindowBase : VObject
     {
-        int x = 0;
-        int y = 0;
-        int width = 200;
-        public abstract int height { get; }
-
-        public Rectangle titleBox
-        {
-            get
-            {
-                return new Rectangle(x, y, width, 25);
-            }
-        }
-        public Rectangle frame
-        {
-            get
-            {
-                return new Rectangle(x, y+25, width, height);
-            }
-        }
-
         public bool dragging = false;
         int dx = 0;
         int dy = 0;
 
         public VWindowBase() : base()
         {
+            this.width = 200;
+            this.height = 25;
         }
-        public VWindowBase(int x, int y)
-        {
-            this.x = x;
-            this.y = y;
-        }
-        public VWindowBase(int x, int y, int width, int height)
-        {
-            this.x = x;
-            this.y = y; 
-            this.width = width;
-        }
-
 
         public override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            e.Graphics.FillRectangle(primary, titleBox);
-            e.Graphics.FillRectangle(secondary, frame);
-            e.Graphics.DrawString(text, font, secondary, titleBox.X, titleBox.Y);
+            e.Graphics.FillRectangle(primary, objRect);
+            e.Graphics.DrawString(text, font, secondary, objRect.X, objRect.Y);
         }
 
         public override void OnInteractDown(clientKeyEvent e)
@@ -66,12 +34,9 @@ namespace Flare_Sharp.UI.ClickUI
             if (e.key == 0x1)
             {
                 Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
-                if (titleBox.Contains(p))
-                {
-                    dx = p.X - titleBox.X;
-                    dy = p.Y - titleBox.Y;
-                    this.dragging = true;
-                }
+                dx = p.X - objRect.X;
+                dy = p.Y - objRect.Y;
+                this.dragging = true;
             }
         }
         public override void OnInteractHeld(clientKeyEvent e)

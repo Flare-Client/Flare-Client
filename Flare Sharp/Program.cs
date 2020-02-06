@@ -4,7 +4,6 @@ using Flare_Sharp.ClientBase.Modules;
 using Flare_Sharp.Memory;
 using Flare_Sharp.Memory.CraftSDK;
 using Flare_Sharp.UI;
-using Flare_Sharp.UI.ClickUI;
 using Flare_Sharp.UI.TabUI;
 using System;
 using System.Collections.Generic;
