@@ -13,19 +13,30 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class ClickUI : Module
     {
+        List<VObject> vObjs = new List<VObject>();
         public ClickUI() : base("ClickGUI", CategoryHandler.registry.categories[3], (char)0xA1, false)
         {
+            OverlayHost.postOverlayLoad += (object sen, EventArgs ea)=>{
+                VCategoryWindow window = new VCategoryWindow();
+                window.addModule(CategoryHandler.registry.categories[0].modules[0]);
+                window.addModule(CategoryHandler.registry.categories[0].modules[1]);
+                vObjs.Add(window);
+            };
         }
         public override void onEnable()
         {
             base.onEnable();
-            OverlayHost.ui.Paint += drawUI;
-        }
-        public void drawUI(object sender, PaintEventArgs args)
-        {
-            if (enabled)
+            foreach(VObject vObj in vObjs)
             {
-                ClickUiHandler.instance.renderCUI(args.Graphics);
+                vObj.visible = true;
+            }
+        }
+        public override void onDisable()
+        {
+            base.onDisable();
+            foreach (VObject vObj in vObjs)
+            {
+                vObj.visible = false;
             }
         }
     }

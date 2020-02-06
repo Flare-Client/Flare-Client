@@ -99,18 +99,10 @@
     <Compile Include="ClientBase\Modules\ModuleHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UI\ClickUI\ClickUiHandler.cs" />
-    <Compile Include="UI\ClickUI\Controls\CUICheckBox.cs" />
-    <Compile Include="UI\ClickUI\Controls\CUIModuleItem.cs" />
-    <Compile Include="UI\ClickUI\Controls\CUIModuleToggle.cs" />
-    <Compile Include="UI\ClickUI\CUIClosableWindow.cs" />
-    <Compile Include="UI\ClickUI\KeybindWindow.cs" />
-    <Compile Include="UI\ClickUI\Controls\CUIButton.cs" />
-    <Compile Include="UI\ClickUI\Controls\CUILabel.cs" />
-    <Compile Include="UI\ClickUI\CUIControl.cs" />
-    <Compile Include="UI\ClickUI\CUIWindow.cs" />
-    <Compile Include="UI\ClickUI\KeybindButton.cs" />
-    <Compile Include="UI\ClickUI\ModuleSettingsWindow.cs" />
+    <Compile Include="UI\ClickUI\VModuleObject.cs" />
+    <Compile Include="UI\ClickUI\VObject.cs" />
+    <Compile Include="UI\ClickUI\VCategoryWindow.cs" />
+    <Compile Include="UI\ClickUI\VWindowBase.cs" />
     <Compile Include="UI\OverlayHost.cs">
       <SubType>Form</SubType>
     </Compile>
