@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Flare_Sharp.ClientBase.Modules.Modules
 {
-    public class BounceFly : Module
+    public class Jesus : Module
     {
-        public BounceFly() : base("BounceFly", CategoryHandler.registry.categories[2], (char)0x07, false)
+        public Jesus() : base("Jesus", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
         }
 
@@ -29,7 +29,10 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            if (SDK.instance.player.velY <= -0.5F) SDK.instance.player.velY = 0.5F;
+            if(SDK.instance.player.isInWater > 0)
+            {
+                SDK.instance.player.velY = 0.2F;
+            }
         }
     }
 }
