@@ -66,6 +66,7 @@
     <Compile Include="ClientBase\Modules\Modules\FastLadder.cs" />
     <Compile Include="ClientBase\Modules\Modules\Freecam.cs" />
     <Compile Include="ClientBase\Modules\Modules\Gamemode.cs" />
+    <Compile Include="ClientBase\Modules\Modules\Highjump.cs" />
     <Compile Include="ClientBase\Modules\Modules\Hitbox.cs" />
     <Compile Include="ClientBase\Modules\Modules\Misplace.cs" />
     <Compile Include="ClientBase\Modules\Modules\Jetpack.cs" />

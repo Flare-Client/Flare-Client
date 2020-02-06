@@ -23,7 +23,9 @@ namespace Flare_Sharp.ClientBase.Modules
             new Aimbot();
             new Triggerbot();
             new Criticals();
+            new Misplace();
             new AirJump();
+            new HighJump();
             new AutoSprint();
             new PlayerSpeed();
             new NoSlowDown();
@@ -32,6 +34,8 @@ namespace Flare_Sharp.ClientBase.Modules
             new Step();
             new FastLadder();
             new Velocity();
+            new Jetpack();
+            new YBoost();
             new Coordinates();
             new Flight();
             new Scaffold();
@@ -44,9 +48,6 @@ namespace Flare_Sharp.ClientBase.Modules
             new Freecam();
             new ServerCrasher();
             new ClickUI();
-            new Misplace();
-            new Jetpack();
-            new YBoost();
             new TabGUI();
             new ModuleList();
             //new HiveFly();// <--will be added back for next release
