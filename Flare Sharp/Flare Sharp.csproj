@@ -80,6 +80,7 @@
     <Compile Include="ClientBase\Modules\Modules\NoPacket.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoSlowDown.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoSwing.cs" />
+    <Compile Include="ClientBase\Modules\Modules\NoWater.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoWeb.cs" />
     <Compile Include="ClientBase\Modules\Modules\Phase.cs" />
     <Compile Include="ClientBase\Modules\Modules\PlayerSpeed.cs" />

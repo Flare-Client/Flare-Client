@@ -29,6 +29,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new AutoSprint();
             new PlayerSpeed();
             new Jesus();
+            new NoWater();
             new BHOP();
             new NoSlowDown();
             new NoKnockBack();

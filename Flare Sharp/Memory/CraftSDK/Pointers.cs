@@ -111,5 +111,6 @@ namespace Flare_Sharp.Memory.CraftSDK
         public static int webTick = 0x120ECA5; //v1.14.2
         public static int ladderUp = 0x13D47D0; //V1.14.2
         public static int ladderDown = 0x13CA405; //V1.14.2
+        public static int waterTick = 0x122014D; //V1.14.2
     }
 }
