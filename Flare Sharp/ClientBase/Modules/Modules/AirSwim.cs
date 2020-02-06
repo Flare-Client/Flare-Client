@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Flare_Sharp.ClientBase.Modules.Modules
 {
-    public class NoWater : Module
+    public class AirSwim : Module
     {
-        public NoWater() : base("NoWater", CategoryHandler.registry.categories[1], (char)0x07, false)
+        public AirSwim() : base("AirSwim", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
         }
 
@@ -20,15 +20,16 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
             base.onEnable();
             byte[] offs = { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 };
-            MCM.writeBaseBytes(Pointers.inWaterTick, offs);
-            SDK.instance.player.isInWater = 0;
+            MCM.writeBaseBytes(Pointers.notInWaterTick, offs);
+            SDK.instance.player.isInWater = 1;
         }
 
         public override void onDisable()
         {
             base.onDisable();
-            byte[] offs = { 0xC6, 0x83, 0x3D, 0x02, 0x00, 0x00, 0x01 };
-            MCM.writeBaseBytes(Pointers.inWaterTick, offs);
+            byte[] offs = { 0x0F, 0xB6, 0x81, 0x3D, 0x02, 0x00, 0x00 };
+            MCM.writeBaseBytes(Pointers.notInWaterTick, offs);
+            SDK.instance.player.isInWater = 0;
         }
     }
 }
