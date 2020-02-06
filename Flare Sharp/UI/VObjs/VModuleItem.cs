@@ -2,6 +2,7 @@
 using Flare_Sharp.ClientBase.Modules;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,8 +32,15 @@ namespace Flare_Sharp.UI.VObjs
         public override void OnInteractDown(clientKeyEvent a)
         {
             base.OnInteractDown(a);
-            if(a.key==0x1)
-                module.enabled = !module.enabled;
+
+            if (a.key == 0x1)
+            {
+                Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
+                if (objRect.Contains(p))
+                {
+                    module.enabled = !module.enabled;
+                }
+            }
         }
     }
 }

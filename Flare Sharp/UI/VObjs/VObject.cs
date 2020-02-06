@@ -51,33 +51,33 @@ namespace Flare_Sharp.UI.VObjs
             {
                 if (visible)
                 {
-                    Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
-                    if (objRect.Contains(p))
-                    {
-                        OnInteractDown(a);
-                    }
+                    OnInteractDown(a);
+                    //Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
+                    //if (objRect.Contains(p))
+                    //{
+                    //}
                 }
             };
             KeybindHandler.clientKeyHeldEvent += (object s, clientKeyEvent a) =>
             {
                 if (visible)
                 {
-                    Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
-                    if (objRect.Contains(p))
-                    {
-                        OnInteractHeld(a);
-                    }
+                    OnInteractHeld(a);
+                    //Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
+                    //if (objRect.Contains(p))
+                    //{
+                    //}
                 }
             };
             KeybindHandler.clientKeyUpEvent += (object s, clientKeyEvent a) =>
             {
                 if (visible)
                 {
-                    Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
-                    if (objRect.Contains(p))
-                    {
-                        OnInteractUp(a);
-                    }
+                    OnInteractUp(a);
+                    //Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
+                    //if (objRect.Contains(p))
+                    //{
+                    //}
                 }
             };
         }

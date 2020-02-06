@@ -35,9 +35,12 @@ namespace Flare_Sharp.UI.VObjs
             if (e.key == 0x1)
             {
                 Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
-                dx = p.X - objRect.X;
-                dy = p.Y - objRect.Y;
-                this.dragging = true;
+                if (objRect.Contains(p))
+                {
+                    dx = p.X - objRect.X;
+                    dy = p.Y - objRect.Y;
+                    this.dragging = true;
+                }
             }
         }
         public override void OnInteractHeld(clientKeyEvent e)

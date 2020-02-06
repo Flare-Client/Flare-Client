@@ -1,6 +1,7 @@
 ﻿using Flare_Sharp.ClientBase.Keybinds;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,12 +38,16 @@ namespace Flare_Sharp.UI.VObjs
             base.OnInteractDown(a);
             if (a.key == 0x2)
             {
-                expanded = !expanded;
-                if (expanded)
-                    height += expandedAmt;
-                else
-                    height -= expandedAmt;
-                OverlayHost.ui.Invalidate();
+                Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
+                if (objRect.Contains(p))
+                {
+                    expanded = !expanded;
+                    if (expanded)
+                        height += expandedAmt;
+                    else
+                        height -= expandedAmt;
+                    OverlayHost.ui.Invalidate();
+                }
             }
         }
     }
