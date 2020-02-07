@@ -51,6 +51,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new NoFall();
             new Phase();
             new NoSwing();
+            new ClickTP();
             new Recall();
             new NoPacket();
             new Freecam();
