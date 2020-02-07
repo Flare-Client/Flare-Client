@@ -24,6 +24,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new Triggerbot();
             new Criticals();
             new Misplace();
+            new Reach();
             new AirJump();
             new HighJump();
             new AutoSprint();
@@ -44,11 +45,13 @@ namespace Flare_Sharp.ClientBase.Modules
             new Coordinates();
             new Flight();
             new BounceFly();
+            new HoverFlight();
             new Scaffold();
             new Gamemode();
             new NoFall();
             new Phase();
             new NoSwing();
+            new ClickTP();
             new Recall();
             new NoPacket();
             new Freecam();

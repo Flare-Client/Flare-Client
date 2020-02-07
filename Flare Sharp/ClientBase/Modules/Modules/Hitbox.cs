@@ -11,7 +11,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class Hitbox : Module
     {
-        public Hitbox() : base("Hitbox", CategoryHandler.registry.categories[0], 'H', false)
+        public Hitbox() : base("Hitbox", CategoryHandler.registry.categories[0], (char)0x07, false)
         {
         }
 

@@ -65,6 +65,7 @@
     <Compile Include="ClientBase\Modules\Modules\AutoSprint.cs" />
     <Compile Include="ClientBase\Modules\Modules\BHOP.cs" />
     <Compile Include="ClientBase\Modules\Modules\BounceFly.cs" />
+    <Compile Include="ClientBase\Modules\Modules\ClickTP.cs" />
     <Compile Include="ClientBase\Modules\Modules\ClickUI.cs" />
     <Compile Include="ClientBase\Modules\Modules\Criticals.cs" />
     <Compile Include="ClientBase\Modules\Modules\FastLadder.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="ClientBase\Modules\Modules\Gamemode.cs" />
     <Compile Include="ClientBase\Modules\Modules\Highjump.cs" />
     <Compile Include="ClientBase\Modules\Modules\Hitbox.cs" />
+    <Compile Include="ClientBase\Modules\Modules\HoverFlight.cs" />
     <Compile Include="ClientBase\Modules\Modules\Jesus.cs" />
     <Compile Include="ClientBase\Modules\Modules\Misplace.cs" />
     <Compile Include="ClientBase\Modules\Modules\Jetpack.cs" />
@@ -85,6 +87,7 @@
     <Compile Include="ClientBase\Modules\Modules\NoWeb.cs" />
     <Compile Include="ClientBase\Modules\Modules\Phase.cs" />
     <Compile Include="ClientBase\Modules\Modules\PlayerSpeed.cs" />
+    <Compile Include="ClientBase\Modules\Modules\Reach.cs" />
     <Compile Include="ClientBase\Modules\Modules\Scaffold.cs" />
     <Compile Include="ClientBase\Modules\Modules\Step.cs" />
     <Compile Include="ClientBase\Modules\Modules\TabGUI.cs" />
