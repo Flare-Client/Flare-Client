@@ -1,4 +1,5 @@
 ﻿using Flare_Sharp.ClientBase.Keybinds;
+using Flare_Sharp.ClientBase.UI.VObjs;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,10 +12,13 @@ namespace Flare_Sharp.UI.VObjs
 {
     public class VShelfItem : VObject
     {
+        public List<VSubShelfItem> children = new List<VSubShelfItem>();
+        public bool expandable = true;
         public bool expanded = false;
         int expandedAmt = 0;
-        public VShelfItem(int shelfHeight)
+        public VShelfItem(int shelfHeight, bool expandable)
         {
+            this.expandable = expandable;
             this.height = shelfHeight;
             this.width = 200;
         }
@@ -23,13 +27,25 @@ namespace Flare_Sharp.UI.VObjs
         {
             base.OnPaint(e);
             e.Graphics.DrawString(text, font, primary, x, y);
-            if (expanded)
+            if (expandable)
             {
-                e.Graphics.DrawString("-", font, primary, x+width-font.Size, y);
-            }
-            else
-            {
-                e.Graphics.DrawString("+", font, primary, x + width - font.Size, y);
+                if (expanded)
+                {
+                    e.Graphics.DrawString("-", font, primary, x + width - font.Size, y);
+                    int paintOffset = 0;
+                    foreach (VSubShelfItem subShelf in children)
+                    {
+                        paintOffset += subShelf.height;
+                        subShelf.visible = visible;
+                        subShelf.x = x + 10;
+                        subShelf.y = y + paintOffset;
+                        subShelf.OnPaint(e);
+                    }
+                }
+                else
+                {
+                    e.Graphics.DrawString("+", font, primary, x + width - font.Size, y);
+                }
             }
         }
 
@@ -43,9 +59,9 @@ namespace Flare_Sharp.UI.VObjs
                 {
                     expanded = !expanded;
                     if (expanded)
-                        height += expandedAmt;
+                        height += children.Count * 24;
                     else
-                        height -= expandedAmt;
+                        height -= children.Count * 24;
                     OverlayHost.ui.Invalidate();
                 }
             }
