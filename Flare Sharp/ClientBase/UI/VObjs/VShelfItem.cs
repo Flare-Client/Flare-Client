@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Flare_Sharp.UI.VObjs
+namespace Flare_Sharp.ClientBase.UI.VObjs
 {
     public class VShelfItem : VObject
     {

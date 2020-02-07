@@ -1,6 +1,7 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.ClientBase.Modules;
+using Flare_Sharp.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Flare_Sharp.UI.VObjs
+namespace Flare_Sharp.ClientBase.UI.VObjs
 {
     public class VCatgoryWindow : VWindowBase
     {
