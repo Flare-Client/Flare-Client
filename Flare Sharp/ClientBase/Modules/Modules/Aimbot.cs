@@ -15,21 +15,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
         }
 
-        public static List<float> getCalculationsToPos(float[] localPos, float[] targetPos)
-        {
-            List<float> calculations = new List<float>();
-
-            float dX = localPos[0] - targetPos[0];
-            float dY = localPos[1] - targetPos[1];
-            float dZ = localPos[2] - targetPos[2];
-            double distance = Math.Sqrt(dX * dX + dY * dY + dZ * dZ);
-            float pitch = ((float)Math.Atan2(dY, (float)distance) * (float)3.13810205 / (float)3.141592653589793);
-            float yaw = ((float)Math.Atan2(dZ, dX) * (float)3.1381025 / (float)3.141592653589793) + (float)-1.569051027;
-            calculations.Add(-pitch);
-            calculations.Add(-yaw);
-            return calculations;
-        }
-
         public override void onTick()
         {
             base.onTick();
@@ -60,7 +45,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                     double distance = Math.Sqrt(dX * dX + dY * dY + dZ * dZ);
                     if(distance == distances[0])
                     {
-                        List<float> staringPos = getCalculationsToPos(localPosition, targetPosition);
+                        List<float> staringPos = SDK.instance.getCalculationsToPos(localPosition, targetPosition);
                         MCM.writeFloat(Pointers.mousePitch(), staringPos[0]);
                         MCM.writeFloat(Pointers.mouseYaw(), staringPos[1]);
                     }
