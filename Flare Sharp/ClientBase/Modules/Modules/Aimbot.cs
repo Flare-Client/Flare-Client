@@ -11,7 +11,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class Aimbot : Module
     {
-        public Aimbot() : base("Aimbot", CategoryHandler.registry.categories[0], 'U', false)
+        public Aimbot() : base("Aimbot", CategoryHandler.registry.categories[0], (char)0x07, false)
         {
         }
 
