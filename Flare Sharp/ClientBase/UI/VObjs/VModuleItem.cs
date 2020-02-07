@@ -14,6 +14,7 @@ namespace Flare_Sharp.UI.VObjs
     {
         public VCatgoryWindow parent;
         public Module module;
+        Rectangle toggleAbleArea;
         public VModuleItem(Module module, VCatgoryWindow parent):base(24)
         {
             this.parent = parent;
@@ -23,10 +24,12 @@ namespace Flare_Sharp.UI.VObjs
 
         public override void OnPaint(PaintEventArgs e)
         {
-            e.Graphics.FillRectangle(secondary, objRect);
+            toggleAbleArea = objRect;
+            toggleAbleArea.Height = 24;
+            e.Graphics.FillRectangle(secondary, toggleAbleArea);
             if (module.enabled)
             {
-                e.Graphics.FillRectangle(tertiary, objRect);
+                e.Graphics.FillRectangle(tertiary, toggleAbleArea);
             }
             base.OnPaint(e);
         }
@@ -40,7 +43,9 @@ namespace Flare_Sharp.UI.VObjs
                 if (a.key == 0x1)
                 {
                     Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
-                    if (objRect.Contains(p))
+                    toggleAbleArea = objRect;
+                    toggleAbleArea.Height = 24;
+                    if (toggleAbleArea.Contains(p))
                     {
                         module.enabled = !module.enabled;
                     }

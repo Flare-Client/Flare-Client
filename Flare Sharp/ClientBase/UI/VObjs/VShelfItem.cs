@@ -12,7 +12,7 @@ namespace Flare_Sharp.UI.VObjs
     public class VShelfItem : VObject
     {
         public bool expanded = false;
-        int expandedAmt = 100;
+        int expandedAmt = 0;
         public VShelfItem(int shelfHeight)
         {
             this.height = shelfHeight;

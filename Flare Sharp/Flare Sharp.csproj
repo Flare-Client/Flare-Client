@@ -93,6 +93,8 @@
     <Compile Include="ClientBase\Modules\Modules\Velocity.cs" />
     <Compile Include="ClientBase\Modules\Modules\YBoost.cs" />
     <Compile Include="ClientBase\Modules\Modules\Recall.cs" />
+    <Compile Include="ClientBase\Settings\CheckboxSetting.cs" />
+    <Compile Include="ClientBase\Settings\Setting.cs" />
     <Compile Include="Memory\CraftSDK\Entity.cs" />
     <Compile Include="Memory\CraftSDK\EntityList.cs" />
     <Compile Include="ClientBase\Modules\Modules\Flight.cs" />
