@@ -108,16 +108,16 @@
     <Compile Include="ClientBase\Modules\ModuleHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UI\OverlayHost.cs">
+    <Compile Include="ClientBase\UI\OverlayHost.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\TabUI\TabUiHandler.cs" />
-    <Compile Include="UI\VObjs\VCatgoryWindow.cs" />
-    <Compile Include="UI\VObjs\VModuleItem.cs" />
-    <Compile Include="UI\VObjs\VShelfItem.cs" />
-    <Compile Include="UI\VObjs\VObject.cs" />
-    <Compile Include="UI\VObjs\VWindowBase.cs" />
-    <Compile Include="UI\WinHooks.cs" />
+    <Compile Include="ClientBase\UI\TabUI\TabUiHandler.cs" />
+    <Compile Include="ClientBase\UI\VObjs\VCatgoryWindow.cs" />
+    <Compile Include="ClientBase\UI\VObjs\VModuleItem.cs" />
+    <Compile Include="ClientBase\UI\VObjs\VShelfItem.cs" />
+    <Compile Include="ClientBase\UI\VObjs\VObject.cs" />
+    <Compile Include="ClientBase\UI\VObjs\VWindowBase.cs" />
+    <Compile Include="ClientBase\UI\WinHooks.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -52,10 +52,6 @@ namespace Flare_Sharp.UI.VObjs
                 if (visible)
                 {
                     OnInteractDown(a);
-                    //Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
-                    //if (objRect.Contains(p))
-                    //{
-                    //}
                 }
             };
             KeybindHandler.clientKeyHeldEvent += (object s, clientKeyEvent a) =>
@@ -63,10 +59,6 @@ namespace Flare_Sharp.UI.VObjs
                 if (visible)
                 {
                     OnInteractHeld(a);
-                    //Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
-                    //if (objRect.Contains(p))
-                    //{
-                    //}
                 }
             };
             KeybindHandler.clientKeyUpEvent += (object s, clientKeyEvent a) =>
@@ -74,10 +66,6 @@ namespace Flare_Sharp.UI.VObjs
                 if (visible)
                 {
                     OnInteractUp(a);
-                    //Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
-                    //if (objRect.Contains(p))
-                    //{
-                    //}
                 }
             };
         }
