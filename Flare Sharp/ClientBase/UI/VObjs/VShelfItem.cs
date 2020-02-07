@@ -60,9 +60,21 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                 {
                     expanded = !expanded;
                     if (expanded)
+                    {
                         height += children.Count * 24;
+                        foreach(VSubShelfItem child in children)
+                        {
+                            child.visible = true;
+                        }
+                    }
                     else
+                    {
                         height -= children.Count * 24;
+                        foreach (VSubShelfItem child in children)
+                        {
+                            child.visible = false;
+                        }
+                    }
                     OverlayHost.ui.Invalidate();
                 }
             }

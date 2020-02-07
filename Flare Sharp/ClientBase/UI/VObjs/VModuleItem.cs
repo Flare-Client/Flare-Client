@@ -22,7 +22,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             this.parent = parent;
             this.module = module;
             this.text = module.name;
-            children.Add(new VSubShelfItem(24, false));
+            children.Add(new VKeybindItem(this));
         }
 
         public override void OnPaint(PaintEventArgs e)
