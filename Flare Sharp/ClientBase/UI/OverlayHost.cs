@@ -30,6 +30,29 @@ namespace Flare_Sharp.UI
         public static extern UInt64 GetWindowLong(IntPtr hWnd, int nIndex);
         [DllImport("user32.dll")]
         public static extern UInt64 SetWindowLong(IntPtr hWnd,int nIndex, UInt64 dwNewLong);
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool GetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
+        private struct WINDOWPLACEMENT
+        {
+            public int length;
+            public int flags;
+            public int showCmd;
+            public System.Drawing.Point ptMinPosition;
+            public System.Drawing.Point ptMaxPosition;
+            public System.Drawing.Rectangle rcNormalPosition;
+        }
+        const UInt32 SW_HIDE = 0;
+        const UInt32 SW_SHOWNORMAL = 1;
+        const UInt32 SW_NORMAL = 1;
+        const UInt32 SW_SHOWMINIMIZED = 2;
+        const UInt32 SW_SHOWMAXIMIZED = 3;
+        const UInt32 SW_MAXIMIZE = 3;
+        const UInt32 SW_SHOWNOACTIVATE = 4;
+        const UInt32 SW_SHOW = 5;
+        const UInt32 SW_MINIMIZE = 6;
+        const UInt32 SW_SHOWMINNOACTIVE = 7;
+        const UInt32 SW_SHOWNA = 8;
 
         public static event EventHandler postOverlayLoad;
 
@@ -43,7 +66,8 @@ namespace Flare_Sharp.UI
         public int y = 0;
         public int width = 0;
         public int height = 0;
-        
+        public int fullScOff = 0;
+
         public SolidBrush primary = new SolidBrush(Color.FromArgb(255, 255, 255));
         public SolidBrush secondary = new SolidBrush(Color.FromArgb(25, 25, 25));
         public SolidBrush tertiary = new SolidBrush(Color.FromArgb(255, 0, 100));
@@ -52,6 +76,7 @@ namespace Flare_Sharp.UI
 
         public OverlayHost()
         {
+            this.AutoScaleMode = AutoScaleMode.None;
             ui = this;
             this.TopMost = true;
             Console.WriteLine("Starting Tab GUI...");
@@ -75,12 +100,19 @@ namespace Flare_Sharp.UI
 
         public void adjustOverlay(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
         {
+            //If it is fullscreen, the title bar is larger
+            WINDOWPLACEMENT placement = new WINDOWPLACEMENT();
+            GetWindowPlacement(MCM.mcWinHandle, ref placement);
+            if (placement.showCmd == SW_MAXIMIZE)
+                fullScOff = 8;
+            else
+                fullScOff = 0;
             //Adust window position
             MCM.RECT mcRect = MCM.getMinecraftRect();
-            x = mcRect.Left + 16;
-            y = mcRect.Top + 34;
-            width = mcRect.Right - mcRect.Left - 25;
-            height = mcRect.Bottom - mcRect.Top - 45;
+            x = mcRect.Left + 9;
+            y = mcRect.Top + 34 + fullScOff;
+            width = mcRect.Right - mcRect.Left-18;
+            height = mcRect.Bottom - mcRect.Top-43- fullScOff;
             SetWindowPos(hWnd, MCM.isMinecraftFocusedInsert(), x, y, width, height, 0x0040);
         }
 
