@@ -113,5 +113,6 @@ namespace Flare_Sharp.Memory.CraftSDK
         public static int ladderDown = 0x13CA405; //V1.14.2
         public static int inWaterTick = 0x122014D; //V1.14.2
         public static int notInWaterTick = 0x120BD40; //V1.14.2
+        public static int survivalReachCmp = 0x5D4471; //V1.14.2
     }
 }
