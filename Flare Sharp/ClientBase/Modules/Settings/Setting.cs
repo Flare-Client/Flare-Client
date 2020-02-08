@@ -11,7 +11,7 @@ namespace Flare_Sharp.ClientBase.Modules.Settings
         public string text;
         public Setting(string text)
         {
-
+            this.text = text;
         }
     }
 }
