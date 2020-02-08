@@ -12,6 +12,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     {
         public Misplace() : base("Misplace", CategoryHandler.registry.categories[0], (char)0x07, false)
         {
+            RegisterSliderSetting("Range", 0, 120, 640);
         }
 
         bool doubleMp = false;
@@ -43,7 +44,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                     mpY = ((mpY + lpY) / 2);
                     mpZ = (mpZ + lpZ) / 2;
                 }
-                if (e.distanceTo(SDK.instance.player) <= 12) {
+                if (e.distanceTo(SDK.instance.player) <= sliderSettings[0].value/10) {
                     e.teleportE(mpX, mpY, mpZ);
                 }
             }

@@ -31,7 +31,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                             SDK.instance.player.velX *= 1.125F;
                             SDK.instance.player.velZ *= 1.125F;
                         }
-                    } catch (Exception e)
+                    } catch (Exception)
                     {
                     }
                 }

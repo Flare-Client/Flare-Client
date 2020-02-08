@@ -1,4 +1,5 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
+using Flare_Sharp.ClientBase.Modules.Settings;
 using Flare_Sharp.Memory;
 using System;
 using System.Collections.Generic;
@@ -26,10 +27,10 @@ namespace Flare_Sharp.ClientBase.Modules
             category.modules.Add(this);
         }
 
-        Dictionary<string, int> settings = new Dictionary<string, int>();
-        public void RegisterSetting(string settingKey, ref int value)
+        public List<SliderSetting> sliderSettings = new List<SliderSetting>();
+        public void RegisterSliderSetting(string text, int min, int value, int max)
         {
-            settings.Add(settingKey, value);
+            sliderSettings.Add(new SliderSetting(text, min, value, max));
         }
 
         public virtual void onEnable()

@@ -13,6 +13,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     {
         public PlayerSpeed() : base("Speed", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
+            RegisterSliderSetting("Speed", 0, 5, 50);
         }
 
         public override void onDisable()
@@ -24,7 +25,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            MCM.writeFloat(Pointers.playerSpeed(), (float)0.5);
+            MCM.writeFloat(Pointers.playerSpeed(), (float)sliderSettings[0].value/10);
         }
     }
 }

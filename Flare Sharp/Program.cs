@@ -39,7 +39,7 @@ namespace Flare_Sharp
                 TabUiHandler tuih = new TabUiHandler();
                 ModuleHandler mh = new ModuleHandler();
                 KeybindHandler kh = new KeybindHandler();
-                Thread uiApp = new Thread(() => { OverlayHost ui = new OverlayHost(); Application.Run(ui); });
+                Thread uiApp = new Thread(() => { OverlayHost ui = new OverlayHost(); Application.Run(ui); }, int.MaxValue);
                 uiApp.Start();
                 while (true)
                 {

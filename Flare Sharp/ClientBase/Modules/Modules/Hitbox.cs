@@ -13,6 +13,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     {
         public Hitbox() : base("Hitbox", CategoryHandler.registry.categories[0], (char)0x07, false)
         {
+            RegisterSliderSetting("Hitbox Height", 0, 60, 120);
+            RegisterSliderSetting("Hitbox Width", 0, 40, 80);
         }
 
         public override void onTick()
@@ -21,8 +23,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             List<Entity> Entity = EntityList.getEntityList();
             foreach(Entity e in Entity)
             {
-                e.hitboxHeight = 6f;
-                e.hitboxWidth = 4f;
+                e.hitboxHeight = sliderSettings[0].value / 10;
+                e.hitboxWidth = sliderSettings[1].value / 10;
             }
         }
 

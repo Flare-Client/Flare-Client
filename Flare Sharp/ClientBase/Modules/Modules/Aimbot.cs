@@ -13,6 +13,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     {
         public Aimbot() : base("Aimbot", CategoryHandler.registry.categories[0], (char)0x07, false)
         {
+            RegisterSliderSetting("Range", 0, 120, 640);
         }
 
         public override void onTick()
@@ -28,7 +29,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                 float dY = localPosition[1] - targetPosition[1];
                 float dZ = localPosition[2] - targetPosition[2];
                 double distance = Math.Sqrt(dX * dX + dY * dY + dZ * dZ);
-                if (distance <= 12)
+                if (distance <= sliderSettings[0].value / 10)
                 {
                     distances.Add(distance);
                 }
