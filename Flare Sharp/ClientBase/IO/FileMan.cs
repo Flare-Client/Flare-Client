@@ -37,6 +37,12 @@ namespace Flare_Sharp.ClientBase.IO
             {
                 foreach (Module mod in cat.modules)
                 {
+                    int y = 0;
+                    foreach (SliderSetting slider in mod.sliderSettings)
+                    {
+                        root.moduleSliderSettings.Add(mod.sliderSettings[y].value);
+                        y++;
+                    }
                     root.moduleKeybinds.Add(mod.keybind);
                     root.enabledModules.Add(mod.enabled);
                     z++;
@@ -73,10 +79,16 @@ namespace Flare_Sharp.ClientBase.IO
                 string json = File.ReadAllText(configFile.FullName);
                 RootObject root = new JavaScriptSerializer().Deserialize<RootObject>(json);
                 int z = 0;
+                int y = 0;
                 foreach (Category cat in CategoryHandler.registry.categories)
                 {
                     foreach (Module mod in cat.modules)
                     {
+                        foreach (SliderSetting slider in mod.sliderSettings)
+                        {
+                            slider.value = root.moduleSliderSettings[y];
+                            y++;
+                        }
                         mod.keybind = root.moduleKeybinds[z];
                         mod.enabled = root.enabledModules[z];
                         z++;
