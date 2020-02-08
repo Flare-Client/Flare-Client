@@ -10,16 +10,15 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class YBoost : Module
     {
-        int boostBy = 10;
         public YBoost() : base("YBoost", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
-            //RegisterSetting("Boost Amount", ref boostBy);
+            RegisterSliderSetting("Boost Amount", 0, 10, 100);
         }
 
         public override void onEnable()
         {
             base.onEnable();
-            SDK.instance.player.velY += boostBy / 10;
+            SDK.instance.player.velY += (float)sliderSettings[0].value / 10;
             this.enabled = false;
         }
     }
