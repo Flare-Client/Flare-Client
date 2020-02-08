@@ -30,8 +30,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                     {
                         if (SDK.instance.player.onGround > 0)
                         {
-                            SDK.instance.player.velX *= sliderSettings[0].value / 10F;
-                            SDK.instance.player.velZ *= sliderSettings[0].value / 10F;
+                            SDK.instance.player.velX *= (float)sliderSettings[0].value / 10;
+                            SDK.instance.player.velZ *= (float)sliderSettings[0].value / 10;
                         }
                     }
                     catch (Exception)
