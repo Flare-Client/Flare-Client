@@ -98,6 +98,12 @@ namespace Flare_Sharp.UI
             {
                 postOverlayLoad.Invoke(this, new EventArgs());
             }
+            Paint += OverlayHost_Paint;
+        }
+
+        private void OverlayHost_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawString("Flare "+Program.version, font, primary, width - (font.Size * Program.version.Length * (float)1.4), height - font.Height);
         }
 
         public void adjustOverlay(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)

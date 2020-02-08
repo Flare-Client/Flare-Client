@@ -18,6 +18,7 @@ namespace Flare_Sharp
 {
     class Program
     {
+        public static string version = "0.0.6";
         public static int threadSleep = 1;
         public static EventHandler<EventArgs> mainLoop;
         static void Main(string[] args)
