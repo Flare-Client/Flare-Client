@@ -45,10 +45,6 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             {
                 increments.Add(new RectangleF(x + (i * incBy), 0, incBy, height));
             }
-            Console.WriteLine(total);
-            Console.WriteLine(width);
-            Console.WriteLine(incBy);
-            Console.WriteLine(incBy*total==width);
         }
 
         public override void OnPaint(PaintEventArgs e)

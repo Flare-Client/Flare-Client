@@ -14,12 +14,13 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     {
         public AirAcceleration() : base("AirAcceleration", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
+            RegisterSliderSetting("Acceleration", 0, 5, 20);
         }
 
         public override void onTick()
         {
             base.onTick();
-            SDK.instance.player.airAcceleration = 0.05F;
+            SDK.instance.player.airAcceleration = (float)sliderSettings[0].value / 100;
         }
     }
 }
