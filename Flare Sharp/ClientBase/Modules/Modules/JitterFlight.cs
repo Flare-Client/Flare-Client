@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace Flare_Sharp.ClientBase.Modules.Modules
 {
-    public class HoverFlight : Module
+    public class JitterFlight : Module
     {
         public int Counter;
         public int Counter2;
 
-        public HoverFlight() : base("JitterFlight", CategoryHandler.registry.categories[2], (char)0x07, false)
+        public JitterFlight() : base("JitterFlight", CategoryHandler.registry.categories[2], (char)0x07, false)
         {
             RegisterSliderSetting("YBoost", 0, 4, 10);
             RegisterSliderSetting("YCollapse", -10, -2, 0);

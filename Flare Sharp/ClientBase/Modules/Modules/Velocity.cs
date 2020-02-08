@@ -13,37 +13,35 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class Velocity : Module
     {
-        public int velocityCounter;
+        public int velocityCounter = 0;
         public Velocity() : base("Velocity", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
             RegisterSliderSetting("Speed", 10, 10, 50);
         }
 
-        public async Task multiplyVelocity()
+        public override void onTick()
         {
-            await Task.Delay(20);
-            if (enabled)
+            base.onTick();
+            if (velocityCounter > 25)
             {
                 if (KeybindHandler.isKeyDown('W') | KeybindHandler.isKeyDown('S') | KeybindHandler.isKeyDown('A') | KeybindHandler.isKeyDown('D'))
                 {
-                    try {
+                    try
+                    {
                         if (SDK.instance.player.onGround > 0)
                         {
-                            SDK.instance.player.velX *= sliderSettings[0].value / 10;
-                            SDK.instance.player.velZ *= sliderSettings[0].value / 10;
+                            SDK.instance.player.velX *= sliderSettings[0].value / 10F;
+                            SDK.instance.player.velZ *= sliderSettings[0].value / 10F;
                         }
-                    } catch (Exception)
+                    }
+                    catch (Exception)
                     {
                     }
                 }
-                await multiplyVelocity();
+                velocityCounter = 0;
+                return;
             }
-        }
-
-        public override void onEnable()
-        {
-            base.onEnable();
-            multiplyVelocity();
+            velocityCounter++;
         }
     }
 }
