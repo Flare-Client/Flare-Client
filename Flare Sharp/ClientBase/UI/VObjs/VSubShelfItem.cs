@@ -17,6 +17,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
 
         public override void OnPaint(PaintEventArgs e)
         {
+            e.Graphics.FillRectangle(quaternary, objRect.X - 5, objRect.Y, objRect.Width + 10, objRect.Height);
             e.Graphics.FillRectangle(secondary, objRect);
             base.OnPaint(e);
         }

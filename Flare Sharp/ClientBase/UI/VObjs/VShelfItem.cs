@@ -38,7 +38,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                     {
                         paintOffset += subShelf.height;
                         subShelf.visible = visible;
-                        subShelf.x = x + 10;
+                        subShelf.x = x + 5;
                         subShelf.y = y + paintOffset;
                         subShelf.OnPaint(e);
                     }
