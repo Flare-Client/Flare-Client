@@ -135,6 +135,7 @@
     <Compile Include="ClientBase\UI\VObjs\VObject.cs" />
     <Compile Include="ClientBase\UI\VObjs\VWindowBase.cs" />
     <Compile Include="ClientBase\UI\WinHooks.cs" />
+    <Compile Include="TimerTickEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

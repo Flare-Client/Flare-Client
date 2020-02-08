@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Timer = System.Windows.Forms.Timer;
 
 namespace Flare_Sharp
 {
@@ -56,7 +57,6 @@ namespace Flare_Sharp
                 {
                     try
                     {
-                        fm.saveConfig();
                         mainLoop.Invoke(null, new EventArgs());
                         Thread.Sleep(threadSleep);
                     }
