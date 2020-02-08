@@ -13,6 +13,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public Misplace() : base("Misplace", CategoryHandler.registry.categories[0], (char)0x07, false)
         {
             RegisterSliderSetting("Range", 0, 120, 640);
+            RegisterSliderSetting("Entity Expansion", 0, 20, 60);
         }
 
         bool doubleMp = false;
@@ -34,15 +35,15 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                 float eY = e.currentY3;
                 float eZ = e.currentZ3;
 
-                float mpX = (lpX + eX) / 2;
-                float mpY = ((lpY + eY) / 2) - 1;
-                float mpZ = (lpZ + eZ) / 2;
+                float mpX = (lpX + eX) / sliderSettings[1].value / 10;
+                float mpY = ((lpY + eY) / sliderSettings[1].value / 10) - 1;
+                float mpZ = (lpZ + eZ) / sliderSettings[1].value / 10;
 
                 if (doubleMp)
                 {
-                    mpX = (mpX + lpX) / 2;
-                    mpY = ((mpY + lpY) / 2);
-                    mpZ = (mpZ + lpZ) / 2;
+                    mpX = (mpX + lpX) / sliderSettings[1].value / 10;
+                    mpY = ((mpY + lpY) / sliderSettings[1].value / 10);
+                    mpZ = (mpZ + lpZ) / sliderSettings[1].value / 10;
                 }
                 if (e.distanceTo(SDK.instance.player) <= sliderSettings[0].value/10) {
                     e.teleportE(mpX, mpY, mpZ);

@@ -15,6 +15,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public Jetpack() : base("Jetpack", CategoryHandler.registry.categories[1], 'F', false)
         {
             KeybindHandler.clientKeyUpEvent += UpKeyHeld;
+            RegisterSliderSetting("Jetpack", 0, 10, 50);
         }
         public void UpKeyHeld(object sender, clientKeyEvent e)
         {
@@ -27,9 +28,9 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
             base.onTick();
             List<float> directionalVec = SDK.instance.directionalVector((SDK.instance.player.yaw + 89.9f) * (float)Math.PI / 178F, SDK.instance.player.pitch * (float)Math.PI / 178F);
-            SDK.instance.player.velX = 1.2F * directionalVec[0];
-            SDK.instance.player.velY = 1.2F * -directionalVec[1];
-            SDK.instance.player.velZ = 1.2F * directionalVec[2];
+            SDK.instance.player.velX = sliderSettings[0].value / 10 * directionalVec[0];
+            SDK.instance.player.velY = sliderSettings[0].value / 10 * -directionalVec[1];
+            SDK.instance.player.velZ = sliderSettings[0].value / 10 * directionalVec[2];
         }
     }
 }

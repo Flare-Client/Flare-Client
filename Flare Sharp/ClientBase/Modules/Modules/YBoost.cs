@@ -12,7 +12,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     {
         public YBoost() : base("YBoost", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
-            RegisterSliderSetting("Boost Amount", 0, 10, 100);
+            RegisterSliderSetting("Boost", 0, 10, 100);
         }
 
         public override void onEnable()

@@ -16,6 +16,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public int velocityCounter;
         public Velocity() : base("Velocity", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
+            RegisterSliderSetting("Speed", 10, 10, 50);
         }
 
         public async Task multiplyVelocity()
@@ -28,8 +29,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                     try {
                         if (SDK.instance.player.onGround > 0)
                         {
-                            SDK.instance.player.velX *= 1.125F;
-                            SDK.instance.player.velZ *= 1.125F;
+                            SDK.instance.player.velX *= sliderSettings[0].value / 10;
+                            SDK.instance.player.velZ *= sliderSettings[0].value / 10;
                         }
                     } catch (Exception)
                     {
