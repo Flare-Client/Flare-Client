@@ -23,7 +23,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             foreach(Module module in category.modules)
             {
                 VModuleItem VMI = new VModuleItem(module, this);
-                VMI.children.Add(new VSliderItem("test", -5, 0, 5));
+                //VMI.children.Add(new VSliderItem("test", -3, 1, 17));
                 moduleObjects.Add(VMI);
 
             }

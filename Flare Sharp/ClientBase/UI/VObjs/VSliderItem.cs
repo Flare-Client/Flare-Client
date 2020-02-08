@@ -86,7 +86,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                     {
                         if (increments[i].Contains(p))
                         {
-                            value = i-(total/2);
+                            value = i-Math.Abs(minimum);
                         }
                     }
                     OverlayHost.ui.Invalidate();
