@@ -1,4 +1,5 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
+using Flare_Sharp.ClientBase.IO;
 using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.ClientBase.Modules;
 using Flare_Sharp.Memory;
@@ -13,11 +14,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Timer = System.Windows.Forms.Timer;
 
 namespace Flare_Sharp
 {
     class Program
     {
+        public static string version = "0.0.6";
         public static int threadSleep = 1;
         public static EventHandler<EventArgs> mainLoop;
         static void Main(string[] args)
@@ -35,11 +38,20 @@ namespace Flare_Sharp
                 MCM.openWindowHost();
 
                 SDK sdk = new SDK();
+                FileMan fm = new FileMan();
                 CategoryHandler ch = new CategoryHandler();
                 TabUiHandler tuih = new TabUiHandler();
                 ModuleHandler mh = new ModuleHandler();
                 KeybindHandler kh = new KeybindHandler();
                 Thread uiApp = new Thread(() => { OverlayHost ui = new OverlayHost(); Application.Run(ui); });
+                if (fm.readConfig())
+                {
+                    Console.WriteLine("Loaded config!");
+                }
+                else
+                {
+                    Console.WriteLine("Could not load config!");
+                }
                 uiApp.Start();
                 while (true)
                 {

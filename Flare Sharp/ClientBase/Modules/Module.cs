@@ -1,4 +1,5 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
+using Flare_Sharp.ClientBase.IO;
 using Flare_Sharp.ClientBase.Modules.Settings;
 using Flare_Sharp.Memory;
 using System;
@@ -36,10 +37,12 @@ namespace Flare_Sharp.ClientBase.Modules
         public virtual void onEnable()
         {
             this.enabled = true;
+            FileMan.man.saveConfig();
         }
         public virtual void onDisable()
         {
             this.enabled = false;
+            FileMan.man.saveConfig();
         }
         //Called like a loop when enabled
         public virtual void onTick()
