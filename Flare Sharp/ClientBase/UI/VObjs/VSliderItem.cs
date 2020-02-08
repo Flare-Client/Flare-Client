@@ -24,35 +24,39 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         {
             get
             {
-                return Math.Abs(minimum) + Math.Abs(maximum)+1;
+                return Math.Abs(minimum) + Math.Abs(maximum);
             }
         }
-        int incBy
+        float incBy
         {
             get
             {
-                return width / total;
+                return (float)width / total;
             }
         }
-        List<Rectangle> increments = new List<Rectangle>();
+        List<RectangleF> increments = new List<RectangleF>();
         public VSliderItem(string name, int minimum, int value, int maximum) : base(24, false)
         {
             this.text = name;
             this.minimum = minimum;
             this.value = value;
             this.maximum = maximum;
-            for(int i =0; i< total; i++)
+            for(int i =0; i< total+1; i++)
             {
-                increments.Add(new Rectangle(x + (i * incBy), 0, incBy, height));
+                increments.Add(new RectangleF(x + (i * incBy), 0, incBy, height));
             }
+            Console.WriteLine(total);
+            Console.WriteLine(width);
+            Console.WriteLine(incBy);
+            Console.WriteLine(incBy*total==width);
         }
 
         public override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            for (int i = 0; i < total; i++)
+            for (int i = 0; i < total+1; i++)
             {
-                Rectangle drawn = increments[i];
+                RectangleF drawn = increments[i];
                 drawn.X = x + (i * incBy);
                 drawn.Y = y;
                 increments[i] = drawn;
@@ -85,7 +89,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                 if (e.key == 0x1)
                 {
                     Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
-                    for (int i = 0; i < total; i++)
+                    for (int i = 0; i < total+1; i++)
                     {
                         if (increments[i].Contains(p))
                         {
