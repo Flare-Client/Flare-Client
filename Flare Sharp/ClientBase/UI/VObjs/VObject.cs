@@ -14,7 +14,13 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
     {
         public string text = "Object";
         public bool visible = false;
-        public Font font = new Font("Arial", 16, FontStyle.Regular);
+        public Font font
+        {
+            get
+            {
+                return OverlayHost.ui.font;
+            }
+        }
 
         public Rectangle objRect
         {
@@ -35,19 +41,36 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         public int width;
         public int height;
 
-        public SolidBrush primary;
-        public SolidBrush secondary;
-        public SolidBrush tertiary;
-        public SolidBrush quaternary;
-        public SolidBrush rainbow;
+        public SolidBrush primary {
+            get
+            {
+                return OverlayHost.ui.primary;
+            }
+        }
+        public SolidBrush secondary
+        {
+            get
+            {
+                return OverlayHost.ui.secondary;
+            }
+        }
+        public SolidBrush tertiary
+        {
+            get
+            {
+                return OverlayHost.ui.tertiary;
+            }
+        }
+        public SolidBrush quaternary
+        {
+            get
+            {
+                return OverlayHost.ui.quaternary;
+            }
+        }
 
         public VObject()
         {
-            primary = OverlayHost.ui.primary;
-            secondary = OverlayHost.ui.secondary;
-            tertiary = OverlayHost.ui.tertiary;
-            quaternary = OverlayHost.ui.quaternary;
-            rainbow = OverlayHost.ui.rainbow;
             KeybindHandler.clientKeyDownEvent += (object s, clientKeyEvent a) =>
             {
                 if (visible)
@@ -75,7 +98,6 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         {
 
         }
-
 
         public virtual void OnInteractDown(clientKeyEvent a)
         {

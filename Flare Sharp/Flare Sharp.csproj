@@ -43,6 +43,12 @@
     <PlatformTarget>x64</PlatformTarget>
     <OutputPath>bin\x64\Release\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -97,6 +103,7 @@
     <Compile Include="ClientBase\Modules\Modules\YBoost.cs" />
     <Compile Include="ClientBase\Modules\Modules\Recall.cs" />
     <Compile Include="ClientBase\UI\VObjs\VKeybindItem.cs" />
+    <Compile Include="ClientBase\UI\VObjs\VSliderItem.cs" />
     <Compile Include="ClientBase\UI\VObjs\VSubShelfItem.cs" />
     <Compile Include="Memory\CraftSDK\Entity.cs" />
     <Compile Include="Memory\CraftSDK\EntityList.cs" />

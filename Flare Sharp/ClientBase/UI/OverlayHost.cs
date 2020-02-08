@@ -74,6 +74,8 @@ namespace Flare_Sharp.UI
         public SolidBrush quaternary = new SolidBrush(Color.FromArgb(255, 0, 255));
         public SolidBrush rainbow = new SolidBrush(Color.FromArgb(255, 255, 255));
 
+        public Font font = new Font("Arial", 16, FontStyle.Regular);
+
         public OverlayHost()
         {
             this.AutoScaleMode = AutoScaleMode.None;
