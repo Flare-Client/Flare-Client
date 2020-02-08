@@ -23,8 +23,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             List<Entity> Entity = EntityList.getEntityList();
             foreach(Entity e in Entity)
             {
-                e.hitboxHeight = sliderSettings[0].value / 10;
-                e.hitboxWidth = sliderSettings[1].value / 10;
+                e.hitboxHeight = (float)sliderSettings[0].value / 10;
+                e.hitboxWidth = (float)sliderSettings[1].value / 10;
             }
         }
 

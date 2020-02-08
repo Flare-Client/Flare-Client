@@ -22,7 +22,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             base.onTick();
             if(SDK.instance.player.isInWater > 0)
             {
-                SDK.instance.player.velY = sliderSettings[0].value / 10;
+                SDK.instance.player.velY = (float)sliderSettings[0].value / 10;
             }
         }
     }
