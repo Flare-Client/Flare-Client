@@ -13,7 +13,10 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
     public class VSliderItem : VSubShelfItem
     {
         public int minimum;
-        public int value;
+        public virtual int value
+        {
+            get;set;
+        }
         public int maximum;
         bool dragging = false;
 

@@ -1,6 +1,7 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.ClientBase.Modules;
+using Flare_Sharp.ClientBase.Modules.Settings;
 using Flare_Sharp.UI;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,10 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             foreach(Module module in category.modules)
             {
                 VModuleItem VMI = new VModuleItem(module, this);
-                //VMI.children.Add(new VSliderItem("test", -3, 1, 17));
+                foreach(SliderSetting sliderSetting in VMI.module.sliderSettings)
+                {
+                    VMI.children.Add(new VModuleSliderSetting(sliderSetting));
+                }
                 moduleObjects.Add(VMI);
 
             }

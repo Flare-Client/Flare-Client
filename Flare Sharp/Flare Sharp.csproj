@@ -102,7 +102,10 @@
     <Compile Include="ClientBase\Modules\Modules\Velocity.cs" />
     <Compile Include="ClientBase\Modules\Modules\YBoost.cs" />
     <Compile Include="ClientBase\Modules\Modules\Recall.cs" />
+    <Compile Include="ClientBase\Modules\Settings\Setting.cs" />
+    <Compile Include="ClientBase\Modules\Settings\SliderSetting.cs" />
     <Compile Include="ClientBase\UI\VObjs\VKeybindItem.cs" />
+    <Compile Include="ClientBase\UI\VObjs\VModuleSliderSetting.cs" />
     <Compile Include="ClientBase\UI\VObjs\VSliderItem.cs" />
     <Compile Include="ClientBase\UI\VObjs\VSubShelfItem.cs" />
     <Compile Include="Memory\CraftSDK\Entity.cs" />

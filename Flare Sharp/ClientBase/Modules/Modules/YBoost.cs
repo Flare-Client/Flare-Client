@@ -13,7 +13,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         int boostBy = 10;
         public YBoost() : base("YBoost", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
-            RegisterSetting("Boost Amount", ref boostBy);
+            //RegisterSetting("Boost Amount", ref boostBy);
         }
 
         public override void onEnable()
