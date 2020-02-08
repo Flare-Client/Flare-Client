@@ -12,24 +12,48 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class HoverFlight : Module
     {
+        public int Counter;
+
         public HoverFlight() : base("HoverFlight", CategoryHandler.registry.categories[2], (char)0x07, false)
         {
         }
 
-        public async Task FlightDelay()
+        public override void onTick()
         {
-            await Task.Delay(300);
-            if (enabled)
-            {
-                SDK.instance.player.velY = 0.4F;
-                await FlightDelay();
-            }            
-        }
+            base.onTick();
+            SDK.instance.player.velY = 0F;
 
-        public override void onEnable()
-        {
-            base.onEnable();
-            FlightDelay();
+            Counter += 1;
+
+            if (Counter == 1)
+            {
+
+                if (KeybindHandler.isKeyDown('W'))
+                {
+                    List<float> directionalVec = SDK.instance.directionalVector((SDK.instance.player.yaw + 89.9f) * (float)Math.PI / 178F, SDK.instance.player.pitch * (float)Math.PI / 178F);
+                    SDK.instance.player.velX = 0.4F * directionalVec[0];
+                    SDK.instance.player.velZ = 0.4F * directionalVec[2];
+                }
+
+                SDK.instance.player.velY = 0.3F;
+            }
+
+            if (Counter == 2)
+            {
+                SDK.instance.player.velY = -0.3F;
+            }
+
+            if (Counter == 3)
+            {
+                SDK.instance.player.velY = 0.7F;
+            }
+
+            if (Counter == 4)
+            {
+                SDK.instance.player.velY = -0.7F;
+                Counter = 0;
+            }
+
         }
     }
 }
