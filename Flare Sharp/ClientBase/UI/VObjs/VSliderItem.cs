@@ -62,7 +62,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                 }
             }
             e.Graphics.DrawString(text, font, primary, x, y);
-            e.Graphics.DrawString(value.ToString(), font, primary, x + width - font.Size, y);
+            e.Graphics.DrawString(value.ToString(), font, primary, x + width - (font.Size * value.ToString().Length), y);
         }
 
         public override void OnInteractDown(clientKeyEvent e)
