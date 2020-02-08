@@ -13,9 +13,13 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     public class HoverFlight : Module
     {
         public int Counter;
+        public int Counter2;
 
         public HoverFlight() : base("HoverFlight", CategoryHandler.registry.categories[2], (char)0x07, false)
         {
+            RegisterSliderSetting("YBoost", 0, 4, 10);
+            RegisterSliderSetting("YCollapse", -10, -2, 0);
+            RegisterSliderSetting("Speed", 0, 4, 10);
         }
 
         public override void onTick()
@@ -23,7 +27,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             base.onTick();
             SDK.instance.player.velY = 0F;
 
-            Counter += 1;
+            Counter++;
+            Counter2++;
 
             if (Counter == 1)
             {
@@ -31,29 +36,21 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                 if (KeybindHandler.isKeyDown('W'))
                 {
                     List<float> directionalVec = SDK.instance.directionalVector((SDK.instance.player.yaw + 89.9f) * (float)Math.PI / 178F, SDK.instance.player.pitch * (float)Math.PI / 178F);
-                    SDK.instance.player.velX = 0.4F * directionalVec[0];
-                    SDK.instance.player.velZ = 0.4F * directionalVec[2];
+                    SDK.instance.player.velX = sliderSettings[2].value / 10F * directionalVec[0];
+                    SDK.instance.player.velZ = sliderSettings[2].value / 10F * directionalVec[2];
                 }
-
-                SDK.instance.player.velY = 0.3F;
+                if (Counter2 > 50)
+                {
+                    SDK.instance.player.teleport(SDK.instance.player.X1, SDK.instance.player.Y1 + sliderSettings[0].value, SDK.instance.player.Z1);
+                    Counter2 = 0;
+                }
             }
 
-            if (Counter == 2)
+            if (Counter >= 2)
             {
-                SDK.instance.player.velY = -0.3F;
-            }
-
-            if (Counter == 3)
-            {
-                SDK.instance.player.velY = 0.7F;
-            }
-
-            if (Counter == 4)
-            {
-                SDK.instance.player.velY = -0.7F;
+                SDK.instance.player.velY = sliderSettings[1].value;
                 Counter = 0;
             }
-
         }
     }
 }
