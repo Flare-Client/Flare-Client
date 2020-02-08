@@ -45,7 +45,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new Coordinates();
             new Flight();
             new BounceFly();
-            new HoverFlight();
+            new JitterFlight();
             new Scaffold();
             new Gamemode();
             new NoFall();

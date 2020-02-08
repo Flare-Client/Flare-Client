@@ -15,7 +15,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public int Counter;
         public int Counter2;
 
-        public HoverFlight() : base("HoverFlight", CategoryHandler.registry.categories[2], (char)0x07, false)
+        public HoverFlight() : base("JitterFlight", CategoryHandler.registry.categories[2], (char)0x07, false)
         {
             RegisterSliderSetting("YBoost", 0, 4, 10);
             RegisterSliderSetting("YCollapse", -10, -2, 0);
