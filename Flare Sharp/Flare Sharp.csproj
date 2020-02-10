@@ -123,6 +123,7 @@
     <Compile Include="ClientBase\Categories\Category.cs" />
     <Compile Include="ClientBase\Modules\Module.cs" />
     <Compile Include="ClientBase\Modules\ModuleHandler.cs" />
+    <Compile Include="Memory\VHooks\CommandHook.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ClientBase\UI\OverlayHost.cs">
@@ -139,6 +140,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Memory\VHooks\WhatsThis.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,0 +1,3 @@
+﻿This is called VHooks because they arent real "Hooks".
+
+These are also probably slow but whatever, they get the job done.
