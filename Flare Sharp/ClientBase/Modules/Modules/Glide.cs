@@ -14,7 +14,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     {
         public Glide() : base("Glide", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
-            RegisterSliderSetting("Value", -10, 0, 10);
+            RegisterSliderSetting("Value", -30, 0, 30);
         }
 
         public override void onTick()
