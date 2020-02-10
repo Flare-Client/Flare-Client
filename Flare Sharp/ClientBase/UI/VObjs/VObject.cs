@@ -12,6 +12,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
 {
     public abstract class VObject
     {
+        public bool debugMode = true;
         public string text = "Object";
         public bool visible = false;
         public Font font
@@ -96,7 +97,14 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
 
         public virtual void OnPaint(PaintEventArgs e)
         {
+            if (debugMode)
+                OnPaintDBG(e);
+        }
 
+        public virtual void OnPaintDBG(PaintEventArgs e)
+        {
+            Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
+            e.Graphics.DrawLine(new Pen(primary), x, y, p.X, p.Y);
         }
 
         public virtual void OnInteractDown(clientKeyEvent a)
