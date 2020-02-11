@@ -47,6 +47,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new Flight();
             new BounceFly();
             new JitterFlight();
+            new TickedGlide();
             new Scaffold();
             new Gamemode();
             new NoFall();
