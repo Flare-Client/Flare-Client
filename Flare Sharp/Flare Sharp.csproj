@@ -88,6 +88,7 @@
     <Compile Include="ClientBase\Modules\Modules\Misplace.cs" />
     <Compile Include="ClientBase\Modules\Modules\Jetpack.cs" />
     <Compile Include="ClientBase\Modules\Modules\ModuleList.cs" />
+    <Compile Include="ClientBase\Modules\Modules\Glide.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoFall.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoKnockBack.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoPacket.cs" />
