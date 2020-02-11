@@ -20,8 +20,11 @@ namespace Flare_Sharp.UI
         [DllImport("user32.dll")]
         public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
         public delegate void WinEventDelegate(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime);
+        private delegate IntPtr LowLevelMouseProc(int nCode, IntPtr wParam, IntPtr lParam);
         [DllImport("user32.dll")]
         public static extern IntPtr SetWinEventHook(uint eventMin, uint eventMax, IntPtr hmodWinEventProc, WinEventDelegate lpfnWinEventProc, uint idProcess, uint idThread, uint dwFlags);
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        private static extern IntPtr SetWindowsHookEx(int idHook, LowLevelMouseProc lpfn, IntPtr hMod, uint dwThreadId);
         [DllImport("user32.dll")]
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, IntPtr voidProcessId);
         [DllImport("user32.dll", SetLastError = true)]
@@ -33,6 +36,10 @@ namespace Flare_Sharp.UI
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool GetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        private static extern IntPtr GetModuleHandle(string lpModuleName);
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
         private struct WINDOWPLACEMENT
         {
             public int length;
@@ -55,12 +62,14 @@ namespace Flare_Sharp.UI
         const UInt32 SW_SHOWNA = 8;
 
         public static event EventHandler postOverlayLoad;
-
         public delegate void fixSizeDel();
-
         public static OverlayHost ui;
 
         WinEventDelegate overDel;
+        LowLevelMouseProc mouseMove;
+
+        IntPtr mouseHookID;
+
         IntPtr hWnd;
         public int x = 0;
         public int y = 0;
@@ -90,8 +99,10 @@ namespace Flare_Sharp.UI
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             hWnd = this.Handle;
             overDel = new WinEventDelegate(adjustOverlay);
+            mouseMove = new LowLevelMouseProc(OnMouseMove);
             SetWinEventHook((uint)SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE, (uint)SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE, IntPtr.Zero, overDel, (uint)MCM.mcWinProcId, GetWindowThreadProcessId(MCM.mcWinHandle, IntPtr.Zero), (uint)SWEH_dwFlags.WINEVENT_OUTOFCONTEXT | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNPROCESS | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNTHREAD);
             SetWinEventHook((uint)SWEH_Events.EVENT_SYSTEM_FOREGROUND, (uint)SWEH_Events.EVENT_SYSTEM_FOREGROUND, IntPtr.Zero, overDel, 0, 0, (uint)SWEH_dwFlags.WINEVENT_OUTOFCONTEXT | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNPROCESS | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNTHREAD);
+            //mouseHookID= SetWindowsHookEx(14, mouseMove, GetModuleHandle("user32"), 0);
             UInt64 initialStyle = GetWindowLong(this.Handle, -20);
             SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
             if(postOverlayLoad != null)
@@ -106,7 +117,16 @@ namespace Flare_Sharp.UI
             e.Graphics.DrawString("Flare "+Program.version, font, primary, width - (font.Size * Program.version.Length * (float)1.4), height - font.Height);
         }
 
+        public IntPtr OnMouseMove(int nCode, IntPtr wParam, IntPtr lParam)
+        {
+            Invalidate();
+            return CallNextHookEx(mouseHookID, nCode, wParam, lParam);
+        }
         public void adjustOverlay(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
+        {
+            trueAdjust();
+        }
+        void trueAdjust()
         {
             //If it is fullscreen, the title bar is larger
             WINDOWPLACEMENT placement = new WINDOWPLACEMENT();
@@ -119,8 +139,8 @@ namespace Flare_Sharp.UI
             MCM.RECT mcRect = MCM.getMinecraftRect();
             x = mcRect.Left + 9;
             y = mcRect.Top + 34 + fullScOff;
-            width = mcRect.Right - mcRect.Left-18;
-            height = mcRect.Bottom - mcRect.Top-43- fullScOff;
+            width = mcRect.Right - mcRect.Left - 18;
+            height = mcRect.Bottom - mcRect.Top - 43 - fullScOff;
             SetWindowPos(hWnd, MCM.isMinecraftFocusedInsert(), x, y, width, height, 0x0040);
         }
 

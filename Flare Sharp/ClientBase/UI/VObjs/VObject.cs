@@ -12,7 +12,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
 {
     public abstract class VObject
     {
-        public bool debugMode = true;
+        public bool debugMode = false;
         public string text = "Object";
         public bool visible = false;
         public Font font
