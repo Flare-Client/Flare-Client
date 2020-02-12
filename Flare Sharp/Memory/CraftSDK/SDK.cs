@@ -13,27 +13,17 @@ namespace Flare_Sharp.Memory.CraftSDK
         public SDK()
         {
             instance = this;
-            UInt64[] offs = { 0x30, 0xF0, 0x428, 0x88 };
-            player = new LocalPlayer(MCM.baseEvaluatePointer(0x03020990, offs));
+            UInt64[] offs = { 0xA8, 0x58, 0x38, 0x8 };
+            player = new LocalPlayer(MCM.baseEvaluatePointer(0x02FFAF50, offs));
         }
-
-        public UInt64 entityFacingMP
+        public UInt64 entityFacing
         {
             get
             {
-                UInt64[] offs = { 0xA8, 0x18, 0x130, 0x540, 0x0, 0x870 };
-                return MCM.readInt64(MCM.baseEvaluatePointer(0x02FF8E38, offs));
+                UInt64[] offs = { 0xA8, 0x18, 0x130, 0x6F0, 0x0, 0x870 };
+                return MCM.readInt64(MCM.baseEvaluatePointer(0x02FFAF50, offs));
             }
         }
-        public UInt64 entityFacingSP
-        {
-            get
-            {
-                UInt64[] offs = { 0xA8, 0x10, 0x870 };
-                return MCM.readInt64(MCM.baseEvaluatePointer(0x02FF8E38, offs));
-            }
-        }
-
         public List<float> directionalVector(float yaw, float pitch)
         {
             List<float> calculations = new List<float>();

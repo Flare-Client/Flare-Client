@@ -24,7 +24,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             {
                 if (enabled)
                 {
-                    if (SDK.instance.player.isInAir > 1 | SDK.instance.player.onGround > 0) SDK.instance.player.velY = sliderSettings[0].value / 10;
+                    if (SDK.instance.player.isInAir > 1 | SDK.instance.player.onGround > 0) SDK.instance.player.velY = (float)sliderSettings[0].value / 10F;
                 }
             }
         }
