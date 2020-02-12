@@ -8,12 +8,13 @@ using System.Windows.Forms;
 
 namespace Flare_Sharp.ClientBase.UI.VObjs
 {
-    public class VTargetsWindow : VWindowBase
+    public class VAddButton : VObject
     {
-        List<VStringShelf> targetObjects = new List<VStringShelf>();
-        public VTargetsWindow(int x) : base(x)
+
+        public VAddButton() : base()
         {
-            text = "Targets";
+            this.text = "+";
+
             //We have to register this manually
             OverlayHost.ui.Paint += (object sender, PaintEventArgs e) =>
             {
@@ -24,6 +25,10 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             };
         }
 
+        public override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
 
+        }
     }
 }

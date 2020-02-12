@@ -109,6 +109,7 @@
     <Compile Include="ClientBase\Modules\Modules\Recall.cs" />
     <Compile Include="ClientBase\Modules\Settings\Setting.cs" />
     <Compile Include="ClientBase\Modules\Settings\SliderSetting.cs" />
+    <Compile Include="ClientBase\UI\VObjs\VAddButton.cs" />
     <Compile Include="ClientBase\UI\VObjs\VKeybindItem.cs" />
     <Compile Include="ClientBase\UI\VObjs\VModuleSliderSetting.cs" />
     <Compile Include="ClientBase\UI\VObjs\VSliderItem.cs" />
