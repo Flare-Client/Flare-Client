@@ -15,12 +15,12 @@ namespace Flare_Sharp.ClientBase.Modules
         public string name;
         public bool enabled;
         public bool selected;
-        public char keybind;
+        public int keybind;
 
         private bool wasEnabled = false;
         public EventHandler toggleEvent;
 
-        public Module(string name, Category category, char keybind, bool enabled)
+        public Module(string name, Category category, int keybind, bool enabled)
         {
             this.name = name;
             this.keybind = keybind;

@@ -10,7 +10,7 @@ namespace Flare_Sharp.ClientBase.IO
     public class RootObject
     {
         public List<bool> enabledModules = new List<bool>();
-        public List<char> moduleKeybinds = new List<char>();
+        public List<int> moduleKeybinds = new List<int>();
         public List<int> moduleSliderSettings = new List<int>();
         public RootObject()
         {

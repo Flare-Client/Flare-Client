@@ -16,6 +16,11 @@ namespace Flare_Sharp.Memory.CraftSDK
             UInt64[] offs = { 0xA8, 0x58, 0x38, 0x8 };
             player = new LocalPlayer(MCM.baseEvaluatePointer(0x02FFAF50, offs));
         }
+        public bool GetKeystate(char key)
+        {
+            UInt64[] offs = { 0x174+(UInt64)key };
+            return MCM.readByte(MCM.baseEvaluatePointer(0x029D9AA0, offs))>0;
+        }
         public UInt64 entityFacing
         {
             get

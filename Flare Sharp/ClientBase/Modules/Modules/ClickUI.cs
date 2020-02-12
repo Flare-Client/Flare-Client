@@ -14,7 +14,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     public class ClickUI : Module
     {
         List<VWindowBase> windows = new List<VWindowBase>();
-        public ClickUI() : base("ClickGUI", CategoryHandler.registry.categories[3], (char)0xA1, false)
+        public ClickUI() : base("ClickGUI", CategoryHandler.registry.categories[3], 0x2D, false)
         {
             OverlayHost.postOverlayLoad += (object sender, EventArgs args) =>
               {
