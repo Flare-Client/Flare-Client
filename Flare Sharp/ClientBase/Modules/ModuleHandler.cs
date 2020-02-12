@@ -25,6 +25,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new Criticals();
             new Misplace();
             new Reach();
+            new RapidAttack();
             new AirJump();
             new Glide();
             new HighJump();
