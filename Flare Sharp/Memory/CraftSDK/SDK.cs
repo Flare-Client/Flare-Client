@@ -20,7 +20,7 @@ namespace Flare_Sharp.Memory.CraftSDK
         {
             get
             {
-                UInt64[] offs = { 0xA8, 0x18, 0x130, 0x6F0, 0x0, 0x870 };
+                UInt64[] offs = { 0xA8, 0x10, 0x870 };
                 return MCM.readInt64(MCM.baseEvaluatePointer(0x02FFAF50, offs));
             }
         }

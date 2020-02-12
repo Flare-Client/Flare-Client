@@ -25,6 +25,9 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                       x += categoryWindow.width;
                       windows.Add(categoryWindow);
                   }
+                  VTargetsWindow targets = new VTargetsWindow(x);
+                  x += targets.width;
+                  windows.Add(targets);
               };
         }
         public override void onEnable()
