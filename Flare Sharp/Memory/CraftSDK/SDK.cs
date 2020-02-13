@@ -16,11 +16,21 @@ namespace Flare_Sharp.Memory.CraftSDK
             UInt64[] offs = { 0xA8, 0x58, 0x38, 0x8 };
             player = new LocalPlayer(MCM.baseEvaluatePointer(0x02FFAF50, offs));
         }
+        public bool GetKeyState(char key)
+        {
+            UInt64[] offs = { 0x174+(UInt64)key };
+            return MCM.readByte(MCM.baseEvaluatePointer(0x029D9AA0, offs))>0;
+        }
+        public bool GetMouseState(int mb)
+        {
+            UInt64[] offs = { 0x998, 0x8, 0x4F + (UInt64)mb };
+            return MCM.readByte(MCM.baseEvaluatePointer(0x03022480, offs)) > 0;
+        }
         public UInt64 entityFacing
         {
             get
             {
-                UInt64[] offs = { 0xA8, 0x18, 0x130, 0x6F0, 0x0, 0x870 };
+                UInt64[] offs = { 0xA8, 0x10, 0x870 };
                 return MCM.readInt64(MCM.baseEvaluatePointer(0x02FFAF50, offs));
             }
         }

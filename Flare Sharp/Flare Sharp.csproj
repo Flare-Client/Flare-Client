@@ -61,6 +61,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientBase\Categories\CategoryHandler.cs" />
@@ -110,10 +111,13 @@
     <Compile Include="ClientBase\Modules\Modules\Recall.cs" />
     <Compile Include="ClientBase\Modules\Settings\Setting.cs" />
     <Compile Include="ClientBase\Modules\Settings\SliderSetting.cs" />
+    <Compile Include="ClientBase\UI\VObjs\VAddButton.cs" />
     <Compile Include="ClientBase\UI\VObjs\VKeybindItem.cs" />
     <Compile Include="ClientBase\UI\VObjs\VModuleSliderSetting.cs" />
     <Compile Include="ClientBase\UI\VObjs\VSliderItem.cs" />
+    <Compile Include="ClientBase\UI\VObjs\VStringShelf.cs" />
     <Compile Include="ClientBase\UI\VObjs\VSubShelfItem.cs" />
+    <Compile Include="ClientBase\UI\VObjs\VTargetsWindow.cs" />
     <Compile Include="Memory\CraftSDK\Entity.cs" />
     <Compile Include="Memory\CraftSDK\EntityList.cs" />
     <Compile Include="ClientBase\Modules\Modules\Flight.cs" />
@@ -125,6 +129,7 @@
     <Compile Include="ClientBase\Categories\Category.cs" />
     <Compile Include="ClientBase\Modules\Module.cs" />
     <Compile Include="ClientBase\Modules\ModuleHandler.cs" />
+    <Compile Include="Memory\VHooks\CommandHook.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ClientBase\UI\OverlayHost.cs">
@@ -141,6 +146,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Memory\VHooks\WhatsThis.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

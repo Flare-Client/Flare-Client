@@ -175,7 +175,7 @@ namespace Flare_Sharp.Memory.CraftSDK
             get
             {
                 UInt64[] offs = { 0x388 };
-                return MCM.readString(MCM.evaluatePointer(addr, offs), 16);
+                return MCM.readString(MCM.evaluatePointer(addr, offs), 20);
             }
         }
 

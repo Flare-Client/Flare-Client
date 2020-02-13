@@ -4,6 +4,7 @@ using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.ClientBase.Modules;
 using Flare_Sharp.Memory;
 using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.VHooks;
 using Flare_Sharp.UI;
 using Flare_Sharp.UI.TabUI;
 using System;
@@ -20,7 +21,7 @@ namespace Flare_Sharp
 {
     class Program
     {
-        public static string version = "0.0.6.2";
+        public static string version = "0.0.6.3";
         public static int threadSleep = 1;
         public static EventHandler<EventArgs> mainLoop;
         static void Main(string[] args)
@@ -37,6 +38,7 @@ namespace Flare_Sharp
                 MCM.openGame();
                 MCM.openWindowHost();
 
+                CommandHook cmh = new CommandHook();
                 SDK sdk = new SDK();
                 FileMan fm = new FileMan();
                 CategoryHandler ch = new CategoryHandler();
