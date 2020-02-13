@@ -110,11 +110,14 @@ namespace Flare_Sharp.UI
             float rainbowTick = 0f;
             rainbowTimer.Tick += (object segfsjn, EventArgs gfdd) =>
             {
-                rainbowTick += 0.005f;
-                rainbow = new SolidBrush(Rainbow(rainbowTick));
-                this.Invalidate();
+                if(MCM.isMinecraftFocused())
+                {
+                    rainbowTick += 0.005f;
+                    rainbow = new SolidBrush(Rainbow(rainbowTick));
+                    this.Invalidate();
+                }
             };
-            rainbowTimer.Interval = 1;
+            rainbowTimer.Interval = 10;
             rainbowTimer.Start();
             if (postOverlayLoad != null)
             {

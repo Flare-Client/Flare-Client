@@ -19,6 +19,7 @@ namespace Flare_Sharp.UI.TabUI
         Font titleFont;
         Font textFont;
         public float catWidth = 0;
+        public float modWidth = 0;
 
         public TabUiHandler()
         {
@@ -53,9 +54,11 @@ namespace Flare_Sharp.UI.TabUI
             titleFont = new Font(new FontFamily("Arial"), tFontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
             textFont = new Font(new FontFamily("Arial"), fontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
 
-            graphics.DrawString("Flare", titleFont, OverlayHost.ui.primary, -10, 0);
+            graphics.FillRectangle(OverlayHost.ui.secondary, 0, 0, catWidth * scale, ((32 * scale) * CategoryHandler.registry.categories.Count) + tFontSize);
+
+            //graphics.FillRectangle(OverlayHost.ui.secondary, 0, 0, catWidth * scale, 32 * scale);
+            graphics.DrawString("Flare", titleFont, OverlayHost.ui.rainbow, -13, 0);
             uint c = 0;
-            catWidth = 0;
             foreach (Category category in CategoryHandler.registry.categories)
             {
                 float wid = graphics.MeasureString(category.name, textFont, 600).Width;
@@ -67,12 +70,11 @@ namespace Flare_Sharp.UI.TabUI
             foreach (Category category in CategoryHandler.registry.categories)
             {
                 //Draw category
-                graphics.FillRectangle(OverlayHost.ui.secondary, 0, tFontSize + (32 * scale) * c, catWidth * scale, 32 * scale);
                 if (category.active)
                 {
+                    graphics.FillRectangle(OverlayHost.ui.secondary, catWidth, tFontSize, modWidth * scale, (32 * scale) * category.modules.Count);
                     graphics.FillRectangle(OverlayHost.ui.quaternary, 0, tFontSize + (32 * scale) * c, catWidth * scale, 32 * scale);
                     //Draw modules
-                    float modWidth = 0;
                     foreach (Module module in category.modules)
                     {
                         float wid = graphics.MeasureString(module.name, textFont, 400).Width;
@@ -84,21 +86,26 @@ namespace Flare_Sharp.UI.TabUI
                     uint m = 0;
                     foreach (Module module in category.modules)
                     {
-                        graphics.FillRectangle(OverlayHost.ui.secondary, catWidth, tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
-                        if (module.enabled)
+                        //graphics.DrawRectangle(new Pen(OverlayHost.ui.rainbow), catWidth, tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
+                        if(module.enabled && module.selected)
                         {
                             graphics.FillRectangle(OverlayHost.ui.quaternary, catWidth, tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
+                        }
+                        else if (module.enabled)
+                        {
+                            graphics.FillRectangle(OverlayHost.ui.rainbow, catWidth, tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
+                        }
+                        else if (module.selected)
+                        {
+                            graphics.FillRectangle(OverlayHost.ui.tertiary, catWidth, tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
                         }
                         graphics.DrawString(module.name, textFont, OverlayHost.ui.primary, catWidth, tFontSize + (32 * scale) * m);
                         float kwid = graphics.MeasureString(module.keybind.ToString(), textFont, 200).Width;
                         graphics.FillRectangle(OverlayHost.ui.secondary, catWidth + modWidth, tFontSize + (32 * scale) * m, kwid * scale, 32 * scale);
                         graphics.DrawString(module.keybind.ToString(), textFont, OverlayHost.ui.primary, catWidth + modWidth, tFontSize + (32 * scale) * m);
-                        if (module.selected)
-                        {
-                            graphics.DrawRectangle(new Pen(OverlayHost.ui.tertiary.Color, 2), catWidth, tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
-                        }
                         m++;
                     }
+                    graphics.DrawRectangle(new Pen(OverlayHost.ui.rainbow, 5), catWidth, tFontSize, modWidth * scale, (32 * scale) * category.modules.Count);
                 }
                 else if (category.selected)
                 {
@@ -107,6 +114,7 @@ namespace Flare_Sharp.UI.TabUI
                 graphics.DrawString(category.name, textFont, OverlayHost.ui.primary, 0, tFontSize + (32 * scale) * c);
                 c++;
             }
+            graphics.DrawRectangle(new Pen(OverlayHost.ui.rainbow,5), 0, 0, catWidth * scale, ((32 * scale)* CategoryHandler.registry.categories.Count)+ tFontSize);
         }
     }
 }

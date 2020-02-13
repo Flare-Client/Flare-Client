@@ -1,6 +1,7 @@
 ﻿using Flare_Sharp.UI;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,7 +43,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         public override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            int z = 24;
+            int z = 25;
             try
             {
                 foreach (VStringShelf shelf in targetObjects)
@@ -65,6 +66,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             addBtn.y = y + z;
             addBtn.x = x;
             addBtn.OnPaint(e);
+            e.Graphics.DrawRectangle(new Pen(rainbow), x, y + height, width - 1, z);
         }
     }
 }

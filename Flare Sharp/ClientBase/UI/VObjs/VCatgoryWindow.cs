@@ -5,6 +5,7 @@ using Flare_Sharp.ClientBase.Modules.Settings;
 using Flare_Sharp.UI;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,6 +55,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                 vObject.OnPaint(e);
                 paintOffset += vObject.height;
             }
+            e.Graphics.DrawRectangle(new Pen(rainbow), x, y + height, width-1, paintOffset);
         }
     }
 }
