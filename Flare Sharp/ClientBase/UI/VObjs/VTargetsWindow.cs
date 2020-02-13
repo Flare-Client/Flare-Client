@@ -35,6 +35,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                 {
                     OnPaint(e);
                 }
+                addBtn.visible = visible;
             };
         }
 
@@ -42,14 +43,24 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         {
             base.OnPaint(e);
             int z = 24;
-            foreach(VStringShelf shelf in targetObjects)
+            try
             {
-                shelf.visible = visible;
-                shelf.x = x;
-                shelf.y = y + z;
-                shelf.OnPaint(e);
-                z += shelf.height;
+                foreach (VStringShelf shelf in targetObjects)
+                {
+                    if (shelf.deleted)
+                    {
+                        targetObjects.Remove(shelf);
+                        OverlayHost.ui.Invalidate();
+                        continue;
+                    }
+                    shelf.visible = visible;
+                    shelf.x = x;
+                    shelf.y = y + z;
+                    shelf.OnPaint(e);
+                    z += shelf.height;
+                }
             }
+            catch (Exception) { }
             addBtn.visible = visible;
             addBtn.y = y + z;
             addBtn.x = x;
