@@ -69,6 +69,13 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                 return OverlayHost.ui.quaternary;
             }
         }
+        public SolidBrush rainbow
+        {
+            get
+            {
+                return OverlayHost.ui.rainbow;
+            }
+        }
 
         public VObject()
         {

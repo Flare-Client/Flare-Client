@@ -39,6 +39,7 @@ namespace Flare_Sharp.UI.TabUI
                     if (mod.enabled)
                     {
                         float mwid = graphics.MeasureString(mod.name, textFont, 600).Width;
+                        graphics.FillRectangle(OverlayHost.ui.secondary, OverlayHost.ui.width - mwid, (32 * scale) * yOff, mwid, fontSize);
                         graphics.DrawString(mod.name, textFont, OverlayHost.ui.rainbow, OverlayHost.ui.width - mwid, (32 * scale) * yOff);
                         yOff++;
                     }

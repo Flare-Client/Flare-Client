@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Timer = System.Windows.Forms.Timer;
 
 namespace Flare_Sharp.UI
 {
@@ -105,7 +106,17 @@ namespace Flare_Sharp.UI
             //mouseHookID= SetWindowsHookEx(14, mouseMove, GetModuleHandle("user32"), 0);
             UInt64 initialStyle = GetWindowLong(this.Handle, -20);
             SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
-            if(postOverlayLoad != null)
+            Timer rainbowTimer = new Timer();
+            float rainbowTick = 0f;
+            rainbowTimer.Tick += (object segfsjn, EventArgs gfdd) =>
+            {
+                rainbowTick += 0.005f;
+                rainbow = new SolidBrush(Rainbow(rainbowTick));
+                this.Invalidate();
+            };
+            rainbowTimer.Interval = 1;
+            rainbowTimer.Start();
+            if (postOverlayLoad != null)
             {
                 postOverlayLoad.Invoke(this, new EventArgs());
             }
