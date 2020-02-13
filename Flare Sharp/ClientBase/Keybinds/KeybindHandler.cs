@@ -15,7 +15,7 @@ namespace Flare_Sharp.ClientBase.Keybinds
 {
     public class KeybindHandler
     {
-        public static bool isKeyDown(char key) { return SDK.instance.GetKeystate(key); }
+        public static bool isKeyDown(char key) { return SDK.instance.GetKeyState(key); }
 
         public static KeybindHandler handler;
         public static EventHandler<clientKeyEvent> clientKeyDownEvent;
@@ -48,7 +48,7 @@ namespace Flare_Sharp.ClientBase.Keybinds
                 {
                     noKey[c] = true;
                     yesKey[c] = false;
-                    if (SDK.instance.GetKeystate(c))
+                    if (SDK.instance.GetKeyState(c) || (c < 0x7&&SDK.instance.GetMouseState(c)))
                     {
                         if (clientKeyHeldEvent != null)
                             clientKeyHeldEvent.Invoke(this, new clientKeyEvent(c));

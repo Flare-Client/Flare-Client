@@ -54,13 +54,13 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                     {
                         if (a.key == 0x1B)
                         {
-                            module.keybind = (char)0x07;
+                            module.keybind = 0x07;
                         }
                         else
                         {
                             module.keybind = a.key;
                         }
-                        this.renderedKeybind = a.key.ToString();
+                        this.renderedKeybind = ((int)a.key).ToString();
                         changing = false;
                     }
                 }
