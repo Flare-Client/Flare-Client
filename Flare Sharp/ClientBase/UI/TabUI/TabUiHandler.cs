@@ -1,5 +1,6 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.ClientBase.Modules;
+using Flare_Sharp.ClientBase.UI;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

@@ -2,6 +2,7 @@
 using Flare_Sharp.ClientBase.IO;
 using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.ClientBase.Modules;
+using Flare_Sharp.ClientBase.UI;
 using Flare_Sharp.Memory;
 using Flare_Sharp.Memory.CraftSDK;
 using Flare_Sharp.Memory.VHooks;
@@ -54,6 +55,7 @@ namespace Flare_Sharp
                 {
                     Console.WriteLine("Could not load config!");
                 }
+                uiApp.SetApartmentState(ApartmentState.STA);
                 uiApp.Start();
                 while (true)
                 {

@@ -1,4 +1,5 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
+using Flare_Sharp.ClientBase.UI;
 using Flare_Sharp.ClientBase.UI.VObjs;
 using Flare_Sharp.UI;
 using System;
