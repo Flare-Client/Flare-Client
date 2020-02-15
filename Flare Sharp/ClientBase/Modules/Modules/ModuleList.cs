@@ -4,6 +4,7 @@ using Flare_Sharp.UI;
 using Flare_Sharp.UI.TabUI;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         }
         private void drawUI(object sender, PaintEventArgs e)
         {
+            e.Graphics.SmoothingMode = SmoothingMode.HighSpeed;
             if (enabled)
             {
                 TabUiHandler.instance.renderMLUI(e.Graphics);

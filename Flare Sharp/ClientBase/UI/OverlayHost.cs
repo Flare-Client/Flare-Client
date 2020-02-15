@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -112,9 +113,9 @@ namespace Flare_Sharp.UI
                     {
                         rainbowTick += 0.005f;
                         rainbow = new SolidBrush(Rainbow(rainbowTick));
-                        if (Program.cpuLimit > 20f)
+                        if (Program.cpuLimit > 10f)
                         {
-                            this.Invalidate();
+                            this.Refresh();
                         }
                     }
                 }
@@ -131,6 +132,7 @@ namespace Flare_Sharp.UI
 
         private void OverlayHost_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.SmoothingMode = SmoothingMode.HighSpeed;
             e.Graphics.DrawString("Flare "+Program.version, font, primary, x, height - font.Height);
             e.Graphics.DrawString("CPU Usage: "+Program.cpuUsage, font, primary, x, height - (font.Height*2));
             e.Graphics.DrawString("CPU Limit: "+Program.cpuLimit, font, primary, x, height - (font.Height*3));

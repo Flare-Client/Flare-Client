@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Web;
 using System.Windows.Forms;
 using Timer = System.Timers.Timer;
 
@@ -27,7 +28,14 @@ namespace Flare_Sharp
         public static int threadSleep = 1;
         public static EventHandler<EventArgs> mainLoop;
         public static float cpuLimit = 70f;
-        public static float cpuUsage = 0f;
+        public static double cpuUsage = 0f;
+        public static bool isCpuLimited
+        {
+            get
+            {
+                return CategoryHandler.registry.categories[3].modules[5].enabled;
+            }
+        }
         static PerformanceCounter cpuCounter;
         static void Main(string[] args)
         {
@@ -43,13 +51,12 @@ namespace Flare_Sharp
                 MCM.openGame();
                 MCM.openWindowHost();
 
-                cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
+                cpuCounter = new PerformanceCounter("Process", "% Processor Time", Process.GetCurrentProcess().ProcessName.ToUpper(), true);
 
                 Timer cpuTimer = new Timer(1000);
                 cpuTimer.Elapsed+=(object obk, ElapsedEventArgs asd)=>
                 {
-                    //Console.WriteLine("CPU logged");
-                    cpuUsage = cpuCounter.NextValue();
+                    cpuUsage = cpuCounter.NextValue()/10;
                 };
                 cpuTimer.Start();
 
@@ -79,7 +86,8 @@ namespace Flare_Sharp
                         {
                             mainLoop.Invoke(null, new EventArgs());
                         }
-                        Thread.Sleep(threadSleep);
+                        if(isCpuLimited)
+                            Thread.Sleep(threadSleep);
                     }
                     catch (Exception)
                     {

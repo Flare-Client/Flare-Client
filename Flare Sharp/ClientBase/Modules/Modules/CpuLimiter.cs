@@ -11,7 +11,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     {
         public CpuLimiter() : base("CPU Limiter", CategoryHandler.registry.categories[3], 0x07, true)
         {
-            RegisterSliderSetting("Max CPU %", 10, 70, 100);
+            RegisterSliderSetting("Max CPU %", 20, 70, 100);
         }
 
         public override void onTick()

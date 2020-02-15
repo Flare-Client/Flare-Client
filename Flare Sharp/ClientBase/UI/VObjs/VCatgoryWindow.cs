@@ -6,6 +6,7 @@ using Flare_Sharp.UI;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             //We have to register this manually
             OverlayHost.ui.Paint += (object sender, PaintEventArgs e) =>
             {
+                e.Graphics.SmoothingMode = SmoothingMode.HighSpeed;
                 if (visible)
                 {
                     OnPaint(e);
