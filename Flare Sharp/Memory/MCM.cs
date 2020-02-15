@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Proc = System.Diagnostics.Process;
 
 namespace Flare_Sharp.Memory
 {
@@ -51,8 +52,8 @@ namespace Flare_Sharp.Memory
 
         public static void openGame()
         {
-            Process[] procs = Process.GetProcessesByName("Minecraft.Windows");
-            Process mcw10 = procs[0];
+            Proc[] procs = Proc.GetProcessesByName("Minecraft.Windows");
+            Proc mcw10 = procs[0];
             IntPtr proc = OpenProcess(0x1F0FFF, false, mcw10.Id);
             mcProcId = (uint)mcw10.Id;
             mcProcHandle = proc;
@@ -61,7 +62,7 @@ namespace Flare_Sharp.Memory
         }
         public static void openWindowHost()
         {
-            Process[] procs = Process.GetProcessesByName("ApplicationFrameHost");
+            Proc[] procs = Proc.GetProcessesByName("ApplicationFrameHost");
             mcWinHandle = procs[0].MainWindowHandle;
             mcWinProcId = (uint)procs[0].Id;
         }

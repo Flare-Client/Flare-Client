@@ -51,8 +51,26 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Overlay.NET">
+      <HintPath>Deps\Overlay.NET.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Process.NET">
+      <HintPath>Deps\Process.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX">
+      <HintPath>Deps\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct2D1">
+      <HintPath>Deps\SharpDX.Direct2D1.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI">
+      <HintPath>Deps\SharpDX.DXGI.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Mathematics">
+      <HintPath>Deps\SharpDX.Mathematics.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -117,13 +135,9 @@
     <Compile Include="ClientBase\Modules\Modules\Recall.cs" />
     <Compile Include="ClientBase\Modules\Settings\Setting.cs" />
     <Compile Include="ClientBase\Modules\Settings\SliderSetting.cs" />
-    <Compile Include="ClientBase\UI\VObjs\VAddButton.cs" />
-    <Compile Include="ClientBase\UI\VObjs\VKeybindItem.cs" />
-    <Compile Include="ClientBase\UI\VObjs\VModuleSliderSetting.cs" />
-    <Compile Include="ClientBase\UI\VObjs\VSliderItem.cs" />
-    <Compile Include="ClientBase\UI\VObjs\VStringShelf.cs" />
-    <Compile Include="ClientBase\UI\VObjs\VSubShelfItem.cs" />
-    <Compile Include="ClientBase\UI\VObjs\VTargetsWindow.cs" />
+    <Compile Include="ClientBase\UI\OverlayHost.cs" />
+    <Compile Include="ClientBase\UI\OverlayHostPlugin.cs" />
+    <Compile Include="ClientBase\UI\OverlaySettings.cs" />
     <Compile Include="Memory\CraftSDK\Entity.cs" />
     <Compile Include="Memory\CraftSDK\EntityList.cs" />
     <Compile Include="ClientBase\Modules\Modules\Flight.cs" />
@@ -138,16 +152,6 @@
     <Compile Include="Memory\VHooks\CommandHook.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ClientBase\UI\OverlayHost.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ClientBase\UI\TabUI\TabUiHandler.cs" />
-    <Compile Include="ClientBase\UI\VObjs\VCatgoryWindow.cs" />
-    <Compile Include="ClientBase\UI\VObjs\VModuleItem.cs" />
-    <Compile Include="ClientBase\UI\VObjs\VShelfItem.cs" />
-    <Compile Include="ClientBase\UI\VObjs\VObject.cs" />
-    <Compile Include="ClientBase\UI\VObjs\VWindowBase.cs" />
-    <Compile Include="ClientBase\UI\WinHooks.cs" />
     <Compile Include="TimerTickEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>

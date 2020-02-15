@@ -6,8 +6,6 @@ using Flare_Sharp.ClientBase.UI;
 using Flare_Sharp.Memory;
 using Flare_Sharp.Memory.CraftSDK;
 using Flare_Sharp.Memory.VHooks;
-using Flare_Sharp.UI;
-using Flare_Sharp.UI.TabUI;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,6 +17,7 @@ using System.Timers;
 using System.Web;
 using System.Windows.Forms;
 using Timer = System.Timers.Timer;
+using Process = System.Diagnostics.Process;
 
 namespace Flare_Sharp
 {
@@ -44,14 +43,14 @@ namespace Flare_Sharp
             Console.WriteLine("Flare port to C#");
             Console.WriteLine("Discord: https://discord.gg/Hz3Dxg8");
 
-            Process.Start("minecraft://");
+            System.Diagnostics.Process.Start("minecraft://");
 
             try
             {
                 MCM.openGame();
                 MCM.openWindowHost();
 
-                cpuCounter = new PerformanceCounter("Process", "% Processor Time", Process.GetCurrentProcess().ProcessName.ToUpper(), true);
+                cpuCounter = new PerformanceCounter("Process", "% Processor Time", System.Diagnostics.Process.GetCurrentProcess().ProcessName.ToUpper(), true);
 
                 Timer cpuTimer = new Timer(1000);
                 cpuTimer.Elapsed+=(object obk, ElapsedEventArgs asd)=>
@@ -60,40 +59,41 @@ namespace Flare_Sharp
                 };
                 cpuTimer.Start();
 
-                CommandHook cmh = new CommandHook();
-                SDK sdk = new SDK();
-                FileMan fm = new FileMan();
-                CategoryHandler ch = new CategoryHandler();
-                TabUiHandler tuih = new TabUiHandler();
-                ModuleHandler mh = new ModuleHandler();
-                KeybindHandler kh = new KeybindHandler();
-                Thread uiApp = new Thread(() => { OverlayHost ui = new OverlayHost(); Application.Run(ui); });
-                if (fm.readConfig())
-                {
-                    Console.WriteLine("Loaded config!");
-                }
-                else
-                {
-                    Console.WriteLine("Could not load config!");
-                }
+                //CommandHook cmh = new CommandHook();
+                //SDK sdk = new SDK();
+                //FileMan fm = new FileMan();
+                //CategoryHandler ch = new CategoryHandler();
+                //TabUiHandler tuih = new TabUiHandler();
+                //ModuleHandler mh = new ModuleHandler();
+                //KeybindHandler kh = new KeybindHandler();
+                //Thread uiApp = new Thread(() => { OverlayHostPlugin ui = new OverlayHostPlugin(); Application.Run(ui); });
+                Thread uiApp = new Thread(() => { var host = new OverlayHost(); host.StartDemo(); });
+                //if (fm.readConfig())
+                //{
+                //    Console.WriteLine("Loaded config!");
+                //}
+                //else
+                //{
+                //    Console.WriteLine("Could not load config!");
+                //}
                 uiApp.SetApartmentState(ApartmentState.STA);
                 uiApp.Start();
-                while (true)
-                {
-                    try
-                    {
-                        if (cpuUsage <= cpuLimit)
-                        {
-                            mainLoop.Invoke(null, new EventArgs());
-                        }
-                        if(isCpuLimited)
-                            Thread.Sleep(threadSleep);
-                    }
-                    catch (Exception)
-                    {
+                //while (true)
+                //{
+                //    try
+                //    {
+                //        if (cpuUsage <= cpuLimit)
+                //        {
+                //            mainLoop.Invoke(null, new EventArgs());
+                //        }
+                //        if(isCpuLimited)
+                //            Thread.Sleep(threadSleep);
+                //    }
+                //    catch (Exception)
+                //    {
 
-                    }
-                }
+                //    }
+                //}
             } catch (Exception ex)
             {
                 Console.WriteLine("Message: " + ex.Message);
@@ -105,7 +105,7 @@ namespace Flare_Sharp
         public static void printCPUInfo()
         {
             // Refresh the current process property values.
-            Process myProcess = Process.GetCurrentProcess();
+            System.Diagnostics.Process myProcess = System.Diagnostics.Process.GetCurrentProcess();
             myProcess.Refresh();
 
             Console.WriteLine();

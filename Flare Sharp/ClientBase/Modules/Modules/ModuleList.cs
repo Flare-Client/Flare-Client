@@ -1,7 +1,5 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.ClientBase.UI;
-using Flare_Sharp.UI;
-using Flare_Sharp.UI.TabUI;
 using System;
 using System.Collections.Generic;
 using System.Drawing.Drawing2D;
@@ -20,14 +18,14 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onEnable()
         {
             base.onEnable();
-            OverlayHost.ui.Paint += drawUI;
+            //OverlayHostPlugin.ui.Paint += drawUI;
         }
         private void drawUI(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.HighSpeed;
             if (enabled)
             {
-                TabUiHandler.instance.renderMLUI(e.Graphics);
+                //TabUiHandler.instance.renderMLUI(e.Graphics);
             }
         }
     }
