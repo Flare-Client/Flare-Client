@@ -67,9 +67,6 @@ namespace Flare_Sharp.UI
         public static OverlayHost ui;
 
         WinEventDelegate overDel;
-        LowLevelMouseProc mouseMove;
-
-        IntPtr mouseHookID;
 
         IntPtr hWnd;
         public int x = 0;
@@ -78,29 +75,28 @@ namespace Flare_Sharp.UI
         public int height = 0;
         public int fullScOff = 0;
 
-        public SolidBrush primary = new SolidBrush(Color.FromArgb(255, 255, 255));
-        public SolidBrush secondary = new SolidBrush(Color.FromArgb(25, 25, 25));
-        public SolidBrush tertiary = new SolidBrush(Color.FromArgb(255, 0, 100));
-        public SolidBrush quaternary = new SolidBrush(Color.FromArgb(255, 0, 255));
-        public SolidBrush rainbow = new SolidBrush(Color.FromArgb(255, 255, 255));
+        public SolidBrush primary = new SolidBrush(System.Drawing.Color.FromArgb(255, 255, 255));
+        public SolidBrush secondary = new SolidBrush(System.Drawing.Color.FromArgb(25, 25, 25));
+        public SolidBrush tertiary = new SolidBrush(System.Drawing.Color.FromArgb(255, 0, 100));
+        public SolidBrush quaternary = new SolidBrush(System.Drawing.Color.FromArgb(255, 0, 255));
+        public SolidBrush rainbow = new SolidBrush(System.Drawing.Color.FromArgb(255, 255, 255));
 
         public Font font = new Font("Arial", 16, FontStyle.Regular);
 
         public OverlayHost()
         {
-            this.AutoScaleMode = AutoScaleMode.None;
+            this.AutoScaleMode = AutoScaleMode.Dpi;
             ui = this;
             this.TopMost = true;
             Console.WriteLine("Starting Tab GUI...");
             this.FormBorderStyle = FormBorderStyle.None;
-            this.TransparencyKey = Color.FromArgb(77, 77, 77);
-            this.BackColor = this.TransparencyKey;
-            this.Location = new Point(0, 0);
+            this.TransparencyKey = System.Drawing.Color.Black;
+            this.BackColor = System.Drawing.Color.Black;
+            this.Location = new System.Drawing.Point(0, 0);
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             hWnd = this.Handle;
             overDel = new WinEventDelegate(adjustOverlay);
-            mouseMove = new LowLevelMouseProc(OnMouseMove);
             SetWinEventHook((uint)SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE, (uint)SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE, IntPtr.Zero, overDel, (uint)MCM.mcWinProcId, GetWindowThreadProcessId(MCM.mcWinHandle, IntPtr.Zero), (uint)SWEH_dwFlags.WINEVENT_OUTOFCONTEXT | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNPROCESS | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNTHREAD);
             SetWinEventHook((uint)SWEH_Events.EVENT_SYSTEM_FOREGROUND, (uint)SWEH_Events.EVENT_SYSTEM_FOREGROUND, IntPtr.Zero, overDel, 0, 0, (uint)SWEH_dwFlags.WINEVENT_OUTOFCONTEXT | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNPROCESS | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNTHREAD);
             //mouseHookID= SetWindowsHookEx(14, mouseMove, GetModuleHandle("user32"), 0);
@@ -112,10 +108,17 @@ namespace Flare_Sharp.UI
             {
                 if(MCM.isMinecraftFocused())
                 {
-                    rainbowTick += 0.005f;
-                    rainbow = new SolidBrush(Rainbow(rainbowTick));
-                    this.Invalidate();
+                    if(Program.cpuUsage < Program.cpuLimit)
+                    {
+                        rainbowTick += 0.005f;
+                        rainbow = new SolidBrush(Rainbow(rainbowTick));
+                        if (Program.cpuLimit > 20f)
+                        {
+                            this.Invalidate();
+                        }
+                    }
                 }
+                //Program.printCPUInfo();
             };
             rainbowTimer.Interval = 10;
             rainbowTimer.Start();
@@ -128,14 +131,11 @@ namespace Flare_Sharp.UI
 
         private void OverlayHost_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawString("Flare "+Program.version, font, primary, width - (font.Size * Program.version.Length * (float)1.4), height - font.Height);
+            e.Graphics.DrawString("Flare "+Program.version, font, primary, x, height - font.Height);
+            e.Graphics.DrawString("CPU Usage: "+Program.cpuUsage, font, primary, x, height - (font.Height*2));
+            e.Graphics.DrawString("CPU Limit: "+Program.cpuLimit, font, primary, x, height - (font.Height*3));
         }
 
-        public IntPtr OnMouseMove(int nCode, IntPtr wParam, IntPtr lParam)
-        {
-            Invalidate();
-            return CallNextHookEx(mouseHookID, nCode, wParam, lParam);
-        }
         public void adjustOverlay(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
         {
             trueAdjust();
@@ -158,7 +158,7 @@ namespace Flare_Sharp.UI
             SetWindowPos(hWnd, MCM.isMinecraftFocusedInsert(), x, y, width, height, 0x0040);
         }
 
-        public static Color Rainbow(float progress)
+        public static System.Drawing.Color Rainbow(float progress)
         {
             float div = (Math.Abs(progress % 1) * 6);
             int ascending = (int)((div % 1) * 255);
@@ -167,17 +167,17 @@ namespace Flare_Sharp.UI
             switch ((int)div)
             {
                 case 0:
-                    return Color.FromArgb(255, 255, ascending, 0);
+                    return System.Drawing.Color.FromArgb(255, 255, ascending, 0);
                 case 1:
-                    return Color.FromArgb(255, descending, 255, 0);
+                    return System.Drawing.Color.FromArgb(255, descending, 255, 0);
                 case 2:
-                    return Color.FromArgb(255, 0, 255, ascending);
+                    return System.Drawing.Color.FromArgb(255, 0, 255, ascending);
                 case 3:
-                    return Color.FromArgb(255, 0, descending, 255);
+                    return System.Drawing.Color.FromArgb(255, 0, descending, 255);
                 case 4:
-                    return Color.FromArgb(255, ascending, 0, 255);
+                    return System.Drawing.Color.FromArgb(255, ascending, 0, 255);
                 default: // case 5:
-                    return Color.FromArgb(255, 255, 0, descending);
+                    return System.Drawing.Color.FromArgb(255, 255, 0, descending);
             }
         }
     }

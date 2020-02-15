@@ -106,7 +106,7 @@ namespace Flare_Sharp.UI.TabUI
                         graphics.DrawString(module.keybind.ToString(), textFont, OverlayHost.ui.primary, catWidth + modWidth, tFontSize + (32 * scale) * m);
                         m++;
                     }
-                    graphics.DrawRectangle(new Pen(OverlayHost.ui.rainbow, 5), catWidth, tFontSize, modWidth * scale, (32 * scale) * category.modules.Count);
+                    graphics.DrawRectangle(new Pen(OverlayHost.ui.rainbow, 1), catWidth, tFontSize, modWidth * scale, (32 * scale) * category.modules.Count);
                 }
                 else if (category.selected)
                 {
@@ -115,7 +115,7 @@ namespace Flare_Sharp.UI.TabUI
                 graphics.DrawString(category.name, textFont, OverlayHost.ui.primary, 0, tFontSize + (32 * scale) * c);
                 c++;
             }
-            graphics.DrawRectangle(new Pen(OverlayHost.ui.rainbow,5), 0, 0, catWidth * scale, ((32 * scale)* CategoryHandler.registry.categories.Count)+ tFontSize);
+            graphics.DrawRectangle(new Pen(OverlayHost.ui.rainbow,1), 0, 0, catWidth * scale, ((32 * scale)* CategoryHandler.registry.categories.Count)+ tFontSize);
         }
     }
 }

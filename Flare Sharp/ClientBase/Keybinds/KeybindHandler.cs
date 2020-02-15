@@ -59,11 +59,11 @@ namespace Flare_Sharp.ClientBase.Keybinds
                             continue;
                         }
                         downBuffs[c]++;
-                        OverlayHost.ui.Invalidate();
                         try
                         {
                             if(clientKeyDownEvent!=null)
                                 clientKeyDownEvent.Invoke(this, new clientKeyEvent(c));
+                            OverlayHost.ui.Invalidate();
                         }
                         catch (Exception) { }
                     }
@@ -75,7 +75,6 @@ namespace Flare_Sharp.ClientBase.Keybinds
                             continue;
                         }
                         releaseBuffs[c]++;
-                        OverlayHost.ui.Invalidate();
                         if (clientKeyUpEvent != null)
                         {
                             try

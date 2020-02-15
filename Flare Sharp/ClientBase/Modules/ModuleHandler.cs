@@ -62,7 +62,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new ClickUI();
             new TabGUI();
             new ModuleList();
-            //new HiveFly();// <--will be added back for next release
+            new CpuLimiter();
             Console.WriteLine("Modules registered!");
             startModuleThread();
         }
