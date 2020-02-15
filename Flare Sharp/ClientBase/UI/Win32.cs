@@ -5,18 +5,18 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Flare_Sharp.ClientBase.UI
+namespace Flare_Sharp.UI
 {
     public class Win32
     {
         [DllImport("user32.dll")]
         public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
         public delegate void WinEventDelegate(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime);
-        private delegate IntPtr LowLevelMouseProc(int nCode, IntPtr wParam, IntPtr lParam);
+        public delegate IntPtr LowLevelMouseProc(int nCode, IntPtr wParam, IntPtr lParam);
         [DllImport("user32.dll")]
         public static extern IntPtr SetWinEventHook(uint eventMin, uint eventMax, IntPtr hmodWinEventProc, WinEventDelegate lpfnWinEventProc, uint idProcess, uint idThread, uint dwFlags);
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr SetWindowsHookEx(int idHook, LowLevelMouseProc lpfn, IntPtr hMod, uint dwThreadId);
+        public static extern IntPtr SetWindowsHookEx(int idHook, LowLevelMouseProc lpfn, IntPtr hMod, uint dwThreadId);
         [DllImport("user32.dll")]
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, IntPtr voidProcessId);
         [DllImport("user32.dll", SetLastError = true)]
@@ -27,12 +27,12 @@ namespace Flare_Sharp.ClientBase.UI
         public static extern UInt64 SetWindowLong(IntPtr hWnd, int nIndex, UInt64 dwNewLong);
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool GetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
+        public static extern bool GetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr GetModuleHandle(string lpModuleName);
+        public static extern IntPtr GetModuleHandle(string lpModuleName);
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
-        private struct WINDOWPLACEMENT
+        public static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
+        public struct WINDOWPLACEMENT
         {
             public int length;
             public int flags;
@@ -41,17 +41,19 @@ namespace Flare_Sharp.ClientBase.UI
             public System.Drawing.Point ptMaxPosition;
             public System.Drawing.Rectangle rcNormalPosition;
         }
-        const UInt32 SW_HIDE = 0;
-        const UInt32 SW_SHOWNORMAL = 1;
-        const UInt32 SW_NORMAL = 1;
-        const UInt32 SW_SHOWMINIMIZED = 2;
-        const UInt32 SW_SHOWMAXIMIZED = 3;
-        const UInt32 SW_MAXIMIZE = 3;
-        const UInt32 SW_SHOWNOACTIVATE = 4;
-        const UInt32 SW_SHOW = 5;
-        const UInt32 SW_MINIMIZE = 6;
-        const UInt32 SW_SHOWMINNOACTIVE = 7;
-        const UInt32 SW_SHOWNA = 8;
+        public const UInt32 SW_HIDE = 0;
+        public const UInt32 SW_SHOWNORMAL = 1;
+        public const UInt32 SW_NORMAL = 1;
+        public const UInt32 SW_SHOWMINIMIZED = 2;
+        public const UInt32 SW_SHOWMAXIMIZED = 3;
+        public const UInt32 SW_MAXIMIZE = 3;
+        public const UInt32 SW_SHOWNOACTIVATE = 4;
+        public const UInt32 SW_SHOW = 5;
+        public const UInt32 SW_MINIMIZE = 6;
+        public const UInt32 SW_SHOWMINNOACTIVE = 7;
+        public const UInt32 SW_SHOWNA = 8;
+
+
 
         //https://stackoverflow.com/questions/48767318/move-window-when-external-applications-window-moves
         //Thx <3

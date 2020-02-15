@@ -5,7 +5,6 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Flare_Sharp.ClientBase.Modules.Modules
 {
@@ -20,6 +19,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             //OverlayHost.ui.Paint += drawUI;
         }
 
+        /*
         private void drawUI(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.HighSpeed;
@@ -28,5 +28,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                 //TabUiHandler.instance.renderTUI(e.Graphics);
             }
         }
+        */
     }
 }

@@ -18,7 +18,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onEnable()
         {
             base.onEnable();
-            //OverlayHostPlugin.ui.Paint += drawUI;
+            //OverlayHost.ui.Paint += drawUI;
         }
         private void drawUI(object sender, PaintEventArgs e)
         {

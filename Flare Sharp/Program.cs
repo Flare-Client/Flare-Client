@@ -15,9 +15,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Web;
-using System.Windows.Forms;
+using System.Windows;
 using Timer = System.Timers.Timer;
-using Process = System.Diagnostics.Process;
 
 namespace Flare_Sharp
 {
@@ -60,42 +59,43 @@ namespace Flare_Sharp
                 };
                 cpuTimer.Start();
                 Console.WriteLine("Performance tracker loaded!");
-
-                //CommandHook cmh = new CommandHook();
-                //SDK sdk = new SDK();
-                //FileMan fm = new FileMan();
-                //CategoryHandler ch = new CategoryHandler();
+                Console.WriteLine("Starting overlay host...");
+                CommandHook cmh = new CommandHook();
+                SDK sdk = new SDK();
+                FileMan fm = new FileMan();
+                CategoryHandler ch = new CategoryHandler();
                 //TabUiHandler tuih = new TabUiHandler();
-                //ModuleHandler mh = new ModuleHandler();
-                //KeybindHandler kh = new KeybindHandler();
-                //Thread uiApp = new Thread(() => { OverlayHostPlugin ui = new OverlayHostPlugin(); Application.Run(ui); });
-                Thread uiApp = new Thread(() => { Application.Run(new OverlayHost()); });
-                //if (fm.readConfig())
-                //{
-                //    Console.WriteLine("Loaded config!");
-                //}
-                //else
-                //{
-                //    Console.WriteLine("Could not load config!");
-                //}
+                ModuleHandler mh = new ModuleHandler();
+                KeybindHandler kh = new KeybindHandler();
+                Thread uiApp = new Thread(() => { OverlayHost ui = new OverlayHost(); new Application().Run(ui); });
+                //Thread uiApp = new Thread(() => { new OverlayHost().StartDemo(); });
+                if (fm.readConfig())
+                {
+                    Console.WriteLine("Loaded config!");
+                }
+                else
+                {
+                    Console.WriteLine("Could not load config!");
+                }
                 uiApp.SetApartmentState(ApartmentState.STA);
+                Console.WriteLine("Overlay ready to go!");
                 uiApp.Start();
-                //while (true)
-                //{
-                //    try
-                //    {
-                //        if (cpuUsage <= cpuLimit)
-                //        {
-                //            mainLoop.Invoke(null, new EventArgs());
-                //        }
-                //        if(isCpuLimited)
-                //            Thread.Sleep(threadSleep);
-                //    }
-                //    catch (Exception)
-                //    {
+                while (true)
+                {
+                    try
+                    {
+                        if (cpuUsage <= cpuLimit)
+                        {
+                            mainLoop.Invoke(null, new EventArgs());
+                        }
+                        if (isCpuLimited)
+                            Thread.Sleep(threadSleep);
+                    }
+                    catch (Exception)
+                    {
 
-                //    }
-                //}
+                    }
+                }
             } catch (Exception ex)
             {
                 Console.WriteLine("Message: " + ex.Message);
