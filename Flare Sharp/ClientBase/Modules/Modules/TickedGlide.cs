@@ -22,6 +22,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public TickedGlide() : base("TickedGlide", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
             RegisterSliderSetting("Speed", 0, 4, 50);
+            RegisterSliderSetting("Decrement Y", -20, -08, 0);
+            RegisterSliderSetting("Delay", 0, 20, 50);
         }
 
         public override void onEnable()
@@ -35,7 +37,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             base.onTick();
 
             SDK.instance.player.velY = 0;
-            SDK.instance.player.velY = -0.7F;
+            SDK.instance.player.velY = (float)sliderSettings[1].value / 10;
 
             if (KeybindHandler.isKeyDown('W'))
             {
@@ -47,7 +49,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 
             Counter += 1;
 
-            if(Counter > 20)
+            if(Counter > sliderSettings[2].value)
             {
                 if(distanceTo(SDK.instance.player.currentY1, savedY) <= 12)
                 {
