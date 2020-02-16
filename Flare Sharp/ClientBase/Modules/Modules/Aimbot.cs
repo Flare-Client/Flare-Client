@@ -13,42 +13,34 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     {
         public Aimbot() : base("Aimbot", CategoryHandler.registry.categories[0], (char)0x07, false)
         {
-            RegisterSliderSetting("Range", 0, 120, 640);
+            RegisterSliderSetting("Range", 0, 120, 500);
         }
 
         public override void onTick()
         {
             base.onTick();
-            float[] localPosition = { SDK.instance.player.currentX1, SDK.instance.player.currentY1, SDK.instance.player.currentZ1 };
             List<Entity> Entity = EntityList.getEntityList();
-            List<double> distances = new List<double>();
-            foreach (Entity e in Entity)
+            List<double> distancesArr = new List<double>();
+
+            foreach(Entity e in Entity)
             {
-                float[] targetPosition = { e.currentX1, e.currentY1, e.currentZ1 };
-                float dX = localPosition[0] - targetPosition[0];
-                float dY = localPosition[1] - targetPosition[1];
-                float dZ = localPosition[2] - targetPosition[2];
-                double distance = Math.Sqrt(dX * dX + dY * dY + dZ * dZ);
-                if (distance <= sliderSettings[0].value / 10)
-                {
-                    distances.Add(distance);
-                }
+                Double distance = e.distanceTo(SDK.instance.player);
+                if (distance <= sliderSettings[0].value / 10F) distancesArr.Add(distance);
             }
-            if(distances.Count() > 0)
+
+            if(distancesArr.Count() > 0)
             {
-                distances.Sort();
+                distancesArr.Sort();
+
                 foreach(Entity e in Entity)
                 {
-                    float[] targetPosition = { e.currentX1, e.currentY1, e.currentZ1 };
-                    float dX = localPosition[0] - targetPosition[0];
-                    float dY = localPosition[1] - targetPosition[1];
-                    float dZ = localPosition[2] - targetPosition[2];
-                    double distance = Math.Sqrt(dX * dX + dY * dY + dZ * dZ);
-                    if(distance == distances[0])
+                    if(e.distanceTo(SDK.instance.player) == distancesArr[0])
                     {
-                        List<float> staringPos = SDK.instance.getCalculationsToPos(localPosition, targetPosition);
-                        MCM.writeFloat(Pointers.mousePitch(), staringPos[0]);
-                        MCM.writeFloat(Pointers.mouseYaw(), staringPos[1]);
+                        float[] localPosition = { SDK.instance.player.currentX2, SDK.instance.player.currentY2, SDK.instance.player.currentZ2 };
+                        float[] targetPosition = { e.currentX3, e.currentY3, e.currentZ3 };
+                        List<float> calculationsArr = SDK.instance.getCalculationsToPos(localPosition, targetPosition);
+                        MCM.writeFloat(Pointers.mousePitch(), calculationsArr[0]);
+                        MCM.writeFloat(Pointers.mouseYaw(), calculationsArr[1]);
                     }
                 }
             }
