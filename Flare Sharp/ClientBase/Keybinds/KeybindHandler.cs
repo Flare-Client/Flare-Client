@@ -71,7 +71,11 @@ namespace Flare_Sharp.ClientBase.Keybinds
                                 clientKeyDownEvent.Invoke(this, new clientKeyEvent(c));
                             OverlayHost.ui.repaint();
                         }
-                        catch (Exception) {}
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                            Console.WriteLine(ex.StackTrace);
+                        }
                     }
                     else
                     {
@@ -87,7 +91,11 @@ namespace Flare_Sharp.ClientBase.Keybinds
                             {
                                 clientKeyUpEvent.Invoke(this, new clientKeyEvent(c));
                             }
-                            catch (Exception) { }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                                Console.WriteLine(ex.StackTrace);
+                            }
                         }
                         OverlayHost.ui.repaint();
                     }

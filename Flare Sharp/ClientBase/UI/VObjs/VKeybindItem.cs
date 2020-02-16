@@ -72,7 +72,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         public override void OnPaint(DrawingContext e)
         {
             base.OnPaint(e);
-            FormattedText ftext = DrawUtils.stringToFormatted(renderedKeybind, "Roboto", 16, primary);
+            FormattedText ftext = DrawUtils.stringToFormatted(renderedKeybind, "Roboto", 16, secondary);
             e.DrawText(ftext, new Point(x +width - ftext.Width, y));
         }
     }

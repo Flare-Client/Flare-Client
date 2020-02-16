@@ -32,7 +32,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             base.OnInteractDown(a);
             if (a.key == 0x1)
             {
-                Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
+                Point p = new Point(Cursor.Position.X - OverlayHost.ui.x, Cursor.Position.Y - OverlayHost.ui.y);
                 if (objRect.Contains(p))
                 {
                     if (clicked != null)

@@ -62,7 +62,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             }
             FormattedText ftext = DrawUtils.stringToFormatted(value.ToString(), "Roboto", 16, secondary);
             e.DrawText(ftext, new Point(x + width - ftext.Width, y));
-            e.DrawText(DrawUtils.stringToFormatted(text, "Roboto", 16, primary), new Point(x, y));
+            e.DrawText(DrawUtils.stringToFormatted(text, "Roboto", 16, secondary), new Point(x, y));
         }
 
         public override void OnInteractDown(clientKeyEvent e)
