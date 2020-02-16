@@ -117,6 +117,8 @@
     <Compile Include="ClientBase\Modules\Modules\Recall.cs" />
     <Compile Include="ClientBase\Modules\Settings\Setting.cs" />
     <Compile Include="ClientBase\Modules\Settings\SliderSetting.cs" />
+    <Compile Include="ClientBase\Modules\VisualModule.cs" />
+    <Compile Include="ClientBase\UI\DrawUtils.cs" />
     <Compile Include="ClientBase\UI\OverlayHost.xaml.cs">
       <DependentUpon>OverlayHost.xaml</DependentUpon>
     </Compile>
@@ -135,6 +137,11 @@
     <Compile Include="Memory\VHooks\CommandHook.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="TimerTickEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -142,12 +149,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Memory\VHooks\WhatsThis.txt" />
+    <None Include="Resources\FlareLogo.png" />
+    <None Include="Resources\Logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="ClientBase\UI\OverlayHost.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

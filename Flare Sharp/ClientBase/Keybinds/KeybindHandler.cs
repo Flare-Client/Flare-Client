@@ -62,7 +62,7 @@ namespace Flare_Sharp.ClientBase.Keybinds
                         {
                             if(clientKeyDownEvent!=null)
                                 clientKeyDownEvent.Invoke(this, new clientKeyEvent(c));
-                            //OverlayHost.ui.Invalidate();
+                            OverlayHost.ui.InvalidateVisual();
                         }
                         catch (Exception) { }
                     }

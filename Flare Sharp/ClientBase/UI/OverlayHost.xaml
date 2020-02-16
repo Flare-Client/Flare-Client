@@ -10,5 +10,4 @@
         AllowsTransparency="True"
         Background="Transparent"
         Topmost="True">
-    <Grid/>
 </Window>

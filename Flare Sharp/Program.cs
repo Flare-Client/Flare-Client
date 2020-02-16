@@ -64,7 +64,6 @@ namespace Flare_Sharp
                 SDK sdk = new SDK();
                 FileMan fm = new FileMan();
                 CategoryHandler ch = new CategoryHandler();
-                //TabUiHandler tuih = new TabUiHandler();
                 ModuleHandler mh = new ModuleHandler();
                 KeybindHandler kh = new KeybindHandler();
                 Thread uiApp = new Thread(() => { OverlayHost ui = new OverlayHost(); new Application().Run(ui); });
