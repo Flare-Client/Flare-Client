@@ -26,7 +26,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                 VModuleItem VMI = new VModuleItem(module, this);
                 foreach(SliderSetting sliderSetting in VMI.module.sliderSettings)
                 {
-                    VMI.children.Add(new VModuleSliderSetting(sliderSetting));
+                    VMI.children.Add(new VModuleSliderSetting(sliderSetting, VMI));
                 }
                 moduleObjects.Add(VMI);
             }

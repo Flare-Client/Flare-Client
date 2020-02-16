@@ -56,6 +56,7 @@ namespace Flare_Sharp.ClientBase.Keybinds
                                 clientKeyHeldEvent.Invoke(this, new clientKeyEvent(c));
                             }catch(Exception ex)
                             {
+                                Console.WriteLine(ex.Message);
                                 Console.WriteLine(ex.StackTrace);
                             }
                         noKey[c] = false;
@@ -85,10 +86,10 @@ namespace Flare_Sharp.ClientBase.Keybinds
                             try
                             {
                                 clientKeyUpEvent.Invoke(this, new clientKeyEvent(c));
-                                OverlayHost.ui.repaint();
                             }
                             catch (Exception) { }
                         }
+                        OverlayHost.ui.repaint();
                     }
                     if (noKey[c])
                     {

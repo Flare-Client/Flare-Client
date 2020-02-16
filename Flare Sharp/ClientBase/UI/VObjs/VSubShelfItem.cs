@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Flare_Sharp.ClientBase.Keybinds;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,9 +12,33 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
     public class VSubShelfItem : VShelfItem
     {
         public VShelfItem parent;
-        public VSubShelfItem(int shelfHeight, bool expandable) : base(shelfHeight, expandable)
+        public VSubShelfItem(int shelfHeight, bool expandable, VShelfItem parent) : base(shelfHeight, expandable)
         {
             this.width -= 10;
+            this.parent = parent;
+        }
+
+        public override void OnInteractDown(clientKeyEvent a)
+        {
+            base.OnInteractDown(a);
+            if (!parent.expanded)
+            {
+                return;
+            }
+        }public override void OnInteractHeld(clientKeyEvent a)
+        {
+            base.OnInteractDown(a);
+            if (!parent.expanded)
+            {
+                return;
+            }
+        }public override void OnInteractUp(clientKeyEvent a)
+        {
+            base.OnInteractDown(a);
+            if (!parent.expanded)
+            {
+                return;
+            }
         }
 
         public override void OnPaint(DrawingContext e)

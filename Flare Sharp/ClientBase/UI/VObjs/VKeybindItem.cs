@@ -11,7 +11,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
 {
     public class VKeybindItem : VSubShelfItem
     {
-        public VModuleItem parent;
+        public new VModuleItem parent;
         bool changing = false;
         public string renderedKeybind = "";
         public Module module
@@ -22,7 +22,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             }
         }
 
-        public VKeybindItem(VModuleItem parent) :base(24, false)
+        public VKeybindItem(VModuleItem parent) :base(24, false, parent)
         {
             this.parent = parent;
             this.text = "Keybind";
@@ -32,34 +32,37 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         public override void OnInteractDown(clientKeyEvent a)
         {
             base.OnInteractDown(a);
-            if (visible)
+            if (parent.expanded)
             {
-                if (a.key == 0x1)
+                if (visible)
                 {
-                    Point p = new Point(GetMousePosition().X - OverlayHost.ui.x, GetMousePosition().Y - OverlayHost.ui.y);
-                    if (objRect.Contains(p))
+                    if (a.key == 0x1)
                     {
-                        if (!changing)
+                        Point p = new Point(GetMousePosition().X - OverlayHost.ui.x, GetMousePosition().Y - OverlayHost.ui.y);
+                        if (objRect.Contains(p))
                         {
-                            changing = true;
-                            this.renderedKeybind = "...";
+                            if (!changing)
+                            {
+                                changing = true;
+                                this.renderedKeybind = "...";
+                            }
                         }
                     }
-                }
-                if (a.key != 0x1)
-                {
-                    if (changing)
+                    if (a.key != 0x1)
                     {
-                        if (a.key == 0x1B)
+                        if (changing)
                         {
-                            module.keybind = 0x07;
+                            if (a.key == 0x1B)
+                            {
+                                module.keybind = 0x07;
+                            }
+                            else
+                            {
+                                module.keybind = a.key;
+                            }
+                            this.renderedKeybind = ((int)a.key).ToString();
+                            changing = false;
                         }
-                        else
-                        {
-                            module.keybind = a.key;
-                        }
-                        this.renderedKeybind = ((int)a.key).ToString();
-                        changing = false;
                     }
                 }
             }

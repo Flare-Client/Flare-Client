@@ -34,7 +34,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             }
         }
         List<Rect> increments = new List<Rect>();
-        public VSliderItem(string name, int minimum, int value, int maximum) : base(24, false)
+        public VSliderItem(string name, int minimum, int value, int maximum, VShelfItem parent) : base(24, false, parent)
         {
             this.text = name;
             this.minimum = minimum;
@@ -68,12 +68,18 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         public override void OnInteractDown(clientKeyEvent e)
         {
             base.OnInteractDown(e);
-            if (e.key == 0x1)
+            if (visible)
             {
-                Point p = new Point(GetMousePosition().X - OverlayHost.ui.x, GetMousePosition().Y - OverlayHost.ui.y);
-                if (objRect.Contains(p))
+                if (parent.expanded)
                 {
-                    this.dragging = true;
+                    if (e.key == 0x1)
+                    {
+                        Point p = new Point(GetMousePosition().X - OverlayHost.ui.x, GetMousePosition().Y - OverlayHost.ui.y);
+                        if (objRect.Contains(p))
+                        {
+                            this.dragging = true;
+                        }
+                    }
                 }
             }
         }

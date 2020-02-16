@@ -11,7 +11,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class Triggerbot : Module
     {
-        public Triggerbot() : base("Triggerbot", CategoryHandler.registry.categories[0], (char)0x07, false)
+        public Triggerbot() : base("Triggerbot", CategoryHandler.registry.categories[0], 0x07, false)
         {
         }
 

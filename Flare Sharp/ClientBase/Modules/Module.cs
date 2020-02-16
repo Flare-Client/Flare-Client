@@ -47,7 +47,6 @@ namespace Flare_Sharp.ClientBase.Modules
         //Called like a loop when enabled
         public virtual void onTick()
         {
-            Console.WriteLine("Ticking: " + name);
         }
         //Called no matter what
         public virtual void onLoop()
