@@ -70,7 +70,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             base.OnInteractDown(e);
             if (e.key == 0x1)
             {
-                Point p = new Point(GetMousePosition().X - OverlayHost.ui.Left, GetMousePosition().Y - OverlayHost.ui.Top);
+                Point p = new Point(GetMousePosition().X - OverlayHost.ui.x, GetMousePosition().Y - OverlayHost.ui.y);
                 if (objRect.Contains(p))
                 {
                     this.dragging = true;
@@ -84,7 +84,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             {
                 if (e.key == 0x1)
                 {
-                    Point p = new Point(GetMousePosition().X - OverlayHost.ui.Left, GetMousePosition().Y - OverlayHost.ui.Top);
+                    Point p = new Point(GetMousePosition().X - OverlayHost.ui.x, GetMousePosition().Y - OverlayHost.ui.y);
                     for (int i = 0; i < total+1; i++)
                     {
                         if (increments[i].Contains(p))

@@ -64,7 +64,7 @@ namespace Flare_Sharp.ClientBase.Keybinds
                                 clientKeyDownEvent.Invoke(this, new clientKeyEvent(c));
                             OverlayHost.ui.repaint();
                         }
-                        catch (Exception) { }
+                        catch (Exception) {}
                     }
                     else
                     {

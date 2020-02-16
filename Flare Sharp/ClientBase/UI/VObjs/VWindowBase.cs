@@ -24,8 +24,8 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         public override void OnPaint(DrawingContext e)
         {
             base.OnPaint(e);
-            e.DrawRectangle(primary, null, objRect);
-            FormattedText ftext = DrawUtils.stringToFormatted(text, "Roboto", 16, primary);
+            e.DrawRectangle(secondary, null, objRect);
+            FormattedText ftext = DrawUtils.stringToFormatted(text, "Roboto", 16, quinary);
             e.DrawText(ftext, new Point(objRect.X, objRect.Y));
         }
 
@@ -34,7 +34,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             base.OnInteractDown(e);
             if (e.key == 0x1)
             {
-                Point p = new Point(GetMousePosition().X - OverlayHost.ui.Left, GetMousePosition().Y - OverlayHost.ui.Top);
+                Point p = new Point(GetMousePosition().X - OverlayHost.ui.x, GetMousePosition().Y - OverlayHost.ui.y);
                 if (objRect.Contains(p))
                 {
                     dx = p.X - objRect.X;
@@ -50,7 +50,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             {
                 if (e.key == 0x1)
                 {
-                    Point p = new Point(GetMousePosition().X - OverlayHost.ui.Left, GetMousePosition().Y - OverlayHost.ui.Top);
+                    Point p = new Point(GetMousePosition().X - OverlayHost.ui.x, GetMousePosition().Y - OverlayHost.ui.y);
                     x = p.X - dx;
                     y = p.Y - dy;
                     OverlayHost.ui.repaint();

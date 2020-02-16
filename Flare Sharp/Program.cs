@@ -37,6 +37,7 @@ namespace Flare_Sharp
             }
         }
         static PerformanceCounter cpuCounter;
+        [STAThread]
         static void Main(string[] args)
         {
             //Dont.Be.A.Scumbag.And.Remove.This.Warn.warn();
@@ -68,11 +69,6 @@ namespace Flare_Sharp
                 CategoryHandler ch = new CategoryHandler();
                 ModuleHandler mh = new ModuleHandler();
                 KeybindHandler kh = new KeybindHandler();
-                Thread uiApp = new Thread(() => { 
-                    OverlayHost ui = new OverlayHost();
-                    ui.Show();
-                    Dispatcher.Run();
-                });
                 if (fm.readConfig())
                 {
                     Console.WriteLine("Loaded config!");
@@ -81,26 +77,27 @@ namespace Flare_Sharp
                 {
                     Console.WriteLine("Could not load config!");
                 }
-                uiApp.SetApartmentState(ApartmentState.STA);
-                uiApp.CurrentCulture = CultureInfo.CurrentCulture;
-                Console.WriteLine("Overlay ready to go!");
-                uiApp.Start();
-                while (true)
-                {
-                    try
+                Thread mainThread = new Thread(() => {
+                    while (true)
                     {
-                        if (cpuUsage <= cpuLimit)
+                        try
                         {
-                            mainLoop.Invoke(null, new EventArgs());
+                            if (cpuUsage <= cpuLimit)
+                            {
+                                mainLoop.Invoke(null, new EventArgs());
+                            }
+                            if (isCpuLimited)
+                                Thread.Sleep(threadSleep);
                         }
-                        if (isCpuLimited)
-                            Thread.Sleep(threadSleep);
-                    }
-                    catch (Exception)
-                    {
+                        catch (Exception)
+                        {
 
+                        }
                     }
-                }
+                });
+                mainThread.Start();
+                Console.WriteLine("Loading overlay...");
+                new Application().Run(new OverlayHost());
             } catch (Exception ex)
             {
                 Console.WriteLine("Message: " + ex.Message);

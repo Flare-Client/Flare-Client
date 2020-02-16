@@ -36,7 +36,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                         }
                         editing = false;
                     }
-                    Point p = new Point(GetMousePosition().X - OverlayHost.ui.Left, GetMousePosition().Y - OverlayHost.ui.Top);
+                    Point p = new Point(GetMousePosition().X - OverlayHost.ui.x, GetMousePosition().Y - OverlayHost.ui.y);
                     if (objRect.Contains(p))
                     {
                         editing = true;
@@ -69,7 +69,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         {
             if (!deleted)
             {
-                e.DrawRectangle(secondary, null, objRect);
+                e.DrawRectangle(primary, null, objRect);
                 base.OnPaint(e);
             }
         }

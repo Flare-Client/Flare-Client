@@ -29,10 +29,10 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         {
             toggleAbleArea = objRect;
             toggleAbleArea.Height = 24;
-            e.DrawRectangle(secondary, null, toggleAbleArea);
+            e.DrawRectangle(primary, null, toggleAbleArea);
             if (module.enabled)
             {
-                e.DrawRectangle(rainbow, null, toggleAbleArea);
+                e.DrawRectangle(tertiary, null, toggleAbleArea);
             }
             base.OnPaint(e);
         }
@@ -40,12 +40,11 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         public override void OnInteractDown(clientKeyEvent a)
         {
             base.OnInteractDown(a);
-            visible = parent.visible;
             if (visible)
             {
                 if (a.key == 0x1)
                 {
-                    Point p = new Point(GetMousePosition().X - OverlayHost.ui.Left, GetMousePosition().Y - OverlayHost.ui.Top);
+                    Point p = new Point(GetMousePosition().X - OverlayHost.ui.x, GetMousePosition().Y - OverlayHost.ui.y);
                     toggleAbleArea = objRect;
                     toggleAbleArea.Height = 24;
                     if (toggleAbleArea.Contains(p))

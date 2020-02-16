@@ -1,4 +1,5 @@
-﻿using Flare_Sharp.ClientBase.Keybinds;
+﻿using Flare_Sharp.ClientBase.Categories;
+using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.UI;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,13 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
     public abstract class VObject
     {
         public string text = "Object";
-        public bool visible = false;
+        public bool visible
+        {
+            get
+            {
+                return CategoryHandler.registry.categories[3].modules[2].enabled;
+            }
+        }
 
         public Rect objRect
         {
@@ -66,6 +73,13 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             get
             {
                 return OverlayHost.quaternary;
+            }
+        }
+        public SolidColorBrush quinary
+        {
+            get
+            {
+                return OverlayHost.quinary;
             }
         }
         public SolidColorBrush rainbow

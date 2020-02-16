@@ -36,7 +36,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             {
                 if (a.key == 0x1)
                 {
-                    Point p = new Point(GetMousePosition().X - OverlayHost.ui.Left, GetMousePosition().Y - OverlayHost.ui.Top);
+                    Point p = new Point(GetMousePosition().X - OverlayHost.ui.x, GetMousePosition().Y - OverlayHost.ui.y);
                     if (objRect.Contains(p))
                     {
                         if (!changing)

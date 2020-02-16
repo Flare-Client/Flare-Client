@@ -47,7 +47,6 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                         OverlayHost.ui.repaint();
                         continue;
                     }
-                    shelf.visible = visible;
                     shelf.x = x;
                     shelf.y = y + z;
                     shelf.OnPaint(e);
@@ -55,7 +54,6 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                 }
             }
             catch (Exception) { }
-            addBtn.visible = visible;
             addBtn.y = y + z;
             addBtn.x = x;
             addBtn.OnPaint(e);
