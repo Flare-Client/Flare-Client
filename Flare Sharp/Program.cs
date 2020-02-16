@@ -9,6 +9,7 @@ using Flare_Sharp.Memory.VHooks;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -16,6 +17,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Web;
 using System.Windows;
+using System.Windows.Threading;
 using Timer = System.Timers.Timer;
 
 namespace Flare_Sharp
@@ -66,8 +68,11 @@ namespace Flare_Sharp
                 CategoryHandler ch = new CategoryHandler();
                 ModuleHandler mh = new ModuleHandler();
                 KeybindHandler kh = new KeybindHandler();
-                Thread uiApp = new Thread(() => { OverlayHost ui = new OverlayHost(); new Application().Run(ui); });
-                //Thread uiApp = new Thread(() => { new OverlayHost().StartDemo(); });
+                Thread uiApp = new Thread(() => { 
+                    OverlayHost ui = new OverlayHost();
+                    ui.Show();
+                    Dispatcher.Run();
+                });
                 if (fm.readConfig())
                 {
                     Console.WriteLine("Loaded config!");
@@ -77,6 +82,7 @@ namespace Flare_Sharp
                     Console.WriteLine("Could not load config!");
                 }
                 uiApp.SetApartmentState(ApartmentState.STA);
+                uiApp.CurrentCulture = CultureInfo.CurrentCulture;
                 Console.WriteLine("Overlay ready to go!");
                 uiApp.Start();
                 while (true)
