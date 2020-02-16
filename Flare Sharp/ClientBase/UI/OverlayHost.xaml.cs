@@ -86,10 +86,12 @@ namespace Flare_Sharp.ClientBase.UI
             {
                 foreach (Module mod in cat.modules)
                 {
-                    if (mod is VisualModule)
-                    {
-                        VisualModule vmod = (VisualModule)mod;
-                        vmod.onDraw(context);
+                    if (mod.enabled) {
+                        if (mod is VisualModule)
+                        {
+                            VisualModule vmod = (VisualModule)mod;
+                            vmod.onDraw(context);
+                        }
                     }
                 }
             }
