@@ -31,7 +31,7 @@ namespace Flare_Sharp.ClientBase.Keybinds
         public KeybindHandler()
         {
             handler = this;
-            Console.WriteLine("Starting key thread");
+            Console.WriteLine("Starting key handler");
             for (char c = (char)0; c < 0xFF; c++)
             {
                 downBuffs.Add(c, 0);
@@ -60,9 +60,9 @@ namespace Flare_Sharp.ClientBase.Keybinds
                         downBuffs[c]++;
                         try
                         {
-                            if(clientKeyDownEvent!=null)
+                            if (clientKeyDownEvent!=null)
                                 clientKeyDownEvent.Invoke(this, new clientKeyEvent(c));
-                            OverlayHost.ui.InvalidateVisual();
+                            OverlayHost.ui.repaint();
                         }
                         catch (Exception) { }
                     }
@@ -95,7 +95,7 @@ namespace Flare_Sharp.ClientBase.Keybinds
             };
 
             clientKeyDownEvent += dispatchKeybinds;
-            Console.WriteLine("key shit started");
+            Console.WriteLine("key handler started");
         }
 
         public void dispatchKeybinds(object sender, clientKeyEvent e)

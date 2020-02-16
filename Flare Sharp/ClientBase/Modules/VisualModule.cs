@@ -24,11 +24,19 @@ namespace Flare_Sharp.ClientBase.Modules
             {
                 return OverlayHost.secondary;
             }
-        }public SolidColorBrush tertiary
+        }
+        public SolidColorBrush tertiary
         {
             get
             {
                 return OverlayHost.tertiary;
+            }
+        }
+        public SolidColorBrush quaternary
+        {
+            get
+            {
+                return OverlayHost.quaternary;
             }
         }
         public SolidColorBrush rainbow

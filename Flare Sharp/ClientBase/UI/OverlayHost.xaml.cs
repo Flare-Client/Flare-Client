@@ -27,14 +27,15 @@ namespace Flare_Sharp.ClientBase.UI
     {
         public static OverlayHost ui;
         Win32.WinEventDelegate overDel;
-        int x
+        public delegate void RepaintDel();
+        public int x
         {
             get
             {
                 return MCM.getMinecraftRect().Left+8;
             }
         }
-        int y
+        public int y
         {
             get
             {
@@ -43,14 +44,14 @@ namespace Flare_Sharp.ClientBase.UI
                 return MCM.getMinecraftRect().Top + 33 + (Convert.ToInt32(place.showCmd == Win32.SW_SHOWMAXIMIZED) * 7);
             }
         }
-        int width
+        public int width
         {
             get
             {
                 return MCM.getMinecraftRect().Right-x-8;
             }
         }
-        int height
+        public int height
         {
             get
             {
@@ -63,6 +64,7 @@ namespace Flare_Sharp.ClientBase.UI
         public static SolidColorBrush primary = new SolidColorBrush(Colors.Black) { Opacity = 0.5 };
         public static SolidColorBrush secondary = new SolidColorBrush(Colors.White);
         public static SolidColorBrush tertiary = new SolidColorBrush(Colors.White) { Opacity = 0.5 };
+        public static SolidColorBrush quaternary = new SolidColorBrush(Colors.Gray) { Opacity = 0.5 };
         public static SolidColorBrush rainbow = new SolidColorBrush(Colors.White);
 
         public OverlayHost()
@@ -148,6 +150,12 @@ namespace Flare_Sharp.ClientBase.UI
         public void addChildObj(UIElement element)
         {
             panel.Children.Add(element);
+        }
+
+        public void repaint()
+        {
+            RepaintDel repaintDel = new RepaintDel(ui.InvalidateVisual);
+            ui.Dispatcher.Invoke(repaintDel);
         }
     }
 }

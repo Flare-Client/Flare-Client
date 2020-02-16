@@ -1,16 +1,11 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.ClientBase.UI;
-using System;
-using System.Collections.Generic;
-using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Windows;
+using System.Windows.Media;
 
 namespace Flare_Sharp.ClientBase.Modules.Modules
 {
-    public class ModuleList : Module
+    public class ModuleList : VisualModule
     {
         public ModuleList() : base("ModuleList", CategoryHandler.registry.categories[3], (char)0x07, true)
         {
@@ -18,14 +13,23 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onEnable()
         {
             base.onEnable();
-            //OverlayHost.ui.Paint += drawUI;
         }
-        private void drawUI(object sender, PaintEventArgs e)
+        public override void onDraw(DrawingContext context)
         {
-            e.Graphics.SmoothingMode = SmoothingMode.HighSpeed;
-            if (enabled)
+            uint yOff = 0;
+            foreach (Category cat in CategoryHandler.registry.categories)
             {
-                //TabUiHandler.instance.renderMLUI(e.Graphics);
+                foreach (Module mod in cat.modules)
+                {
+                    if (mod.enabled)
+                    {
+                        FormattedText modText = DrawUtils.stringToFormatted(mod.name, "Roboto", 32, secondary);
+                        double mwid = modText.Width;
+                        context.DrawRectangle(primary, null, new Rect(OverlayHost.ui.width - mwid, 32 * yOff, mwid, 32));
+                        context.DrawText(modText, new Point(OverlayHost.ui.width - mwid, 32 * yOff));
+                        yOff++;
+                    }
+                }
             }
         }
     }
