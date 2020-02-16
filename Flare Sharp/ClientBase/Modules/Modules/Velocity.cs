@@ -16,60 +16,72 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public Velocity() : base("Velocity", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
             RegisterSliderSetting("Speed", 00, 010, 100);
+            RegisterSliderSetting("Sideways Speed", 00, 010, 100);
         }
 
         public override void onTick()
         {
             base.onTick();
-            if(!KeybindHandler.isKeyDown((char)0x20) && SDK.instance.player.isInAir != 0 | !KeybindHandler.isKeyDown((char)0x20) && SDK.instance.player.onGround != 0)
+            if (!KeybindHandler.isKeyDown((char)0x20) && SDK.instance.player.isInAir != 0 | !KeybindHandler.isKeyDown((char)0x20) && SDK.instance.player.onGround != 0)
             {
-                if (KeybindHandler.isKeyDown('W') && !KeybindHandler.isKeyDown('S') && !KeybindHandler.isKeyDown('A') && !KeybindHandler.isKeyDown('D'))
+                List<float> directionalVec;
+                float directionalVelocity = sliderSettings[0].value / 10F;
+                float sidewayVelocity = sliderSettings[1].value / 10F;
+
+                if (KeybindHandler.isKeyDown('W'))
                 {
-                    List<float> directionalVec = SDK.instance.directionalVector((SDK.instance.player.yaw + 90) * (float)Math.PI / 178F, (float)Math.PI / 178F);
-                    SDK.instance.player.velX = (float)sliderSettings[0].value / 100F * directionalVec[0];
-                    SDK.instance.player.velZ = (float)sliderSettings[0].value / 100F * directionalVec[2];
+                    if (!KeybindHandler.isKeyDown('A') && !KeybindHandler.isKeyDown('D')) //Only W input
+                    {
+                        directionalVec = SDK.instance.directionalVector((SDK.instance.player.yaw + 90) * (float)Math.PI / 180, (float)Math.PI / 180);
+                        SDK.instance.player.velX = (float)directionalVelocity * directionalVec[0];
+                        SDK.instance.player.velZ = (float)directionalVelocity * directionalVec[2];
+                    }
+                    else if (KeybindHandler.isKeyDown('A')) //W & A input
+                    {
+                        directionalVec = SDK.instance.directionalVector((SDK.instance.player.yaw + 70) * (float)Math.PI / 180, (float)Math.PI / 180);
+                        SDK.instance.player.velX = (float)sidewayVelocity * directionalVec[0];
+                        SDK.instance.player.velZ = (float)sidewayVelocity * directionalVec[2];
+                    }
+                    else if (KeybindHandler.isKeyDown('D')) //W & D input
+                    {
+                        directionalVec = SDK.instance.directionalVector((SDK.instance.player.yaw + 110) * (float)Math.PI / 180, (float)Math.PI / 180);
+                        SDK.instance.player.velX = (float)sidewayVelocity * directionalVec[0];
+                        SDK.instance.player.velZ = (float)sidewayVelocity * directionalVec[2];
+                    }
                 }
-                else if (!KeybindHandler.isKeyDown('W') && KeybindHandler.isKeyDown('S') && !KeybindHandler.isKeyDown('A') && !KeybindHandler.isKeyDown('D'))
+                else if (KeybindHandler.isKeyDown('S'))
                 {
-                    List<float> directionalVec = SDK.instance.directionalVector((SDK.instance.player.yaw + -90) * (float)Math.PI / 178F, (float)Math.PI / 178F);
-                    SDK.instance.player.velX = (float)sliderSettings[0].value / 100F * directionalVec[0];
-                    SDK.instance.player.velZ = (float)sliderSettings[0].value / 100F * directionalVec[2];
-                }
-                else if (!KeybindHandler.isKeyDown('W') && !KeybindHandler.isKeyDown('S') && KeybindHandler.isKeyDown('A') && !KeybindHandler.isKeyDown('D'))
+                    if (!KeybindHandler.isKeyDown('A') && !KeybindHandler.isKeyDown('D')) //Only S input
+                    {
+                        directionalVec = SDK.instance.directionalVector((SDK.instance.player.yaw + -90) * (float)Math.PI / 180, (float)Math.PI / 180);
+                        SDK.instance.player.velX = (float)sidewayVelocity * directionalVec[0];
+                        SDK.instance.player.velZ = (float)sidewayVelocity * directionalVec[2];
+                    }
+                    else if (KeybindHandler.isKeyDown('A')) //S & A input
+                    {
+                        directionalVec = SDK.instance.directionalVector((SDK.instance.player.yaw + -70) * (float)Math.PI / 180, (float)Math.PI / 180);
+                        SDK.instance.player.velX = (float)sidewayVelocity * directionalVec[0];
+                        SDK.instance.player.velZ = (float)sidewayVelocity * directionalVec[2];
+                    }
+                    else if (KeybindHandler.isKeyDown('D')) //S & D input
+                    {
+                        directionalVec = SDK.instance.directionalVector((SDK.instance.player.yaw + -110) * (float)Math.PI / 180, (float)Math.PI / 180);
+                        SDK.instance.player.velX = (float)sidewayVelocity * directionalVec[0];
+                        SDK.instance.player.velZ = (float)sidewayVelocity * directionalVec[2];
+                    }
+                } else if(!KeybindHandler.isKeyDown('W') && !KeybindHandler.isKeyDown('S'))
                 {
-                    List<float> directionalVec = SDK.instance.directionalVector((SDK.instance.player.yaw) * (float)Math.PI / 178F, (float)Math.PI / 178F);
-                    SDK.instance.player.velX = (float)sliderSettings[0].value / 100F * directionalVec[0];
-                    SDK.instance.player.velZ = (float)sliderSettings[0].value / 100F * directionalVec[2];
-                }
-                else if (!KeybindHandler.isKeyDown('S') && !KeybindHandler.isKeyDown('W') && !KeybindHandler.isKeyDown('A') && KeybindHandler.isKeyDown('D'))
-                {
-                    List<float> directionalVec = SDK.instance.directionalVector((SDK.instance.player.yaw + 180) * (float)Math.PI / 178F, (float)Math.PI / 178F);
-                    SDK.instance.player.velX = (float)sliderSettings[0].value / 100F * directionalVec[0];
-                    SDK.instance.player.velZ = (float)sliderSettings[0].value / 100F * directionalVec[2];
-                }
-                else if (KeybindHandler.isKeyDown('W') && KeybindHandler.isKeyDown('A'))
-                {
-                    List<float> directionalVec = SDK.instance.directionalVector((SDK.instance.player.yaw + 70) * (float)Math.PI / 178F, (float)Math.PI / 178F);
-                    SDK.instance.player.velX = (float)sliderSettings[0].value / 100F * directionalVec[0];
-                    SDK.instance.player.velZ = (float)sliderSettings[0].value / 100F * directionalVec[2];
-                }
-                else if (KeybindHandler.isKeyDown('W') && KeybindHandler.isKeyDown('D'))
-                {
-                    List<float> directionalVec = SDK.instance.directionalVector((SDK.instance.player.yaw + 110) * (float)Math.PI / 178F, (float)Math.PI / 178F);
-                    SDK.instance.player.velX = (float)sliderSettings[0].value / 100F * directionalVec[0];
-                    SDK.instance.player.velZ = (float)sliderSettings[0].value / 100F * directionalVec[2];
-                }
-                else if (KeybindHandler.isKeyDown('S') && KeybindHandler.isKeyDown('D'))
-                {
-                    List<float> directionalVec = SDK.instance.directionalVector((SDK.instance.player.yaw + -110) * (float)Math.PI / 178F, (float)Math.PI / 178F);
-                    SDK.instance.player.velX = (float)sliderSettings[0].value / 100F * directionalVec[0];
-                    SDK.instance.player.velZ = (float)sliderSettings[0].value / 100F * directionalVec[2];
-                }
-                else if (KeybindHandler.isKeyDown('S') && KeybindHandler.isKeyDown('A'))
-                {
-                    List<float> directionalVec = SDK.instance.directionalVector((SDK.instance.player.yaw + -70) * (float)Math.PI / 178F, (float)Math.PI / 178F);
-                    SDK.instance.player.velX = (float)sliderSettings[0].value / 100F * directionalVec[0];
-                    SDK.instance.player.velZ = (float)sliderSettings[0].value / 100F * directionalVec[2];
+                    if (KeybindHandler.isKeyDown('A'))
+                    {
+                        directionalVec = SDK.instance.directionalVector((SDK.instance.player.yaw) * (float)Math.PI / 180, (float)Math.PI / 180);
+                        SDK.instance.player.velX = (float)sidewayVelocity * directionalVec[0];
+                        SDK.instance.player.velZ = (float)sidewayVelocity * directionalVec[2];
+                    } else if (KeybindHandler.isKeyDown('D'))
+                    {
+                        directionalVec = SDK.instance.directionalVector((SDK.instance.player.yaw + 180) * (float)Math.PI / 180, (float)Math.PI / 180);
+                        SDK.instance.player.velX = (float)sidewayVelocity * directionalVec[0];
+                        SDK.instance.player.velZ = (float)sidewayVelocity * directionalVec[2];
+                    }
                 }
             }
         }
