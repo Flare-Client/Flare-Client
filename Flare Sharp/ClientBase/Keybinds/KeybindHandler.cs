@@ -51,7 +51,13 @@ namespace Flare_Sharp.ClientBase.Keybinds
                     if (SDK.instance.GetKeyState(c) || (c < 0x7&&SDK.instance.GetMouseState(c)))
                     {
                         if (clientKeyHeldEvent != null)
-                            clientKeyHeldEvent.Invoke(this, new clientKeyEvent(c));
+                            try
+                            {
+                                clientKeyHeldEvent.Invoke(this, new clientKeyEvent(c));
+                            }catch(Exception ex)
+                            {
+                                Console.WriteLine(ex.StackTrace);
+                            }
                         noKey[c] = false;
                         if (downBuffs[c] > 0)
                         {

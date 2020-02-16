@@ -19,7 +19,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         public override void OnPaint(DrawingContext e)
         {
             e.DrawRectangle(quaternary, null, new Rect(objRect.X - 5, objRect.Y, objRect.Width + 10, objRect.Height));
-            e.DrawRectangle(secondary, null, objRect);
+            e.DrawRectangle(primary, null, objRect);
             base.OnPaint(e);
         }
     }
