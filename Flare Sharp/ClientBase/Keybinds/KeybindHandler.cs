@@ -79,6 +79,7 @@ namespace Flare_Sharp.ClientBase.Keybinds
                             try
                             {
                                 clientKeyUpEvent.Invoke(this, new clientKeyEvent(c));
+                                OverlayHost.ui.repaint();
                             }
                             catch (Exception) { }
                         }

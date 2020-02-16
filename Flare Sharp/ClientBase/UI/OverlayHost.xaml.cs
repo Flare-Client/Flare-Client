@@ -59,6 +59,9 @@ namespace Flare_Sharp.ClientBase.UI
             }
         }
 
+        public static event EventHandler postOverlayLoad;
+        bool loaded = false;
+
         Grid panel = new Grid();
 
         public static SolidColorBrush primary = new SolidColorBrush(Colors.Black) { Opacity = 0.5 };
@@ -78,6 +81,11 @@ namespace Flare_Sharp.ClientBase.UI
             CompositionTarget.Rendering += CompositionTarget_Rendering;
             overDel = new Win32.WinEventDelegate(LocationChangeCallback);
             Win32.SetWinEventHook((uint)Win32.SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE, (uint)Win32.SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE, IntPtr.Zero, overDel, MCM.mcWinProcId, Win32.GetWindowThreadProcessId(MCM.mcWinHandle, IntPtr.Zero), (uint)Win32.SWEH_dwFlags.WINEVENT_OUTOFCONTEXT | (uint)Win32.SWEH_dwFlags.WINEVENT_SKIPOWNPROCESS | (uint)Win32.SWEH_dwFlags.WINEVENT_SKIPOWNTHREAD);
+            loaded = true;
+            if (postOverlayLoad != null)
+            {
+                postOverlayLoad.Invoke(this, new EventArgs());
+            }
         }
 
         protected override void OnRender(DrawingContext context)
@@ -156,8 +164,11 @@ namespace Flare_Sharp.ClientBase.UI
 
         public void repaint()
         {
-            RepaintDel repaintDel = new RepaintDel(ui.InvalidateVisual);
-            ui.Dispatcher.Invoke(repaintDel);
+            if (loaded)
+            {
+                RepaintDel repaintDel = new RepaintDel(ui.InvalidateVisual);
+                ui.Dispatcher.Invoke(repaintDel);
+            }
         }
     }
 }
