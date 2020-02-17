@@ -3,21 +3,11 @@ using Flare_Sharp.ClientBase.Modules;
 using Flare_Sharp.Memory;
 using Flare_Sharp.UI;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Flare_Sharp.ClientBase.UI
 {
@@ -60,6 +50,8 @@ namespace Flare_Sharp.ClientBase.UI
             }
         }
 
+        IntPtr thisHandle;
+
         public static event EventHandler postOverlayLoad;
         bool loaded = false;
 
@@ -92,7 +84,7 @@ namespace Flare_Sharp.ClientBase.UI
 
         protected override void OnSourceInitialized(EventArgs e)
         {
-            IntPtr thisHandle = new WindowInteropHelper(this).Handle;
+            thisHandle = new WindowInteropHelper(this).Handle;
             UInt64 initialStyle = Win32.GetWindowLong(thisHandle, -20);
             Win32.SetWindowLong(thisHandle, -20, initialStyle | 0x20);
         }
@@ -133,10 +125,7 @@ namespace Flare_Sharp.ClientBase.UI
 
         public void LocationChangeCallback(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
         {
-            Left = x;
-            Top = y;
-            Width = width;
-            Height = height;
+            Win32.SetWindowPos(thisHandle, (IntPtr)(-1), x, y, width, height, 0);
         }
 
         private void windowLoaded(object sender, RoutedEventArgs e)

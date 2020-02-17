@@ -51,31 +51,32 @@ namespace Flare_Sharp.ClientBase.Modules
         //Called no matter what
         public virtual void onLoop()
         {
-            if (wasEnabled != enabled)
+            try
             {
-                if (enabled == false)
+                if (wasEnabled != enabled)
                 {
-                    onDisable();
-                    try
+                    if (enabled == false)
                     {
-                        toggleEvent.Invoke(this, new EventArgs());
+                        onDisable();
+                        if(toggleEvent != null)
+                            toggleEvent.Invoke(this, new EventArgs());
                     }
-                    catch (Exception) { }
+                    else
+                    {
+                        onEnable();
+                        if (toggleEvent != null)
+                            toggleEvent.Invoke(this, new EventArgs());
+                    }
+                    wasEnabled = enabled;
                 }
-                else
+                if (enabled)
                 {
-                    onEnable();
-                    try
-                    {
-                        toggleEvent.Invoke(this, new EventArgs());
-                    }
-                    catch (Exception) { }
+                    onTick();
                 }
-                wasEnabled = enabled;
-            }
-            if (enabled)
+            }catch(Exception ex)
             {
-                onTick();
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
             }
         }
     }
