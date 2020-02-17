@@ -8,20 +8,44 @@ namespace Flare_Sharp.Memory.CraftSDK
 {
     public class Pointers
     {
-        public static UInt64 mousePitch()
+        public static float mousePitch
         {
-            UInt64[] offs = { 0x30, 0xE0, 0x28, 0x38, 0x168, 0x0, 0x14 };
-            return MCM.baseEvaluatePointer(0x03022AE0, offs);
+            get
+            {
+                UInt64[] offs = { 0x30, 0xE0, 0x28, 0x38, 0x168, 0x0, 0x14 };
+                return MCM.readFloat(MCM.baseEvaluatePointer(0x03022AE0, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x30, 0xE0, 0x28, 0x38, 0x168, 0x0, 0x14 };
+                MCM.writeFloat(MCM.baseEvaluatePointer(0x03022AE0, offs), value);
+            }
         }
-        public static UInt64 mouseYaw()
+        public static float mouseYaw
         {
-            UInt64[] offs = { 0x30, 0xE0, 0x28, 0x38, 0x168, 0x0, 0x10 };
-            return MCM.baseEvaluatePointer(0x03022AE0, offs);
+            get
+            {
+                UInt64[] offs = { 0x30, 0xE0, 0x28, 0x38, 0x168, 0x0, 0x10 };
+                return MCM.readFloat(MCM.baseEvaluatePointer(0x03022AE0, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x30, 0xE0, 0x28, 0x38, 0x168, 0x0, 0x10 };
+                MCM.writeFloat(MCM.baseEvaluatePointer(0x03022AE0, offs), value);
+            }
         }
-        public static UInt64 playerSpeed()
+        public static float playerSpeed
         {
-            UInt64[] offs = { 0x30, 0xF8, 0x410, 0x18, 0x1F8, 0x9C };
-            return MCM.baseEvaluatePointer(0x03022AE0, offs);
+            get
+            {
+                UInt64[] offs = { 0x30, 0xF8, 0x410, 0x18, 0x1F8, 0x9C };
+                return MCM.readFloat(MCM.baseEvaluatePointer(0x03022AE0, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x30, 0xF8, 0x410, 0x18, 0x1F8, 0x9C };
+                MCM.writeFloat(MCM.baseEvaluatePointer(0x03022AE0, offs), value);
+            }
         }
         public static int blockSide
         {
@@ -75,6 +99,21 @@ namespace Flare_Sharp.Memory.CraftSDK
                 MCM.writeInt(MCM.baseEvaluatePointer(0x02FFAF50, offs), value);
             }
         }
+
+        public static byte doImmediateRespawnGamerule
+        {
+            get
+            {
+                UInt64[] offs = { 0xA8, 0x20, 0x38, 0x340, 0xFC8, 0x44};
+                return MCM.readByte(MCM.baseEvaluatePointer(0x02FFAF50, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0xA8, 0x20, 0x38, 0x340, 0xFC8, 0x44 };
+                MCM.writeByte(MCM.baseEvaluatePointer(0x02FFAF50, offs), value);
+            }
+        }
+
         public static int attackSwing = 0x102E23E; //v1.14.3
         public static int handSwingPacket = 0x8AADBF; //v1.14.3
         public static int rapidPlace = 0x102E1C3; //v1.14.3

@@ -55,6 +55,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new NoSwing();
             new ClickTP();
             new Instabreak();
+            new AutoRespawn();
             new Recall();
             new NoPacket();
             new Freecam();

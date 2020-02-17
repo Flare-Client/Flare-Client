@@ -39,8 +39,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                         float[] localPosition = { SDK.instance.player.currentX2, SDK.instance.player.currentY2, SDK.instance.player.currentZ2 };
                         float[] targetPosition = { e.currentX3, e.currentY3, e.currentZ3 };
                         List<float> calculationsArr = SDK.instance.getCalculationsToPos(localPosition, targetPosition);
-                        MCM.writeFloat(Pointers.mousePitch(), calculationsArr[0]);
-                        MCM.writeFloat(Pointers.mouseYaw(), calculationsArr[1]);
+                        Pointers.mousePitch = calculationsArr[0];
+                        Pointers.mouseYaw = calculationsArr[1];
                     }
                 }
             }
