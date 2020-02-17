@@ -1,10 +1,9 @@
 # Flare Client
-### **Flare Client is an external cheat for Minecraft Bedrock Edition written in C++ (Ported to C#) :sunglasses:** 
+### **Flare Client is a C# External Utility for Minecraft Bedrock Edition (Previously written in C++) :sunglasses:** 
 
 #### Developers:
 
 ```
-● iShabzz102 
 ● EchoHackCmd
 ● DisabledMallis
 ```
