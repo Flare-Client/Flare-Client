@@ -105,6 +105,7 @@
     <Compile Include="ClientBase\Modules\Modules\Step.cs" />
     <Compile Include="ClientBase\Modules\Modules\TabGUI.cs" />
     <Compile Include="ClientBase\Modules\Modules\TickedGlide.cs" />
+    <Compile Include="ClientBase\Modules\Modules\Tower.cs" />
     <Compile Include="ClientBase\Modules\Modules\Triggerbot.cs" />
     <Compile Include="ClientBase\Modules\Modules\Coordinates.cs" />
     <Compile Include="ClientBase\Modules\Modules\Velocity.cs" />

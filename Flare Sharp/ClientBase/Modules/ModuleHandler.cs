@@ -49,6 +49,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new JitterFlight();
             new TickedGlide();
             new Scaffold();
+            new Tower();
             new Gamemode();
             new NoFall();
             new Phase();
