@@ -317,5 +317,19 @@ namespace Flare_Sharp.Memory.CraftSDK
                 MCM.writeByte(MCM.evaluatePointer(addr, offs), value);
             }
         }
+
+        public int heldItemID
+        {
+            get
+            {
+                UInt64[] offs = { 0x10E2 };
+                return MCM.readInt(MCM.evaluatePointer(addr, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x10E2 };
+                MCM.writeInt(MCM.evaluatePointer(addr, offs), value);
+            }
+        }
     }
 }
