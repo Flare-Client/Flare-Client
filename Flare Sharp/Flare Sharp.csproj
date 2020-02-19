@@ -85,6 +85,7 @@
     <Compile Include="ClientBase\Modules\Modules\Gamemode.cs" />
     <Compile Include="ClientBase\Modules\Modules\Highjump.cs" />
     <Compile Include="ClientBase\Modules\Modules\Hitbox.cs" />
+    <Compile Include="ClientBase\Modules\Modules\InventoryMove.cs" />
     <Compile Include="ClientBase\Modules\Modules\JitterFlight.cs" />
     <Compile Include="ClientBase\Modules\Modules\Instabreak.cs" />
     <Compile Include="ClientBase\Modules\Modules\Jesus.cs" />

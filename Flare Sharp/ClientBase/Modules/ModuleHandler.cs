@@ -46,6 +46,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new Jetpack();
             new YBoost();
             new Coordinates();
+            new InventoryMove();
             new Flight();
             new BounceFly();
             new JitterFlight();

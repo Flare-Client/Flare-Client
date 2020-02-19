@@ -331,5 +331,13 @@ namespace Flare_Sharp.Memory.CraftSDK
                 MCM.writeInt(MCM.evaluatePointer(addr, offs), value);
             }
         }
+        public bool inventoryIsOpen //Located near held item ID
+        {
+            get
+            {
+                UInt64[] offs = { 0x11FE };
+                return MCM.readInt(MCM.evaluatePointer(addr, offs)) == 262144;
+            }
+        }
     }
 }
