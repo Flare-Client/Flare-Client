@@ -114,6 +114,20 @@ namespace Flare_Sharp.Memory.CraftSDK
             }
         }
 
+        public static int selectedHotbarSlot
+        {
+            get
+            {
+                UInt64[] offs = { 0x30, 0xF0, 0x428, 0x60, 0x5F0, 0x10 };
+                return MCM.readInt(MCM.baseEvaluatePointer(0x03022AE0, offs));
+            }
+            set
+            {
+                UInt64[] offs = { 0x30, 0xF0, 0x428, 0x60, 0x5F0, 0x10 };
+                MCM.writeInt(MCM.baseEvaluatePointer(0x03022AE0, offs), value);
+            }
+        }
+
         public static int attackSwing = 0x102E23E; //v1.14.3
         public static int handSwingPacket = 0x8AADBF; //v1.14.3
         public static int rapidPlace = 0x102E1C3; //v1.14.3
