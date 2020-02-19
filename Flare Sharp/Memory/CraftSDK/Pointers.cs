@@ -134,7 +134,7 @@ namespace Flare_Sharp.Memory.CraftSDK
         public static int autoSprint = 0x1A652C0; //v1.14.3
         public static int criticalsPacket = 0xFDBC66; //v1.14.3
         public static int showCoordinates = 0x6029FD; //v1.14.3
-        public static int blockFace = 0x5D53C2; //v1.14.3
+        public static int blockFace = 0x5D53C6; //v1.14.3
         public static int noPacket = 0xFA21DD; //v1.14.3
         public static int movementPacket = 0x8AD747; //V1.14.3
         public static int NoSlowDown1 = 0x1A653C9; //v1.14.3
