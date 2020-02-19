@@ -23,6 +23,22 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 
             if (SDK.instance.player.inventoryIsOpen)
             {
+                if (KeybindHandler.isKeyDown((char)0x27)) //Arrow Key -> Right
+                {
+                    Pointers.mouseYaw -= 0.02F;
+                }
+                else if (KeybindHandler.isKeyDown((char)0x25)) //Arrow Key -> Left
+                {
+                    Pointers.mouseYaw += 0.02F;
+                }
+                else if (KeybindHandler.isKeyDown((char)0x26)) //Arrow Key -> Up
+                {
+                    Pointers.mousePitch += 0.02F;
+                }
+                else if (KeybindHandler.isKeyDown((char)0x28)) //Arrow Key -> Down
+                {
+                    Pointers.mousePitch -= 0.02F;
+                }
 
                 if (KeybindHandler.isKeyDown((char)0x20))
                 {
