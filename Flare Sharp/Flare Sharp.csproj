@@ -96,6 +96,7 @@
     <Compile Include="ClientBase\Modules\Modules\NoFall.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoKnockBack.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoPacket.cs" />
+    <Compile Include="ClientBase\Modules\Modules\NoShadow.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoSlowDown.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoSwing.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoWater.cs" />

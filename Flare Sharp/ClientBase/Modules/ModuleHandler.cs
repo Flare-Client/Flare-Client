@@ -63,6 +63,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new Recall();
             new NoPacket();
             new Freecam();
+            new NoShadow();
             //new ServerCrasher(); <- Removed. 1. didnt work 2. UC doesnt allow it (luv u guys @ UC <3)
             new ClickUI();
             new TabGUI();
