@@ -148,7 +148,6 @@ namespace Flare_Sharp.Memory.CraftSDK
         public static int inWaterTick = 0x1222DAD; //V1.14.3
         public static int survivalReachCmp = 0x5D58B1; //V1.14.3
         public static int blockBreak = 0x14A6125; //V1.14.3
-        public static int blinkPacket = 0xDF70AB; //V1.14.3
         public static int shadowRenderer = 0xA17A85; //V1.14.3
     }
 }
