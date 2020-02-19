@@ -16,30 +16,41 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 
         public AutoSword() : base("AutoSword", CategoryHandler.registry.categories[0], (char)0x07, false)
         {
+            RegisterSliderSetting("Range", 0, 120, 240);
         }
 
         public override void onTick()
         {
             base.onTick();
 
-            autoSwordCounter += 1;
+            List<Entity> Entity = EntityList.getEntityList();
 
-            int heldItemID = SDK.instance.player.heldItemID;
-
-            if(autoSwordCounter > 4)
+            foreach (Entity e in Entity)
             {
-                if (heldItemID != 276 && heldItemID != 283 && heldItemID != 267 && heldItemID != 272 && heldItemID != 268)
+                double distance = e.distanceTo(SDK.instance.player);
+
+                if (distance <= (float)sliderSettings[0].value / 10F)
                 {
-                    if (Pointers.selectedHotbarSlot < 8)
+                    autoSwordCounter += 1;
+
+                    int heldItemID = SDK.instance.player.heldItemID;
+
+                    if (autoSwordCounter > 4)
                     {
-                        Pointers.selectedHotbarSlot += 1;
-                    }
-                    else
-                    {
-                        Pointers.selectedHotbarSlot = 0;
+                        if (heldItemID != 276 && heldItemID != 283 && heldItemID != 267 && heldItemID != 272 && heldItemID != 268)
+                        {
+                            if (Pointers.selectedHotbarSlot < 8)
+                            {
+                                Pointers.selectedHotbarSlot += 1;
+                            }
+                            else
+                            {
+                                Pointers.selectedHotbarSlot = 0;
+                            }
+                        }
+                        autoSwordCounter = 0;
                     }
                 }
-                autoSwordCounter = 0;
             }
         }
 
