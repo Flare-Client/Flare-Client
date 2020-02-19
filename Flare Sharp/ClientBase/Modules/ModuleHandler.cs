@@ -19,9 +19,10 @@ namespace Flare_Sharp.ClientBase.Modules
             registry = this;
             Console.WriteLine("Starting module register...");
             /* Register modules here */
-            new Hitbox();
             new Aimbot();
+            new Hitbox();
             new Triggerbot();
+            new BoostHit();
             new Criticals();
             new Misplace();
             new Reach();
