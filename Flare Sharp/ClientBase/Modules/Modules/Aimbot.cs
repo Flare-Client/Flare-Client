@@ -19,10 +19,10 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            List<Entity> Entity = EntityList.getEntityList();
+            List<PlayerEntity> Entity = EntityList.getPlayerList();
             List<double> distancesArr = new List<double>();
 
-            foreach(Entity e in Entity)
+            foreach(PlayerEntity e in Entity)
             {
                 Double distance = e.distanceTo(SDK.instance.player);
                 if (distance <= sliderSettings[0].value / 10F) distancesArr.Add(distance);
@@ -32,7 +32,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             {
                 distancesArr.Sort();
 
-                foreach(Entity e in Entity)
+                foreach(PlayerEntity e in Entity)
                 {
                     if(e.distanceTo(SDK.instance.player) == distancesArr[0])
                     {

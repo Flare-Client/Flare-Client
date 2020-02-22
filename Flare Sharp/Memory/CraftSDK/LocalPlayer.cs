@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace Flare_Sharp.Memory.CraftSDK
 {
-    public class LocalPlayer : Entity
+    public class LocalPlayer : PlayerEntity
     {
-        public UInt64 addr;
         public LocalPlayer(UInt64 addr) : base(addr)
         {
-            this.addr = addr;
         }
 
         public void teleport(float x, float y, float z)
@@ -40,6 +38,14 @@ namespace Flare_Sharp.Memory.CraftSDK
             get
             {
                 return Math.Sqrt(velX * velX + velY * velY + velZ * velZ);
+            }
+        }
+
+        public List<float> lookingVec
+        {
+            get
+            {
+                return SDK.instance.directionalVector((SDK.instance.player.yaw + 89.9f) * (float)Math.PI / 178F, SDK.instance.player.pitch * (float)Math.PI / 178F);
             }
         }
 

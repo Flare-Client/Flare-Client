@@ -68,7 +68,8 @@ namespace Flare_Sharp.ClientBase.Modules
             new ClickUI();
             new TabGUI();
             new ModuleList();
-            //new HiveFly();// <--will be added back for next release
+            new TPFlight();
+            new ListTest();
             Console.WriteLine("Modules registered!");
             startModuleThread();
         }

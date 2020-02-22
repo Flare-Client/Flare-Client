@@ -23,9 +23,9 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
             base.onTick();
 
-            List<Entity> Entity = EntityList.getEntityList();
+            List<PlayerEntity> Entity = EntityList.getPlayerList();
 
-            foreach (Entity e in Entity)
+            foreach (PlayerEntity e in Entity)
             {
                 double distance = e.distanceTo(SDK.instance.player);
 
