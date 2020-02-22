@@ -10,8 +10,16 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
     public class VSubShelfItem : VShelfItem
     {
         public VShelfItem parent;
-        public VSubShelfItem(int shelfHeight, bool expandable) : base(shelfHeight, expandable)
+        public bool opened
         {
+            get
+            {
+                return parent.expanded;
+            }
+        }
+        public VSubShelfItem(int shelfHeight, bool expandable, VShelfItem parent) : base(shelfHeight, expandable)
+        {
+            this.parent = parent;
             this.width -= 10;
         }
 
