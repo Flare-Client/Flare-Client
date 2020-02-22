@@ -32,7 +32,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             e.Graphics.FillRectangle(secondary, toggleAbleArea);
             if (module.enabled)
             {
-                e.Graphics.FillRectangle(rainbow, toggleAbleArea);
+                e.Graphics.FillRectangle(primary, toggleAbleArea);
             }
             base.OnPaint(e);
         }
@@ -40,7 +40,6 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         public override void OnInteractDown(clientKeyEvent a)
         {
             base.OnInteractDown(a);
-            visible = parent.visible;
             if (visible)
             {
                 if (a.key == 0x1)

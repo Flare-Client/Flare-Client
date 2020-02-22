@@ -49,13 +49,12 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             int paintOffset = 0;
             foreach (VObject vObject in moduleObjects)
             {
-                vObject.visible = visible;
                 vObject.x = x;
                 vObject.y = y + height + paintOffset;
                 vObject.OnPaint(e);
                 paintOffset += vObject.height;
             }
-            e.Graphics.DrawRectangle(new Pen(rainbow), x, y + height, width-1, paintOffset);
+            e.Graphics.DrawRectangle(new Pen(primary), x, y + height, width-1, paintOffset);
         }
     }
 }

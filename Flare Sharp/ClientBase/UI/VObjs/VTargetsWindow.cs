@@ -36,7 +36,6 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                 {
                     OnPaint(e);
                 }
-                addBtn.visible = visible;
             };
         }
 
@@ -54,7 +53,6 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                         OverlayHost.ui.Invalidate();
                         continue;
                     }
-                    shelf.visible = visible;
                     shelf.x = x;
                     shelf.y = y + z;
                     shelf.OnPaint(e);
@@ -62,11 +60,10 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                 }
             }
             catch (Exception) { }
-            addBtn.visible = visible;
             addBtn.y = y + z;
             addBtn.x = x;
             addBtn.OnPaint(e);
-            e.Graphics.DrawRectangle(new Pen(rainbow), x, y + height, width - 1, z);
+            e.Graphics.DrawRectangle(new Pen(primary), x, y + height, width - 1, z);
         }
     }
 }

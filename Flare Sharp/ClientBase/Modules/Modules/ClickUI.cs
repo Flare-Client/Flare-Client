@@ -33,18 +33,10 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onEnable()
         {
             base.onEnable();
-            foreach(VWindowBase window in windows)
-            {
-                window.visible = true;
-            }
         }
         public override void onDisable()
         {
             base.onDisable();
-            foreach (VWindowBase window in windows)
-            {
-                window.visible = false;
-            }
         }
     }
 }

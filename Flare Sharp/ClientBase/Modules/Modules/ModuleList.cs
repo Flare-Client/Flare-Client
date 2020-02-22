@@ -1,8 +1,8 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.UI;
-using Flare_Sharp.UI.TabUI;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Flare_Sharp.ClientBase.Modules.Modules
 {
-    public class ModuleList : Module
+    public class ModuleList : VisualModule
     {
         public ModuleList() : base("ModuleList", CategoryHandler.registry.categories[3], (char)0x07, true)
         {
@@ -18,13 +18,24 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onEnable()
         {
             base.onEnable();
-            OverlayHost.ui.Paint += drawUI;
         }
-        private void drawUI(object sender, PaintEventArgs e)
+        public override void onDraw(Graphics graphics)
         {
-            if (enabled)
+            base.onDraw(graphics);
+            //Draw enabled modules
+            uint yOff = 0;
+            foreach (Category cat in CategoryHandler.registry.categories)
             {
-                TabUiHandler.instance.renderMLUI(e.Graphics);
+                foreach (Module mod in cat.modules)
+                {
+                    if (mod.enabled)
+                    {
+                        float mwid = graphics.MeasureString(mod.name, textFont, 600).Width;
+                        graphics.FillRectangle(OverlayHost.ui.secondary, OverlayHost.ui.width - mwid, (32 * scale) * yOff, mwid, fontSize);
+                        graphics.DrawString(mod.name, textFont, primary, OverlayHost.ui.width - mwid, (32 * scale) * yOff);
+                        yOff++;
+                    }
+                }
             }
         }
     }

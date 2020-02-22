@@ -117,6 +117,7 @@
     <Compile Include="ClientBase\Modules\Modules\Recall.cs" />
     <Compile Include="ClientBase\Modules\Settings\Setting.cs" />
     <Compile Include="ClientBase\Modules\Settings\SliderSetting.cs" />
+    <Compile Include="ClientBase\Modules\VisualModule.cs" />
     <Compile Include="ClientBase\UI\VObjs\VAddButton.cs" />
     <Compile Include="ClientBase\UI\VObjs\VKeybindItem.cs" />
     <Compile Include="ClientBase\UI\VObjs\VModuleSliderSetting.cs" />
@@ -141,7 +142,6 @@
     <Compile Include="ClientBase\UI\OverlayHost.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ClientBase\UI\TabUI\TabUiHandler.cs" />
     <Compile Include="ClientBase\UI\VObjs\VCatgoryWindow.cs" />
     <Compile Include="ClientBase\UI\VObjs\VModuleItem.cs" />
     <Compile Include="ClientBase\UI\VObjs\VShelfItem.cs" />
