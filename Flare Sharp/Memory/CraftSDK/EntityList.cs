@@ -13,10 +13,8 @@ namespace Flare_Sharp.Memory.CraftSDK
         {
             List<Entity> entityList = new List<Entity>();
 
-            UInt64[] startOffs = { 0x358, 0x40, 0x0 };
-            UInt64 entityListStart = MCM.evaluatePointer(SDK.instance.player.addr, startOffs);
-            UInt64[] endOffs = { 0x358, 0x48, 0x0 };
-            UInt64 entityListEnd = MCM.evaluatePointer(SDK.instance.player.addr, endOffs);
+            UInt64[] endOffs = { 0xA8, 0x18, 0xB8, 0x48, 0x18, 0x50, 0xA0, 0x0 };
+            UInt64 entityListEnd = MCM.readInt64(MCM.baseEvaluatePointer(0x02FFAF50, endOffs));
 
             for (UInt64 entity = entityListStart; entity < entityListEnd; entity += 0x8)
             {
