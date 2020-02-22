@@ -82,6 +82,7 @@ namespace Flare_Sharp.UI
         public SolidBrush secondary = new SolidBrush(Color.FromArgb(25, 25, 25));
         public SolidBrush tertiary = new SolidBrush(Color.FromArgb(255, 0, 100));
         public SolidBrush quaternary = new SolidBrush(Color.FromArgb(255, 0, 255));
+        public SolidBrush quinary = new SolidBrush(Color.FromArgb(50, 50, 50));
 
         public Font font = new Font("Arial", 16, FontStyle.Regular);
 
@@ -119,10 +120,13 @@ namespace Flare_Sharp.UI
             {
                 foreach(Module mod in cat.modules)
                 {
-                    if(mod is VisualModule)
+                    if (mod.enabled)
                     {
-                        VisualModule vmod = (VisualModule)mod;
-                        vmod.onDraw(e.Graphics);
+                        if (mod is VisualModule)
+                        {
+                            VisualModule vmod = (VisualModule)mod;
+                            vmod.onDraw(e.Graphics);
+                        }
                     }
                 }
             }

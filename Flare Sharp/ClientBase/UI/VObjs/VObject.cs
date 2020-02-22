@@ -75,6 +75,13 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                 return OverlayHost.ui.quaternary;
             }
         }
+        public SolidBrush quinary
+        {
+            get
+            {
+                return OverlayHost.ui.quinary;
+            }
+        }
 
         public VObject()
         {

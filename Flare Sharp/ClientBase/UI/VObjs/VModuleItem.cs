@@ -32,7 +32,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             e.Graphics.FillRectangle(secondary, toggleAbleArea);
             if (module.enabled)
             {
-                e.Graphics.FillRectangle(primary, toggleAbleArea);
+                e.Graphics.FillRectangle(tertiary, toggleAbleArea);
             }
             base.OnPaint(e);
         }

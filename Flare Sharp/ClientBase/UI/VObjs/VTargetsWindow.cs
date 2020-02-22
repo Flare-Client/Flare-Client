@@ -63,7 +63,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             addBtn.y = y + z;
             addBtn.x = x;
             addBtn.OnPaint(e);
-            e.Graphics.DrawRectangle(new Pen(primary), x, y + height, width - 1, z);
+            e.Graphics.DrawRectangle(new Pen(quinary), x, y + height, width - 1, z-1);
         }
     }
 }

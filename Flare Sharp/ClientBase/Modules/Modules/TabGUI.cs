@@ -65,7 +65,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                         }
                         else if (module.enabled)
                         {
-                            graphics.FillRectangle(primary, catWidth, tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
+                            graphics.FillRectangle(quinary, catWidth, tFontSize + (32 * scale) * m, modWidth * scale, 32 * scale);
                         }
                         else if (module.selected)
                         {
@@ -77,7 +77,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                         graphics.DrawString(module.keybind.ToString(), textFont, primary, catWidth + modWidth, tFontSize + (32 * scale) * m);
                         m++;
                     }
-                    graphics.DrawRectangle(new Pen(primary, 5), catWidth, tFontSize, modWidth * scale, (32 * scale) * category.modules.Count);
+                    graphics.DrawRectangle(new Pen(quinary, 1), catWidth, tFontSize, modWidth * scale, (32 * scale) * category.modules.Count);
                 }
                 else if (category.selected)
                 {
@@ -86,7 +86,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                 graphics.DrawString(category.name, textFont, primary, 0, tFontSize + (32 * scale) * c);
                 c++;
             }
-            graphics.DrawRectangle(new Pen(primary, 5), 0, 0, catWidth * scale, ((32 * scale) * CategoryHandler.registry.categories.Count) + tFontSize);
+            graphics.DrawRectangle(new Pen(quinary, 1), 0, 0, catWidth * scale, ((32 * scale) * CategoryHandler.registry.categories.Count) + tFontSize);
         }
     }
 }
