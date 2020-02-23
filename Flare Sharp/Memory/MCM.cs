@@ -233,7 +233,7 @@ namespace Flare_Sharp.Memory
         public static UInt64 readInt64(UInt64 address)
         {
             UInt64 buffer = 0;
-            ReadProcessMemory(mcProcHandle, address, ref buffer, sizeof(int), 0);
+            ReadProcessMemory(mcProcHandle, address, ref buffer, sizeof(ulong), 0);
             return buffer;
         }
         public static string readString(UInt64 address, UInt64 length)

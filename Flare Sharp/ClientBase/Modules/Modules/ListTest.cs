@@ -22,7 +22,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             ulong index = 0;
             foreach(Entity e in entities)
             {
-                Console.WriteLine("Entity{0}: {1}", index, e.addr);
+                Console.WriteLine("Entity{0}: {1}", index, e.addr.ToString("X"));
                 index++;
             }
             this.enabled = false;
