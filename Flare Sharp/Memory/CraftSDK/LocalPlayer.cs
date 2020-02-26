@@ -52,91 +52,77 @@ namespace Flare_Sharp.Memory.CraftSDK
         public int onGround
         {
             get {
-                UInt64[] offs = { 0x178 };
-                return MCM.readInt(MCM.evaluatePointer(addr, offs));
+                return MCM.readInt(addr+0x178);
             }
             set
             {
-                UInt64[] offs = { 0x178 };
-                MCM.writeInt(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeInt(addr+0x178, value);
             }
         }
         public byte isFlying
         {
             get
             {
-                UInt64[] offs = { 0xA90 };
-                return MCM.readByte(MCM.evaluatePointer(addr, offs));
+                return MCM.readByte(addr + 0xA90);
             }
             set
             {
-                UInt64[] offs = { 0xA90 };
-                MCM.writeByte(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeByte(addr+0xA90, value);
             }
         }
         public byte isInAir
         {
             get
             {
-                UInt64[] offs = { 0x8FC };
-                return MCM.readByte(MCM.evaluatePointer(addr, offs));
+                return MCM.readByte(addr+0x8FC);
             }
             set
             {
-                UInt64[] offs = { 0x8FC };
-                MCM.writeByte(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeByte(addr+0x8FC, value);
             }
         }
         public int isInWater
         {
             get
             {
-                UInt64[] offs = { 0x23D };
-                return MCM.readInt(MCM.evaluatePointer(addr, offs));
+                return MCM.readInt(addr+0x23D);
             }
             set
             {
-                UInt64[] offs = { 0x23D };
-                MCM.writeInt(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeInt(addr + 0x23D, value);
             }
         }
         public int currentGamemode
         {
             get
             {
-                UInt64[] offs = { 0x1DB4 };
-                return MCM.readInt(MCM.evaluatePointer(addr, offs));
+                return MCM.readInt(addr+ 0x1DB4);
             }
             set
             {
-                UInt64[] offs = { 0x1DB4 };
-                MCM.writeInt(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeInt(addr + 0x1DB4, value);
             }
         }
         public int viewCreativeItems
         {
             get
             {
-                UInt64[] offs = { 0xAA8 };
-                return MCM.readInt(MCM.evaluatePointer(addr, offs));
+                return MCM.readInt(addr+ 0xAA8);
             }
             set
             {
-                UInt64[] offs = { 0xAA8 };
-                MCM.writeInt(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeInt(addr + 0xAA8, value);
             }
         }
         public float airAcceleration
         {
             get
             {
-                UInt64[] offs = { 0x8A4 };
-                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+                return MCM.readFloat(addr+0x8A4);
             }
             set
             {
-                UInt64[] offs = { 0x8A4 };
-                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeFloat(addr + 0x8A4, value);
             }
         }
 
@@ -144,169 +130,143 @@ namespace Flare_Sharp.Memory.CraftSDK
         {
             get
             {
-                UInt64[] offs = { 0x430 };
-                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+                return MCM.readFloat(addr+0x430);
             }
             set
             {
-                UInt64[] offs = { 0x430 };
-                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeFloat(addr + 0x430, value);
             }
         }
         public float Y1
         {
             get
             {
-                UInt64[] offs = { 0x434 };
-                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+                return MCM.readFloat(addr+0x434);
             }
             set
             {
-                UInt64[] offs = { 0x434 };
-                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeFloat(addr + 0x434, value);
             }
         }
         public float Z1
         {
             get
             {
-                UInt64[] offs = { 0x438 };
-                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+                return MCM.readFloat(addr+0x438);
             }
             set
             {
-                UInt64[] offs = { 0x438 };
-                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeFloat(addr + 0x438, value);
             }
         }
         public float X2
         {
             get
             {
-                UInt64[] offs = { 0x43C };
-                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+                return MCM.readFloat(addr+0x43C);
             }
             set
             {
-                UInt64[] offs = { 0x43C };
-                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeFloat(addr + 0x43C, value);
             }
         }
         public float Y2
         {
             get
             {
-                UInt64[] offs = { 0x440 };
-                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+                return MCM.readFloat(addr+0x440);
             }
             set
             {
-                UInt64[] offs = { 0x440 };
-                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeFloat(addr + 0x440, value);
             }
         }
         public float Z2
         {
             get
             {
-                UInt64[] offs = { 0x444 };
-                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+                return MCM.readFloat(addr+0x444);
             }
             set
             {
-                UInt64[] offs = { 0x444 };
-                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeFloat(addr + 0x444, value);
             }
         }
         public int isFalling
         {
             get
             {
-                UInt64[] offs = { 0x194 };
-                return MCM.readInt(MCM.evaluatePointer(addr, offs));
+                return MCM.readInt(addr+0x194);
             }
             set
             {
-                UInt64[] offs = { 0x194 };
-                MCM.writeInt(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeInt(addr + 0x194, value);
             }
         }
         public float blockCollisionStep
         {
             get
             {
-                UInt64[] offs = { 0x220 };
-                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+                return MCM.readFloat(addr+0x220);
             }
             set
             {
-                UInt64[] offs = { 0x220 };
-                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeFloat(addr + 0x220, value);
             }
         }
         public float velX
         {
             get
             {
-                UInt64[] offs = { 0x46C };
-                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+                return MCM.readFloat(addr+0x46C);
             }
             set
             {
-                UInt64[] offs = { 0x46C };
-                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeFloat(addr + 0x46C, value);
             }
         }
         public float velY
         {
             get
             {
-                UInt64[] offs = { 0x470 };
-                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+                return MCM.readFloat(addr+0x470);
             }
             set
             {
-                UInt64[] offs = { 0x470 };
-                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeFloat(addr + 0x470, value);
             }
         }
         public float velZ
         {
             get
             {
-                UInt64[] offs = { 0x474 };
-                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+                return MCM.readFloat(addr+0x474);
             }
             set
             {
-                UInt64[] offs = { 0x474 };
-                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeFloat(addr + 0x474, value);
             }
         }
         public float yaw
         {
             get
             {
-                UInt64[] offs = { 0xF4 };
-                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+                return MCM.readFloat(addr+0xF4);
             }
             set
             {
-                UInt64[] offs = { 0xF4 };
-                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeFloat(addr + 0xF4, value);
             }
         }
         public float pitch
         {
             get
             {
-                UInt64[] offs = { 0xF0 };
-                return MCM.readFloat(MCM.evaluatePointer(addr, offs));
+                return MCM.readFloat(addr+0xF0);
             }
             set
             {
-                UInt64[] offs = { 0xF0 };
-                MCM.writeFloat(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeFloat(addr + 0xF0, value);
             }
         }
 
@@ -314,13 +274,11 @@ namespace Flare_Sharp.Memory.CraftSDK
         {
             get
             {
-                UInt64[] offs = { 0x2102 };
-                return MCM.readByte(MCM.evaluatePointer(addr, offs));
+                return MCM.readByte(addr+0x2102);
             }
             set
             {
-                UInt64[] offs = { 0x2102 };
-                MCM.writeByte(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeByte(addr + 0x2102, value);
             }
         }
 
@@ -328,21 +286,18 @@ namespace Flare_Sharp.Memory.CraftSDK
         {
             get
             {
-                UInt64[] offs = { 0x10E2 };
-                return MCM.readInt(MCM.evaluatePointer(addr, offs));
+                return MCM.readInt(addr+0x10E2);
             }
             set
             {
-                UInt64[] offs = { 0x10E2 };
-                MCM.writeInt(MCM.evaluatePointer(addr, offs), value);
+                MCM.writeInt(addr + 0x10E2, value);
             }
         }
         public bool inventoryIsOpen //Located near held item ID
         {
             get
             {
-                UInt64[] offs = { 0x11FE };
-                return MCM.readInt(MCM.evaluatePointer(addr, offs)) == 262144;
+                return MCM.readInt(addr+0x11FE) == 262144;
             }
         }
     }

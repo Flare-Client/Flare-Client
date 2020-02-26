@@ -13,7 +13,7 @@ namespace Flare_Sharp.Memory.CraftSDK
         public SDK()
         {
             instance = this;
-            UInt64[] offs = { 0xA8, 0x58, 0x38, 0x8 };
+            UInt64[] offs = { 0xA8, 0x58, 0x38, 0x8, 0x0 };
             player = new LocalPlayer(MCM.baseEvaluatePointer(0x02FFAF50, offs));
         }
         public bool GetKeyState(char key)
