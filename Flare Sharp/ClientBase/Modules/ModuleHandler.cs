@@ -69,7 +69,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new TabGUI();
             new ModuleList();
             new TPFlight();
-            new ListTest();
+            //new ListTest();
             new KillauraTest();
             Console.WriteLine("Modules registered!");
             startModuleThread();

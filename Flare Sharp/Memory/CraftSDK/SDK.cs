@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Flare_Sharp.Memory.CraftSDK
@@ -84,7 +85,7 @@ namespace Flare_Sharp.Memory.CraftSDK
 
             Marshal.FreeHGlobal(iptrtoparams);
 
-            MCM.CreateRemoteThread(MCM.mcProc.Handle, (IntPtr)null, 100, MCM.mcBaseAddress + 0x1400CF0, iptrremoteallocatedmemory, 0, out bytesout);
+            MCM.CreateRemoteThread(MCM.mcProcHandle, (IntPtr)null, 0, MCM.mcBaseAddress + 0x1400CF0, iptrremoteallocatedmemory, 0, out bytesout);
         }
     }
 }

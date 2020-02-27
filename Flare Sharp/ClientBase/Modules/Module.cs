@@ -59,7 +59,8 @@ namespace Flare_Sharp.ClientBase.Modules
                     onDisable();
                     try
                     {
-                        toggleEvent.Invoke(this, new EventArgs());
+                        if (toggleEvent != null)
+                            toggleEvent.Invoke(this, new EventArgs());
                     }
                     catch (Exception) { }
                 }
@@ -68,7 +69,8 @@ namespace Flare_Sharp.ClientBase.Modules
                     onEnable();
                     try
                     {
-                        toggleEvent.Invoke(this, new EventArgs());
+                        if(toggleEvent!=null)
+                            toggleEvent.Invoke(this, new EventArgs());
                     }
                     catch (Exception) { }
                 }
