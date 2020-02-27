@@ -39,7 +39,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onDisable()
         {
             base.onDisable();
-            MCM.writeBaseByte(Pointers.blockFace, 8);
+            MCM.writeBaseByte(Pointers.blockFace, 84);
             MCM.writeBaseByte(Pointers.rapidPlace, 0);
         }
     }
