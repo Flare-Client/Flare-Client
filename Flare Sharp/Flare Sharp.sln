@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flare Sharp", "Flare Sharp.csproj", "{CACF815B-6EE3-4B2A-BA69-014F06BBEA89}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FlareInjected", "..\FlareInjected\FlareInjected.vcxproj", "{C76C50BE-DA5B-4E1C-99BC-5FA7DAEEE0A6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,16 +27,6 @@ Global
 		{CACF815B-6EE3-4B2A-BA69-014F06BBEA89}.Release|x64.Build.0 = Release|x64
 		{CACF815B-6EE3-4B2A-BA69-014F06BBEA89}.Release|x86.ActiveCfg = Release|Any CPU
 		{CACF815B-6EE3-4B2A-BA69-014F06BBEA89}.Release|x86.Build.0 = Release|Any CPU
-		{C76C50BE-DA5B-4E1C-99BC-5FA7DAEEE0A6}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{C76C50BE-DA5B-4E1C-99BC-5FA7DAEEE0A6}.Debug|x64.ActiveCfg = Debug|x64
-		{C76C50BE-DA5B-4E1C-99BC-5FA7DAEEE0A6}.Debug|x64.Build.0 = Debug|x64
-		{C76C50BE-DA5B-4E1C-99BC-5FA7DAEEE0A6}.Debug|x86.ActiveCfg = Debug|Win32
-		{C76C50BE-DA5B-4E1C-99BC-5FA7DAEEE0A6}.Debug|x86.Build.0 = Debug|Win32
-		{C76C50BE-DA5B-4E1C-99BC-5FA7DAEEE0A6}.Release|Any CPU.ActiveCfg = Release|Win32
-		{C76C50BE-DA5B-4E1C-99BC-5FA7DAEEE0A6}.Release|x64.ActiveCfg = Release|x64
-		{C76C50BE-DA5B-4E1C-99BC-5FA7DAEEE0A6}.Release|x64.Build.0 = Release|x64
-		{C76C50BE-DA5B-4E1C-99BC-5FA7DAEEE0A6}.Release|x86.ActiveCfg = Release|Win32
-		{C76C50BE-DA5B-4E1C-99BC-5FA7DAEEE0A6}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
