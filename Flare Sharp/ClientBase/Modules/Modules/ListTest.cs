@@ -17,7 +17,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 
         public override void onEnable()
         {
-            List<Entity> entities = EntityList.getEntityList();
+            List<Entity> entities = EntityList.getEntityList(true);
             Console.WriteLine("Entity List ({0})", entities.Count);
             ulong index = 0;
             foreach(Entity e in entities)

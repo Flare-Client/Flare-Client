@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Flare_Sharp.ClientBase.UI.VObjs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,20 @@ namespace Flare_Sharp.Memory.CraftSDK
 {
     public class EntityList
     {
+        public static List<string> targetable
+        {
+            get
+            {
+                List<string> returned = new List<string>();
+                foreach(VStringShelf shelf in VTargetsWindow.instance.targetObjects)
+                {
+                    returned.Add(shelf.text);
+                }
+                return returned;
+            }
+        }
         //Made by EchoHackCmd
-        public static List<Entity> getEntityList()
+        public static List<Entity> getEntityList(bool filter)
         {
             List<Entity> entityList = new List<Entity>();
 
@@ -27,7 +40,15 @@ namespace Flare_Sharp.Memory.CraftSDK
                     break;
 
                 Entity eObj = new Entity(indexedEntity);
-                entityList.Add(eObj);
+                if (filter)
+                {
+                    if (targetable.Contains(eObj.type))
+                    {
+                        entityList.Add(eObj);
+                    }
+                }
+                else
+                    entityList.Add(eObj);
                 /*
                 if (eObj.movedTick > 1)
                 {
@@ -41,7 +62,7 @@ namespace Flare_Sharp.Memory.CraftSDK
         public static List<PlayerEntity> getPlayerList()
         {
             List<PlayerEntity> playerEntityList = new List<PlayerEntity>();
-            List<Entity> entityList = getEntityList();
+            List<Entity> entityList = getEntityList(false);
             foreach (Entity entity in entityList)
             {
                 if (entity.addr == SDK.instance.player.addr) continue;

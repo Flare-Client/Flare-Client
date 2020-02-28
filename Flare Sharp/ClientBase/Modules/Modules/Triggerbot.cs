@@ -18,12 +18,19 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            UInt64 facing = SDK.instance.entityFacing.addr;
-            if (facing > 0)
+            Entity facing = SDK.instance.entityFacing;
+            if (EntityList.targetable.Contains(facing.type))
             {
-                MCM.writeBaseByte(Pointers.attackSwing, 0);
+                if (facing.addr > 0)
+                {
+                    MCM.writeBaseByte(Pointers.attackSwing, 0);
+                }
+                else
+                {
+                    MCM.writeBaseByte(Pointers.attackSwing, 1);
+                }
             }
-            else
+            if (facing.addr <= 0)
             {
                 MCM.writeBaseByte(Pointers.attackSwing, 1);
             }

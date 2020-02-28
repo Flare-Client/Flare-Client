@@ -280,10 +280,13 @@ namespace Flare_Sharp.Memory
             int inc = 0;
             foreach (byte b in strByte)
             {
-                strByte[inc] = readByte(address + (UInt64)inc);
+                byte next = readByte(address + (UInt64)inc);
+                if (next == 0)
+                    break;
+                strByte[inc] = next;
                 inc++;
             }
-            return Convert.ToString(strByte);
+            return new string(Encoding.Default.GetString(strByte).Take(inc).ToArray());
         }
 
         //Write direct
