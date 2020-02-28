@@ -19,15 +19,18 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
             base.onTick();
             Entity facing = SDK.instance.entityFacing;
-            if (EntityList.targetable.Contains(facing.type))
+            if (facing.movedTick > 1)
             {
-                if (facing.addr > 0)
+                if (EntityList.targetable.Contains(facing.type))
                 {
-                    MCM.writeBaseByte(Pointers.attackSwing, 0);
-                }
-                else
-                {
-                    MCM.writeBaseByte(Pointers.attackSwing, 1);
+                    if (facing.addr > 0)
+                    {
+                        MCM.writeBaseByte(Pointers.attackSwing, 0);
+                    }
+                    else
+                    {
+                        MCM.writeBaseByte(Pointers.attackSwing, 1);
+                    }
                 }
             }
             if (facing.addr <= 0)

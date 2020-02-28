@@ -40,15 +40,18 @@ namespace Flare_Sharp.Memory.CraftSDK
                     break;
 
                 Entity eObj = new Entity(indexedEntity);
-                if (filter)
+                if (eObj.movedTick > 1)
                 {
-                    if (targetable.Contains(eObj.type))
+                    if (filter)
                     {
-                        entityList.Add(eObj);
+                        if (targetable.Contains(eObj.type))
+                        {
+                            entityList.Add(eObj);
+                        }
                     }
+                    else
+                        entityList.Add(eObj);
                 }
-                else
-                    entityList.Add(eObj);
                 /*
                 if (eObj.movedTick > 1)
                 {
