@@ -14,12 +14,56 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     {
         public BHOP() : base("BHOP", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
+            RegisterSliderSetting("Speed", 01, 05, 30);
         }
 
         public override void onTick()
         {
             base.onTick();
-            if (SDK.instance.player.isInAir > 1 | SDK.instance.player.onGround > 0) SDK.instance.player.velY = 0.3F;
+            float playerYaw = SDK.instance.player.yaw;
+
+            if (SDK.instance.player.isInAir > 0) SDK.instance.player.velY = 0.3F;
+
+            if (KeybindHandler.isKeyDown('W'))
+            {
+                if(!KeybindHandler.isKeyDown('A') && !KeybindHandler.isKeyDown('D'))
+                {
+                    playerYaw += 90F;
+                }
+                if (KeybindHandler.isKeyDown('A'))
+                {
+                    playerYaw += 45F;
+                } else if (KeybindHandler.isKeyDown('D'))
+                {
+                    playerYaw += 135F;
+                }
+            } else if (KeybindHandler.isKeyDown('S'))
+            {
+                if (!KeybindHandler.isKeyDown('A') && !KeybindHandler.isKeyDown('D'))
+                {
+                    playerYaw -= 90F;
+                }
+                if (KeybindHandler.isKeyDown('A'))
+                {
+                    playerYaw -= 45F;
+                }
+                else if (KeybindHandler.isKeyDown('D'))
+                {
+                    playerYaw -= 135F;
+                }
+            } else if(!KeybindHandler.isKeyDown('W') && !KeybindHandler.isKeyDown('S'))
+            {
+                if (!KeybindHandler.isKeyDown('A') && KeybindHandler.isKeyDown('D')) playerYaw += 180F;
+            }
+
+            if(KeybindHandler.isKeyDown('W') | KeybindHandler.isKeyDown('A') | KeybindHandler.isKeyDown('D') | KeybindHandler.isKeyDown('S'))
+            {
+                float calcYaw = (playerYaw) * ((float)Math.PI / 180F);
+                float calcPitch = (SDK.instance.player.pitch) * -((float)Math.PI / 180F);
+                SDK.instance.player.velX = (float)Math.Cos(calcYaw) * sliderSettings[0].value / 10F;
+                SDK.instance.player.velZ = (float)Math.Sin(calcYaw) * sliderSettings[0].value / 10F;
+            }
+
         }
     }
 }

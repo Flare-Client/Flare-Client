@@ -74,11 +74,11 @@ namespace Flare_Sharp.Memory.CraftSDK
         {
             get
             {
-                return MCM.readByte(addr+0x8FC);
+                return MCM.readByte(addr+0x17C);
             }
             set
             {
-                MCM.writeByte(addr+0x8FC, value);
+                MCM.writeByte(addr+0x17C, value);
             }
         }
         public int isInWater
