@@ -72,12 +72,12 @@ namespace Flare_Sharp.Memory.CraftSDK
         {
             get
             {
-                UInt64[] offs = { 0x8FC };
+                UInt64[] offs = { 0x17C };
                 return MCM.readByte(MCM.evaluatePointer(addr, offs));
             }
             set
             {
-                UInt64[] offs = { 0x8FC };
+                UInt64[] offs = { 0x17C };
                 MCM.writeByte(MCM.evaluatePointer(addr, offs), value);
             }
         }
