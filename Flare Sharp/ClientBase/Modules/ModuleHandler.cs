@@ -61,7 +61,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new Instabreak();
             new AutoRespawn();
             new Recall();
-            new NoPacket();
+            new NoPacket(); //42
             new Freecam();
             new NoShadow();
             //new ServerCrasher(); <- Removed. 1. didnt work 2. UC doesnt allow it (luv u guys @ UC <3)
@@ -71,6 +71,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new TPFlight();
             //new ListTest();
             new KillauraTest();
+            //new AntiSentinel(); crashed game a lot, not a very good bypass tbh
             Console.WriteLine("Modules registered!");
             startModuleThread();
         }

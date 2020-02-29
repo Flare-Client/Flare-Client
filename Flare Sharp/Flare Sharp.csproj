@@ -51,6 +51,9 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NuklearDotNet">
+      <HintPath>Deps\NuklearDotNet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -72,6 +75,7 @@
     <Compile Include="ClientBase\Modules\Modules\Aimbot.cs" />
     <Compile Include="ClientBase\Modules\Modules\AirAcceleration.cs" />
     <Compile Include="ClientBase\Modules\Modules\AirJump.cs" />
+    <Compile Include="ClientBase\Modules\Modules\AntiSentinel.cs" />
     <Compile Include="ClientBase\Modules\Modules\AutoRespawn.cs" />
     <Compile Include="ClientBase\Modules\Modules\AutoSprint.cs" />
     <Compile Include="ClientBase\Modules\Modules\AutoSword.cs" />
