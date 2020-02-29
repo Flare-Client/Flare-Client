@@ -19,7 +19,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onEnable()
         {
             base.onEnable();
-            MCM.writeBaseByte(Pointers.blockFace, 0);
+            MCM.writeBaseByte(Pointers.blockFace, 135);
         }
 
         public override void onTick()
@@ -39,7 +39,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onDisable()
         {
             base.onDisable();
-            MCM.writeBaseByte(Pointers.blockFace, 8);
+            MCM.writeBaseByte(Pointers.blockFace, 134);
             MCM.writeBaseByte(Pointers.rapidPlace, 0);
         }
     }
