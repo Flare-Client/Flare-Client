@@ -161,6 +161,18 @@ namespace Flare_Sharp.Memory
             }
             return ints;
         }
+        public static ulong[] ceByte2uLong(string byteString)
+        {
+            string[] intStr = byteString.Split(' ');
+            ulong[] longs = new ulong[intStr.Length];
+            int c = 0;
+            foreach (string b in intStr)
+            {
+                longs[c] = (ulong.Parse(b, System.Globalization.NumberStyles.HexNumber));
+                c++;
+            }
+            return longs;
+        }
 
         public static UInt64 baseEvaluatePointer(UInt64 offset, UInt64[] offsets)
         {

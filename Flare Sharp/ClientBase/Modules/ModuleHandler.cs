@@ -70,8 +70,8 @@ namespace Flare_Sharp.ClientBase.Modules
             new ModuleList();
             new TPFlight();
             //new ListTest();
-            new KillauraTest();
             //new AntiSentinel(); crashed game a lot, not a very good bypass tbh
+            new AntiHive();
             Console.WriteLine("Modules registered!");
             startModuleThread();
         }

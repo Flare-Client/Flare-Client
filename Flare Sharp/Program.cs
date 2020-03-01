@@ -58,7 +58,7 @@ namespace Flare_Sharp
                     try
                     {
                         mainLoop.Invoke(null, new EventArgs());
-                        Thread.Sleep(threadSleep);
+                        //Thread.Sleep(threadSleep);
                     }
                     catch (Exception)
                     {

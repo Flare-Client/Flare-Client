@@ -49,14 +49,21 @@ namespace Flare_Sharp.Memory.CraftSDK
             }
         }
 
-        public int onGround
+        public byte onGround
         {
             get {
-                return MCM.readInt(addr+0x178);
+                return MCM.readByte(addr+0x178);
             }
             set
             {
-                MCM.writeInt(addr+0x178, value);
+                MCM.writeByte(addr+0x178, value);
+            }
+        }
+        public int onGround_type2
+        {
+            get
+            {
+                return MCM.readInt(addr + 0x17B);
             }
         }
         public byte isFlying

@@ -18,6 +18,25 @@ namespace Flare_Sharp.Memory.CraftSDK
             UInt64[] offs = { 0xA8, 0x58, 0x38, 0x8, 0x0 };
             player = new LocalPlayer(MCM.baseEvaluatePointer(0x02FFAF50, offs));
         }
+
+        public bool IsOnMainMenu()
+        {
+            return MCM.readBaseByte(0x2FFBDD8) > 0;
+        }
+        public bool IsOnAMenu()
+        {
+            bool ret = MCM.readInt(MCM.baseEvaluatePointer(0x02FF5FD0, MCM.ceByte2uLong("1E8 CB0"))) > 0;
+            //Console.WriteLine(ret);
+            return ret;
+        }
+
+        //public bool IsAMenuOpen()
+        //{
+        //    UInt64[] offs = { 0x1E8, 0xCB0 };
+        //    int value = MCM.readInt(MCM.baseEvaluatePointer(0x02FF5FD0, offs));
+        //    //Console.WriteLine(value.ToString("X"));
+        //    return value > 0;
+        //}
         public bool GetKeyState(char key)
         {
             UInt64[] offs = { 0x174+(UInt64)key };
@@ -58,34 +77,6 @@ namespace Flare_Sharp.Memory.CraftSDK
             calculations.Add(-pitch);
             calculations.Add(-yaw);
             return calculations;
-        }
-
-        [StructLayout(LayoutKind.Sequential, Pack = 1)]
-        public struct AttackEntityParams
-        {
-            [MarshalAs(UnmanagedType.U8)]
-            public ulong attacker;
-
-            [MarshalAs(UnmanagedType.U8)]
-            public ulong victim;
-
-        }
-        public void AttackEntity(Entity attacker, Entity victim)
-        {
-            AttackEntityParams parameters = new AttackEntityParams();
-            parameters.attacker = attacker.addr;
-            parameters.victim = victim.addr;
-            uint bytesout;
-
-            IntPtr iptrtoparams = Marshal.AllocHGlobal(Marshal.SizeOf(parameters));
-            Marshal.StructureToPtr(parameters, iptrtoparams, false);
-            IntPtr iptrremoteallocatedmemory = MCM.VirtualAllocEx(MCM.mcProcHandle, (IntPtr)null, (uint)Marshal.SizeOf(parameters), MCM.AllocationType.Commit | MCM.AllocationType.Reserve, MCM.MemoryProtection.ExecuteReadWrite);
-
-            MCM.WriteProcessMemory(MCM.mcProcHandle, iptrremoteallocatedmemory, ref iptrtoparams, Marshal.SizeOf(parameters), 0);
-
-            Marshal.FreeHGlobal(iptrtoparams);
-
-            MCM.CreateRemoteThread(MCM.mcProcHandle, (IntPtr)null, 0, MCM.mcBaseAddress + 0x1400CF0, iptrremoteallocatedmemory, 0, out bytesout);
         }
     }
 }
