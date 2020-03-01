@@ -6,7 +6,6 @@ using Flare_Sharp.Memory;
 using Flare_Sharp.Memory.CraftSDK;
 using Flare_Sharp.Memory.VHooks;
 using Flare_Sharp.UI;
-using Flare_Sharp.UI.TabUI;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -42,7 +41,6 @@ namespace Flare_Sharp
                 SDK sdk = new SDK();
                 FileMan fm = new FileMan();
                 CategoryHandler ch = new CategoryHandler();
-                TabUiHandler tuih = new TabUiHandler();
                 ModuleHandler mh = new ModuleHandler();
                 KeybindHandler kh = new KeybindHandler();
                 Thread uiApp = new Thread(() => { OverlayHost ui = new OverlayHost(); Application.Run(ui); });
@@ -60,7 +58,7 @@ namespace Flare_Sharp
                     try
                     {
                         mainLoop.Invoke(null, new EventArgs());
-                        Thread.Sleep(threadSleep);
+                        //Thread.Sleep(threadSleep);
                     }
                     catch (Exception)
                     {

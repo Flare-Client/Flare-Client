@@ -61,14 +61,17 @@ namespace Flare_Sharp.ClientBase.Modules
             new Instabreak();
             new AutoRespawn();
             new Recall();
-            new NoPacket();
+            new NoPacket(); //42
             new Freecam();
             new NoShadow();
             //new ServerCrasher(); <- Removed. 1. didnt work 2. UC doesnt allow it (luv u guys @ UC <3)
             new ClickUI();
             new TabGUI();
             new ModuleList();
-            //new HiveFly();// <--will be added back for next release
+            new TPFlight();
+            //new ListTest();
+            //new AntiSentinel(); crashed game a lot, not a very good bypass tbh
+            new AntiHive();
             Console.WriteLine("Modules registered!");
             startModuleThread();
         }

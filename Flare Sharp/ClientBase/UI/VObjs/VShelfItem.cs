@@ -37,7 +37,6 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                     foreach (VSubShelfItem subShelf in children)
                     {
                         paintOffset += subShelf.height;
-                        subShelf.visible = visible;
                         subShelf.x = x + 5;
                         subShelf.y = y + paintOffset;
                         subShelf.OnPaint(e);
@@ -62,18 +61,10 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                     if (expanded)
                     {
                         height += children.Count * 24;
-                        foreach(VSubShelfItem child in children)
-                        {
-                            child.visible = true;
-                        }
                     }
                     else
                     {
                         height -= children.Count * 24;
-                        foreach (VSubShelfItem child in children)
-                        {
-                            child.visible = false;
-                        }
                     }
                     OverlayHost.ui.Invalidate();
                 }

@@ -82,7 +82,7 @@ namespace Flare_Sharp.UI
         public SolidBrush secondary = new SolidBrush(Color.FromArgb(25, 25, 25));
         public SolidBrush tertiary = new SolidBrush(Color.FromArgb(255, 0, 100));
         public SolidBrush quaternary = new SolidBrush(Color.FromArgb(255, 0, 255));
-        public SolidBrush rainbow = new SolidBrush(Color.FromArgb(255, 255, 255));
+        public SolidBrush quinary = new SolidBrush(Color.FromArgb(50, 50, 50));
 
         public Font font = new Font("Arial", 16, FontStyle.Regular);
 
@@ -106,19 +106,6 @@ namespace Flare_Sharp.UI
             //mouseHookID= SetWindowsHookEx(14, mouseMove, GetModuleHandle("user32"), 0);
             UInt64 initialStyle = GetWindowLong(this.Handle, -20);
             SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
-            Timer rainbowTimer = new Timer();
-            float rainbowTick = 0f;
-            rainbowTimer.Tick += (object segfsjn, EventArgs gfdd) =>
-            {
-                if(MCM.isMinecraftFocused())
-                {
-                    rainbowTick += 0.005f;
-                    rainbow = new SolidBrush(Rainbow(rainbowTick));
-                    this.Invalidate();
-                }
-            };
-            rainbowTimer.Interval = 10;
-            rainbowTimer.Start();
             if (postOverlayLoad != null)
             {
                 postOverlayLoad.Invoke(this, new EventArgs());
@@ -129,6 +116,20 @@ namespace Flare_Sharp.UI
         private void OverlayHost_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawString("Flare "+Program.version, font, primary, width - (font.Size * Program.version.Length * (float)1.4), height - font.Height);
+            foreach(Category cat in CategoryHandler.registry.categories)
+            {
+                foreach(Module mod in cat.modules)
+                {
+                    if (mod.enabled)
+                    {
+                        if (mod is VisualModule)
+                        {
+                            VisualModule vmod = (VisualModule)mod;
+                            vmod.onDraw(e.Graphics);
+                        }
+                    }
+                }
+            }
         }
 
         public IntPtr OnMouseMove(int nCode, IntPtr wParam, IntPtr lParam)

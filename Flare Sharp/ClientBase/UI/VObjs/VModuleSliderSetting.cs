@@ -22,7 +22,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                     setting.value = value;
             }
         }
-        public VModuleSliderSetting(SliderSetting setting) : base(setting.text, setting.min, setting.value, setting.max)
+        public VModuleSliderSetting(SliderSetting setting, VShelfItem parent) : base(setting.text, setting.min, setting.value, setting.max, parent)
         {
             this.setting = setting;
         }

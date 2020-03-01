@@ -36,7 +36,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             }
         }
         List<RectangleF> increments = new List<RectangleF>();
-        public VSliderItem(string name, int minimum, int value, int maximum) : base(24, false)
+        public VSliderItem(string name, int minimum, int value, int maximum, VShelfItem parent) : base(24, false, parent)
         {
             this.text = name;
             this.minimum = minimum;
@@ -69,42 +69,51 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         public override void OnInteractDown(clientKeyEvent e)
         {
             base.OnInteractDown(e);
-            if (e.key == 0x1)
+            if (opened)
             {
-                Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
-                if (objRect.Contains(p))
+                if (e.key == 0x1)
                 {
-                    this.dragging = true;
+                    Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
+                    if (objRect.Contains(p))
+                    {
+                        this.dragging = true;
+                    }
                 }
             }
         }
         public override void OnInteractHeld(clientKeyEvent e)
         {
             base.OnInteractHeld(e);
-            if (this.dragging)
+            if (opened)
             {
-                if (e.key == 0x1)
+                if (this.dragging)
                 {
-                    Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
-                    for (int i = 0; i < total+1; i++)
+                    if (e.key == 0x1)
                     {
-                        if (increments[i].Contains(p))
+                        Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
+                        for (int i = 0; i < total + 1; i++)
                         {
-                            value = i-Math.Abs(minimum);
+                            if (increments[i].Contains(p))
+                            {
+                                value = i - Math.Abs(minimum);
+                            }
                         }
+                        OverlayHost.ui.Invalidate();
                     }
-                    OverlayHost.ui.Invalidate();
                 }
             }
         }
         public override void OnInteractUp(clientKeyEvent e)
         {
             base.OnInteractUp(e);
-            if (e.key == 0x1)
+            if (opened)
             {
-                this.dragging = false;
-                FileMan.man.saveConfig();
-                OverlayHost.ui.Invalidate();
+                if (e.key == 0x1)
+                {
+                    this.dragging = false;
+                    FileMan.man.saveConfig();
+                    OverlayHost.ui.Invalidate();
+                }
             }
         }
     }

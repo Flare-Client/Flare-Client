@@ -1,4 +1,5 @@
-﻿using Flare_Sharp.ClientBase.Keybinds;
+﻿using Flare_Sharp.ClientBase.Categories;
+using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.UI;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,12 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
     {
         public bool debugMode = false;
         public string text = "Object";
-        public bool visible = false;
+        public bool visible {
+            get
+            {
+                return CategoryHandler.registry.categories[3].modules[3].enabled;
+            }
+        }
         public Font font
         {
             get
@@ -69,11 +75,11 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                 return OverlayHost.ui.quaternary;
             }
         }
-        public SolidBrush rainbow
+        public SolidBrush quinary
         {
             get
             {
-                return OverlayHost.ui.rainbow;
+                return OverlayHost.ui.quinary;
             }
         }
 

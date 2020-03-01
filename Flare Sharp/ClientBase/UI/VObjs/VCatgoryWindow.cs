@@ -27,7 +27,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                 VModuleItem VMI = new VModuleItem(module, this);
                 foreach(SliderSetting sliderSetting in VMI.module.sliderSettings)
                 {
-                    VMI.children.Add(new VModuleSliderSetting(sliderSetting));
+                    VMI.children.Add(new VModuleSliderSetting(sliderSetting, VMI));
                 }
                 moduleObjects.Add(VMI);
 
@@ -49,13 +49,12 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             int paintOffset = 0;
             foreach (VObject vObject in moduleObjects)
             {
-                vObject.visible = visible;
                 vObject.x = x;
                 vObject.y = y + height + paintOffset;
                 vObject.OnPaint(e);
                 paintOffset += vObject.height;
             }
-            e.Graphics.DrawRectangle(new Pen(rainbow), x, y + height, width-1, paintOffset);
+            e.Graphics.DrawRectangle(new Pen(quinary), x, y + height, width-1, paintOffset);
         }
     }
 }
