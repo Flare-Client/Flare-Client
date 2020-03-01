@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Flare_Sharp.Memory.CraftSDK
@@ -13,9 +15,28 @@ namespace Flare_Sharp.Memory.CraftSDK
         public SDK()
         {
             instance = this;
-            UInt64[] offs = { 0xA8, 0x58, 0x38, 0x8 };
+            UInt64[] offs = { 0xA8, 0x58, 0x38, 0x8, 0x0 };
             player = new LocalPlayer(MCM.baseEvaluatePointer(0x02FFAF50, offs));
         }
+
+        public bool IsOnMainMenu()
+        {
+            return MCM.readBaseByte(0x2FFBDD8) > 0;
+        }
+        public bool IsOnAMenu()
+        {
+            bool ret = MCM.readInt(MCM.baseEvaluatePointer(0x02FF5FD0, MCM.ceByte2uLong("1E8 CB0"))) > 0;
+            //Console.WriteLine(ret);
+            return ret;
+        }
+
+        //public bool IsAMenuOpen()
+        //{
+        //    UInt64[] offs = { 0x1E8, 0xCB0 };
+        //    int value = MCM.readInt(MCM.baseEvaluatePointer(0x02FF5FD0, offs));
+        //    //Console.WriteLine(value.ToString("X"));
+        //    return value > 0;
+        //}
         public bool GetKeyState(char key)
         {
             UInt64[] offs = { 0x174+(UInt64)key };
@@ -26,12 +47,12 @@ namespace Flare_Sharp.Memory.CraftSDK
             UInt64[] offs = { 0x998, 0x8, 0x4F + (UInt64)mb };
             return MCM.readByte(MCM.baseEvaluatePointer(0x03022480, offs)) > 0;
         }
-        public UInt64 entityFacing
+        public Entity entityFacing
         {
             get
             {
                 UInt64[] offs = { 0xA8, 0x10, 0x870 };
-                return MCM.readInt64(MCM.baseEvaluatePointer(0x02FFAF50, offs));
+                return new Entity(MCM.readInt64(MCM.baseEvaluatePointer(0x02FFAF50, offs)));
             }
         }
         public List<float> directionalVector(float yaw, float pitch)

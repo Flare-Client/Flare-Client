@@ -43,6 +43,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <PlatformTarget>x64</PlatformTarget>
     <OutputPath>bin\x64\Release\</OutputPath>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
@@ -76,8 +77,13 @@
     <Compile Include="ClientBase\Modules\Modules\Aimbot.cs" />
     <Compile Include="ClientBase\Modules\Modules\AirAcceleration.cs" />
     <Compile Include="ClientBase\Modules\Modules\AirJump.cs" />
+    <Compile Include="ClientBase\Modules\Modules\AntiHive.cs" />
+    <Compile Include="ClientBase\Modules\Modules\AntiSentinel.cs" />
+    <Compile Include="ClientBase\Modules\Modules\AutoRespawn.cs" />
     <Compile Include="ClientBase\Modules\Modules\AutoSprint.cs" />
+    <Compile Include="ClientBase\Modules\Modules\AutoSword.cs" />
     <Compile Include="ClientBase\Modules\Modules\BHOP.cs" />
+    <Compile Include="ClientBase\Modules\Modules\BoostHit.cs" />
     <Compile Include="ClientBase\Modules\Modules\BounceFly.cs" />
     <Compile Include="ClientBase\Modules\Modules\ClickTP.cs" />
     <Compile Include="ClientBase\Modules\Modules\ClickUI.cs" />
@@ -88,9 +94,11 @@
     <Compile Include="ClientBase\Modules\Modules\Gamemode.cs" />
     <Compile Include="ClientBase\Modules\Modules\Highjump.cs" />
     <Compile Include="ClientBase\Modules\Modules\Hitbox.cs" />
+    <Compile Include="ClientBase\Modules\Modules\InventoryMove.cs" />
     <Compile Include="ClientBase\Modules\Modules\JitterFlight.cs" />
     <Compile Include="ClientBase\Modules\Modules\Instabreak.cs" />
     <Compile Include="ClientBase\Modules\Modules\Jesus.cs" />
+    <Compile Include="ClientBase\Modules\Modules\ListTest.cs" />
     <Compile Include="ClientBase\Modules\Modules\Misplace.cs" />
     <Compile Include="ClientBase\Modules\Modules\Jetpack.cs" />
     <Compile Include="ClientBase\Modules\Modules\ModuleList.cs" />
@@ -98,6 +106,7 @@
     <Compile Include="ClientBase\Modules\Modules\NoFall.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoKnockBack.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoPacket.cs" />
+    <Compile Include="ClientBase\Modules\Modules\NoShadow.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoSlowDown.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoSwing.cs" />
     <Compile Include="ClientBase\Modules\Modules\NoWater.cs" />
@@ -110,6 +119,8 @@
     <Compile Include="ClientBase\Modules\Modules\Step.cs" />
     <Compile Include="ClientBase\Modules\Modules\TabGUI.cs" />
     <Compile Include="ClientBase\Modules\Modules\TickedGlide.cs" />
+    <Compile Include="ClientBase\Modules\Modules\Tower.cs" />
+    <Compile Include="ClientBase\Modules\Modules\TPFlight.cs" />
     <Compile Include="ClientBase\Modules\Modules\Triggerbot.cs" />
     <Compile Include="ClientBase\Modules\Modules\Coordinates.cs" />
     <Compile Include="ClientBase\Modules\Modules\Velocity.cs" />
@@ -136,6 +147,7 @@
     <Compile Include="ClientBase\UI\VObjs\VWindowBase.cs" />
     <Compile Include="ClientBase\UI\Win32.cs" />
     <Compile Include="Memory\CraftSDK\Entity.cs" />
+    <Compile Include="Memory\CraftSDK\PlayerEntity.cs" />
     <Compile Include="Memory\CraftSDK\EntityList.cs" />
     <Compile Include="ClientBase\Modules\Modules\Flight.cs" />
     <Compile Include="Memory\CraftSDK\LocalPlayer.cs" />

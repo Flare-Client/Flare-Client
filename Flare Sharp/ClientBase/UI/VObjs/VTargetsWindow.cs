@@ -13,10 +13,12 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
 {
     public class VTargetsWindow : VWindowBase
     {
+        public static VTargetsWindow instance;
         VAddButton addBtn;
         List<VStringShelf> targetObjects = new List<VStringShelf>();
         public VTargetsWindow(double x) : base(x)
         {
+            instance = this;
             addBtn = new VAddButton();
             addBtn.width = width;
             addBtn.height = 24;

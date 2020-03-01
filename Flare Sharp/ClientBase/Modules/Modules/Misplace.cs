@@ -19,7 +19,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            foreach (Entity e in EntityList.getEntityList())
+            foreach (Entity e in EntityList.getEntityList(true))
             {
                 if (e.distanceTo(SDK.instance.player) < 2)
                 {

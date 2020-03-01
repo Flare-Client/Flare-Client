@@ -26,8 +26,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             for(var I = 0; I < prevPositions.Count(); I++)
             {
                 SDK.instance.player.teleport(prevPositions[I][0], prevPositions[I][1], prevPositions[I][2]);
-                MCM.writeFloat(Pointers.mousePitch(), prevStaring[I][0]);
-                MCM.writeFloat(Pointers.mouseYaw(), prevStaring[I][1]);
+                Pointers.mousePitch = prevStaring[I][0];
+                Pointers.mouseYaw = prevStaring[I][1];
                 if (enabled) break;
             }
             prevStaring.Clear();
@@ -43,8 +43,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             position.Add(SDK.instance.player.currentY1);
             position.Add(SDK.instance.player.currentZ1);
 
-            staringPos.Add(MCM.readFloat(Pointers.mousePitch()));
-            staringPos.Add(MCM.readFloat(Pointers.mouseYaw()));
+            staringPos.Add(Pointers.mousePitch);
+            staringPos.Add(Pointers.mouseYaw);
 
             for (int I = 0; I < 10; I++)
             {

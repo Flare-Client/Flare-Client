@@ -20,8 +20,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            List<Entity> Entity = EntityList.getEntityList();
-            foreach(Entity e in Entity)
+            List<Entity> entList = EntityList.getEntityList(true);
+            foreach(Entity e in entList)
             {
                 e.hitboxHeight = (float)sliderSettings[0].value / 10;
                 e.hitboxWidth = (float)sliderSettings[1].value / 10;
@@ -31,8 +31,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onDisable()
         {
             base.onDisable();
-            List<Entity> Entity = EntityList.getEntityList();
-            foreach (Entity e in Entity)
+            List<Entity> entList = EntityList.getEntityList(true);
+            foreach (Entity e in entList)
             {
                 e.hitboxHeight = 0.6f;
                 e.hitboxWidth = 1.8f;

@@ -18,6 +18,8 @@ namespace Flare_Sharp.Memory
         [DllImport("kernel32", SetLastError = true)]
         public static extern int ReadProcessMemory(IntPtr hProcess, UInt64 lpBase, ref UInt64 lpBuffer, int nSize, int lpNumberOfBytesRead);
         [DllImport("kernel32", SetLastError = true)]
+        public static extern int WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, ref IntPtr lpBuffer, int nSize, int lpNumberOfBytesWritten);
+        [DllImport("kernel32", SetLastError = true)]
         public static extern int WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, ref byte lpBuffer, int nSize, int lpNumberOfBytesWritten);
         [DllImport("kernel32", SetLastError = true)]
         public static extern int VirtualProtectEx(IntPtr hProcess, IntPtr lpAddress, int dwSize, Int64 flNewProtect, ref Int64 lpflOldProtect
@@ -34,6 +36,12 @@ namespace Flare_Sharp.Memory
         static extern bool IsWindowVisible(IntPtr hWnd);
         [DllImport("user32.dll")]
         static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
+        [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
+        public static extern IntPtr VirtualAllocEx(IntPtr hProcess, IntPtr lpAddress, uint dwSize, AllocationType flAllocationType, MemoryProtection flProtect);
+        [DllImport("kernel32")]
+        public static extern IntPtr CreateRemoteThread(IntPtr hProcess, IntPtr lpThreadAttributes, uint dwStackSize, IntPtr lpStartAddress, IntPtr lpParameter, uint dwCreationFlags, out uint lpThreadId);
+        [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
+        public static extern bool VirtualFreeEx(IntPtr hProcess, IntPtr lpAddress, UIntPtr dwSize, uint dwFreeType);
         [StructLayout(LayoutKind.Sequential)]
         public struct RECT
         {
@@ -42,6 +50,34 @@ namespace Flare_Sharp.Memory
             public int Right;
             public int Bottom;
         }
+        [Flags]
+        public enum AllocationType
+        {
+            Commit = 0x1000,
+            Reserve = 0x2000,
+            Decommit = 0x4000,
+            Release = 0x8000,
+            Reset = 0x80000,
+            Physical = 0x400000,
+            TopDown = 0x100000,
+            WriteWatch = 0x200000,
+            LargePages = 0x20000000
+        }
+        [Flags]
+        public enum MemoryProtection
+        {
+            Execute = 0x10,
+            ExecuteRead = 0x20,
+            ExecuteReadWrite = 0x40,
+            ExecuteWriteCopy = 0x80,
+            NoAccess = 0x01,
+            ReadOnly = 0x02,
+            ReadWrite = 0x04,
+            WriteCopy = 0x08,
+            GuardModifierflag = 0x100,
+            NoCacheModifierflag = 0x200,
+            WriteCombineModifierflag = 0x400
+        }
 
         public static IntPtr mcProcHandle;
         public static ProcessModule mcMainModule;
@@ -49,6 +85,7 @@ namespace Flare_Sharp.Memory
         public static IntPtr mcWinHandle;
         public static uint mcProcId;
         public static uint mcWinProcId;
+        public static Process mcProc;
 
         public static void openGame()
         {
@@ -59,6 +96,7 @@ namespace Flare_Sharp.Memory
             mcProcHandle = proc;
             mcMainModule = mcw10.MainModule;
             mcBaseAddress = mcMainModule.BaseAddress;
+            mcProc = mcw10;
         }
         public static void openWindowHost()
         {
@@ -123,6 +161,18 @@ namespace Flare_Sharp.Memory
                 c++;
             }
             return ints;
+        }
+        public static ulong[] ceByte2uLong(string byteString)
+        {
+            string[] intStr = byteString.Split(' ');
+            ulong[] longs = new ulong[intStr.Length];
+            int c = 0;
+            foreach (string b in intStr)
+            {
+                longs[c] = (ulong.Parse(b, System.Globalization.NumberStyles.HexNumber));
+                c++;
+            }
+            return longs;
         }
 
         public static UInt64 baseEvaluatePointer(UInt64 offset, UInt64[] offsets)
@@ -234,7 +284,7 @@ namespace Flare_Sharp.Memory
         public static UInt64 readInt64(UInt64 address)
         {
             UInt64 buffer = 0;
-            ReadProcessMemory(mcProcHandle, address, ref buffer, sizeof(int), 0);
+            ReadProcessMemory(mcProcHandle, address, ref buffer, sizeof(ulong), 0);
             return buffer;
         }
         public static string readString(UInt64 address, UInt64 length)
@@ -243,10 +293,13 @@ namespace Flare_Sharp.Memory
             int inc = 0;
             foreach (byte b in strByte)
             {
-                strByte[inc] = readByte(address + (UInt64)inc);
+                byte next = readByte(address + (UInt64)inc);
+                if (next == 0)
+                    break;
+                strByte[inc] = next;
                 inc++;
             }
-            return Convert.ToString(strByte);
+            return new string(Encoding.Default.GetString(strByte).Take(inc).ToArray());
         }
 
         //Write direct

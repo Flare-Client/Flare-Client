@@ -24,8 +24,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             savedCoordinates.Add(SDK.instance.player.currentX1);
             savedCoordinates.Add((float)Math.Floor(SDK.instance.player.currentY1 - 1));
             savedCoordinates.Add(SDK.instance.player.currentZ1);
-            savedPitchAndYaw.Add(MCM.readFloat(Pointers.mousePitch()));
-            savedPitchAndYaw.Add(MCM.readFloat(Pointers.mouseYaw()));
+            savedPitchAndYaw.Add(Pointers.mousePitch);
+            savedPitchAndYaw.Add(Pointers.mouseYaw);
             savedFlightState = SDK.instance.player.isFlying;
             byte[] write = { 0x90, 0x90, 0x90 };
             MCM.writeBaseBytes(Pointers.movementPacket, write);
@@ -34,8 +34,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
             base.onDisable();
             SDK.instance.player.teleport(savedCoordinates[0], savedCoordinates[1], savedCoordinates[2]);
-            MCM.writeFloat(Pointers.mousePitch(), savedPitchAndYaw[0]);
-            MCM.writeFloat(Pointers.mouseYaw(), savedPitchAndYaw[1]);
+            Pointers.mousePitch = savedPitchAndYaw[0];
+            Pointers.mouseYaw = savedPitchAndYaw[1];
             SDK.instance.player.isFlying = savedFlightState;
             savedCoordinates.Clear();
             savedPitchAndYaw.Clear();

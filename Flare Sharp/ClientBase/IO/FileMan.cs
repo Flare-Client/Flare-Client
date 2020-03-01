@@ -28,6 +28,19 @@ namespace Flare_Sharp.ClientBase.IO
             man = this;
         }
 
+        public void resetConfig()
+        {
+            if (configFile.Exists)
+            {
+                configFile.Delete();
+            }
+            if (configDir.Exists)
+            {
+                configDir.Delete();
+            }
+            saveConfig();
+        }
+
         public void saveConfig()
         {
             //Console.WriteLine("Saving...");
@@ -97,7 +110,14 @@ namespace Flare_Sharp.ClientBase.IO
                 return true;
             } catch(Exception)
             {
-                MessageBox.Show("Your flare config data is likely corrupt. Please delete it. Path: " + configFile.FullName);
+                if(MessageBox.Show("Your flare config data is likely corrupt. Click 'OK' to delete it or 'Cancel' to do the same thing. Idc what you want.", "Broken data.", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    resetConfig();
+                }
+                else
+                {
+                    resetConfig();
+                }
                 return false;
             }
         }

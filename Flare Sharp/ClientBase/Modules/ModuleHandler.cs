@@ -19,13 +19,15 @@ namespace Flare_Sharp.ClientBase.Modules
             registry = this;
             Console.WriteLine("Starting module register...");
             /* Register modules here */
-            new Hitbox();
             new Aimbot();
+            new Hitbox();
             new Triggerbot();
+            new BoostHit();
             new Criticals();
             new Misplace();
             new Reach();
             new RapidAttack();
+            new AutoSword();
             new AirJump();
             new Glide();
             new HighJump();
@@ -44,25 +46,33 @@ namespace Flare_Sharp.ClientBase.Modules
             new Jetpack();
             new YBoost();
             new Coordinates();
+            new InventoryMove();
             new Flight();
             new BounceFly();
             new JitterFlight();
             new TickedGlide();
             new Scaffold();
+            new Tower();
             new Gamemode();
             new NoFall();
             new Phase();
             new NoSwing();
             new ClickTP();
             new Instabreak();
+            new AutoRespawn();
             new Recall();
-            new NoPacket();
+            new NoPacket(); //42
             new Freecam();
+            new NoShadow();
             //new ServerCrasher(); <- Removed. 1. didnt work 2. UC doesnt allow it (luv u guys @ UC <3)
             new ClickUI();
             new TabGUI();
             new ModuleList();
             new CpuLimiter();
+            new TPFlight();
+            //new ListTest();
+            //new AntiSentinel(); crashed game a lot, not a very good bypass tbh
+            new AntiHive();
             Console.WriteLine("Modules registered!");
             startModuleThread();
         }

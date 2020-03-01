@@ -17,7 +17,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         bool editing = false;
         public VStringShelf() : base(24, false)
         {
-            text = "No text";
+            text = "player";
         }
 
         public override void OnInteractUp(clientKeyEvent a)
