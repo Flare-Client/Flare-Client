@@ -17,8 +17,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class TabGUI : VisualModule
     {
-        public float catWidth = 0;
-        public float modWidth = 0;
+        public double catWidth = 0;
+        public double modWidth = 0;
 
         public TabGUI() : base("TabGUI", CategoryHandler.registry.categories[3], (char)0x07, true)
         {
@@ -29,7 +29,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             base.onEnable();
         }
 
-        double catWidth = 0;
         bool initializing = true;
         BitmapSource bitmapSource;
         /*onRender is Deprecated, use onDraw*/
@@ -98,7 +97,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                     //context.DrawRectangle(primary, null, new Rect(catWidth, 32, modWidth, 32 * cat.modules.Count));
                 }
             }
-            graphics.DrawRectangle(new Pen(quinary, 1), 0, 0, catWidth * scale, ((32 * scale) * CategoryHandler.registry.categories.Count) + tFontSize);
+            //graphics.DrawRectangle(new Pen(quinary, 1), 0, 0, catWidth * scale, ((32 * scale) * CategoryHandler.registry.categories.Count) + tFontSize);
         }
     }
 }

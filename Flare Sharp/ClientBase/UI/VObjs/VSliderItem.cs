@@ -86,22 +86,17 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         public override void OnInteractHeld(clientKeyEvent e)
         {
             base.OnInteractHeld(e);
-            if (opened)
+            if (visible)
             {
                 if (this.dragging)
                 {
                     Point p = new Point(GetMousePosition().X - OverlayHost.ui.x, GetMousePosition().Y - OverlayHost.ui.y);
                     for (int i = 0; i < total+1; i++)
                     {
-                        Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
-                        for (int i = 0; i < total + 1; i++)
+                        if (increments[i].Contains(p))
                         {
-                            if (increments[i].Contains(p))
-                            {
-                                value = i - Math.Abs(minimum);
-                            }
+                            value = i - Math.Abs(minimum);
                         }
-                        OverlayHost.ui.Invalidate();
                     }
                     OverlayHost.ui.repaint();
                 }
@@ -110,7 +105,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         public override void OnInteractUp(clientKeyEvent e)
         {
             base.OnInteractUp(e);
-            if (opened)
+            if (visible)
             {
                 this.dragging = false;
                 FileMan.man.saveConfig();

@@ -15,7 +15,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
     {
         public static VTargetsWindow instance;
         VAddButton addBtn;
-        List<VStringShelf> targetObjects = new List<VStringShelf>();
+        public List<VStringShelf> targetObjects = new List<VStringShelf>();
         public VTargetsWindow(double x) : base(x)
         {
             instance = this;

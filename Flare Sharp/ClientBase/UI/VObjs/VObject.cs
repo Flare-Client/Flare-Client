@@ -18,7 +18,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         {
             get
             {
-                return CategoryHandler.registry.categories[3].modules[2].enabled;
+                return CategoryHandler.registry.categories[3].modules[3].enabled;
             }
         }
 
