@@ -25,19 +25,23 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             OverlayHost.ui.rainbowProg += 0.001f;
             Graphics g = OverlayHost.ui.CreateGraphics();
             //Rainbow around main tab gui
-            g.DrawRectangle(new Pen(rainbow.Color, 1), 0, 0, TabGUI.instance.catWidth, TabGUI.instance.catHeight);
+            if(TabGUI.instance.enabled)
+                g.DrawRectangle(new Pen(rainbow.Color, 1), 0, 0, TabGUI.instance.catWidth, TabGUI.instance.catHeight);
 
             //Rainbow for enabled modules
-            uint yOff = 0;
-            foreach (Category cat in CategoryHandler.registry.categories)
+            if (ModuleList.instance.enabled)
             {
-                foreach (Module mod in cat.modules)
+                uint yOff = 0;
+                foreach (Category cat in CategoryHandler.registry.categories)
                 {
-                    if (mod.enabled)
+                    foreach (Module mod in cat.modules)
                     {
-                        float mwid = g.MeasureString(mod.name, textFont, 600).Width;
-                        g.FillRectangle(rainbow, OverlayHost.ui.width - mwid - 5, (32 * scale) * yOff, 5, fontSize);
-                        yOff++;
+                        if (mod.enabled)
+                        {
+                            float mwid = g.MeasureString(mod.name, textFont, 600).Width;
+                            g.FillRectangle(rainbow, OverlayHost.ui.width - mwid - 5, (32 * scale) * yOff, 5, fontSize);
+                            yOff++;
+                        }
                     }
                 }
             }

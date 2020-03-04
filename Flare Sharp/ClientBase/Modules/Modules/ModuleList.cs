@@ -12,8 +12,10 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class ModuleList : VisualModule
     {
+        public static ModuleList instance;
         public ModuleList() : base("ModuleList", CategoryHandler.registry.categories[3], (char)0x07, true)
         {
+            instance = this;
         }
         public override void onEnable()
         {

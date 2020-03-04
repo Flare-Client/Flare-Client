@@ -41,6 +41,10 @@ namespace Flare_Sharp.UI
         private static extern IntPtr GetModuleHandle(string lpModuleName);
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern bool SetForegroundWindow(IntPtr hwnd);
+        [DllImport("user32.dll")]
+        private static extern bool SetWindowPlacement(IntPtr hWnd, [In] ref WINDOWPLACEMENT lpwndpl);
         private struct WINDOWPLACEMENT
         {
             public int length;
@@ -124,7 +128,7 @@ namespace Flare_Sharp.UI
 
         private void OverlayHost_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawString("Flare "+Program.version, font, primary, width - (font.Size * Program.version.Length * (float)1.4), height - font.Height);
+            e.Graphics.DrawString("Flare "+Program.version, font, primary, width - (font.Size * Program.version.Length * (float)1.15), height - font.Height);
             foreach(Category cat in CategoryHandler.registry.categories)
             {
                 foreach(Module mod in cat.modules)
@@ -156,7 +160,11 @@ namespace Flare_Sharp.UI
             WINDOWPLACEMENT placement = new WINDOWPLACEMENT();
             GetWindowPlacement(MCM.mcWinHandle, ref placement);
             if (placement.showCmd == SW_MAXIMIZE)
+            {
                 fullScOff = 8;
+                TopMost = true;
+                WindowState = FormWindowState.Maximized;
+            }
             else
                 fullScOff = 0;
             //Adust window position
