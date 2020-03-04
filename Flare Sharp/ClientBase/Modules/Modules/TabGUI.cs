@@ -32,6 +32,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         bool initializing = true;
         BitmapSource bitmapSource;
         /*onRender is Deprecated, use onDraw*/
+        int i = 0;
         public override void onRender()
         {
             base.onRender();

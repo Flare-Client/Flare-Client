@@ -53,6 +53,11 @@ namespace Flare_Sharp.ClientBase.Modules
         public virtual void onRender()
         {
 
+            DrawingVisual drawingVisual = new DrawingVisual();
+            DrawingContext drawingContext = drawingVisual.RenderOpen();
+            onDraw(drawingContext);
+            drawingContext.Close();
+            OverlayHost.ui.addChildObj(drawingVisual);
         }
         public virtual void onDraw(DrawingContext context)
         {

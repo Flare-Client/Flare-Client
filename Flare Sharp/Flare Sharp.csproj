@@ -13,6 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -77,7 +78,6 @@
     <Compile Include="ClientBase\Modules\Modules\Aimbot.cs" />
     <Compile Include="ClientBase\Modules\Modules\AirAcceleration.cs" />
     <Compile Include="ClientBase\Modules\Modules\AirJump.cs" />
-    <Compile Include="ClientBase\Modules\Modules\AntiHive.cs" />
     <Compile Include="ClientBase\Modules\Modules\AntiSentinel.cs" />
     <Compile Include="ClientBase\Modules\Modules\AutoRespawn.cs" />
     <Compile Include="ClientBase\Modules\Modules\AutoSprint.cs" />
@@ -133,6 +133,7 @@
     <Compile Include="ClientBase\UI\OverlayHost.xaml.cs">
       <DependentUpon>OverlayHost.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ClientBase\UI\VisualHost.cs" />
     <Compile Include="ClientBase\UI\VObjs\VAddButton.cs" />
     <Compile Include="ClientBase\UI\VObjs\VCatgoryWindow.cs" />
     <Compile Include="ClientBase\UI\VObjs\VKeybindItem.cs" />

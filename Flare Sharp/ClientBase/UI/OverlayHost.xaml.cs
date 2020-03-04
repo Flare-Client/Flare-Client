@@ -89,38 +89,42 @@ namespace Flare_Sharp.ClientBase.UI
             Win32.SetWindowLong(thisHandle, -20, initialStyle | 0x20);
         }
 
-        protected override void OnRender(DrawingContext context)
-        {
-            foreach (Category cat in CategoryHandler.registry.categories)
-            {
-                foreach (Module mod in cat.modules)
-                {
-                    if (mod.enabled) {
-                        if (mod is VisualModule)
-                        {
-                            VisualModule vmod = (VisualModule)mod;
-                            vmod.onDraw(context);
-                        }
-                    }
-                }
-            }
-        }
+        //protected override void OnRender(DrawingContext context)
+        //{
+        //    foreach (Category cat in CategoryHandler.registry.categories)
+        //    {
+        //        foreach (Module mod in cat.modules)
+        //        {
+        //            if (mod.enabled) {
+        //                if (mod is VisualModule)
+        //                {
+        //                    VisualModule vmod = (VisualModule)mod;
+        //                    vmod.onDraw(context);
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
         float rainbowProg = 0f;
         private void CompositionTarget_Rendering(object sender, EventArgs e)
         {
+            vHost.children.Clear();
             foreach (Category cat in CategoryHandler.registry.categories)
             {
                 foreach (Module mod in cat.modules)
                 {
-                    if (mod is VisualModule)
+                    if (mod.enabled)
                     {
-                        VisualModule vmod = (VisualModule)mod;
-                        vmod.onRender();
+                        if (mod is VisualModule)
+                        {
+                            VisualModule vmod = (VisualModule)mod;
+                            vmod.onRender();
+                        }
                     }
                 }
             }
-            Thread.Sleep(10);
+            vHost.InvalidateVisual();
         }
 
         public void LocationChangeCallback(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
@@ -155,9 +159,9 @@ namespace Flare_Sharp.ClientBase.UI
             }
         }
 
-        public void addChildObj(UIElement element)
+        public void addChildObj(Visual element)
         {
-            panel.Children.Add(element);
+            vHost.children.Add(element);
         }
 
         public void repaint()

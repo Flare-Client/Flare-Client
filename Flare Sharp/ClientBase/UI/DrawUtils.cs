@@ -18,14 +18,11 @@ namespace Flare_Sharp.ClientBase.UI
         }
         public static void drawLine(int x, int y, int x2, int y2, double thickness, Brush brush)
         {
-            Line line = new Line();
-            line.Stroke = brush;
-            line.StrokeThickness = thickness;
-            line.X1 = x;
-            line.X2 = x2;
-            line.Y1 = y;
-            line.Y2 = y2;
-            OverlayHost.ui.addChildObj(line);
+            DrawingVisual drawingVisual = new DrawingVisual();
+            DrawingContext drawingContext = drawingVisual.RenderOpen();
+            drawingContext.DrawLine(new Pen(brush, thickness), new Point(x, y), new Point(x2, y2));
+            drawingContext.Close();
+            OverlayHost.ui.addChildObj(drawingVisual);
         }
         public static void drawRectangle(int x, int y, int width, int height, double thickness, Brush brush)
         {

@@ -6,8 +6,12 @@
         xmlns:local="clr-namespace:Flare_Sharp.ClientBase.UI"
         mc:Ignorable="d"
         Title="OverlayHost" Height="450" Width="800"
+        Name="mainWindow"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
         Topmost="True">
+    <local:VisualHost x:Name="vHost">
+        
+    </local:VisualHost>
 </Window>
