@@ -22,14 +22,14 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         public override void OnPaint(DrawingContext e)
         {
             base.OnPaint(e);
-            FormattedText ftext = DrawUtils.stringToFormatted(text, "Roboto", 16, secondary);
-            e.DrawText(ftext, new Point(x, y));
+            //FormattedText ftext = DrawUtils.stringToFormatted(text, "Roboto", 16, secondary);
+            //e.DrawText(ftext, new Point(x, y));
             if (expandable)
             {
                 if (expanded)
                 {
-                    FormattedText dditext = DrawUtils.stringToFormatted("-", "Roboto", 16, secondary);
-                    e.DrawText(dditext, new Point(x + width - 16, y));
+                    //FormattedText dditext = DrawUtils.stringToFormatted("-", "Roboto", 16, secondary);
+                    //e.DrawText(dditext, new Point(x + width - 16, y));
                     double paintOffset = 0;
                     foreach (VSubShelfItem subShelf in children)
                     {
@@ -41,8 +41,8 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                 }
                 else
                 {
-                    FormattedText dditext = DrawUtils.stringToFormatted("+", "Roboto", 16, secondary);
-                    e.DrawText(dditext, new Point(x + width - 16, y));
+                    //FormattedText dditext = DrawUtils.stringToFormatted("+", "Roboto", 16, secondary);
+                    //e.DrawText(dditext, new Point(x + width - 16, y));
                 }
             }
         }

@@ -32,6 +32,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             };
         }
 
+        /*
         public override void onDraw(DrawingContext context)
         {
             base.onDraw(context);
@@ -40,5 +41,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                 window.OnPaint(context);
             }
         }
+        */
     }
 }

@@ -6,44 +6,52 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Flare_Sharp.ClientBase.Modules
 {
     public abstract class VisualModule : Module
     {
-        public SolidColorBrush primary
+        public Color primary
         {
             get
             {
                 return OverlayHost.primary;
             }
         }
-        public SolidColorBrush secondary
+        public Color secondary
         {
             get
             {
                 return OverlayHost.secondary;
             }
         }
-        public SolidColorBrush tertiary
+        public Color tertiary
         {
             get
             {
                 return OverlayHost.tertiary;
             }
         }
-        public SolidColorBrush quaternary
+        public Color quaternary
         {
             get
             {
                 return OverlayHost.quaternary;
             }
         }
-        public SolidColorBrush rainbow
+        public Color rainbow
         {
             get
             {
                 return OverlayHost.rainbow;
+            }
+        }
+        public WriteableBitmap screen
+        {
+            get
+            {
+                return OverlayHost.writeableBitmap;
             }
         }
         public VisualModule(string name, Category category, int keybind, bool enabled) : base(name, category, keybind, enabled)
@@ -52,16 +60,7 @@ namespace Flare_Sharp.ClientBase.Modules
 
         public virtual void onRender()
         {
-
-            DrawingVisual drawingVisual = new DrawingVisual();
-            DrawingContext drawingContext = drawingVisual.RenderOpen();
-            onDraw(drawingContext);
-            drawingContext.Close();
-            OverlayHost.ui.addChildObj(drawingVisual);
-        }
-        public virtual void onDraw(DrawingContext context)
-        {
-
+            
         }
     }
 }

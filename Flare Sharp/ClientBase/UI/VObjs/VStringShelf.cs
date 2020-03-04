@@ -69,7 +69,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         {
             if (!deleted)
             {
-                e.DrawRectangle(primary, null, objRect);
+                //e.DrawRectangle(primary, null, objRect);
                 base.OnPaint(e);
             }
         }

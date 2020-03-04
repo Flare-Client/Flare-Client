@@ -31,15 +31,18 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 
         bool initializing = true;
         BitmapSource bitmapSource;
-        /*onRender is Deprecated, use onDraw*/
+
         int i = 0;
         public override void onRender()
         {
             base.onRender();
+            DrawUtils.fillRect(0, 0, 100, 100, primary);
         }
-        public override void onDraw(DrawingContext context)
+        /*
+        public override void onDraw()
         {
-            base.onDraw(context);
+            base.onDraw();
+            
             if (initializing)
             {
                 bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(Resources.FlareLogo.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
@@ -100,5 +103,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             }
             //graphics.DrawRectangle(new Pen(quinary, 1), 0, 0, catWidth * scale, ((32 * scale) * CategoryHandler.registry.categories.Count) + tFontSize);
         }
+        */
     }
 }

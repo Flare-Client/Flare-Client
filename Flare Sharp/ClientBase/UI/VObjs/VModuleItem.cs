@@ -29,10 +29,10 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         {
             toggleAbleArea = objRect;
             toggleAbleArea.Height = 24;
-            e.DrawRectangle(primary, null, toggleAbleArea);
+            //e.DrawRectangle(primary, null, toggleAbleArea);
             if (module.enabled)
             {
-                e.DrawRectangle(tertiary, null, toggleAbleArea);
+                //e.DrawRectangle(tertiary, null, toggleAbleArea);
             }
             base.OnPaint(e);
         }

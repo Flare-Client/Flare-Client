@@ -21,10 +21,12 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
 
         public override void OnPaint(DrawingContext e)
         {
+            /*
             base.OnPaint(e);
             e.DrawRectangle(primary, null, objRect);
             FormattedText texts = DrawUtils.stringToFormatted(text, "Roboto", 16, secondary);
             e.DrawText(texts, new Point(x + (width / 2) - (16 / 2), y));
+            */
         }
 
         public override void OnInteractUp(clientKeyEvent a)

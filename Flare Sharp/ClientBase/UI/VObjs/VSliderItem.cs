@@ -57,12 +57,12 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                 increments[i] = drawn;
                 if (i <= value+ Math.Abs(minimum)-1)
                 {
-                    e.DrawRectangle(tertiary, null, drawn);
+                    //e.DrawRectangle(tertiary, null, drawn);
                 }
             }
-            FormattedText ftext = DrawUtils.stringToFormatted(value.ToString(), "Roboto", 16, secondary);
-            e.DrawText(ftext, new Point(x + width - ftext.Width, y));
-            e.DrawText(DrawUtils.stringToFormatted(text, "Roboto", 16, secondary), new Point(x, y));
+            //FormattedText ftext = DrawUtils.stringToFormatted(value.ToString(), "Roboto", 16, secondary);
+            //e.DrawText(ftext, new Point(x + width - ftext.Width, y));
+            //e.DrawText(DrawUtils.stringToFormatted(text, "Roboto", 16, secondary), new Point(x, y));
         }
 
         public override void OnInteractDown(clientKeyEvent e)

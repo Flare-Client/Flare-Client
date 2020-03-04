@@ -11,4 +11,5 @@
         AllowsTransparency="True"
         Background="Transparent"
         Topmost="True">
+    <Image Name="vHost"></Image>
 </Window>

@@ -22,7 +22,6 @@ namespace Flare_Sharp.ClientBase.UI
         public delegate void RepaintDel();
 
         public static WriteableBitmap writeableBitmap;
-        static Image i;
 
         public int x
         {
@@ -62,15 +61,15 @@ namespace Flare_Sharp.ClientBase.UI
 
         Grid panel = new Grid();
 
-        public static SolidColorBrush primary = new SolidColorBrush(Colors.Black) { Opacity = 0.5 };
-        public static SolidColorBrush secondary = new SolidColorBrush(Colors.White);
-        public static SolidColorBrush tertiary = new SolidColorBrush(Colors.White) { Opacity = 0.5 };
-        public static SolidColorBrush quaternary = new SolidColorBrush(Colors.Gray) { Opacity = 0.5 };
-        public static SolidColorBrush quinary = new SolidColorBrush(Colors.Black);
-        public static SolidColorBrush rainbow {
+        public static Color primary = Color.FromArgb(127, 0, 0, 0);
+        public static Color secondary = Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF);
+        public static Color tertiary = Color.FromArgb(127, 0xFF, 0xFF, 0xFF);
+        public static Color quaternary = Color.FromArgb(127, 127, 127, 127);
+        public static Color quinary = Color.FromArgb(0xFF, 0, 0, 0);
+        public static Color rainbow {
             get
             {
-                return new SolidColorBrush(Rainbow(rainbowProg));
+                return Rainbow(rainbowProg);
             }
         }
 
@@ -82,19 +81,11 @@ namespace Flare_Sharp.ClientBase.UI
             InitializeComponent();
             RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.Default;
 
-            i = new Image();
-            RenderOptions.SetBitmapScalingMode(i, BitmapScalingMode.NearestNeighbor);
-            RenderOptions.SetEdgeMode(i, EdgeMode.Aliased);
-
-            this.Content = i;
+            RenderOptions.SetBitmapScalingMode(vHost, BitmapScalingMode.NearestNeighbor);
+            RenderOptions.SetEdgeMode(vHost, EdgeMode.Aliased);
 
             writeableBitmap = new WriteableBitmap((int)width, (int)height, 96, 96, PixelFormats.Bgra32, null);
-
-            i.Source = writeableBitmap;
-
-            i.Stretch = Stretch.None;
-            i.HorizontalAlignment = HorizontalAlignment.Left;
-            i.VerticalAlignment = VerticalAlignment.Top;
+            vHost.Source = writeableBitmap;
 
             Loaded += windowLoaded;
             CompositionTarget.Rendering += RenderBMP;
@@ -134,23 +125,18 @@ namespace Flare_Sharp.ClientBase.UI
         static float rainbowProg = 0f;
         private unsafe void RenderBMP(object sender, EventArgs e)
         {
-            try
+            using (writeableBitmap.GetBitmapContext())
             {
-                writeableBitmap.Lock();
-                IntPtr pBackBuffer = writeableBitmap.BackBuffer;
-
-                int color_data = 255 << 32; // R
-                color_data |= 128 << 16;   // G
-                color_data |= 255 << 8;   // B
-                color_data |= 255 << 0;   // A
-
-                *(int*)pBackBuffer = color_data;
-
+                //writeableBitmap.Lock();
+                /*
                 byte[] ColorData = { 0, 0, 0, 0 };
                 Int32Rect rect = new Int32Rect(0, 0, 1, 1);
                 writeableBitmap.WritePixels(rect, ColorData, 4, 0);
+                */
 
+                //Console.WriteLine("Rendering");
                 rainbowProg += 0.01f;
+                writeableBitmap.Clear(Colors.Transparent);
                 foreach (Category cat in CategoryHandler.registry.categories)
                 {
                     foreach (Module mod in cat.modules)
@@ -165,10 +151,7 @@ namespace Flare_Sharp.ClientBase.UI
                         }
                     }
                 }
-            }
-            finally
-            {
-                writeableBitmap.Unlock();
+                repaint();
             }
         }
         /*private void CompositionTarget_Rendering(object sender, EventArgs e)
@@ -194,6 +177,8 @@ namespace Flare_Sharp.ClientBase.UI
 
         public void LocationChangeCallback(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
         {
+            writeableBitmap = writeableBitmap.Resize(width, height, WriteableBitmapExtensions.Interpolation.Bilinear);
+            vHost.Source = writeableBitmap;
             Win32.SetWindowPos(thisHandle, (IntPtr)(-1), x, y, width, height, 0);
         }
 
