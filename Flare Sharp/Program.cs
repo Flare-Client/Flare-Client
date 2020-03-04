@@ -52,7 +52,7 @@ namespace Flare_Sharp
                 MCM.openGame();
                 MCM.openWindowHost();
 
-                Console.WriteLine("Starting performance tracker...");
+                /*Console.WriteLine("Starting performance tracker...");
                 cpuCounter = new PerformanceCounter("Process", "% Processor Time", System.Diagnostics.Process.GetCurrentProcess().ProcessName.ToUpper(), true);
 
                 Timer cpuTimer = new Timer(1000);
@@ -61,7 +61,7 @@ namespace Flare_Sharp
                     cpuUsage = cpuCounter.NextValue()/10;
                 };
                 cpuTimer.Start();
-                Console.WriteLine("Performance tracker loaded!");
+                Console.WriteLine("Performance tracker loaded!");*/
                 Console.WriteLine("Starting overlay host...");
                 CommandHook cmh = new CommandHook();
                 SDK sdk = new SDK();

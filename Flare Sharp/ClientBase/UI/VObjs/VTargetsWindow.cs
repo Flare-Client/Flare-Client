@@ -55,7 +55,10 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                     z += shelf.height;
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
             addBtn.y = y + z;
             addBtn.x = x;
             addBtn.OnPaint(e);

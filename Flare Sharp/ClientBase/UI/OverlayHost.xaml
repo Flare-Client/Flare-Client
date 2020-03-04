@@ -11,7 +11,4 @@
         AllowsTransparency="True"
         Background="Transparent"
         Topmost="True">
-    <local:VisualHost x:Name="vHost">
-        
-    </local:VisualHost>
 </Window>

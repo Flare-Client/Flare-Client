@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Flare_Sharp.ClientBase.UI
 {
@@ -19,6 +20,10 @@ namespace Flare_Sharp.ClientBase.UI
         public static OverlayHost ui;
         Win32.WinEventDelegate overDel;
         public delegate void RepaintDel();
+
+        public static WriteableBitmap writeableBitmap;
+        static Image i;
+
         public int x
         {
             get
@@ -62,7 +67,12 @@ namespace Flare_Sharp.ClientBase.UI
         public static SolidColorBrush tertiary = new SolidColorBrush(Colors.White) { Opacity = 0.5 };
         public static SolidColorBrush quaternary = new SolidColorBrush(Colors.Gray) { Opacity = 0.5 };
         public static SolidColorBrush quinary = new SolidColorBrush(Colors.Black);
-        public static SolidColorBrush rainbow = new SolidColorBrush(Colors.White);
+        public static SolidColorBrush rainbow {
+            get
+            {
+                return new SolidColorBrush(Rainbow(rainbowProg));
+            }
+        }
 
         public OverlayHost()
         {
@@ -71,8 +81,23 @@ namespace Flare_Sharp.ClientBase.UI
             this.Content = panel;
             InitializeComponent();
             RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.Default;
+
+            i = new Image();
+            RenderOptions.SetBitmapScalingMode(i, BitmapScalingMode.NearestNeighbor);
+            RenderOptions.SetEdgeMode(i, EdgeMode.Aliased);
+
+            this.Content = i;
+
+            writeableBitmap = new WriteableBitmap((int)width, (int)height, 96, 96, PixelFormats.Bgra32, null);
+
+            i.Source = writeableBitmap;
+
+            i.Stretch = Stretch.None;
+            i.HorizontalAlignment = HorizontalAlignment.Left;
+            i.VerticalAlignment = VerticalAlignment.Top;
+
             Loaded += windowLoaded;
-            CompositionTarget.Rendering += CompositionTarget_Rendering;
+            CompositionTarget.Rendering += RenderBMP;
             overDel = new Win32.WinEventDelegate(LocationChangeCallback);
             Win32.SetWinEventHook((uint)Win32.SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE, (uint)Win32.SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE, IntPtr.Zero, overDel, MCM.mcWinProcId, Win32.GetWindowThreadProcessId(MCM.mcWinHandle, IntPtr.Zero), (uint)Win32.SWEH_dwFlags.WINEVENT_OUTOFCONTEXT | (uint)Win32.SWEH_dwFlags.WINEVENT_SKIPOWNPROCESS | (uint)Win32.SWEH_dwFlags.WINEVENT_SKIPOWNTHREAD);
             loaded = true;
@@ -106,9 +131,49 @@ namespace Flare_Sharp.ClientBase.UI
         //    }
         //}
 
-        float rainbowProg = 0f;
-        private void CompositionTarget_Rendering(object sender, EventArgs e)
+        static float rainbowProg = 0f;
+        private unsafe void RenderBMP(object sender, EventArgs e)
         {
+            try
+            {
+                writeableBitmap.Lock();
+                IntPtr pBackBuffer = writeableBitmap.BackBuffer;
+
+                int color_data = 255 << 32; // R
+                color_data |= 128 << 16;   // G
+                color_data |= 255 << 8;   // B
+                color_data |= 255 << 0;   // A
+
+                *(int*)pBackBuffer = color_data;
+
+                byte[] ColorData = { 0, 0, 0, 0 };
+                Int32Rect rect = new Int32Rect(0, 0, 1, 1);
+                writeableBitmap.WritePixels(rect, ColorData, 4, 0);
+
+                rainbowProg += 0.01f;
+                foreach (Category cat in CategoryHandler.registry.categories)
+                {
+                    foreach (Module mod in cat.modules)
+                    {
+                        if (mod.enabled)
+                        {
+                            if (mod is VisualModule)
+                            {
+                                VisualModule vmod = (VisualModule)mod;
+                                vmod.onRender();
+                            }
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                writeableBitmap.Unlock();
+            }
+        }
+        /*private void CompositionTarget_Rendering(object sender, EventArgs e)
+        {
+            rainbowProg += 0.01f;
             vHost.children.Clear();
             foreach (Category cat in CategoryHandler.registry.categories)
             {
@@ -125,7 +190,7 @@ namespace Flare_Sharp.ClientBase.UI
                 }
             }
             vHost.InvalidateVisual();
-        }
+        }*/
 
         public void LocationChangeCallback(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
         {
@@ -161,7 +226,7 @@ namespace Flare_Sharp.ClientBase.UI
 
         public void addChildObj(Visual element)
         {
-            vHost.children.Add(element);
+            //vHost.children.Add(element);
         }
 
         public void repaint()

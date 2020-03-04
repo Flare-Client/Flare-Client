@@ -26,6 +26,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                         FormattedText modText = DrawUtils.stringToFormatted(mod.name, "Roboto", 32, secondary);
                         double mwid = modText.Width;
                         context.DrawRectangle(primary, null, new Rect(OverlayHost.ui.width - mwid, 32 * yOff, mwid, 32));
+                        context.DrawRectangle(rainbow, null, new Rect(OverlayHost.ui.width - mwid-5, 32 * yOff, 5, 32));
                         context.DrawText(modText, new Point(OverlayHost.ui.width - mwid, 32 * yOff));
                         yOff++;
                     }

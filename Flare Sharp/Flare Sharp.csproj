@@ -36,15 +36,18 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <PlatformTarget>x64</PlatformTarget>
     <OutputPath>bin\x64\Debug\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <PlatformTarget>x64</PlatformTarget>
     <OutputPath>bin\x64\Release\</OutputPath>
     <Optimize>false</Optimize>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
@@ -147,6 +150,20 @@
     <Compile Include="ClientBase\UI\VObjs\VTargetsWindow.cs" />
     <Compile Include="ClientBase\UI\VObjs\VWindowBase.cs" />
     <Compile Include="ClientBase\UI\Win32.cs" />
+    <Compile Include="ClientBase\UI\WritableBitmapAPI\BitmapContext.cs" />
+    <Compile Include="ClientBase\UI\WritableBitmapAPI\BitmapFactory.cs" />
+    <Compile Include="ClientBase\UI\WritableBitmapAPI\NativeMethods.cs" />
+    <Compile Include="ClientBase\UI\WritableBitmapAPI\WriteableBitmapAntialiasingExtensions.cs" />
+    <Compile Include="ClientBase\UI\WritableBitmapAPI\WriteableBitmapBaseExtensions.cs" />
+    <Compile Include="ClientBase\UI\WritableBitmapAPI\WriteableBitmapBlitExtensions.cs" />
+    <Compile Include="ClientBase\UI\WritableBitmapAPI\WriteableBitmapContextExtensions.cs" />
+    <Compile Include="ClientBase\UI\WritableBitmapAPI\WriteableBitmapConvertExtensions.cs" />
+    <Compile Include="ClientBase\UI\WritableBitmapAPI\WriteableBitmapFillExtensions.cs" />
+    <Compile Include="ClientBase\UI\WritableBitmapAPI\WriteableBitmapFilterExtensions.cs" />
+    <Compile Include="ClientBase\UI\WritableBitmapAPI\WriteableBitmapLineExtensions.cs" />
+    <Compile Include="ClientBase\UI\WritableBitmapAPI\WriteableBitmapShapeExtensions.cs" />
+    <Compile Include="ClientBase\UI\WritableBitmapAPI\WriteableBitmapSplineExtensions.cs" />
+    <Compile Include="ClientBase\UI\WritableBitmapAPI\WriteableBitmapTransformationExtensions.cs" />
     <Compile Include="Memory\CraftSDK\Entity.cs" />
     <Compile Include="Memory\CraftSDK\PlayerEntity.cs" />
     <Compile Include="Memory\CraftSDK\EntityList.cs" />
