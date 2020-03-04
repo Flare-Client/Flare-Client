@@ -20,7 +20,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             base.onEnable();
         }
 
-        public override void onTick()
+        void draw()
         {
             OverlayHost.ui.rainbowProg += 0.001f;
             Graphics g = OverlayHost.ui.CreateGraphics();
@@ -36,7 +36,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                     if (mod.enabled)
                     {
                         float mwid = g.MeasureString(mod.name, textFont, 600).Width;
-                        g.FillRectangle(rainbow, OverlayHost.ui.width - mwid-5, (32 * scale) * yOff, 5, fontSize);
+                        g.FillRectangle(rainbow, OverlayHost.ui.width - mwid - 5, (32 * scale) * yOff, 5, fontSize);
                         yOff++;
                     }
                 }
@@ -44,6 +44,16 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 
             g.Flush();
             g.Dispose();
+        }
+
+        public override void onTick()
+        {
+            draw();
+        }
+        public override void onDraw(Graphics graphics)
+        {
+            base.onDraw(graphics);
+            draw();
         }
     }
 }
