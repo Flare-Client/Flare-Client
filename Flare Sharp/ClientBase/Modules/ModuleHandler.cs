@@ -73,6 +73,7 @@ namespace Flare_Sharp.ClientBase.Modules
             //new AntiSentinel(); crashed game a lot, not a very good bypass tbh
             //new AntiHive();
             new CpuLimiter();
+            new RainbowUI();
             Console.WriteLine("Modules registered!");
             startModuleThread();
         }

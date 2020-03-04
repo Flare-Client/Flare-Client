@@ -110,6 +110,7 @@
     <Compile Include="ClientBase\Modules\Modules\NoWeb.cs" />
     <Compile Include="ClientBase\Modules\Modules\Phase.cs" />
     <Compile Include="ClientBase\Modules\Modules\PlayerSpeed.cs" />
+    <Compile Include="ClientBase\Modules\Modules\RainbowUI.cs" />
     <Compile Include="ClientBase\Modules\Modules\RapidAttack.cs" />
     <Compile Include="ClientBase\Modules\Modules\Reach.cs" />
     <Compile Include="ClientBase\Modules\Modules\Scaffold.cs" />
