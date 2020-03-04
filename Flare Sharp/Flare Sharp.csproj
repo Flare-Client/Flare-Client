@@ -75,7 +75,6 @@
     <Compile Include="ClientBase\Modules\Modules\Aimbot.cs" />
     <Compile Include="ClientBase\Modules\Modules\AirAcceleration.cs" />
     <Compile Include="ClientBase\Modules\Modules\AirJump.cs" />
-    <Compile Include="ClientBase\Modules\Modules\AntiHive.cs" />
     <Compile Include="ClientBase\Modules\Modules\AntiSentinel.cs" />
     <Compile Include="ClientBase\Modules\Modules\AutoRespawn.cs" />
     <Compile Include="ClientBase\Modules\Modules\AutoSprint.cs" />
@@ -85,6 +84,7 @@
     <Compile Include="ClientBase\Modules\Modules\BounceFly.cs" />
     <Compile Include="ClientBase\Modules\Modules\ClickTP.cs" />
     <Compile Include="ClientBase\Modules\Modules\ClickUI.cs" />
+    <Compile Include="ClientBase\Modules\Modules\CpuLimiter.cs" />
     <Compile Include="ClientBase\Modules\Modules\Criticals.cs" />
     <Compile Include="ClientBase\Modules\Modules\FastLadder.cs" />
     <Compile Include="ClientBase\Modules\Modules\Freecam.cs" />

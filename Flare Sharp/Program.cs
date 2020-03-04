@@ -23,6 +23,7 @@ namespace Flare_Sharp
         public static string version = "0.0.6.3";
         public static int threadSleep = 1;
         public static EventHandler<EventArgs> mainLoop;
+        public static bool limitCpu = false;
         static void Main(string[] args)
         {
             //Dont.Be.A.Scumbag.And.Remove.This.Warn.warn();
@@ -58,7 +59,8 @@ namespace Flare_Sharp
                     try
                     {
                         mainLoop.Invoke(null, new EventArgs());
-                        //Thread.Sleep(threadSleep);
+                        if(limitCpu)
+                            Thread.Sleep(threadSleep);
                     }
                     catch (Exception)
                     {
