@@ -14,7 +14,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         public int minimum;
         public virtual int value
         {
-            get;set;
+            get; set;
         }
         public int maximum;
         bool dragging = false;
@@ -40,7 +40,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             this.minimum = minimum;
             this.value = value;
             this.maximum = maximum;
-            for(int i =0; i< total+1; i++)
+            for (int i = 0; i < total + 1; i++)
             {
                 increments.Add(new Rect(x + (i * incBy), 0, incBy, height));
             }
@@ -49,20 +49,20 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         public override void OnPaint(DrawingContext e)
         {
             base.OnPaint(e);
-            for (int i = 0; i < total+1; i++)
+            for (int i = 0; i < total + 1; i++)
             {
                 Rect drawn = increments[i];
                 drawn.X = x + (i * incBy);
                 drawn.Y = y;
                 increments[i] = drawn;
-                if (i <= value+ Math.Abs(minimum)-1)
+                if (i <= value + Math.Abs(minimum) - 1)
                 {
-                    //e.DrawRectangle(tertiary, null, drawn);
+                    e.DrawRectangle(tertiary, null, drawn);
                 }
             }
-            //FormattedText ftext = DrawUtils.stringToFormatted(value.ToString(), "Roboto", 16, secondary);
-            //e.DrawText(ftext, new Point(x + width - ftext.Width, y));
-            //e.DrawText(DrawUtils.stringToFormatted(text, "Roboto", 16, secondary), new Point(x, y));
+            FormattedText ftext = DrawUtils.stringToFormatted(value.ToString(), "Roboto", 16, secondary);
+            e.DrawText(ftext, new Point(x + width - ftext.Width, y));
+            e.DrawText(DrawUtils.stringToFormatted(text, "Roboto", 16, secondary), new Point(x, y));
         }
 
         public override void OnInteractDown(clientKeyEvent e)
@@ -86,22 +86,17 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         public override void OnInteractHeld(clientKeyEvent e)
         {
             base.OnInteractHeld(e);
-            if (opened)
+            if (visible)
             {
                 if (this.dragging)
                 {
                     Point p = new Point(GetMousePosition().X - OverlayHost.ui.x, GetMousePosition().Y - OverlayHost.ui.y);
-                    for (int i = 0; i < total+1; i++)
+                    for (int i = 0; i < total + 1; i++)
                     {
-                        Point p = new Point(Cursor.Position.X - OverlayHost.ui.Left, Cursor.Position.Y - OverlayHost.ui.Top);
-                        for (int i = 0; i < total + 1; i++)
+                        if (increments[i].Contains(p))
                         {
-                            if (increments[i].Contains(p))
-                            {
-                                value = i - Math.Abs(minimum);
-                            }
+                            value = i - Math.Abs(minimum);
                         }
-                        OverlayHost.ui.Invalidate();
                     }
                     OverlayHost.ui.repaint();
                 }
@@ -110,7 +105,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         public override void OnInteractUp(clientKeyEvent e)
         {
             base.OnInteractUp(e);
-            if (opened)
+            if (visible)
             {
                 this.dragging = false;
                 FileMan.man.saveConfig();

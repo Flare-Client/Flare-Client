@@ -29,7 +29,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             base.onEnable();
         }
 
-        double catWidth = 0;
         bool initializing = true;
         BitmapSource bitmapSource;
 
