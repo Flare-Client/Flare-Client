@@ -47,18 +47,11 @@ namespace Flare_Sharp.ClientBase.Modules
                 return OverlayHost.rainbow;
             }
         }
-        public WriteableBitmap screen
-        {
-            get
-            {
-                return OverlayHost.writeableBitmap;
-            }
-        }
         public VisualModule(string name, Category category, int keybind, bool enabled) : base(name, category, keybind, enabled)
         {
         }
 
-        public virtual void onRender()
+        public virtual void onRender(WriteableBitmap map)
         {
             
         }

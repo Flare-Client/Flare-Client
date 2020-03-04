@@ -125,7 +125,9 @@ namespace Flare_Sharp.ClientBase.UI
         static float rainbowProg = 0f;
         private unsafe void RenderBMP(object sender, EventArgs e)
         {
-            using (writeableBitmap.GetBitmapContext())
+            //Console.WriteLine("Rendering");
+            WriteableBitmap map = (WriteableBitmap)vHost.Source;
+            using (map.GetBitmapContext())
             {
                 //writeableBitmap.Lock();
                 /*
@@ -134,9 +136,8 @@ namespace Flare_Sharp.ClientBase.UI
                 writeableBitmap.WritePixels(rect, ColorData, 4, 0);
                 */
 
-                //Console.WriteLine("Rendering");
                 rainbowProg += 0.01f;
-                writeableBitmap.Clear(Colors.Transparent);
+                map.Clear(Colors.Transparent);
                 foreach (Category cat in CategoryHandler.registry.categories)
                 {
                     foreach (Module mod in cat.modules)
@@ -146,13 +147,13 @@ namespace Flare_Sharp.ClientBase.UI
                             if (mod is VisualModule)
                             {
                                 VisualModule vmod = (VisualModule)mod;
-                                vmod.onRender();
+                                vmod.onRender(map);
                             }
                         }
                     }
                 }
-                repaint();
             }
+            //repaint();
         }
         /*private void CompositionTarget_Rendering(object sender, EventArgs e)
         {
@@ -180,6 +181,7 @@ namespace Flare_Sharp.ClientBase.UI
             writeableBitmap = writeableBitmap.Resize(width, height, WriteableBitmapExtensions.Interpolation.Bilinear);
             vHost.Source = writeableBitmap;
             Win32.SetWindowPos(thisHandle, (IntPtr)(-1), x, y, width, height, 0);
+            repaint();
         }
 
         private void windowLoaded(object sender, RoutedEventArgs e)

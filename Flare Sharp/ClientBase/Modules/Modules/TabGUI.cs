@@ -33,10 +33,11 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         BitmapSource bitmapSource;
 
         int i = 0;
-        public override void onRender()
+        public override void onRender(WriteableBitmap map)
         {
-            base.onRender();
-            DrawUtils.fillRect(0, 0, 100, 100, primary);
+            base.onRender(map);
+            DrawUtils.drawText("Flare", 0, 0, 32, secondary);
+            DrawUtils.fillRect(0, 0, 100, 100, rainbow, map);
         }
         /*
         public override void onDraw()

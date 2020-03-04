@@ -11,5 +11,8 @@
         AllowsTransparency="True"
         Background="Transparent"
         Topmost="True">
-    <Image Name="vHost"></Image>
+    <Grid Name="contentHolder">
+        <Image Name="vHost"></Image>
+        <Grid Name="textHolder"></Grid>
+    </Grid>
 </Window>
