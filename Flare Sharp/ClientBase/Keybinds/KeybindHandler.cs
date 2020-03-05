@@ -15,7 +15,7 @@ namespace Flare_Sharp.ClientBase.Keybinds
 {
     public class KeybindHandler
     {
-        public static bool isKeyDown(char key) { return SDK.instance.GetKeyState(key); }
+        public static bool isKeyDown(char key) { return MCM.GetAsyncKeyState(key); }
 
         public static KeybindHandler handler;
         public static EventHandler<clientKeyEvent> clientKeyDownEvent;
