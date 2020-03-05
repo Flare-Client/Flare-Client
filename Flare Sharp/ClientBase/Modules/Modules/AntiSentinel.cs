@@ -1,4 +1,5 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
+using Flare_Sharp.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +20,12 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             base.onTick();
             if (updateTick > 100 && updateTick < 104)
             {
-                CategoryHandler.registry.categories[3].modules[0].enabled = false;
+                MCM.writeBaseByte(0xFA21E0, 3);
                 Console.WriteLine("disabled");
             }
             if(updateTick > 105)
             {
-                CategoryHandler.registry.categories[3].modules[0].enabled = true;
+                MCM.writeBaseByte(0xFA21E0, 1);
                 Console.WriteLine("enabled");
                 updateTick = 0;
             }
@@ -34,7 +35,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onDisable()
         {
             base.onDisable();
-            CategoryHandler.registry.categories[3].modules[0].enabled = false;
+            MCM.writeBaseByte(0xFA21E0, 3);
         }
     }
 }

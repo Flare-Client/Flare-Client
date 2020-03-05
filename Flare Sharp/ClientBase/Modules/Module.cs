@@ -50,7 +50,7 @@ namespace Flare_Sharp.ClientBase.Modules
             
         }
         //Called no matter what
-        public virtual void onLoop()
+        public virtual async Task onLoop()
         {
             if (wasEnabled != enabled)
             {
@@ -80,6 +80,7 @@ namespace Flare_Sharp.ClientBase.Modules
             {
                 onTick();
             }
+            return;
         }
     }
 }
