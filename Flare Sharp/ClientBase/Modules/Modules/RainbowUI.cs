@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace Flare_Sharp.ClientBase.Modules.Modules
 {
@@ -13,6 +14,15 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     {
         public RainbowUI() : base("Rainbow UI", CategoryHandler.registry.categories[3], 0x07, false)
         {
+            OverlayHost.postOverlayLoad += (object sen, EventArgs e) =>
+              {
+                  Timer rgbTimer = new Timer(10);
+                  rgbTimer.Elapsed += (object send, ElapsedEventArgs arg) =>
+                  {
+                      OverlayHost.ui.rainbowProg += 0.01f;
+                  };
+                  rgbTimer.Start();
+              };
         }
 
         public override void onEnable()
@@ -22,7 +32,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 
         void draw()
         {
-            OverlayHost.ui.rainbowProg += 0.001f;
             Graphics g = OverlayHost.ui.CreateGraphics();
             //Rainbow around main tab gui
             if(TabGUI.instance.enabled)

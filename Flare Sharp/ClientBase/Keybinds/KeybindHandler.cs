@@ -66,7 +66,7 @@ namespace Flare_Sharp.ClientBase.Keybinds
                                 if (clientKeyDownEvent != null)
                                 {
                                     clientKeyDownEvent.Invoke(this, new clientKeyEvent(c));
-                                    DBG.Debug("Dispatched key down [" + c.ToString() + "]");
+                                    //DBG.Debug("Dispatched key down [" + c.ToString() + "]");
                                 }
                             }
                             catch (Exception) { }
@@ -85,7 +85,7 @@ namespace Flare_Sharp.ClientBase.Keybinds
                                 try
                                 {
                                     clientKeyUpEvent.Invoke(this, new clientKeyEvent(c));
-                                    DBG.Debug("Dispatched key up [" + c.ToString() + "]");
+                                    //DBG.Debug("Dispatched key up [" + c.ToString() + "]");
                                 }
                                 catch (Exception) { }
                             }
