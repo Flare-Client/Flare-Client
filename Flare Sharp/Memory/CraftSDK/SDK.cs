@@ -37,11 +37,14 @@ namespace Flare_Sharp.Memory.CraftSDK
         //    //Console.WriteLine(value.ToString("X"));
         //    return value > 0;
         //}
+        
         public bool GetKeyState(char key)
         {
             UInt64[] offs = { 0x174+(UInt64)key };
             return MCM.readByte(MCM.baseEvaluatePointer(0x029D9AA0, offs))>0;
         }
+        
+
         public bool GetMouseState(int mb)
         {
             UInt64[] offs = { 0x998, 0x8, 0x4F + (UInt64)mb };

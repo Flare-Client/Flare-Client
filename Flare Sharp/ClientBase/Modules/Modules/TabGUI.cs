@@ -27,9 +27,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onDraw(Graphics graphics)
         {
             base.onDraw(graphics);
-            //Adjust fonts
-            titleFont = new Font(new FontFamily("Arial"), tFontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
-            textFont = new Font(new FontFamily("Arial"), fontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
 
             graphics.FillRectangle(secondary, 0, 0, catWidth * scale, ((32 * scale) * CategoryHandler.registry.categories.Count) + tFontSize);
 

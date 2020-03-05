@@ -14,6 +14,8 @@ namespace Flare_Sharp.Memory
      */
     public class MCM
     {
+        [DllImport("user32.dll")]
+        public static extern bool GetAsyncKeyState(char vKey);
         [DllImport("kernel32", SetLastError = true)]
         public static extern int ReadProcessMemory(IntPtr hProcess, UInt64 lpBase, ref UInt64 lpBuffer, int nSize, int lpNumberOfBytesRead);
         [DllImport("kernel32", SetLastError = true)]
@@ -114,7 +116,7 @@ namespace Flare_Sharp.Memory
         {
             StringBuilder sb = new StringBuilder("Minecraft".Length + 1);
             GetWindowText(GetForegroundWindow(), sb, "Minecraft".Length + 1);
-            return sb.ToString() == "Minecraft";
+            return sb.ToString().CompareTo("Minecraft")==0;
         }
         public static IntPtr isMinecraftFocusedInsert()
         {

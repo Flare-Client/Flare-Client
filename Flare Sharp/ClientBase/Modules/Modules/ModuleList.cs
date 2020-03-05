@@ -33,6 +33,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                     if (mod.enabled)
                     {
                         float mwid = graphics.MeasureString(mod.name, textFont, 600).Width;
+                        graphics.FillRectangle(quinary, OverlayHost.ui.width - mwid - 5, (32 * scale) * yOff, 5, fontSize);
                         graphics.FillRectangle(OverlayHost.ui.secondary, OverlayHost.ui.width - mwid, (32 * scale) * yOff, mwid, fontSize);
                         graphics.DrawString(mod.name, textFont, primary, OverlayHost.ui.width - mwid, (32 * scale) * yOff);
                         yOff++;
