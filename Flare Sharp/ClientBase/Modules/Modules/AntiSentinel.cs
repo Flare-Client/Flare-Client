@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Flare_Sharp.ClientBase.Modules.Modules
@@ -36,28 +37,34 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             */
         }
 
-        bool switcher = false;
         public override void onTimedTick()
         {
             base.onTimedTick();
-            if (!switcher)
-            {
-                MCM.writeBaseByte(0xFA21E0, 3);
-                Console.WriteLine("disabled");
-                switcher = true;
-            }
-            else
-            {
-                MCM.writeBaseByte(0xFA21E0, 1);
-                Console.WriteLine("enabled");
-                switcher = false;
-            }
+            MCM.writeBaseByte(0xFA21E0, 3);
+            Console.WriteLine("disabled");
+            RunAsync(afterTimedTick());
+        }
+        public async Task afterTimedTick()
+        {
+            Thread.Sleep(5);
+            MCM.writeBaseByte(0xFA21E0, 1);
+            Console.WriteLine("enabled");
+            return;
         }
 
         public override void onDisable()
         {
             base.onDisable();
             MCM.writeBaseByte(0xFA21E0, 3);
+        }
+
+        private void RunAsync(Task task)
+        {
+            task.ContinueWith(t =>
+            {
+                Console.WriteLine("Unexpected Error " + t.Exception);
+
+            }, TaskContinuationOptions.OnlyOnFaulted);
         }
     }
 }
