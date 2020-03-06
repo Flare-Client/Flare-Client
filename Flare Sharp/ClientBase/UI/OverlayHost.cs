@@ -73,9 +73,6 @@ namespace Flare_Sharp.UI
         public float rainbowProg = 0f;
 
         WinEventDelegate overDel;
-        LowLevelMouseProc mouseMove;
-
-        IntPtr mouseHookID;
 
         IntPtr hWnd;
         public int x = 0;
@@ -114,7 +111,6 @@ namespace Flare_Sharp.UI
             //DBG.Debug("Set overlay styles");
             hWnd = this.Handle;
             overDel = new WinEventDelegate(adjustOverlay);
-            mouseMove = new LowLevelMouseProc(OnMouseMove);
             //DBG.Debug("Registered event delegates");
             SetWinEventHook((uint)SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE, (uint)SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE, IntPtr.Zero, overDel, (uint)MCM.mcWinProcId, GetWindowThreadProcessId(MCM.mcWinHandle, IntPtr.Zero), (uint)SWEH_dwFlags.WINEVENT_OUTOFCONTEXT | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNPROCESS | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNTHREAD);
             SetWinEventHook((uint)SWEH_Events.EVENT_SYSTEM_FOREGROUND, (uint)SWEH_Events.EVENT_SYSTEM_FOREGROUND, IntPtr.Zero, overDel, 0, 0, (uint)SWEH_dwFlags.WINEVENT_OUTOFCONTEXT | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNPROCESS | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNTHREAD);
@@ -153,11 +149,6 @@ namespace Flare_Sharp.UI
             //DBG.Debug("Drawn!");
         }
 
-        public IntPtr OnMouseMove(int nCode, IntPtr wParam, IntPtr lParam)
-        {
-            Invalidate();
-            return CallNextHookEx(mouseHookID, nCode, wParam, lParam);
-        }
         public void adjustOverlay(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
         {
             trueAdjust();

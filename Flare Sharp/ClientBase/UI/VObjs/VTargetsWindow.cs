@@ -1,4 +1,5 @@
-﻿using Flare_Sharp.UI;
+﻿using Flare_Sharp.ClientBase.IO;
+using Flare_Sharp.UI;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -20,15 +21,17 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             addBtn = new VAddButton();
             addBtn.width = width;
             addBtn.height = 24;
-            VStringShelf shelff = new VStringShelf();
+            /*VStringShelf shelff = new VStringShelf();
             shelff.width = width;
             shelff.height = 24;
-            targetObjects.Add(shelff);
+            targetObjects.Add(shelff);*/
+            FileMan.man.readConfig();
             addBtn.clicked += (object a, EventArgs b)=>{
                 VStringShelf shelf = new VStringShelf();
                 shelf.width = width;
                 shelf.height = 24;
                 targetObjects.Add(shelf);
+                FileMan.man.saveConfig();
             };
             text = "Targets";
             //We have to register this manually

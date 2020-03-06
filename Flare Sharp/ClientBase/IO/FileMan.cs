@@ -120,7 +120,7 @@ namespace Flare_Sharp.ClientBase.IO
                         VTargetsWindow.instance.targetObjects.Clear();
                         foreach(string target in root.targets)
                         {
-                            Console.WriteLine("Adding " + target);
+                            //Console.WriteLine("Adding " + target);
                             VStringShelf targetShelf = new VStringShelf();
                             targetShelf.text = target;
                             VTargetsWindow.instance.targetObjects.Add(targetShelf);

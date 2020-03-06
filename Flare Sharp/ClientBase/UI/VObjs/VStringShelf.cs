@@ -1,4 +1,5 @@
-﻿using Flare_Sharp.ClientBase.Keybinds;
+﻿using Flare_Sharp.ClientBase.IO;
+using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.UI;
 using System;
 using System.Collections.Generic;
@@ -59,6 +60,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                             typed += (char)0x20;
                         }
                         text = text.Remove(text.Length - 1) + typed + "|";
+                        FileMan.man.saveConfig();
                     }
                 }
             }

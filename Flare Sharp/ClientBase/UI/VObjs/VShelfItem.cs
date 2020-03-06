@@ -16,7 +16,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         public List<VSubShelfItem> children = new List<VSubShelfItem>();
         public bool expandable = true;
         public bool expanded = false;
-        int expandedAmt = 0;
+
         public VShelfItem(int shelfHeight, bool expandable)
         {
             this.expandable = expandable;

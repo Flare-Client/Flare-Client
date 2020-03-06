@@ -78,7 +78,11 @@ namespace Flare_Sharp.ClientBase.Modules
             }
             if (enabled)
             {
-                onTick();
+                try
+                {
+                    onTick();
+                }
+                catch (Exception) { }
             }
             return;
         }

@@ -13,8 +13,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
-using Timer = System.Windows.Forms.Timer;
+using Timer = System.Timers.Timer;
 
 namespace Flare_Sharp
 {
@@ -54,13 +55,24 @@ namespace Flare_Sharp
                     Console.WriteLine("Could not load config!");
                 }
                 uiApp.Start();
+                if(args != null)
+                {
+                    if (args.Length > 0)
+                    {
+                        if (args[0] == "dualThread")
+                        {
+                            Thread moduleThread = new Thread(() => { while (true) { try { ModuleHandler.registry.tickModuleThread(); Thread.Sleep(1); } catch (Exception) { } } });
+                            moduleThread.Start();
+                        }
+                    }
+                }
                 while (true)
                 {
                     try
                     {
                         mainLoop.Invoke(null, new EventArgs());
                         if(limitCpu)
-                            Thread.Sleep(threadSleep);
+                            Thread.Sleep(1);
                     }
                     catch (Exception)
                     {
