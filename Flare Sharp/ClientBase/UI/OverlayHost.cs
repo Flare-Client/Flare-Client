@@ -161,8 +161,6 @@ namespace Flare_Sharp.UI
             if (placement.showCmd == SW_MAXIMIZE)
             {
                 fullScOff = 8;
-                TopMost = true;
-                WindowState = FormWindowState.Maximized;
             }
             else
                 fullScOff = 0;

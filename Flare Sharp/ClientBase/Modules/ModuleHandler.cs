@@ -82,7 +82,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new ModuleList();
             new TPFlight();
             //new ListTest();
-            new AntiSentinel();
+            //new AntiSentinel();
             new CpuLimiter();
             new RainbowUI();
             Console.WriteLine("Modules registered!");
