@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace Flare_Sharp.ClientBase.Modules
 {
@@ -33,6 +34,20 @@ namespace Flare_Sharp.ClientBase.Modules
         {
             sliderSettings.Add(new SliderSetting(text, min, value, max));
         }
+        public void startTimer(int millis)
+        {
+            Timer timer = new Timer();
+            timer.Interval = millis;
+            timer.Elapsed += (object send, ElapsedEventArgs arg) =>
+            {
+                if (enabled)
+                {
+                    onTimedTick();
+                }
+            };
+            timer.Start();
+        }
+
 
         public virtual void onEnable()
         {
@@ -85,6 +100,12 @@ namespace Flare_Sharp.ClientBase.Modules
                 catch (Exception) { }
             }
             return;
+        }
+
+        //Called at a defined time repeatedly
+        public virtual void onTimedTick()
+        {
+
         }
     }
 }

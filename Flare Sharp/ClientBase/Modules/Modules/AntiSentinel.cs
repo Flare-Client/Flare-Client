@@ -13,11 +13,14 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         int updateTick = 0;
         public AntiSentinel():base("AntiSentinel", CategoryHandler.registry.categories[3], 0x07, false)
         {
+            startTimer(1000);
+            startTimer(1015);
         }
 
         public override void onTick()
         {
             base.onTick();
+            /*
             if (updateTick > 100 && updateTick < 104)
             {
                 MCM.writeBaseByte(0xFA21E0, 3);
@@ -30,6 +33,25 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                 updateTick = 0;
             }
             updateTick++;
+            */
+        }
+
+        bool switcher = false;
+        public override void onTimedTick()
+        {
+            base.onTimedTick();
+            if (!switcher)
+            {
+                MCM.writeBaseByte(0xFA21E0, 1);
+                Console.WriteLine("enabled");
+                switcher = true;
+            }
+            else
+            {
+                MCM.writeBaseByte(0xFA21E0, 3);
+                Console.WriteLine("disabled");
+                switcher = false;
+            }
         }
 
         public override void onDisable()
