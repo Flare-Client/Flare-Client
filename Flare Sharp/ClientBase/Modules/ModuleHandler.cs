@@ -89,8 +89,8 @@ namespace Flare_Sharp.ClientBase.Modules
             startModuleThread();
         }
 
-        uint tps = 0;
-        uint currentTick = 0;
+        //uint tps = 0;
+        //uint currentTick = 0;
         public void tickModuleThread()
         {
             foreach (Category category in CategoryHandler.registry.categories)
