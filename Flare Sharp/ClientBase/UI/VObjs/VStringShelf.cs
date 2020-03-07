@@ -50,7 +50,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                         text = text.Remove(text.Length - 2) + "|";
                     }
                 }
-                else if (a.key > 0x30 && a.key < 0x5A)
+                else if (a.key >= 0x30 && a.key <= 0x5A)
                 {
                     if (editing)
                     {

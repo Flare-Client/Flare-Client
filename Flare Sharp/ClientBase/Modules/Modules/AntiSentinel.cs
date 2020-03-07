@@ -12,7 +12,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class AntiSentinel : Module
     {
-        int countFinished = 0;
         public AntiSentinel():base("AntiSentinel", CategoryHandler.registry.categories[3], 0x07, false)
         {
             //startTimer(500);
