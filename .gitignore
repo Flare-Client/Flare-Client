@@ -395,4 +395,4 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 Flare Client/.vs/Flare Client/v16/.suo
-Flare Sharp/ClientBase/Modules/Modules/AntiHive.cs
+AntiHive.cs
