@@ -1,6 +1,7 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace Flare_Sharp.ClientBase.IO
         public List<int> moduleKeybinds = new List<int>();
         public List<int> moduleSliderSettings = new List<int>();
         public List<string> targets = new List<string>();
+        public List<FileInfo> profiles = new List<FileInfo>();
         public RootObject()
         {
 

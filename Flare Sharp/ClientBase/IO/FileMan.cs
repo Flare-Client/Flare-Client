@@ -1,8 +1,6 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.ClientBase.Modules;
 using Flare_Sharp.ClientBase.Modules.Settings;
-using Flare_Sharp.ClientBase.UI.VObjs;
-using Flare_Sharp.Memory.CraftSDK;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +14,7 @@ namespace Flare_Sharp.ClientBase.IO
 {
     public class FileMan
     {
-        public DirectoryInfo configDir = new DirectoryInfo(Environment.CurrentDirectory+"/FlareData");
+        public DirectoryInfo configDir = new DirectoryInfo(Environment.CurrentDirectory + "/FlareData");
         public FileInfo configFile
         {
             get
@@ -62,10 +60,6 @@ namespace Flare_Sharp.ClientBase.IO
                     root.enabledModules.Add(mod.enabled);
                     z++;
                 }
-            }
-            foreach(string targetable in EntityList.targetable)
-            {
-                root.targets.Add(targetable);
             }
             string json = new JavaScriptSerializer().Serialize(root);
             if (!configDir.Exists)
@@ -113,24 +107,11 @@ namespace Flare_Sharp.ClientBase.IO
                         z++;
                     }
                 }
-                if (VTargetsWindow.instance != null)
-                {
-                    if(VTargetsWindow.instance.targetObjects != null)
-                    {
-                        VTargetsWindow.instance.targetObjects.Clear();
-                        foreach(string target in root.targets)
-                        {
-                            //Console.WriteLine("Adding " + target);
-                            VStringShelf targetShelf = new VStringShelf();
-                            targetShelf.text = target;
-                            VTargetsWindow.instance.targetObjects.Add(targetShelf);
-                        }
-                    }
-                }
                 return true;
-            } catch(Exception)
+            }
+            catch (Exception)
             {
-                if(MessageBox.Show("Your flare config data is likely corrupt. Click 'OK' to delete it or 'Cancel' to do the same thing. Idc what you want.", "Broken data.", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                if (MessageBox.Show("Your flare config data is likely corrupt. Click 'OK' to delete it or 'Cancel' to do the same thing. Idc what you want.", "Broken data.", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
                     resetConfig();
                 }

@@ -1,4 +1,5 @@
-﻿using Flare_Sharp.ClientBase.Categories;
+﻿using Flare_Sharp.ClientBase;
+using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.ClientBase.IO;
 using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.ClientBase.Modules;
@@ -46,7 +47,7 @@ namespace Flare_Sharp
                 ModuleHandler mh = new ModuleHandler();
                 KeybindHandler kh = new KeybindHandler();
                 Thread uiApp = new Thread(() => { OverlayHost ui = new OverlayHost(); Application.Run(ui); });
-                if (fm.readConfig())
+                if (fm.readConfig()) 
                 {
                     Console.WriteLine("Loaded config!");
                 }

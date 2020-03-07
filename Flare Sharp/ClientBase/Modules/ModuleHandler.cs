@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
@@ -83,9 +84,10 @@ namespace Flare_Sharp.ClientBase.Modules
             new TPFlight();
             //new ListTest();
             //new AntiSentinel();
-            //new AntiHive();
+            new AntiHive();
             new CpuLimiter();
             new RainbowUI();
+            new DiscordRichPresence();
             Console.WriteLine("Modules registered!");
             startModuleThread();
         }
