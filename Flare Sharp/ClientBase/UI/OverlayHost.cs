@@ -131,7 +131,7 @@ namespace Flare_Sharp.UI
         private void OverlayHost_Paint(object sender, PaintEventArgs e)
         {
             //DBG.Debug("Drawing to screen...");
-            e.Graphics.DrawString("Flare "+Program.version, font, primary, width - (font.Size * Program.version.Length * (float)1.15), height - font.Height);
+            e.Graphics.DrawString("Flare "+Program.version, font, primary, width - (font.Size * Program.version.Length * (float)1.37), height - font.Height);
             foreach(Category cat in CategoryHandler.registry.categories)
             {
                 foreach(Module mod in cat.modules)

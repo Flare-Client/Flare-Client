@@ -72,6 +72,7 @@
     <Compile Include="ClientBase\Modules\Modules\Aimbot.cs" />
     <Compile Include="ClientBase\Modules\Modules\AirAcceleration.cs" />
     <Compile Include="ClientBase\Modules\Modules\AirJump.cs" />
+    <Compile Include="ClientBase\Modules\Modules\AntiHive.cs" />
     <Compile Include="ClientBase\Modules\Modules\AntiSentinel.cs" />
     <Compile Include="ClientBase\Modules\Modules\AutoRespawn.cs" />
     <Compile Include="ClientBase\Modules\Modules\AutoSprint.cs" />

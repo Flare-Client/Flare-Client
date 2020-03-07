@@ -16,6 +16,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             RegisterSliderSetting("Range", 0, 120, 500);
         }
 
+
         public override void onTick()
         {
             base.onTick();
