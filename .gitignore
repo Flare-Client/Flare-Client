@@ -16,6 +16,9 @@
 *.dylib
 *.dll
 
+# Allow wanted dll
+!DiscordRPC.dll
+
 # Fortran module files
 *.mod
 *.smod

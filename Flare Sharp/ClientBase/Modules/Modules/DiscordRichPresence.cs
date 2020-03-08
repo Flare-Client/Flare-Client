@@ -5,6 +5,7 @@ using Flare_Sharp.Memory.CraftSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,13 +18,13 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public DiscordRichPresence() : base("DiscordRPC", CategoryHandler.registry.categories[3], (char)0x07, true)
         {
             startTimer(150);
-        }
+		}
 
-        public override void onTimedTick()
+		public override void onTimedTick()
         {
             base.onTimedTick();
 
-			if(client != null) { client.Invoke(); }
+			if(client != null) { client.Invoke(); Console.WriteLine($"DiscordRPC client: {client}"); }
         }
 
         public override void onEnable()

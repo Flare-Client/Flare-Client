@@ -87,7 +87,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new AntiHive();
             new CpuLimiter();
             new RainbowUI();
-            new DiscordRichPresence();
+            //new DiscordRichPresence(); Add once working
             Console.WriteLine("Modules registered!");
             startModuleThread();
         }

@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,6 +28,8 @@ namespace Flare_Sharp
         public static int threadSleep = 1;
         public static EventHandler<EventArgs> mainLoop;
         public static bool limitCpu = false;
+        public static WebClient webClient = new WebClient();
+
         static void Main(string[] args)
         {
             //Dont.Be.A.Scumbag.And.Remove.This.Warn.warn();
@@ -55,6 +59,12 @@ namespace Flare_Sharp
                 {
                     Console.WriteLine("Could not load config!");
                 }
+
+                // Readd when working
+                //webClient.DownloadFile("https://raw.githubusercontent.com/Flare-Client/Flare-Client/dom/Dependencies/DiscordRPC.dll", $"{Environment.CurrentDirectory}/FlareData/DiscordRPC.dll");
+                //Assembly assembly = Assembly.LoadFrom($"{Environment.CurrentDirectory}/FlareData/DiscordRPC.dll");
+                //Console.WriteLine($"DiscordRPC assembly: {assembly}");
+
                 uiApp.Start();
                 if(args != null)
                 {
