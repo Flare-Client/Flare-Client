@@ -12,7 +12,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     public class AutoRespawn : Module
     {
 
-        public static byte savedImmediateSpawnGameRule;
+        public static bool savedImmediateSpawnGameRule;
         public AutoRespawn() : base("AutoRespawn", CategoryHandler.registry.categories[2], (char)0x07, false)
         {
         }
@@ -20,19 +20,26 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onEnable()
         {
             base.onEnable();
-            savedImmediateSpawnGameRule = Statics.doImmediateRespawnGamerule;
+            List<Gamerule> gamerules = Minecraft.clientInstance.localPlayer.level.gamerules;
+            int i = 0;
+            foreach(Gamerule rule in gamerules)
+            {
+                Console.WriteLine(rule.name + "," + i.ToString());
+                i++;
+            }
+            savedImmediateSpawnGameRule = Minecraft.clientInstance.localPlayer.level.gamerules[23].toggle;
         }
 
         public override void onTick()
         {
             base.onTick();
-            Statics.doImmediateRespawnGamerule = 1;
+            Minecraft.clientInstance.localPlayer.level.gamerules[23].toggle = true;
         }
 
         public override void onDisable()
         {
             base.onDisable();
-            Statics.doImmediateRespawnGamerule = savedImmediateSpawnGameRule;
+            Minecraft.clientInstance.localPlayer.level.gamerules[23].toggle = savedImmediateSpawnGameRule;
         }
     }
 }

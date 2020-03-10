@@ -20,11 +20,13 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
             if (enabled && e.key == (char)0x02)
             {
+                /*
                 if(Minecraft.clientInstance.localPlayer.pitch >= 85F && Minecraft.clientInstance.localPlayer.heldItemCount > 0 && Statics.blockPosY > 0 && Statics.blockPosY <= 256)
                 {
                     Statics.blockSide = 1;
                     Minecraft.clientInstance.localPlayer.velY = 0.5F;
                 }
+                */
             }
         }
     }

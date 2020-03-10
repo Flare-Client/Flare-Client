@@ -39,6 +39,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                     {
                         if (heldItemID != 276 && heldItemID != 283 && heldItemID != 267 && heldItemID != 272 && heldItemID != 268)
                         {
+                            /*
                             if (Statics.selectedHotbarSlot < 8)
                             {
                                 Statics.selectedHotbarSlot += 1;
@@ -47,6 +48,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                             {
                                 Statics.selectedHotbarSlot = 0;
                             }
+                            */
                         }
                         autoSwordCounter = 0;
                     }

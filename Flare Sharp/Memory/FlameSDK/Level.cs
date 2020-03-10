@@ -27,5 +27,18 @@ namespace Flare_Sharp.Memory.FlameSDK
                 return new FirstPersonLookBehavior(MCM.evaluatePointer(addr, MCM.ceByte2uLong("60 38 0")));
             }
         }
+
+        public List<Gamerule> gamerules
+        {
+            get
+            {
+                List<Gamerule> returnRules = new List<Gamerule>();
+                for (ulong ruleIndex = 0; ruleIndex < 28; ruleIndex++)
+                {
+                    returnRules.Add(new Gamerule(MCM.readInt64(addr + 0x340) + (ruleIndex * 176)));
+                }
+                return returnRules;
+            }
+        }
     }
 }
