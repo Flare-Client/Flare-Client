@@ -1,6 +1,6 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.Memory;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using Flare_Sharp.Memory.FlameSDK;
 using System;
 using System.Collections.Generic;
@@ -20,7 +20,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            List<Entity> Entity = Minecraft.clientInstance.localPlayer.;
+            List<Entity> Entity = Minecraft.clientInstance.localPlayer.entityRegistry.targetableEntities;
             List<double> distancesArr = new List<double>();
 
             foreach(Entity e in Entity)
@@ -41,7 +41,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                         Utils.Vec3f targetPosition = e.location;
                         Utils.Vec2f calculationsArr = Utils.getCalculationsToPos(localPosition, targetPosition);
                         Statics.mousePitch = calculationsArr.x;
-                        Pointers.mouseYaw = calculationsArr.y;
+                        Statics.mouseYaw = calculationsArr.y;
                     }
                 }
             }

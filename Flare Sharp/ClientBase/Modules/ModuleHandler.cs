@@ -1,7 +1,7 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.ClientBase.Modules.Modules;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -110,7 +110,6 @@ namespace Flare_Sharp.ClientBase.Modules
                     }
                 }
             }
-            new SDK();
         }
         public void startModuleThread()
         {

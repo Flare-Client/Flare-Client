@@ -20,6 +20,13 @@ namespace Flare_Sharp.Memory.FlameSDK
                 return new EntityRegistry(MCM.evaluatePointer(addr+8,MCM.ceByte2uLong("50 120 0")));
             }
         }
+        public Level level
+        {
+            get
+            {
+                return new Level(MCM.readInt64(addr + 0x358));
+            }
+        }
 
         //Player offset shiz
         public void teleport(float x, float y, float z)
