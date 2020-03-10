@@ -23,9 +23,9 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
             base.onTick();
 
-            List<Entity> Entity = Minecraft.clientInstance.localPlayer.entityRegistry.targetableEntities;
+            List<Mob> Entity = Minecraft.clientInstance.localPlayer.entityRegistry.targetableEntities;
 
-            foreach (Entity e in Entity)
+            foreach (Mob e in Entity)
             {
                 double distance = e.distanceTo(Minecraft.clientInstance.localPlayer);
 

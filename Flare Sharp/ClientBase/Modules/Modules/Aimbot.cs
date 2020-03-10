@@ -20,10 +20,10 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            List<Entity> Entity = Minecraft.clientInstance.localPlayer.entityRegistry.targetableEntities;
+            List<Mob> Entity = Minecraft.clientInstance.localPlayer.entityRegistry.targetableEntities;
             List<double> distancesArr = new List<double>();
 
-            foreach(Entity e in Entity)
+            foreach(Mob e in Entity)
             {
                 Double distance = e.distanceTo(Minecraft.clientInstance.localPlayer);
                 if (distance <= sliderSettings[0].value / 10F) distancesArr.Add(distance);
@@ -33,15 +33,15 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             {
                 distancesArr.Sort();
 
-                foreach(Entity e in Entity)
+                foreach(Mob e in Entity)
                 {
                     if(e.distanceTo(Minecraft.clientInstance.localPlayer) == distancesArr[0])
                     {
                         Utils.Vec3f localPosition = Minecraft.clientInstance.localPlayer.location;
                         Utils.Vec3f targetPosition = e.location;
                         Utils.Vec2f calculationsArr = Utils.getCalculationsToPos(localPosition, targetPosition);
-                        Statics.mousePitch = calculationsArr.x;
-                        Statics.mouseYaw = calculationsArr.y;
+                        Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraPitch = calculationsArr.x;
+                        Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraYaw = calculationsArr.y;
                     }
                 }
             }

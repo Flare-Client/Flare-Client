@@ -22,12 +22,12 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
             if (enabled)
             {
-                UInt64 facingEnt = SDK.instance.entityFacing.addr;
+                UInt64 facingEnt = Minecraft.clientInstance.localPlayer.level.lookingEntity.addr;
                 if(facingEnt > 0 && e.key == (char)0x01)
                 {
                     Utils.Vec3f directionalVec = Utils.directionalVector((Minecraft.clientInstance.localPlayer.yaw + 90) * (float)Math.PI / 180, (float)Math.PI / 180);
-                    Minecraft.clientInstance.localPlayer.velX = (float)sliderSettings[0].value / 10F * directionalVec[0];
-                    Minecraft.clientInstance.localPlayer.velZ = (float)sliderSettings[0].value / 10F * directionalVec[2];
+                    Minecraft.clientInstance.localPlayer.velX = (float)sliderSettings[0].value / 10F * directionalVec.x;
+                    Minecraft.clientInstance.localPlayer.velZ = (float)sliderSettings[0].value / 10F * directionalVec.z;
                 }
             }
         }

@@ -1,6 +1,6 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.ClientBase.Keybinds;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +20,9 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
             if (enabled && e.key == (char)0x02)
             {
-                if(Minecraft.clientInstance.localPlayer.pitch >= 85F && Minecraft.clientInstance.localPlayer.heldItemCount > 0 && Pointers.blockPosY > 0 && Pointers.blockPosY <= 256)
+                if(Minecraft.clientInstance.localPlayer.pitch >= 85F && Minecraft.clientInstance.localPlayer.heldItemCount > 0 && Statics.blockPosY > 0 && Statics.blockPosY <= 256)
                 {
-                    Pointers.blockSide = 1;
+                    Statics.blockSide = 1;
                     Minecraft.clientInstance.localPlayer.velY = 0.5F;
                 }
             }

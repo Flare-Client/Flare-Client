@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Flare_Sharp.Memory.FlameSDK
 {
-    public class Entity : SDKObj
+    public class Mob : Actor
     {
-        public Entity(ulong addr):base(addr)
+        public Mob(ulong addr):base(addr)
         {
         }
 
@@ -168,7 +168,7 @@ namespace Flare_Sharp.Memory.FlameSDK
             currentY1 = y + 1.8f;
             currentZ1 = z + 0.6f;
         }
-        public double distanceTo(Entity e)
+        public double distanceTo(Mob e)
         {
             float dX = currentX1 - e.currentX1;
             float dY = currentY1 - e.currentY1;

@@ -17,10 +17,10 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 
         public override void onEnable()
         {
-            List<Entity> entities = Minecraft.clientInstance.localPlayer.entityRegistry.Entities;
+            List<Mob> entities = Minecraft.clientInstance.localPlayer.entityRegistry.Entities;
             Console.WriteLine("Entity List ({0})", entities.Count);
             ulong index = 0;
-            foreach(Entity e in entities)
+            foreach(Mob e in entities)
             {
                 Console.WriteLine("Entity{0}: {1}", index, e.addr.ToString("X"));
                 index++;

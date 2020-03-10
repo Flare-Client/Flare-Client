@@ -1,7 +1,7 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.Memory;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +20,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
             base.onEnable();
             byte[] offs = { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 };
-            MCM.writeBaseBytes(Pointers.inWaterTick, offs);
+            MCM.writeBaseBytes(Statics.inWaterTick, offs);
             Minecraft.clientInstance.localPlayer.isInWater = 0;
         }
 
@@ -28,7 +28,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
             base.onDisable();
             byte[] offs = { 0xC6, 0x83, 0x3D, 0x02, 0x00, 0x00, 0x01 };
-            MCM.writeBaseBytes(Pointers.inWaterTick, offs);
+            MCM.writeBaseBytes(Statics.inWaterTick, offs);
         }
     }
 }

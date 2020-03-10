@@ -12,11 +12,19 @@ namespace Flare_Sharp.Memory.FlameSDK
         {
         }
 
-        public Entity lookingEntity
+        public Mob lookingEntity
         {
             get
             {
-                return new Entity(MCM.readInt64(addr + 0x870));
+                return new Mob(MCM.readInt64(addr + 0x870));
+            }
+        }
+
+        public FirstPersonLookBehavior firstPersonCamera
+        {
+            get
+            {
+                return new FirstPersonLookBehavior(MCM.evaluatePointer(addr, MCM.ceByte2uLong("60 38 0")));
             }
         }
     }

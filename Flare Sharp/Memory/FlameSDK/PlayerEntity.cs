@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Flare_Sharp.Memory.FlameSDK
 {
-    public class PlayerEntity : Entity
+    public class PlayerEntity : Mob
     {
         public PlayerEntity(UInt64 addr) : base(addr)
         {

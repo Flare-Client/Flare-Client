@@ -9,11 +9,11 @@ namespace Flare_Sharp.Memory.FlameSDK
 {
     public class EntityRegistry : SDKObj
     {
-        public List<Entity> Entities
+        public List<Mob> Entities
         {
             get
             {
-                List<Entity> entityList = new List<Entity>();
+                List<Mob> entityList = new List<Mob>();
                 UInt64 likelySize = MCM.readBaseInt64(0x30366B0);
 
                 for (UInt64 index = 0; index < likelySize; index++)
@@ -22,7 +22,7 @@ namespace Flare_Sharp.Memory.FlameSDK
                     UInt64 indexedEntity = MCM.readInt64(MCM.evaluatePointer(addr + 0x38, startOffs));
                     if (indexedEntity == Minecraft.clientInstance.localPlayer.addr) continue;
 
-                    Entity eObj = new Entity(indexedEntity);
+                    Mob eObj = new Mob(indexedEntity);
                     if (eObj.movedTick > 1)
                     {
                         entityList.Add(eObj);
@@ -31,11 +31,11 @@ namespace Flare_Sharp.Memory.FlameSDK
                 return entityList;
             }
         }
-        public List<Entity> targetableEntities
+        public List<Mob> targetableEntities
         {
             get
             {
-                List<Entity> entityList = new List<Entity>();
+                List<Mob> entityList = new List<Mob>();
                 UInt64 likelySize = MCM.readBaseInt64(0x30366B0);
 
                 for (UInt64 index = 0; index < likelySize; index++)
@@ -44,7 +44,7 @@ namespace Flare_Sharp.Memory.FlameSDK
                     UInt64 indexedEntity = MCM.readInt64(MCM.evaluatePointer(addr + 0x38, startOffs));
                     if (indexedEntity == Minecraft.clientInstance.localPlayer.addr) continue;
 
-                    Entity eObj = new Entity(indexedEntity);
+                    Mob eObj = new Mob(indexedEntity);
                     if (eObj.movedTick > 1)
                     {
                         if (VTargetsWindow.targetable.Contains(eObj.type))

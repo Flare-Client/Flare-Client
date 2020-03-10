@@ -1,6 +1,6 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.Memory;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,19 +20,19 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onEnable()
         {
             base.onEnable();
-            savedImmediateSpawnGameRule = Pointers.doImmediateRespawnGamerule;
+            savedImmediateSpawnGameRule = Statics.doImmediateRespawnGamerule;
         }
 
         public override void onTick()
         {
             base.onTick();
-            Pointers.doImmediateRespawnGamerule = 1;
+            Statics.doImmediateRespawnGamerule = 1;
         }
 
         public override void onDisable()
         {
             base.onDisable();
-            Pointers.doImmediateRespawnGamerule = savedImmediateSpawnGameRule;
+            Statics.doImmediateRespawnGamerule = savedImmediateSpawnGameRule;
         }
     }
 }

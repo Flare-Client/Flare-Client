@@ -19,7 +19,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            Entity facing = SDK.instance.entityFacing;
+            Mob facing = Minecraft.clientInstance.localPlayer.level.lookingEntity;
             if (facing.movedTick > 1)
             {
                 if (VTargetsWindow.targetable.Contains(facing.type))
