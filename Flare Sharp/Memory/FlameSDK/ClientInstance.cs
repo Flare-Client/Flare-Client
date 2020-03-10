@@ -26,5 +26,12 @@ namespace Flare_Sharp.Memory.FlameSDK
                 return new LocalPlayer(MCM.readInt64(addr + 0xF0));
             }
         }
+        public LoopbackPacketSender loopbackPacketSender
+        {
+            get
+            {
+                return new LoopbackPacketSender(MCM.readInt64(addr + 0x88));
+            }
+        }
     }
 }
