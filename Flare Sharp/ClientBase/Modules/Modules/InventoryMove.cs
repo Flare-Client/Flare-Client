@@ -1,6 +1,6 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.ClientBase.Keybinds;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,26 +18,26 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            List<float> directionalVec;
+            Utils.Vec3f directionalVec;
             float walkSpeed = 0.3F;
 
             if (Minecraft.clientInstance.localPlayer.inventoryIsOpen)
             {
                 if (KeybindHandler.isKeyDown((char)0x27)) //Arrow Key -> Right
                 {
-                    Pointers.mouseYaw -= 0.02F;
+                    Statics.mouseYaw -= 0.02F;
                 }
                 else if (KeybindHandler.isKeyDown((char)0x25)) //Arrow Key -> Left
                 {
-                    Pointers.mouseYaw += 0.02F;
+                    Statics.mouseYaw += 0.02F;
                 }
                 else if (KeybindHandler.isKeyDown((char)0x26)) //Arrow Key -> Up
                 {
-                    Pointers.mousePitch += 0.02F;
+                    Statics.mousePitch += 0.02F;
                 }
                 else if (KeybindHandler.isKeyDown((char)0x28)) //Arrow Key -> Down
                 {
-                    Pointers.mousePitch -= 0.02F;
+                    Statics.mousePitch -= 0.02F;
                 }
 
                 if (KeybindHandler.isKeyDown((char)0x20))
@@ -49,57 +49,57 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                 {
                     if (!KeybindHandler.isKeyDown('A') && !KeybindHandler.isKeyDown('D'))
                     {
-                        directionalVec = SDK.instance.directionalVector((Minecraft.clientInstance.localPlayer.yaw + 90) * (float)Math.PI / 180, (float)Math.PI / 180);
-                        Minecraft.clientInstance.localPlayer.velX = walkSpeed * directionalVec[0];
-                        Minecraft.clientInstance.localPlayer.velZ = walkSpeed * directionalVec[2];
+                        directionalVec = Utils.directionalVector((Minecraft.clientInstance.localPlayer.yaw + 90) * (float)Math.PI / 180, (float)Math.PI / 180);
+                        Minecraft.clientInstance.localPlayer.velX = walkSpeed * directionalVec.x;
+                        Minecraft.clientInstance.localPlayer.velZ = walkSpeed * directionalVec.z;
                     }
                     else if (KeybindHandler.isKeyDown('A'))
                     {
-                        directionalVec = SDK.instance.directionalVector((Minecraft.clientInstance.localPlayer.yaw + 70) * (float)Math.PI / 180, (float)Math.PI / 180);
-                        Minecraft.clientInstance.localPlayer.velX = walkSpeed * directionalVec[0];
-                        Minecraft.clientInstance.localPlayer.velZ = walkSpeed * directionalVec[2];
+                        directionalVec = Utils.directionalVector((Minecraft.clientInstance.localPlayer.yaw + 70) * (float)Math.PI / 180, (float)Math.PI / 180);
+                        Minecraft.clientInstance.localPlayer.velX = walkSpeed * directionalVec.x;
+                        Minecraft.clientInstance.localPlayer.velZ = walkSpeed * directionalVec.z;
                     }
                     else if (KeybindHandler.isKeyDown('D'))
                     {
-                        directionalVec = SDK.instance.directionalVector((Minecraft.clientInstance.localPlayer.yaw + 110) * (float)Math.PI / 180, (float)Math.PI / 180);
-                        Minecraft.clientInstance.localPlayer.velX = walkSpeed * directionalVec[0];
-                        Minecraft.clientInstance.localPlayer.velZ = walkSpeed * directionalVec[2];
+                        directionalVec = Utils.directionalVector((Minecraft.clientInstance.localPlayer.yaw + 110) * (float)Math.PI / 180, (float)Math.PI / 180);
+                        Minecraft.clientInstance.localPlayer.velX = walkSpeed * directionalVec.x;
+                        Minecraft.clientInstance.localPlayer.velZ = walkSpeed * directionalVec.z;
                     }
                 }
                 else if (KeybindHandler.isKeyDown('S'))
                 {
                     if (!KeybindHandler.isKeyDown('A') && !KeybindHandler.isKeyDown('D'))
                     {
-                        directionalVec = SDK.instance.directionalVector((Minecraft.clientInstance.localPlayer.yaw + -90) * (float)Math.PI / 180, (float)Math.PI / 180);
-                        Minecraft.clientInstance.localPlayer.velX = walkSpeed * directionalVec[0];
-                        Minecraft.clientInstance.localPlayer.velZ = walkSpeed * directionalVec[2];
+                        directionalVec = Utils.directionalVector((Minecraft.clientInstance.localPlayer.yaw + -90) * (float)Math.PI / 180, (float)Math.PI / 180);
+                        Minecraft.clientInstance.localPlayer.velX = walkSpeed * directionalVec.x;
+                        Minecraft.clientInstance.localPlayer.velZ = walkSpeed * directionalVec.z;
                     }
                     else if (KeybindHandler.isKeyDown('A'))
                     {
-                        directionalVec = SDK.instance.directionalVector((Minecraft.clientInstance.localPlayer.yaw + -70) * (float)Math.PI / 180, (float)Math.PI / 180);
-                        Minecraft.clientInstance.localPlayer.velX = walkSpeed * directionalVec[0];
-                        Minecraft.clientInstance.localPlayer.velZ = walkSpeed * directionalVec[2];
+                        directionalVec = Utils.directionalVector((Minecraft.clientInstance.localPlayer.yaw + -70) * (float)Math.PI / 180, (float)Math.PI / 180);
+                        Minecraft.clientInstance.localPlayer.velX = walkSpeed * directionalVec.x;
+                        Minecraft.clientInstance.localPlayer.velZ = walkSpeed * directionalVec.z;
                     }
                     else if (KeybindHandler.isKeyDown('D'))
                     {
-                        directionalVec = SDK.instance.directionalVector((Minecraft.clientInstance.localPlayer.yaw + -110) * (float)Math.PI / 180, (float)Math.PI / 180);
-                        Minecraft.clientInstance.localPlayer.velX = walkSpeed * directionalVec[0];
-                        Minecraft.clientInstance.localPlayer.velZ = walkSpeed * directionalVec[2];
+                        directionalVec = Utils.directionalVector((Minecraft.clientInstance.localPlayer.yaw + -110) * (float)Math.PI / 180, (float)Math.PI / 180);
+                        Minecraft.clientInstance.localPlayer.velX = walkSpeed * directionalVec.x;
+                        Minecraft.clientInstance.localPlayer.velZ = walkSpeed * directionalVec.z;
                     }
                 }
                 else if (!KeybindHandler.isKeyDown('W') && !KeybindHandler.isKeyDown('S'))
                 {
                     if (KeybindHandler.isKeyDown('A'))
                     {
-                        directionalVec = SDK.instance.directionalVector((Minecraft.clientInstance.localPlayer.yaw) * (float)Math.PI / 180, (float)Math.PI / 180);
-                        Minecraft.clientInstance.localPlayer.velX = walkSpeed * directionalVec[0];
-                        Minecraft.clientInstance.localPlayer.velZ = walkSpeed * directionalVec[2];
+                        directionalVec = Utils.directionalVector((Minecraft.clientInstance.localPlayer.yaw) * (float)Math.PI / 180, (float)Math.PI / 180);
+                        Minecraft.clientInstance.localPlayer.velX = walkSpeed * directionalVec.x;
+                        Minecraft.clientInstance.localPlayer.velZ = walkSpeed * directionalVec.z;
                     }
                     else if (KeybindHandler.isKeyDown('D'))
                     {
-                        directionalVec = SDK.instance.directionalVector((Minecraft.clientInstance.localPlayer.yaw + 180) * (float)Math.PI / 180, (float)Math.PI / 180);
-                        Minecraft.clientInstance.localPlayer.velX = walkSpeed * directionalVec[0];
-                        Minecraft.clientInstance.localPlayer.velZ = walkSpeed * directionalVec[2];
+                        directionalVec = Utils.directionalVector((Minecraft.clientInstance.localPlayer.yaw + 180) * (float)Math.PI / 180, (float)Math.PI / 180);
+                        Minecraft.clientInstance.localPlayer.velX = walkSpeed * directionalVec.x;
+                        Minecraft.clientInstance.localPlayer.velZ = walkSpeed * directionalVec.z;
                     }
                 }
             }

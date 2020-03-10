@@ -1,7 +1,7 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.Memory;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,9 +35,9 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 
                 if (KeybindHandler.isKeyDown('W'))
                 {
-                    List<float> directionalVec = SDK.instance.directionalVector((Minecraft.clientInstance.localPlayer.yaw + 89.9f) * (float)Math.PI / 178F, Minecraft.clientInstance.localPlayer.pitch * (float)Math.PI / 178F);
-                    Minecraft.clientInstance.localPlayer.velX = sliderSettings[2].value / 10F * directionalVec[0];
-                    Minecraft.clientInstance.localPlayer.velZ = sliderSettings[2].value / 10F * directionalVec[2];
+                    Utils.Vec3f directionalVec = Utils.directionalVector((Minecraft.clientInstance.localPlayer.yaw + 89.9f) * (float)Math.PI / 178F, Minecraft.clientInstance.localPlayer.pitch * (float)Math.PI / 178F);
+                    Minecraft.clientInstance.localPlayer.velX = sliderSettings[2].value / 10F * directionalVec.x;
+                    Minecraft.clientInstance.localPlayer.velZ = sliderSettings[2].value / 10F * directionalVec.z;
                 }
                 if (Counter2 > 50)
                 {

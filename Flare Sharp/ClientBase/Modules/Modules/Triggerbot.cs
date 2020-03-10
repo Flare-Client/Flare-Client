@@ -1,6 +1,7 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
+using Flare_Sharp.ClientBase.UI.VObjs;
 using Flare_Sharp.Memory;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,28 +22,28 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             Entity facing = SDK.instance.entityFacing;
             if (facing.movedTick > 1)
             {
-                if (EntityList.targetable.Contains(facing.type))
+                if (VTargetsWindow.targetable.Contains(facing.type))
                 {
                     if (facing.addr > 0)
                     {
-                        MCM.writeBaseByte(Pointers.attackSwing, 0);
+                        MCM.writeBaseByte(Statics.attackSwing, 0);
                     }
                     else
                     {
-                        MCM.writeBaseByte(Pointers.attackSwing, 1);
+                        MCM.writeBaseByte(Statics.attackSwing, 1);
                     }
                 }
             }
             if (facing.addr <= 0)
             {
-                MCM.writeBaseByte(Pointers.attackSwing, 1);
+                MCM.writeBaseByte(Statics.attackSwing, 1);
             }
         }
 
         public override void onDisable()
         {
             base.onDisable();
-            MCM.writeBaseByte(Pointers.attackSwing, 1);
+            MCM.writeBaseByte(Statics.attackSwing, 1);
         }
     }
 }
