@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Flare_Sharp.Memory.CraftSDK
+namespace Flare_Sharp.Memory.FlameSDK
 {
     public class LocalPlayer : PlayerEntity
     {
@@ -12,6 +12,16 @@ namespace Flare_Sharp.Memory.CraftSDK
         {
         }
 
+        //SDK stuffs
+        public EntityRegistry entityRegistry
+        {
+            get
+            {
+                return new EntityRegistry(MCM.evaluatePointer(addr+8,MCM.ceByte2uLong("50 120 0")));
+            }
+        }
+
+        //Player offset shiz
         public void teleport(float x, float y, float z)
         {
             currentX1 = x;
@@ -41,11 +51,11 @@ namespace Flare_Sharp.Memory.CraftSDK
             }
         }
 
-        public List<float> lookingVec
+        public Utils.Vec3f lookingVec
         {
             get
             {
-                return SDK.instance.directionalVector((SDK.client.localPlayer.yaw + 89.9f) * (float)Math.PI / 178F, SDK.client.localPlayer.pitch * (float)Math.PI / 178F);
+                return Utils.directionalVector((Minecraft.clientInstance.localPlayer.yaw + 89.9f) * (float)Math.PI / 178F, Minecraft.clientInstance.localPlayer.pitch * (float)Math.PI / 178F);
             }
         }
 

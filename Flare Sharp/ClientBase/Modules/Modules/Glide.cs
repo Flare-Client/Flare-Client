@@ -20,7 +20,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            SDK.instance.player.velY = sliderSettings[0].value;
+            Minecraft.clientInstance.localPlayer.velY = sliderSettings[0].value;
         }
     }
 }

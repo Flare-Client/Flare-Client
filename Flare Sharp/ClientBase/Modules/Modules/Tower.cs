@@ -20,10 +20,10 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
             if (enabled && e.key == (char)0x02)
             {
-                if(SDK.instance.player.pitch >= 85F && SDK.instance.player.heldItemCount > 0 && Pointers.blockPosY > 0 && Pointers.blockPosY <= 256)
+                if(Minecraft.clientInstance.localPlayer.pitch >= 85F && Minecraft.clientInstance.localPlayer.heldItemCount > 0 && Pointers.blockPosY > 0 && Pointers.blockPosY <= 256)
                 {
                     Pointers.blockSide = 1;
-                    SDK.instance.player.velY = 0.5F;
+                    Minecraft.clientInstance.localPlayer.velY = 0.5F;
                 }
             }
         }

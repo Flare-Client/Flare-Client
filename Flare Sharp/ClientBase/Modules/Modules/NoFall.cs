@@ -17,7 +17,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            SDK.instance.player.isFalling = 0;
+            Minecraft.clientInstance.localPlayer.isFalling = 0;
         }
     }
 }

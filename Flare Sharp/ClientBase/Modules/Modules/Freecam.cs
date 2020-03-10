@@ -21,22 +21,22 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onEnable()
         {
             base.onEnable();
-            savedCoordinates.Add(SDK.instance.player.currentX1);
-            savedCoordinates.Add((float)Math.Floor(SDK.instance.player.currentY1 - 1));
-            savedCoordinates.Add(SDK.instance.player.currentZ1);
+            savedCoordinates.Add(Minecraft.clientInstance.localPlayer.currentX1);
+            savedCoordinates.Add((float)Math.Floor(Minecraft.clientInstance.localPlayer.currentY1 - 1));
+            savedCoordinates.Add(Minecraft.clientInstance.localPlayer.currentZ1);
             savedPitchAndYaw.Add(Pointers.mousePitch);
             savedPitchAndYaw.Add(Pointers.mouseYaw);
-            savedFlightState = SDK.instance.player.isFlying;
+            savedFlightState = Minecraft.clientInstance.localPlayer.isFlying;
             byte[] write = { 0x90, 0x90, 0x90 };
             MCM.writeBaseBytes(Pointers.movementPacket, write);
         }
         public override void onDisable()
         {
             base.onDisable();
-            SDK.instance.player.teleport(savedCoordinates[0], savedCoordinates[1], savedCoordinates[2]);
+            Minecraft.clientInstance.localPlayer.teleport(savedCoordinates[0], savedCoordinates[1], savedCoordinates[2]);
             Pointers.mousePitch = savedPitchAndYaw[0];
             Pointers.mouseYaw = savedPitchAndYaw[1];
-            SDK.instance.player.isFlying = savedFlightState;
+            Minecraft.clientInstance.localPlayer.isFlying = savedFlightState;
             savedCoordinates.Clear();
             savedPitchAndYaw.Clear();
             byte[] write = { 0xFF, 0x50, 0x08 };

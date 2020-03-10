@@ -19,7 +19,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            if (SDK.instance.player.velY <= -0.5F) SDK.instance.player.velY = 0.5F;
+            if (Minecraft.clientInstance.localPlayer.velY <= -0.5F) Minecraft.clientInstance.localPlayer.velY = 0.5F;
         }
     }
 }

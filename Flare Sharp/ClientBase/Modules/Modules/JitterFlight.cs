@@ -25,7 +25,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            SDK.instance.player.velY = 0F;
+            Minecraft.clientInstance.localPlayer.velY = 0F;
 
             Counter++;
             Counter2++;
@@ -35,20 +35,20 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 
                 if (KeybindHandler.isKeyDown('W'))
                 {
-                    List<float> directionalVec = SDK.instance.directionalVector((SDK.instance.player.yaw + 89.9f) * (float)Math.PI / 178F, SDK.instance.player.pitch * (float)Math.PI / 178F);
-                    SDK.instance.player.velX = sliderSettings[2].value / 10F * directionalVec[0];
-                    SDK.instance.player.velZ = sliderSettings[2].value / 10F * directionalVec[2];
+                    List<float> directionalVec = SDK.instance.directionalVector((Minecraft.clientInstance.localPlayer.yaw + 89.9f) * (float)Math.PI / 178F, Minecraft.clientInstance.localPlayer.pitch * (float)Math.PI / 178F);
+                    Minecraft.clientInstance.localPlayer.velX = sliderSettings[2].value / 10F * directionalVec[0];
+                    Minecraft.clientInstance.localPlayer.velZ = sliderSettings[2].value / 10F * directionalVec[2];
                 }
                 if (Counter2 > 50)
                 {
-                    SDK.instance.player.teleport(SDK.instance.player.X1, SDK.instance.player.Y1 + sliderSettings[0].value, SDK.instance.player.Z1);
+                    Minecraft.clientInstance.localPlayer.teleport(Minecraft.clientInstance.localPlayer.X1, Minecraft.clientInstance.localPlayer.Y1 + sliderSettings[0].value, Minecraft.clientInstance.localPlayer.Z1);
                     Counter2 = 0;
                 }
             }
 
             if (Counter >= 2)
             {
-                SDK.instance.player.velY = sliderSettings[1].value;
+                Minecraft.clientInstance.localPlayer.velY = sliderSettings[1].value;
                 Counter = 0;
             }
         }

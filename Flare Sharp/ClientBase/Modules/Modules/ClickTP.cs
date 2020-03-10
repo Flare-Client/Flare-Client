@@ -25,7 +25,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                 {
                     if(Pointers.blockPosY > 0)
                     {
-                        SDK.instance.player.teleport((float)Pointers.blockPosX, (float)Pointers.blockPosY + 1, (float)Pointers.blockPosZ);
+                        Minecraft.clientInstance.localPlayer.teleport((float)Pointers.blockPosX, (float)Pointers.blockPosY + 1, (float)Pointers.blockPosZ);
                     }
                 }
             }

@@ -25,9 +25,9 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                 UInt64 facingEnt = SDK.instance.entityFacing.addr;
                 if(facingEnt > 0 && e.key == (char)0x01)
                 {
-                    List<float> directionalVec = SDK.instance.directionalVector((SDK.instance.player.yaw + 90) * (float)Math.PI / 180, (float)Math.PI / 180);
-                    SDK.instance.player.velX = (float)sliderSettings[0].value / 10F * directionalVec[0];
-                    SDK.instance.player.velZ = (float)sliderSettings[0].value / 10F * directionalVec[2];
+                    List<float> directionalVec = SDK.instance.directionalVector((Minecraft.clientInstance.localPlayer.yaw + 90) * (float)Math.PI / 180, (float)Math.PI / 180);
+                    Minecraft.clientInstance.localPlayer.velX = (float)sliderSettings[0].value / 10F * directionalVec[0];
+                    Minecraft.clientInstance.localPlayer.velZ = (float)sliderSettings[0].value / 10F * directionalVec[2];
                 }
             }
         }

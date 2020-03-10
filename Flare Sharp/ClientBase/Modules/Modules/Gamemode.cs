@@ -11,7 +11,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class Gamemode : Module
     {
-        public int inventoryState = SDK.instance.player.viewCreativeItems;
+        public int inventoryState = Minecraft.clientInstance.localPlayer.viewCreativeItems;
         public int savedGamemode;
         public Gamemode() : base("Gamemode", CategoryHandler.registry.categories[2], (char)0x07, false)
         {
@@ -21,17 +21,17 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onEnable()
         {
             base.onEnable();
-            savedGamemode = SDK.instance.player.currentGamemode;
-            inventoryState = SDK.instance.player.viewCreativeItems;
-            SDK.instance.player.currentGamemode = sliderSettings[0].value;
-            if(sliderSettings[0].value == 1) SDK.instance.player.viewCreativeItems = 1;
+            savedGamemode = Minecraft.clientInstance.localPlayer.currentGamemode;
+            inventoryState = Minecraft.clientInstance.localPlayer.viewCreativeItems;
+            Minecraft.clientInstance.localPlayer.currentGamemode = sliderSettings[0].value;
+            if(sliderSettings[0].value == 1) Minecraft.clientInstance.localPlayer.viewCreativeItems = 1;
         }
 
         public override void onDisable()
         {
             base.onDisable();
-            SDK.instance.player.currentGamemode = savedGamemode;
-            SDK.instance.player.viewCreativeItems = inventoryState;
+            Minecraft.clientInstance.localPlayer.currentGamemode = savedGamemode;
+            Minecraft.clientInstance.localPlayer.viewCreativeItems = inventoryState;
         }
     }
 }

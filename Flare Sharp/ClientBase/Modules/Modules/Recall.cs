@@ -25,7 +25,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             prevStaring.Reverse();
             for(var I = 0; I < prevPositions.Count(); I++)
             {
-                SDK.instance.player.teleport(prevPositions[I][0], prevPositions[I][1], prevPositions[I][2]);
+                Minecraft.clientInstance.localPlayer.teleport(prevPositions[I][0], prevPositions[I][1], prevPositions[I][2]);
                 Pointers.mousePitch = prevStaring[I][0];
                 Pointers.mouseYaw = prevStaring[I][1];
                 if (enabled) break;
@@ -39,9 +39,9 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             base.onTick();
             List<float> position = new List<float>();
             List<float> staringPos = new List<float>();
-            position.Add(SDK.instance.player.currentX1);
-            position.Add(SDK.instance.player.currentY1);
-            position.Add(SDK.instance.player.currentZ1);
+            position.Add(Minecraft.clientInstance.localPlayer.currentX1);
+            position.Add(Minecraft.clientInstance.localPlayer.currentY1);
+            position.Add(Minecraft.clientInstance.localPlayer.currentZ1);
 
             staringPos.Add(Pointers.mousePitch);
             staringPos.Add(Pointers.mouseYaw);

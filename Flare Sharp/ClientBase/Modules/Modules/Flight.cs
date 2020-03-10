@@ -18,13 +18,13 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onDisable()
         {
             base.onDisable();
-            SDK.instance.player.isFlying = 0;
+            Minecraft.clientInstance.localPlayer.isFlying = 0;
         }
 
         public override void onTick()
         {
             base.onTick();
-            SDK.instance.player.isFlying = 1;
+            Minecraft.clientInstance.localPlayer.isFlying = 1;
         }
     }
 }

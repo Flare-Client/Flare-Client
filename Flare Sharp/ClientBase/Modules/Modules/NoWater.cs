@@ -21,7 +21,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             base.onEnable();
             byte[] offs = { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 };
             MCM.writeBaseBytes(Pointers.inWaterTick, offs);
-            SDK.instance.player.isInWater = 0;
+            Minecraft.clientInstance.localPlayer.isInWater = 0;
         }
 
         public override void onDisable()

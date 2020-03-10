@@ -4,16 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Flare_Sharp.Memory.CraftSDK
+namespace Flare_Sharp.Memory.FlameSDK
 {
-    public class Entity
+    public class Entity : SDKObj
     {
-        ulong addr;
-        public Entity(ulong addr)
+        public Entity(ulong addr):base(addr)
         {
-            this.addr = addr;
         }
 
+        public Utils.Vec3f location
+        {
+            get
+            {
+                Utils.Vec3f vec3 = new Utils.Vec3f();
+                vec3.x = currentX1;
+                vec3.y = currentY1;
+                vec3.z = currentZ1;
+                return vec3;
+            }
+        }
         public string type
         {
             get

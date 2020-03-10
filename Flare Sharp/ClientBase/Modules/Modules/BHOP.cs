@@ -20,9 +20,9 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            float playerYaw = SDK.instance.player.yaw;
+            float playerYaw = Minecraft.clientInstance.localPlayer.yaw;
 
-            if (SDK.instance.player.isInAir > 0) SDK.instance.player.velY = 0.3F;
+            if (Minecraft.clientInstance.localPlayer.isInAir > 0) Minecraft.clientInstance.localPlayer.velY = 0.3F;
 
             if (KeybindHandler.isKeyDown('W'))
             {
@@ -59,9 +59,9 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             if(KeybindHandler.isKeyDown('W') | KeybindHandler.isKeyDown('A') | KeybindHandler.isKeyDown('D') | KeybindHandler.isKeyDown('S'))
             {
                 float calcYaw = (playerYaw) * ((float)Math.PI / 180F);
-                float calcPitch = (SDK.instance.player.pitch) * -((float)Math.PI / 180F);
-                SDK.instance.player.velX = (float)Math.Cos(calcYaw) * sliderSettings[0].value / 10F;
-                SDK.instance.player.velZ = (float)Math.Sin(calcYaw) * sliderSettings[0].value / 10F;
+                float calcPitch = (Minecraft.clientInstance.localPlayer.pitch) * -((float)Math.PI / 180F);
+                Minecraft.clientInstance.localPlayer.velX = (float)Math.Cos(calcYaw) * sliderSettings[0].value / 10F;
+                Minecraft.clientInstance.localPlayer.velZ = (float)Math.Sin(calcYaw) * sliderSettings[0].value / 10F;
             }
 
         }
