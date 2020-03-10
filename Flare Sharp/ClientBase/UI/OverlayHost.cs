@@ -41,6 +41,10 @@ namespace Flare_Sharp.UI
         private static extern IntPtr GetModuleHandle(string lpModuleName);
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern bool SetForegroundWindow(IntPtr hwnd);
+        [DllImport("user32.dll")]
+        private static extern bool SetWindowPlacement(IntPtr hWnd, [In] ref WINDOWPLACEMENT lpwndpl);
         private struct WINDOWPLACEMENT
         {
             public int length;
@@ -66,10 +70,9 @@ namespace Flare_Sharp.UI
         public delegate void fixSizeDel();
         public static OverlayHost ui;
 
-        WinEventDelegate overDel;
-        LowLevelMouseProc mouseMove;
+        public float rainbowProg = 0f;
 
-        IntPtr mouseHookID;
+        WinEventDelegate overDel;
 
         IntPtr hWnd;
         public int x = 0;
@@ -80,9 +83,16 @@ namespace Flare_Sharp.UI
 
         public SolidBrush primary = new SolidBrush(Color.FromArgb(255, 255, 255));
         public SolidBrush secondary = new SolidBrush(Color.FromArgb(25, 25, 25));
-        public SolidBrush tertiary = new SolidBrush(Color.FromArgb(255, 0, 100));
+        public SolidBrush tertiary = new SolidBrush(Color.FromArgb(100, 100, 255));
         public SolidBrush quaternary = new SolidBrush(Color.FromArgb(255, 0, 255));
         public SolidBrush quinary = new SolidBrush(Color.FromArgb(50, 50, 50));
+        public SolidBrush rainbow
+        {
+            get
+            {
+                return new SolidBrush(Rainbow(rainbowProg));
+            }
+        }
 
         public Font font = new Font("Arial", 16, FontStyle.Regular);
 
@@ -98,24 +108,30 @@ namespace Flare_Sharp.UI
             this.Location = new Point(0, 0);
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            //DBG.Debug("Set overlay styles");
             hWnd = this.Handle;
             overDel = new WinEventDelegate(adjustOverlay);
-            mouseMove = new LowLevelMouseProc(OnMouseMove);
+            //DBG.Debug("Registered event delegates");
             SetWinEventHook((uint)SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE, (uint)SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE, IntPtr.Zero, overDel, (uint)MCM.mcWinProcId, GetWindowThreadProcessId(MCM.mcWinHandle, IntPtr.Zero), (uint)SWEH_dwFlags.WINEVENT_OUTOFCONTEXT | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNPROCESS | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNTHREAD);
             SetWinEventHook((uint)SWEH_Events.EVENT_SYSTEM_FOREGROUND, (uint)SWEH_Events.EVENT_SYSTEM_FOREGROUND, IntPtr.Zero, overDel, 0, 0, (uint)SWEH_dwFlags.WINEVENT_OUTOFCONTEXT | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNPROCESS | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNTHREAD);
+            //DBG.Debug("Hooked win events");
             //mouseHookID= SetWindowsHookEx(14, mouseMove, GetModuleHandle("user32"), 0);
             UInt64 initialStyle = GetWindowLong(this.Handle, -20);
             SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
+            //DBG.Debug("Set overlay window styles (2)");
             if (postOverlayLoad != null)
             {
                 postOverlayLoad.Invoke(this, new EventArgs());
+                //DBG.Debug("Invoked post overlay event");
             }
             Paint += OverlayHost_Paint;
+            //DBG.Debug("paint hooked");
         }
 
         private void OverlayHost_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawString("Flare "+Program.version, font, primary, width - (font.Size * Program.version.Length * (float)1.4), height - font.Height);
+            //DBG.Debug("Drawing to screen...");
+            e.Graphics.DrawString("Flare "+Program.version, font, primary, width - (font.Size * Program.version.Length * (float)1.15), height - font.Height);
             foreach(Category cat in CategoryHandler.registry.categories)
             {
                 foreach(Module mod in cat.modules)
@@ -130,13 +146,9 @@ namespace Flare_Sharp.UI
                     }
                 }
             }
+            //DBG.Debug("Drawn!");
         }
 
-        public IntPtr OnMouseMove(int nCode, IntPtr wParam, IntPtr lParam)
-        {
-            Invalidate();
-            return CallNextHookEx(mouseHookID, nCode, wParam, lParam);
-        }
         public void adjustOverlay(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
         {
             trueAdjust();
@@ -147,7 +159,11 @@ namespace Flare_Sharp.UI
             WINDOWPLACEMENT placement = new WINDOWPLACEMENT();
             GetWindowPlacement(MCM.mcWinHandle, ref placement);
             if (placement.showCmd == SW_MAXIMIZE)
+            {
                 fullScOff = 8;
+                TopMost = true;
+                WindowState = FormWindowState.Maximized;
+            }
             else
                 fullScOff = 0;
             //Adust window position

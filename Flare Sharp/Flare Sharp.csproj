@@ -51,9 +51,6 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NuklearDotNet">
-      <HintPath>Deps\NuklearDotNet.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -75,7 +72,6 @@
     <Compile Include="ClientBase\Modules\Modules\Aimbot.cs" />
     <Compile Include="ClientBase\Modules\Modules\AirAcceleration.cs" />
     <Compile Include="ClientBase\Modules\Modules\AirJump.cs" />
-    <Compile Include="ClientBase\Modules\Modules\AntiHive.cs" />
     <Compile Include="ClientBase\Modules\Modules\AntiSentinel.cs" />
     <Compile Include="ClientBase\Modules\Modules\AutoRespawn.cs" />
     <Compile Include="ClientBase\Modules\Modules\AutoSprint.cs" />
@@ -85,6 +81,7 @@
     <Compile Include="ClientBase\Modules\Modules\BounceFly.cs" />
     <Compile Include="ClientBase\Modules\Modules\ClickTP.cs" />
     <Compile Include="ClientBase\Modules\Modules\ClickUI.cs" />
+    <Compile Include="ClientBase\Modules\Modules\CpuLimiter.cs" />
     <Compile Include="ClientBase\Modules\Modules\Criticals.cs" />
     <Compile Include="ClientBase\Modules\Modules\FastLadder.cs" />
     <Compile Include="ClientBase\Modules\Modules\Freecam.cs" />
@@ -110,6 +107,7 @@
     <Compile Include="ClientBase\Modules\Modules\NoWeb.cs" />
     <Compile Include="ClientBase\Modules\Modules\Phase.cs" />
     <Compile Include="ClientBase\Modules\Modules\PlayerSpeed.cs" />
+    <Compile Include="ClientBase\Modules\Modules\RainbowUI.cs" />
     <Compile Include="ClientBase\Modules\Modules\RapidAttack.cs" />
     <Compile Include="ClientBase\Modules\Modules\Reach.cs" />
     <Compile Include="ClientBase\Modules\Modules\Scaffold.cs" />
@@ -133,6 +131,7 @@
     <Compile Include="ClientBase\UI\VObjs\VStringShelf.cs" />
     <Compile Include="ClientBase\UI\VObjs\VSubShelfItem.cs" />
     <Compile Include="ClientBase\UI\VObjs\VTargetsWindow.cs" />
+    <Compile Include="DBG.cs" />
     <Compile Include="Memory\CraftSDK\Entity.cs" />
     <Compile Include="Memory\CraftSDK\PlayerEntity.cs" />
     <Compile Include="Memory\CraftSDK\EntityList.cs" />

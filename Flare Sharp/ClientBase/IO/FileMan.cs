@@ -1,6 +1,8 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.ClientBase.Modules;
 using Flare_Sharp.ClientBase.Modules.Settings;
+using Flare_Sharp.ClientBase.UI.VObjs;
+using Flare_Sharp.Memory.CraftSDK;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -61,6 +63,10 @@ namespace Flare_Sharp.ClientBase.IO
                     z++;
                 }
             }
+            foreach(string targetable in EntityList.targetable)
+            {
+                root.targets.Add(targetable);
+            }
             string json = new JavaScriptSerializer().Serialize(root);
             if (!configDir.Exists)
             {
@@ -105,6 +111,20 @@ namespace Flare_Sharp.ClientBase.IO
                         mod.keybind = root.moduleKeybinds[z];
                         mod.enabled = root.enabledModules[z];
                         z++;
+                    }
+                }
+                if (VTargetsWindow.instance != null)
+                {
+                    if(VTargetsWindow.instance.targetObjects != null)
+                    {
+                        VTargetsWindow.instance.targetObjects.Clear();
+                        foreach(string target in root.targets)
+                        {
+                            //Console.WriteLine("Adding " + target);
+                            VStringShelf targetShelf = new VStringShelf();
+                            targetShelf.text = target;
+                            VTargetsWindow.instance.targetObjects.Add(targetShelf);
+                        }
                     }
                 }
                 return true;

@@ -51,6 +51,13 @@ namespace Flare_Sharp.ClientBase.Modules
                 return OverlayHost.ui.quinary;
             }
         }
+        public SolidBrush rainbow
+        {
+            get
+            {
+                return OverlayHost.ui.rainbow;
+            }
+        }
 
         public VisualModule(string name, Category category, int keybind, bool enabled) : base(name, category, keybind, enabled)
         {

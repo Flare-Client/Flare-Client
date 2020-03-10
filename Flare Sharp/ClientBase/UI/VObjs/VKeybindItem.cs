@@ -13,7 +13,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
 {
     public class VKeybindItem : VSubShelfItem
     {
-        public VModuleItem parent;
+        public new VModuleItem parent;
         bool changing = false;
         public string renderedKeybind = "";
         public Module module

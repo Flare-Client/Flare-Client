@@ -14,17 +14,19 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     {
         public float catWidth = 0;
         public float modWidth = 0;
+        public float catHeight = 0;
+        public float modHeight = 0;
+
+        public static TabGUI instance;
 
         public TabGUI() : base("TabGUI", CategoryHandler.registry.categories[3], (char)0x07, true)
         {
+            instance = this;
         }
 
         public override void onDraw(Graphics graphics)
         {
             base.onDraw(graphics);
-            //Adjust fonts
-            titleFont = new Font(new FontFamily("Arial"), tFontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
-            textFont = new Font(new FontFamily("Arial"), fontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
 
             graphics.FillRectangle(secondary, 0, 0, catWidth * scale, ((32 * scale) * CategoryHandler.registry.categories.Count) + tFontSize);
 
@@ -86,6 +88,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                 graphics.DrawString(category.name, textFont, primary, 0, tFontSize + (32 * scale) * c);
                 c++;
             }
+            catHeight = ((32 * scale) * CategoryHandler.registry.categories.Count) + tFontSize;
             graphics.DrawRectangle(new Pen(quinary, 1), 0, 0, catWidth * scale, ((32 * scale) * CategoryHandler.registry.categories.Count) + tFontSize);
         }
     }

@@ -13,16 +13,18 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
-using Timer = System.Windows.Forms.Timer;
+using Timer = System.Timers.Timer;
 
 namespace Flare_Sharp
 {
     class Program
     {
-        public static string version = "0.0.6.3";
+        public static string version = "0.0.6.4";
         public static int threadSleep = 1;
         public static EventHandler<EventArgs> mainLoop;
+        public static bool limitCpu = false;
         static void Main(string[] args)
         {
             //Dont.Be.A.Scumbag.And.Remove.This.Warn.warn();
@@ -53,12 +55,24 @@ namespace Flare_Sharp
                     Console.WriteLine("Could not load config!");
                 }
                 uiApp.Start();
+                if(args != null)
+                {
+                    if (args.Length > 0)
+                    {
+                        if (args[0] == "dualThread")
+                        {
+                            Thread moduleThread = new Thread(() => { while (true) { try { ModuleHandler.registry.tickModuleThread(); Thread.Sleep(1); } catch (Exception) { } } });
+                            moduleThread.Start();
+                        }
+                    }
+                }
                 while (true)
                 {
                     try
                     {
                         mainLoop.Invoke(null, new EventArgs());
-                        //Thread.Sleep(threadSleep);
+                        if(limitCpu)
+                            Thread.Sleep(1);
                     }
                     catch (Exception)
                     {
