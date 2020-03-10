@@ -147,6 +147,7 @@
     <Compile Include="Memory\FlameSDK\Minecraft.cs" />
     <Compile Include="Memory\FlameSDK\NetworkHandler.cs" />
     <Compile Include="Memory\FlameSDK\PlayerEntity.cs" />
+    <Compile Include="Memory\FlameSDK\PlayerInventoryProxy.cs" />
     <Compile Include="Memory\FlameSDK\RakNetInstance.cs" />
     <Compile Include="Memory\FlameSDK\SDKObj.cs" />
     <Compile Include="Memory\FlameSDK\Statics.cs" />

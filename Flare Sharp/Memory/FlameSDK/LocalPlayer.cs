@@ -17,7 +17,7 @@ namespace Flare_Sharp.Memory.FlameSDK
         {
             get
             {
-                return new EntityRegistry(MCM.evaluatePointer(addr+8,MCM.ceByte2uLong("50 120 0")));
+                return new EntityRegistry(MCM.evaluatePointer(addr,MCM.ceByte2uLong("8 50 120 0")));
             }
         }
         public Level level
@@ -25,6 +25,13 @@ namespace Flare_Sharp.Memory.FlameSDK
             get
             {
                 return new Level(MCM.readInt64(addr + 0x358));
+            }
+        }
+        public PlayerInventoryProxy inventoryProxy
+        {
+            get
+            {
+                return new PlayerInventoryProxy(MCM.evaluatePointer(addr, MCM.ceByte2uLong("428 60 5F0 0")));
             }
         }
 

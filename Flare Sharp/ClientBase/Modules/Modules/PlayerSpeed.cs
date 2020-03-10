@@ -19,13 +19,13 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onDisable()
         {
             base.onDisable();
-            //Statics.playerSpeed = 0.1F;
+            Statics.playerSpeed = 0.1F;
         }
 
         public override void onTick()
         {
             base.onTick();
-            //Statics.playerSpeed = (float)sliderSettings[0].value/10;
+            Statics.playerSpeed = (float)sliderSettings[0].value/10;
         }
     }
 }
