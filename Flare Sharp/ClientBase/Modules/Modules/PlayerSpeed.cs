@@ -19,13 +19,13 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onDisable()
         {
             base.onDisable();
-            Statics.playerSpeed = 0.1F;
+            Minecraft.clientInstance.localPlayer.playerAttributes.speed.value = 0.1F;
         }
 
         public override void onTick()
         {
             base.onTick();
-            Statics.playerSpeed = (float)sliderSettings[0].value/10;
+            Minecraft.clientInstance.localPlayer.playerAttributes.speed.value = (float)sliderSettings[0].value/10;
         }
     }
 }
