@@ -39,7 +39,7 @@ namespace Flare_Sharp.Memory.FlameSDK
         {
             get
             {
-                return new PlayerAttributes(MCM.evaluatePointer(addr, MCM.ceByte2uLong("410 18 0")));
+                return new PlayerAttributes(MCM.evaluatePointer(addr+0x410, MCM.ceByte2uLong("18 0")));
             }
         }
 
