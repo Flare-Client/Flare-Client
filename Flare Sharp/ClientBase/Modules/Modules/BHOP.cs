@@ -22,7 +22,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             base.onTick();
             float playerYaw = Minecraft.clientInstance.localPlayer.yaw;
 
-            if (Minecraft.clientInstance.localPlayer.isInAir > 0) Minecraft.clientInstance.localPlayer.velY = 0.3F;
+            if (Minecraft.clientInstance.localPlayer.onGround_type2 == 257) Minecraft.clientInstance.localPlayer.velY = 0.3F;
 
             if (KeybindHandler.isKeyDown('W'))
             {
