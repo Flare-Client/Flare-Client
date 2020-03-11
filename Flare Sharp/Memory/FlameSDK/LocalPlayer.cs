@@ -35,6 +35,14 @@ namespace Flare_Sharp.Memory.FlameSDK
             }
         }
 
+        public PlayerAttributes playerAttributes
+        {
+            get
+            {
+                return new PlayerAttributes(MCM.evaluatePointer(addr, MCM.ceByte2uLong("410 18 0")));
+            }
+        }
+
         //Player offset shiz
         public void teleport(float x, float y, float z)
         {
