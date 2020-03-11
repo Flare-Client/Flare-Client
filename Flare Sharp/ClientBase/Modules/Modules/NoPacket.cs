@@ -18,14 +18,12 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onEnable()
         {
             base.onEnable();
-            byte[] write = { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 };
-            MCM.writeBaseBytes(Pointers.noPacket, write);
+            MCM.writeBaseByte(0xFA21E0, 1);
         }
         public override void onDisable()
         {
             base.onDisable();
-            byte[] write = { 0x80, 0xB8, 0x31, 0x03, 0x00, 0x00, 0x00 };
-            MCM.writeBaseBytes(Pointers.noPacket, write);
+            MCM.writeBaseByte(0xFA21E0, 3);
         }
     }
 }
