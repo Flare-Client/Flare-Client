@@ -23,9 +23,9 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             {
                 if(e.key == (char)0x02)
                 {
-                    if(Statics.blockPosY > 0)
+                    if(Minecraft.clientInstance.localPlayer.level.lookingBlockY > 0)
                     {
-                        Minecraft.clientInstance.localPlayer.teleport((float)Statics.blockPosX, (float)Statics.blockPosY + 1, (float)Statics.blockPosZ);
+                        Minecraft.clientInstance.localPlayer.teleport((float)Minecraft.clientInstance.localPlayer.level.lookingBlockX, (float)Minecraft.clientInstance.localPlayer.level.lookingBlockY + 1, (float)Minecraft.clientInstance.localPlayer.level.lookingBlockZ);
                     }
                 }
             }

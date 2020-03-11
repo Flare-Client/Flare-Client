@@ -20,6 +20,51 @@ namespace Flare_Sharp.Memory.FlameSDK
             }
         }
 
+        public int lookingBlockSide 
+        {
+            get
+            {
+                return MCM.readInt(addr + 0x854);
+            }
+            set
+            {
+                MCM.writeInt(addr + 0x854, value);
+            }
+        }
+        public int lookingBlockX
+        {
+            get
+            {
+                return MCM.readInt(addr + 0x858);
+            }
+            set
+            {
+                MCM.writeInt(addr + 0x858, value);
+            }
+        }
+        public int lookingBlockY
+        {
+            get
+            {
+                return MCM.readInt(addr + 0x85C);
+            }
+            set
+            {
+                MCM.writeInt(addr + 0x85C, value);
+            }
+        }
+        public int lookingBlockZ
+        {
+            get
+            {
+                return MCM.readInt(addr + 0x860);
+            }
+            set
+            {
+                MCM.writeInt(addr + 0x860, value);
+            }
+        }
+
         public FirstPersonLookBehavior firstPersonCamera
         {
             get
