@@ -139,6 +139,8 @@
     <Compile Include="Memory\FlameSDK\FirstPersonLookBehavior.cs" />
     <Compile Include="Memory\FlameSDK\Gamerule.cs" />
     <Compile Include="Memory\FlameSDK\Inventory.cs" />
+    <Compile Include="Memory\FlameSDK\Item.cs" />
+    <Compile Include="Memory\FlameSDK\ItemStack.cs" />
     <Compile Include="Memory\FlameSDK\LoopbackPacketSender.cs" />
     <Compile Include="Memory\FlameSDK\Mob.cs" />
     <Compile Include="Memory\FlameSDK\EntityRegistry.cs" />
