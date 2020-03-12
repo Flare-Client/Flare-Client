@@ -1,7 +1,7 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.Memory;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +24,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             {
                 if (enabled)
                 {
-                    if (SDK.instance.player.isInAir > 1 | SDK.instance.player.onGround > 0) SDK.instance.player.velY = (float)sliderSettings[0].value / 10F;
+                    if (Minecraft.clientInstance.localPlayer.isInAir > 1 | Minecraft.clientInstance.localPlayer.onGround > 0) Minecraft.clientInstance.localPlayer.velY = (float)sliderSettings[0].value / 10F;
                 }
             }
         }

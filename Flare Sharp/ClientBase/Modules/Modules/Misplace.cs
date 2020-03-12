@@ -1,5 +1,5 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,16 +19,16 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            foreach (Entity e in EntityList.getEntityList(true))
+            foreach (Mob e in Minecraft.clientInstance.localPlayer.entityRegistry.targetableEntities)
             {
-                if (e.distanceTo(SDK.instance.player) < 2)
+                if (e.distanceTo(Minecraft.clientInstance.localPlayer) < 2)
                 {
                     continue;
                 }
 
-                float lpX = SDK.instance.player.X1;
-                float lpY = SDK.instance.player.Y1;
-                float lpZ = SDK.instance.player.Z1;
+                float lpX = Minecraft.clientInstance.localPlayer.X1;
+                float lpY = Minecraft.clientInstance.localPlayer.Y1;
+                float lpZ = Minecraft.clientInstance.localPlayer.Z1;
 
                 float eX = e.currentX3;
                 float eY = e.currentY3;
@@ -44,7 +44,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                     mpY = ((mpY + lpY) / 2);
                     mpZ = (mpZ + lpZ) / 2;
                 }
-                if (e.distanceTo(SDK.instance.player) <= sliderSettings[0].value/10) {
+                if (e.distanceTo(Minecraft.clientInstance.localPlayer) <= sliderSettings[0].value/10) {
                     e.teleportE(mpX, mpY, mpZ);
                 }
             }

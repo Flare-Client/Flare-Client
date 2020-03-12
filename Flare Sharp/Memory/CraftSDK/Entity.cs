@@ -8,8 +8,8 @@ namespace Flare_Sharp.Memory.CraftSDK
 {
     public class Entity
     {
-        public UInt64 addr;
-        public Entity(UInt64 addr)
+        ulong addr;
+        public Entity(ulong addr)
         {
             this.addr = addr;
         }

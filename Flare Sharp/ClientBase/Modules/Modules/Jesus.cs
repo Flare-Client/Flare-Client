@@ -1,7 +1,7 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.Memory;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +20,9 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            if(SDK.instance.player.isInWater > 0)
+            if(Minecraft.clientInstance.localPlayer.isInWater > 0)
             {
-                SDK.instance.player.velY = (float)sliderSettings[0].value / 10;
+                Minecraft.clientInstance.localPlayer.velY = (float)sliderSettings[0].value / 10;
             }
         }
     }
