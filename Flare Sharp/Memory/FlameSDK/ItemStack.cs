@@ -13,7 +13,7 @@ namespace Flare_Sharp.Memory.FlameSDK
         {
             get
             {
-
+                
             }
         }
         public byte stackSize
