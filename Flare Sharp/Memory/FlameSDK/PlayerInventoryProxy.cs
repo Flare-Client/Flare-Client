@@ -12,6 +12,14 @@ namespace Flare_Sharp.Memory.FlameSDK
         {
         }
 
+        public Inventory inventory
+        {
+            get
+            {
+                return new Inventory(MCM.readInt64(addr + 0xA8));
+            }
+        }
+
         public ulong selectedHotbarSlot
         {
             get
