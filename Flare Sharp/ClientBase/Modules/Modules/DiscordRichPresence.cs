@@ -1,7 +1,7 @@
 ﻿using DiscordRPC;
 using DiscordRPC.Message;
 using Flare_Sharp.ClientBase.Categories;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +48,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 					SmallImageKey = "flarelogo"
 				}
 			});
-			Console.WriteLine(SDK.instance.player.username);
+			Console.WriteLine(Minecraft.clientInstance.localPlayer.username);
 		}
         public override void onDisable()
         {
