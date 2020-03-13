@@ -45,7 +45,7 @@ namespace Flare_Sharp.Memory.CraftSDK
         {
             get
             {
-                return SDK.instance.directionalVector((SDK.instance.player.yaw + 89.9f) * (float)Math.PI / 178F, SDK.instance.player.pitch * (float)Math.PI / 178F);
+                return SDK.instance.directionalVector((SDK.client.localPlayer.yaw + 89.9f) * (float)Math.PI / 178F, SDK.client.localPlayer.pitch * (float)Math.PI / 178F);
             }
         }
 

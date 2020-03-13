@@ -1,6 +1,6 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.Memory;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,20 +18,20 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            UInt64 facing = SDK.instance.entityFacing.addr;
+            UInt64 facing = Minecraft.clientInstance.localPlayer.level.lookingEntity.addr;
             if(facing > 0)
             {
-                MCM.writeBaseByte(Pointers.rapidPlace, 0);
+                MCM.writeBaseByte(Statics.rapidPlace, 0);
             } else
             {
-                MCM.writeBaseByte(Pointers.rapidPlace, 1);
+                MCM.writeBaseByte(Statics.rapidPlace, 1);
             }
         }
 
         public override void onDisable()
         {
             base.onDisable();
-            MCM.writeBaseByte(Pointers.rapidPlace, 0);
+            MCM.writeBaseByte(Statics.rapidPlace, 0);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.Memory;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +20,12 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            List<Entity> Entity = EntityList.getEntityList(true);
+            List<Mob> Entity = Minecraft.clientInstance.localPlayer.entityRegistry.targetableEntities;
             List<double> distancesArr = new List<double>();
 
-            foreach(Entity e in Entity)
+            foreach(Mob e in Entity)
             {
-                Double distance = e.distanceTo(SDK.instance.player);
+                Double distance = e.distanceTo(Minecraft.clientInstance.localPlayer);
                 if (distance <= sliderSettings[0].value / 10F) distancesArr.Add(distance);
             }
 
@@ -32,15 +33,15 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             {
                 distancesArr.Sort();
 
-                foreach(Entity e in Entity)
+                foreach(Mob e in Entity)
                 {
-                    if(e.distanceTo(SDK.instance.player) == distancesArr[0])
+                    if(e.distanceTo(Minecraft.clientInstance.localPlayer) == distancesArr[0])
                     {
-                        float[] localPosition = { SDK.instance.player.currentX2, SDK.instance.player.currentY2, SDK.instance.player.currentZ2 };
-                        float[] targetPosition = { e.currentX3, e.currentY3, e.currentZ3 };
-                        List<float> calculationsArr = SDK.instance.getCalculationsToPos(localPosition, targetPosition);
-                        Pointers.mousePitch = calculationsArr[0];
-                        Pointers.mouseYaw = calculationsArr[1];
+                        Utils.Vec3f localPosition = Minecraft.clientInstance.localPlayer.location;
+                        Utils.Vec3f targetPosition = e.location;
+                        Utils.Vec2f calculationsArr = Utils.getCalculationsToPos(localPosition, targetPosition);
+                        Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraPitch = calculationsArr.x;
+                        Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraYaw = calculationsArr.y;
                     }
                 }
             }

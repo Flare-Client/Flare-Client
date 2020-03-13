@@ -1,6 +1,6 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.Memory;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +21,9 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            if(SDK.instance.player.onGround_type2 < 1)
+            if(Minecraft.clientInstance.localPlayer.onGround_type2 < 1)
             {
-                SDK.instance.player.teleport(SDK.instance.player.X1, SDK.instance.player.Y1 + fall, SDK.instance.player.Z1);
+                Minecraft.clientInstance.localPlayer.teleport(Minecraft.clientInstance.localPlayer.X1, Minecraft.clientInstance.localPlayer.Y1 + fall, Minecraft.clientInstance.localPlayer.Z1);
             }
             if (fall > 0)
             {

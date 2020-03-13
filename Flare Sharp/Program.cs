@@ -3,7 +3,7 @@ using Flare_Sharp.ClientBase.IO;
 using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.ClientBase.Modules;
 using Flare_Sharp.Memory;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using Flare_Sharp.Memory.VHooks;
 using Flare_Sharp.UI;
 using System;
@@ -40,7 +40,6 @@ namespace Flare_Sharp
                 MCM.openWindowHost();
 
                 CommandHook cmh = new CommandHook();
-                SDK sdk = new SDK();
                 FileMan fm = new FileMan();
                 CategoryHandler ch = new CategoryHandler();
                 ModuleHandler mh = new ModuleHandler();

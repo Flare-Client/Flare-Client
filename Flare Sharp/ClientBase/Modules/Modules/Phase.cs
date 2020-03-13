@@ -1,7 +1,7 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.Memory;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,13 +19,13 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onDisable()
         {
             base.onDisable();
-            SDK.instance.player.Y2 = SDK.instance.player.Y1 + 1.8f;
+            Minecraft.clientInstance.localPlayer.Y2 = Minecraft.clientInstance.localPlayer.Y1 + 1.8f;
         }
 
         public override void onTick()
         {
             base.onTick();
-            SDK.instance.player.Y2 = SDK.instance.player.Y1;
+            Minecraft.clientInstance.localPlayer.Y2 = Minecraft.clientInstance.localPlayer.Y1;
         }
     }
 }

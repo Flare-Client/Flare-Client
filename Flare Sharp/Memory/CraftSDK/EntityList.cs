@@ -25,19 +25,13 @@ namespace Flare_Sharp.Memory.CraftSDK
         public static List<Entity> getEntityList(bool filter)
         {
             List<Entity> entityList = new List<Entity>();
-
-            UInt64[] endOffs = { 0xA8, 0x18, 0xB8, 0x48, 0xD18, 0x50, 0xA0, 0x0 };
-            UInt64 entityListEnd = MCM.readInt64(MCM.baseEvaluatePointer(0x02FFAF50, endOffs));
-
             UInt64 likelySize = MCM.readBaseInt64(0x30366B0);
 
             for (UInt64 index = 0; index<likelySize; index++)
             {
-                UInt64[] startOffs = { 0xA8, 0x18, 0xB8, 0x48, 0xD18, 0x50, 0x98, index*0x8 };
-                UInt64 indexedEntity = MCM.readInt64(MCM.baseEvaluatePointer(0x02FFAF50, startOffs));
-                if (indexedEntity == SDK.instance.player.addr) continue;
-                if (indexedEntity == entityListEnd) 
-                    break;
+                UInt64[] startOffs = { 0x30, 0xF0, 0x8, 0x50, 0x120, 0x38, index*0x8 };
+                UInt64 indexedEntity = MCM.readInt64(MCM.baseEvaluatePointer(0x03022AE0, startOffs));
+                if (indexedEntity == SDK.client.localPlayer.addr) continue;
 
                 Entity eObj = new Entity(indexedEntity);
                 if (eObj.movedTick > 1)
@@ -68,13 +62,23 @@ namespace Flare_Sharp.Memory.CraftSDK
             List<Entity> entityList = getEntityList(false);
             foreach (Entity entity in entityList)
             {
-                if (entity.addr == SDK.instance.player.addr) continue;
+                if (entity.addr == SDK.client.localPlayer.addr) continue;
                 if (entity.type == "player")
                 {
                     playerEntityList.Add(new PlayerEntity(entity.addr));
                 }
             }
             return playerEntityList;
+        }
+
+        public static ulong SwapEndianness(ulong value)
+        {
+            var b1 = (value >> 0) & 0xff;
+            var b2 = (value >> 8) & 0xff;
+            var b3 = (value >> 16) & 0xff;
+            var b4 = (value >> 24) & 0xff;
+
+            return b1 << 24 | b2 << 16 | b3 << 8 | b4 << 0;
         }
     }
 }
