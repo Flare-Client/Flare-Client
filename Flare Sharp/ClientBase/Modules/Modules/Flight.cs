@@ -1,6 +1,6 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.Memory;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,13 +18,13 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onDisable()
         {
             base.onDisable();
-            SDK.instance.player.isFlying = 0;
+            Minecraft.clientInstance.localPlayer.isFlying = 0;
         }
 
         public override void onTick()
         {
             base.onTick();
-            SDK.instance.player.isFlying = 1;
+            Minecraft.clientInstance.localPlayer.isFlying = 1;
         }
     }
 }

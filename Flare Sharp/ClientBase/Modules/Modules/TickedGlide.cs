@@ -1,6 +1,6 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.ClientBase.Keybinds;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,34 +29,34 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onEnable()
         {
             base.onEnable();
-            savedY = SDK.instance.player.currentY1;
+            savedY = Minecraft.clientInstance.localPlayer.currentY1;
         }
 
         public override void onTick()
         {
             base.onTick();
 
-            SDK.instance.player.velY = 0;
-            SDK.instance.player.velY = (float)sliderSettings[1].value / 10;
+            Minecraft.clientInstance.localPlayer.velY = 0;
+            Minecraft.clientInstance.localPlayer.velY = (float)sliderSettings[1].value / 10;
 
             if (KeybindHandler.isKeyDown('W'))
             {
-                List<float> directionalVec = SDK.instance.directionalVector((SDK.instance.player.yaw + 89.9f) * (float)Math.PI / 178F, (float)Math.PI / 178F);
+                Utils.Vec3f directionalVec = Utils.directionalVector((Minecraft.clientInstance.localPlayer.yaw + 89.9f) * (float)Math.PI / 178F, (float)Math.PI / 178F);
 
-                SDK.instance.player.velX = (float)sliderSettings[0].value / 10F * directionalVec[0];
-                SDK.instance.player.velZ = (float)sliderSettings[0].value / 10F * directionalVec[2];
+                Minecraft.clientInstance.localPlayer.velX = (float)sliderSettings[0].value / 10F * directionalVec.x;
+                Minecraft.clientInstance.localPlayer.velZ = (float)sliderSettings[0].value / 10F * directionalVec.z;
             }
 
             Counter += 1;
 
             if(Counter > sliderSettings[2].value)
             {
-                if(distanceTo(SDK.instance.player.currentY1, savedY) <= 12)
+                if(distanceTo(Minecraft.clientInstance.localPlayer.currentY1, savedY) <= 12)
                 {
-                    SDK.instance.player.teleport(SDK.instance.player.currentX1, savedY, SDK.instance.player.currentZ1);
+                    Minecraft.clientInstance.localPlayer.teleport(Minecraft.clientInstance.localPlayer.currentX1, savedY, Minecraft.clientInstance.localPlayer.currentZ1);
                 } else
                 {
-                    savedY = SDK.instance.player.currentY1;
+                    savedY = Minecraft.clientInstance.localPlayer.currentY1;
                 }
                 Counter = 0;
             }

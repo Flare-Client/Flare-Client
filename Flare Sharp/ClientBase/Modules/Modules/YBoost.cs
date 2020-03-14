@@ -1,5 +1,5 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +18,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onEnable()
         {
             base.onEnable();
-            SDK.instance.player.velY += (float)sliderSettings[0].value / 10;
+            Minecraft.clientInstance.localPlayer.velY += (float)sliderSettings[0].value / 10;
             this.enabled = false;
         }
     }

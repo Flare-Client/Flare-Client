@@ -1,6 +1,6 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.Memory;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +20,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            List<Entity> entList = EntityList.getEntityList(true);
-            foreach(Entity e in entList)
+            List<Mob> entList = Minecraft.clientInstance.localPlayer.entityRegistry.targetableEntities;
+            foreach(Mob e in entList)
             {
                 e.hitboxHeight = (float)sliderSettings[0].value / 10;
                 e.hitboxWidth = (float)sliderSettings[1].value / 10;
@@ -31,8 +31,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onDisable()
         {
             base.onDisable();
-            List<Entity> entList = EntityList.getEntityList(true);
-            foreach (Entity e in entList)
+            List<Mob> entList = Minecraft.clientInstance.localPlayer.entityRegistry.targetableEntities;
+            foreach (Mob e in entList)
             {
                 e.hitboxHeight = 0.6f;
                 e.hitboxWidth = 1.8f;

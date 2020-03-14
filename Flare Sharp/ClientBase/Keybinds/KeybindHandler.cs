@@ -2,7 +2,7 @@
 using Flare_Sharp.ClientBase.Modules;
 using Flare_Sharp.ClientBase.UI;
 using Flare_Sharp.Memory;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;

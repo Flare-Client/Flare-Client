@@ -31,7 +31,7 @@ namespace Flare_Sharp.Memory.CraftSDK
             {
                 UInt64[] startOffs = { 0x30, 0xF0, 0x8, 0x50, 0x120, 0x38, index*0x8 };
                 UInt64 indexedEntity = MCM.readInt64(MCM.baseEvaluatePointer(0x03022AE0, startOffs));
-                if (indexedEntity == SDK.instance.player.addr) continue;
+                if (indexedEntity == SDK.client.localPlayer.addr) continue;
 
                 Entity eObj = new Entity(indexedEntity);
                 if (eObj.movedTick > 1)
@@ -62,7 +62,7 @@ namespace Flare_Sharp.Memory.CraftSDK
             List<Entity> entityList = getEntityList(false);
             foreach (Entity entity in entityList)
             {
-                if (entity.addr == SDK.instance.player.addr) continue;
+                if (entity.addr == SDK.client.localPlayer.addr) continue;
                 if (entity.type == "player")
                 {
                     playerEntityList.Add(new PlayerEntity(entity.addr));
