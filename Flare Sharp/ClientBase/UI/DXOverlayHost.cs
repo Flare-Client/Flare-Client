@@ -1,15 +1,32 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.ClientBase.Modules;
 using Flare_Sharp.Memory;
+using SharpDX;
+using SharpDX.Direct2D1;
+using SharpDX.Direct3D;
+using SharpDX.Direct3D11;
+using SharpDX.DXGI;
+using SharpDX.Mathematics.Interop;
+using SharpDX.Windows;
 using System;
-using System.Drawing;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using AlphaMode = SharpDX.Direct2D1.AlphaMode;
+using Device = SharpDX.Direct3D11.Device;
+using Factory = SharpDX.DXGI.Factory;
+using RectangleF = SharpDX.RectangleF;
 
 namespace Flare_Sharp.ClientBase.UI
 {
-    public class OverlayHost : Form
+    public partial class DXOverlayHost : RenderForm
     {
         [DllImport("user32.dll")]
         public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
@@ -26,7 +43,7 @@ namespace Flare_Sharp.ClientBase.UI
         [DllImport("user32.dll")]
         public static extern UInt64 GetWindowLong(IntPtr hWnd, int nIndex);
         [DllImport("user32.dll")]
-        public static extern UInt64 SetWindowLong(IntPtr hWnd,int nIndex, UInt64 dwNewLong);
+        public static extern UInt64 SetWindowLong(IntPtr hWnd, int nIndex, UInt64 dwNewLong);
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool GetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
@@ -59,15 +76,6 @@ namespace Flare_Sharp.ClientBase.UI
         const UInt32 SW_SHOWMINNOACTIVE = 7;
         const UInt32 SW_SHOWNA = 8;
 
-        public static event EventHandler postOverlayLoad;
-        public delegate void fixSizeDel();
-        public static OverlayHost ui;
-        public static DXOverlayHost dxui;
-
-        public float rainbowProg = 0f;
-
-        WinEventDelegate overDel;
-
         IntPtr hWnd;
         public int x = 0;
         public int y = 0;
@@ -75,35 +83,50 @@ namespace Flare_Sharp.ClientBase.UI
         public int height = 0;
         public int fullScOff = 0;
 
-        public SolidBrush primary = new SolidBrush(Color.FromArgb(255, 255, 255));
-        public SolidBrush secondary = new SolidBrush(Color.FromArgb(25, 25, 25));
-        public SolidBrush tertiary = new SolidBrush(Color.FromArgb(100, 100, 255));
-        public SolidBrush quaternary = new SolidBrush(Color.FromArgb(255, 0, 255));
-        public SolidBrush quinary = new SolidBrush(Color.FromArgb(50, 50, 50));
-        public SolidBrush rainbow
+        WinEventDelegate overDel;
+        public static DXOverlayHost dxui;
+
+        public SolidColorBrush primary;
+
+        public DXOverlayHost()
         {
-            get
+            dxui = this;
+            InitializeComponent();
+
+            // SwapChain description
+            var desc = new SwapChainDescription()
             {
-                return new SolidBrush(Rainbow(rainbowProg));
-            }
-        }
+                BufferCount = 1,
+                ModeDescription = new ModeDescription(ClientSize.Width, ClientSize.Height, new Rational(60, 1), Format.R8G8B8A8_UNorm),
+                IsWindowed = true,
+                OutputHandle = Handle,
+                SampleDescription = new SampleDescription(1, 0),
+                SwapEffect = SwapEffect.Discard,
+                Usage = Usage.RenderTargetOutput
+            };
+            // Create Device and SwapChain
+            Device device;
+            SwapChain swapChain;
+            Device.CreateWithSwapChain(DriverType.Hardware, DeviceCreationFlags.BgraSupport, new SharpDX.Direct3D.FeatureLevel[] { SharpDX.Direct3D.FeatureLevel.Level_10_0 }, desc, out device, out swapChain);
+            var d2dFactory = new SharpDX.Direct2D1.Factory();
+            int width = ClientSize.Width;
+            int height = ClientSize.Height;
+            // Ignore all windows events
+            Factory factory = swapChain.GetParent<Factory>();
+            factory.MakeWindowAssociation(Handle, WindowAssociationFlags.IgnoreAll);
+            // New RenderTargetView from the backbuffer
+            Texture2D backBuffer = Texture2D.FromSwapChain<Texture2D>(swapChain, 0);
+            var renderView = new RenderTargetView(device, backBuffer);
+            Surface surface = backBuffer.QueryInterface<Surface>();
+            var d2dRenderTarget = new RenderTarget(d2dFactory, surface, new RenderTargetProperties(new PixelFormat(Format.Unknown, AlphaMode.Premultiplied)));
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
 
-        public Font font = new Font("Arial", 16, FontStyle.Regular);
-
-        public OverlayHost()
-        {
-            this.AutoScaleMode = AutoScaleMode.None;
-            ui = this;
             this.TopMost = true;
-            this.AllowTransparency = true;
-            Console.WriteLine("Starting Tab GUI...");
             this.FormBorderStyle = FormBorderStyle.None;
-            this.TransparencyKey = Color.FromArgb(77,77,77);
-            this.BackColor = this.TransparencyKey;
-            this.Location = new Point(0, 0);
-            this.DoubleBuffered = true;
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            //DBG.Debug("Set overlay styles");
+            this.AllowTransparency = true;
+            this.TransparencyKey = System.Drawing.Color.FromArgb(Color.Transparent.ToRgba());
+
             hWnd = this.Handle;
             overDel = new WinEventDelegate(adjustOverlay);
             //DBG.Debug("Registered event delegates");
@@ -111,41 +134,33 @@ namespace Flare_Sharp.ClientBase.UI
             SetWinEventHook((uint)SWEH_Events.EVENT_SYSTEM_FOREGROUND, (uint)SWEH_Events.EVENT_SYSTEM_FOREGROUND, IntPtr.Zero, overDel, 0, 0, (uint)SWEH_dwFlags.WINEVENT_OUTOFCONTEXT | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNPROCESS | (uint)SWEH_dwFlags.WINEVENT_SKIPOWNTHREAD);
             //DBG.Debug("Hooked win events");
             //mouseHookID= SetWindowsHookEx(14, mouseMove, GetModuleHandle("user32"), 0);
-            UInt64 initialStyle = GetWindowLong(this.Handle, -20);
-            SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
-            //DBG.Debug("Set overlay window styles (2)");
+            //UInt64 initialStyle = GetWindowLong(this.Handle, -20);
+            //SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
 
-            if (postOverlayLoad != null)
+            primary = new SolidColorBrush(d2dRenderTarget, new RawColor4() {R=1f,G=0f,B=0f,A=1f});
+
+            RenderLoop.Run(this, () =>
             {
-                postOverlayLoad.Invoke(this, new EventArgs());
-                //DBG.Debug("Invoked post overlay event");
-            }
-            Paint += OverlayHost_Paint;
-
-            Thread dxThread = new Thread(() => { dxui = new DXOverlayHost(); });
-
-            //DBG.Debug("paint hooked");
-        }
-
-        private void OverlayHost_Paint(object sender, PaintEventArgs e)
-        {
-            //DBG.Debug("Drawing to screen...");
-            e.Graphics.DrawString("Flare "+Program.version, font, primary, width - (font.Size * Program.version.Length * (float)1.37), height - font.Height);
-            foreach(Category cat in CategoryHandler.registry.categories)
-            {
-                foreach(Module mod in cat.modules)
+                d2dRenderTarget.BeginDraw();
+                d2dRenderTarget.Clear(Color.Transparent);
+                d2dRenderTarget.EndDraw();
+                foreach (Category cat in CategoryHandler.registry.categories)
                 {
-                    if (mod.enabled)
+                    foreach (Module mod in cat.modules)
                     {
-                        if (mod is VisualModule)
+                        if (mod.enabled)
                         {
-                            VisualModule vmod = (VisualModule)mod;
-                            vmod.onDraw(e.Graphics);
+                            if (mod is VisualModule)
+                            {
+                                VisualModule vmod = (VisualModule)mod;
+                                vmod.onRender(d2dRenderTarget);
+                            }
                         }
                     }
                 }
-            }
-            //DBG.Debug("Drawn!");
+                swapChain.Present(0, PresentFlags.None);
+                Thread.Sleep(1);
+            });
         }
 
         public void adjustOverlay(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
@@ -172,29 +187,6 @@ namespace Flare_Sharp.ClientBase.UI
             width = mcRect.Right - mcRect.Left - 18;
             height = mcRect.Bottom - mcRect.Top - 43 - fullScOff;
             SetWindowPos(hWnd, MCM.isMinecraftFocusedInsert(), x, y, width, height, 0x0040);
-        }
-
-        public static Color Rainbow(float progress)
-        {
-            float div = (Math.Abs(progress % 1) * 6);
-            int ascending = (int)((div % 1) * 255);
-            int descending = 255 - ascending;
-
-            switch ((int)div)
-            {
-                case 0:
-                    return Color.FromArgb(255, 255, ascending, 0);
-                case 1:
-                    return Color.FromArgb(255, descending, 255, 0);
-                case 2:
-                    return Color.FromArgb(255, 0, 255, ascending);
-                case 3:
-                    return Color.FromArgb(255, 0, descending, 255);
-                case 4:
-                    return Color.FromArgb(255, ascending, 0, 255);
-                default: // case 5:
-                    return Color.FromArgb(255, 255, 0, descending);
-            }
         }
     }
 }

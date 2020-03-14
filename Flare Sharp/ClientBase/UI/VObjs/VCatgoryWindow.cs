@@ -2,7 +2,7 @@
 using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.ClientBase.Modules;
 using Flare_Sharp.ClientBase.Modules.Settings;
-using Flare_Sharp.UI;
+using Flare_Sharp.ClientBase.UI;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

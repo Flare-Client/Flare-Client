@@ -51,6 +51,27 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SharpDX, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>packages\SharpDX.4.2.0\lib\net45\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.D3DCompiler, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>packages\SharpDX.D3DCompiler.4.2.0\lib\net45\SharpDX.D3DCompiler.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Desktop, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>packages\SharpDX.Desktop.4.2.0\lib\net45\SharpDX.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct2D1, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>packages\SharpDX.Direct2D1.4.2.0\lib\net45\SharpDX.Direct2D1.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>packages\SharpDX.Direct3D11.4.2.0\lib\net45\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>packages\SharpDX.DXGI.4.2.0\lib\net45\SharpDX.DXGI.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Mathematics, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>packages\SharpDX.Mathematics.4.2.0\lib\net45\SharpDX.Mathematics.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -114,6 +135,7 @@
     <Compile Include="ClientBase\Modules\Modules\Scaffold.cs" />
     <Compile Include="ClientBase\Modules\Modules\Step.cs" />
     <Compile Include="ClientBase\Modules\Modules\TabGUI.cs" />
+    <Compile Include="ClientBase\Modules\Modules\TestESP.cs" />
     <Compile Include="ClientBase\Modules\Modules\TickedGlide.cs" />
     <Compile Include="ClientBase\Modules\Modules\Tower.cs" />
     <Compile Include="ClientBase\Modules\Modules\TPFlight.cs" />
@@ -125,6 +147,12 @@
     <Compile Include="ClientBase\Modules\Settings\Setting.cs" />
     <Compile Include="ClientBase\Modules\Settings\SliderSetting.cs" />
     <Compile Include="ClientBase\Modules\VisualModule.cs" />
+    <Compile Include="ClientBase\UI\DXOverlayHost.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientBase\UI\DXOverlayHost.Designer.cs">
+      <DependentUpon>DXOverlayHost.cs</DependentUpon>
+    </Compile>
     <Compile Include="ClientBase\UI\VObjs\VAddButton.cs" />
     <Compile Include="ClientBase\UI\VObjs\VKeybindItem.cs" />
     <Compile Include="ClientBase\UI\VObjs\VModuleSliderSetting.cs" />
@@ -161,6 +189,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Memory\VHooks\WhatsThis.txt" />

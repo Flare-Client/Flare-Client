@@ -1,5 +1,5 @@
 ﻿using Flare_Sharp.ClientBase.Keybinds;
-using Flare_Sharp.UI;
+using Flare_Sharp.ClientBase.UI;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

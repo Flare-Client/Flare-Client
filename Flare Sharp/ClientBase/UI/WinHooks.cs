@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Flare_Sharp.UI
+namespace Flare_Sharp.ClientBase.UI
 {
     //https://stackoverflow.com/questions/48767318/move-window-when-external-applications-window-moves
     //Thx <3

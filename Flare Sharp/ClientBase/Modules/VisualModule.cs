@@ -1,5 +1,6 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
-using Flare_Sharp.UI;
+using Flare_Sharp.ClientBase.UI;
+using SharpDX.Direct2D1;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -58,6 +59,13 @@ namespace Flare_Sharp.ClientBase.Modules
                 return OverlayHost.ui.rainbow;
             }
         }
+        public SolidColorBrush primaryDx
+        {
+            get
+            {
+                return DXOverlayHost.dxui.primary;
+            }
+        }
 
         public VisualModule(string name, Category category, int keybind, bool enabled) : base(name, category, keybind, enabled)
         {
@@ -66,6 +74,10 @@ namespace Flare_Sharp.ClientBase.Modules
         }
 
         public virtual void onDraw(Graphics graphics)
+        {
+
+        }
+        public virtual void onRender(RenderTarget target)
         {
 
         }
