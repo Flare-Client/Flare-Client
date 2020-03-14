@@ -8,6 +8,11 @@ namespace Flare_Sharp.Memory.FlameSDK
 {
     public class Minecraft
     {
-        public static ClientInstance clientInstance = new ClientInstance(MCM.baseEvaluatePointer(0x03022AE0, MCM.ceByte2uLong("30 0")));
+        public static ClientInstance clientInstance {
+            get
+            {
+                return new ClientInstance(MCM.baseEvaluatePointer(0x03022AE0, MCM.ceByte2uLong("30 0")));
+            }
+        }
     }
 }
