@@ -123,6 +123,7 @@ namespace Flare_Sharp.ClientBase.UI
             Paint += OverlayHost_Paint;
 
             Thread dxThread = new Thread(() => { dxui = new DXOverlayHost(); });
+            dxThread.Start();
 
             //DBG.Debug("paint hooked");
         }

@@ -143,7 +143,6 @@ namespace Flare_Sharp.ClientBase.UI
             {
                 d2dRenderTarget.BeginDraw();
                 d2dRenderTarget.Clear(Color.Transparent);
-                d2dRenderTarget.EndDraw();
                 foreach (Category cat in CategoryHandler.registry.categories)
                 {
                     foreach (Module mod in cat.modules)
@@ -158,8 +157,9 @@ namespace Flare_Sharp.ClientBase.UI
                         }
                     }
                 }
+                d2dRenderTarget.EndDraw();
                 swapChain.Present(0, PresentFlags.None);
-                Thread.Sleep(1);
+                Thread.Sleep(10);
             });
         }
 
