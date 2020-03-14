@@ -13,7 +13,7 @@ namespace Flare_Sharp.Memory.FlameSDK
         {
             get
             {
-                MCM.readInt(addr + 0x1C0);
+                return MCM.readInt(addr + 0x1C0);
             }
             set
             {
