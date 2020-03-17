@@ -1,11 +1,5 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
-using Flare_Sharp.Memory;
-using Flare_Sharp.Memory.CraftSDK;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Flare_Sharp.Memory.FlameSDK;
 
 namespace Flare_Sharp.ClientBase.Modules.Modules
 {
@@ -17,7 +11,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            SDK.instance.player.isFalling = 0;
+            Minecraft.clientInstance.localPlayer.isFalling = 0;
         }
     }
 }

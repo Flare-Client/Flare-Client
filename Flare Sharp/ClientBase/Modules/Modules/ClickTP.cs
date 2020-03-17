@@ -1,12 +1,6 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.ClientBase.Keybinds;
-using Flare_Sharp.Memory;
-using Flare_Sharp.Memory.CraftSDK;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Flare_Sharp.Memory.FlameSDK;
 
 namespace Flare_Sharp.ClientBase.Modules.Modules
 {
@@ -23,9 +17,9 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             {
                 if(e.key == (char)0x02)
                 {
-                    if(Pointers.blockPosY > 0)
+                    if(Minecraft.clientInstance.localPlayer.level.lookingBlockY > 0)
                     {
-                        SDK.instance.player.teleport((float)Pointers.blockPosX, (float)Pointers.blockPosY + 1, (float)Pointers.blockPosZ);
+                        Minecraft.clientInstance.localPlayer.teleport((float)Minecraft.clientInstance.localPlayer.level.lookingBlockX, (float)Minecraft.clientInstance.localPlayer.level.lookingBlockY + 1, (float)Minecraft.clientInstance.localPlayer.level.lookingBlockZ);
                     }
                 }
             }

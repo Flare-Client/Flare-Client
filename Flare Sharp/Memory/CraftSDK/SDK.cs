@@ -11,12 +11,12 @@ namespace Flare_Sharp.Memory.CraftSDK
     public class SDK
     {
         public static SDK instance;
-        public LocalPlayer player;
+        public static ClientInstance client;
         public SDK()
         {
             instance = this;
-            UInt64[] offs = { 0xA8, 0x58, 0x38, 0x8, 0x0 };
-            player = new LocalPlayer(MCM.baseEvaluatePointer(0x02FFAF50, offs));
+            ulong[] offs = { 0x30, 0x0 };
+            client = new ClientInstance(MCM.baseEvaluatePointer(0x03022AE0, offs));
         }
 
         public bool IsOnMainMenu()

@@ -1,10 +1,5 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
-using Flare_Sharp.Memory.CraftSDK;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Flare_Sharp.Memory.FlameSDK;
 
 namespace Flare_Sharp.ClientBase.Modules.Modules
 {
@@ -21,15 +16,15 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            SDK.instance.player.velX = 0;
-            SDK.instance.player.velY = 0;
-            SDK.instance.player.velZ = 0;
+            Minecraft.clientInstance.localPlayer.velX = 0;
+            Minecraft.clientInstance.localPlayer.velY = 0;
+            Minecraft.clientInstance.localPlayer.velZ = 0;
             if (limitCheck <= sliderSettings[2].value || sliderSettings[2].value <= 0)
             {
                 if (delayCount >= sliderSettings[1].value)
                 {
-                    List<float> directionalVec = SDK.instance.player.lookingVec;
-                    SDK.instance.player.teleport(SDK.instance.player.X1 + sliderSettings[0].value / 10 * directionalVec[0], SDK.instance.player.Y1 + sliderSettings[0].value / 10 * -directionalVec[1], SDK.instance.player.Z1 + sliderSettings[0].value / 10 * directionalVec[2]);
+                    Utils.Vec3f directionalVec = Minecraft.clientInstance.localPlayer.lookingVec;
+                    Minecraft.clientInstance.localPlayer.teleport(Minecraft.clientInstance.localPlayer.X1 + sliderSettings[0].value / 10 * directionalVec.x, Minecraft.clientInstance.localPlayer.Y1 + sliderSettings[0].value / 10 * -directionalVec.y, Minecraft.clientInstance.localPlayer.Z1 + sliderSettings[0].value / 10 * directionalVec.z);
                     delayCount = 0;
                     limitCheck++;
                 }

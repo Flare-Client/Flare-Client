@@ -1,11 +1,5 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
-using Flare_Sharp.Memory;
-using Flare_Sharp.Memory.CraftSDK;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Flare_Sharp.Memory.FlameSDK;
 
 namespace Flare_Sharp.ClientBase.Modules.Modules
 {
@@ -19,13 +13,13 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onDisable()
         {
             base.onDisable();
-            Pointers.playerSpeed = 0.1F;
+            Minecraft.clientInstance.localPlayer.playerAttributes.speed.value = 0.1F;
         }
 
         public override void onTick()
         {
             base.onTick();
-            Pointers.playerSpeed = (float)sliderSettings[0].value/10;
+            Minecraft.clientInstance.localPlayer.playerAttributes.speed.value = (float)sliderSettings[0].value/10;
         }
     }
 }

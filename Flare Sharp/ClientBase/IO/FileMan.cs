@@ -2,7 +2,7 @@
 using Flare_Sharp.ClientBase.Modules;
 using Flare_Sharp.ClientBase.Modules.Settings;
 using Flare_Sharp.ClientBase.UI.VObjs;
-using Flare_Sharp.Memory.CraftSDK;
+using Flare_Sharp.Memory.FlameSDK;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -63,7 +63,7 @@ namespace Flare_Sharp.ClientBase.IO
                     z++;
                 }
             }
-            foreach(string targetable in EntityList.targetable)
+            foreach(string targetable in VTargetsWindow.targetable)
             {
                 root.targets.Add(targetable);
             }
