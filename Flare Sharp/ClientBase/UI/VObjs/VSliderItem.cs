@@ -1,4 +1,4 @@
-﻿using Flare_Sharp.ClientBase.IO;
+﻿
 using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.UI;
 using System;
@@ -111,7 +111,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                 if (e.key == 0x1)
                 {
                     this.dragging = false;
-                    FileMan.man.saveConfig();
+                    //
                     OverlayHost.ui.Invalidate();
                 }
             }
