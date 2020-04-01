@@ -83,7 +83,6 @@ namespace Flare_Sharp.ClientBase.Modules
             new TPFlight();
             //new ListTest();
             //new AntiSentinel();
-            new HiveFly();
             new CpuLimiter();
             new RainbowUI();
             new CubeCraftFly();

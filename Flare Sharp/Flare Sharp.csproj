@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientBase\Categories\CategoryHandler.cs" />
+    <Compile Include="ClientBase\IO\ProfileIO.cs" />
     <Compile Include="ClientBase\Keybinds\KeybindHandler.cs" />
     <Compile Include="ClientBase\Modules\Modules\Aimbot.cs" />
     <Compile Include="ClientBase\Modules\Modules\AirAcceleration.cs" />
@@ -86,7 +87,6 @@
     <Compile Include="ClientBase\Modules\Modules\Gamemode.cs" />
     <Compile Include="ClientBase\Modules\Modules\Highjump.cs" />
     <Compile Include="ClientBase\Modules\Modules\Hitbox.cs" />
-    <Compile Include="ClientBase\Modules\Modules\HiveFly.cs" />
     <Compile Include="ClientBase\Modules\Modules\InventoryMove.cs" />
     <Compile Include="ClientBase\Modules\Modules\JitterFlight.cs" />
     <Compile Include="ClientBase\Modules\Modules\Instabreak.cs" />
@@ -181,8 +181,6 @@
   <ItemGroup>
     <Content Include="Memory\VHooks\WhatsThis.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ClientBase\IO\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
