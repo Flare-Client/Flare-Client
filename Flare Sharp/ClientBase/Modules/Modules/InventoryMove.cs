@@ -9,31 +9,34 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     {
         public InventoryMove() : base("InventoryMove", CategoryHandler.registry.categories[2], (char)0x07, false)
         {
+            RegisterSliderSetting("Walk Speed", 00, 03, 05);
+            RegisterSliderSetting("Camera Speed", 00, 02, 05);
         }
 
         public override void onTick()
         {
             base.onTick();
             Utils.Vec3f directionalVec;
-            float walkSpeed = 0.3F;
+            float walkSpeed = sliderSettings[0].value / 10F;
+            float camMoveSpeed = sliderSettings[0].value / 10F;
 
             if (Minecraft.clientInstance.localPlayer.inventoryIsOpen)
             {
                 if (KeybindHandler.isKeyDown((char)0x27)) //Arrow Key -> Right
                 {
-                    Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraYaw -= 0.02F;
+                    Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraYaw -= camMoveSpeed;
                 }
                 else if (KeybindHandler.isKeyDown((char)0x25)) //Arrow Key -> Left
                 {
-                    Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraYaw += 0.02F;
+                    Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraYaw += camMoveSpeed;
                 }
                 else if (KeybindHandler.isKeyDown((char)0x26)) //Arrow Key -> Up
                 {
-                    Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraPitch += 0.02F;
+                    Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraPitch += camMoveSpeed;
                 }
                 else if (KeybindHandler.isKeyDown((char)0x28)) //Arrow Key -> Down
                 {
-                    Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraPitch -= 0.02F;
+                    Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraPitch -= camMoveSpeed;
                 }
 
                 if (KeybindHandler.isKeyDown((char)0x20))
