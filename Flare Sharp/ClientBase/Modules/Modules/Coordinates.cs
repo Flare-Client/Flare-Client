@@ -6,6 +6,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class Coordinates : Module
     {
+        public static bool savedCoordinatsDisplayRule;
         public Coordinates() : base("Coords", CategoryHandler.registry.categories[2], (char)0x07, false)
         {
         }
@@ -13,14 +14,17 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onEnable()
         {
             base.onEnable();
-            byte[] write = { 0x90, 0x90, 0x90, 0x90, 0x74, 0x07 };
-            MCM.writeBaseBytes(Statics.showCoordinates, write);
+            savedCoordinatsDisplayRule = Minecraft.clientInstance.localPlayer.level.gamerules[14].toggle;
+        }
+        public override void onTick()
+        {
+            base.onTick();
+            Minecraft.clientInstance.localPlayer.level.gamerules[14].toggle = true;
         }
         public override void onDisable()
         {
             base.onDisable();
-            byte[] write = { 0x80, 0x78, 0x04, 0x00, 0x74, 0x07 };
-            MCM.writeBaseBytes(Statics.showCoordinates, write);
+            Minecraft.clientInstance.localPlayer.level.gamerules[14].toggle = savedCoordinatsDisplayRule;
         }
     }
 }
