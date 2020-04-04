@@ -40,6 +40,12 @@ namespace Flare_Sharp.ClientBase.Modules
         {
             sliderSettings.Add(new SliderSetting(text, min, value, max));
         }
+        public List<ToggleSetting> toggleSettings = new List<ToggleSetting>();
+        public void RegisterToggleSetting(string text, bool value)
+        {
+            toggleSettings.Add(new ToggleSetting(text, value));
+        }
+
         public void startTimer(int millis)
         {
             Timer timer = new Timer();
