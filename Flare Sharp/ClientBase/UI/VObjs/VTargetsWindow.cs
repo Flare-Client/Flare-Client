@@ -1,4 +1,4 @@
-﻿using Flare_Sharp.ClientBase.IO;
+﻿
 using Flare_Sharp.UI;
 using System;
 using System.Collections.Generic;
@@ -20,9 +20,15 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             get
             {
                 List<string> returned = new List<string>();
-                foreach (VStringShelf shelf in VTargetsWindow.instance.targetObjects)
+                if(instance != null)
                 {
-                    returned.Add(shelf.text);
+                    if(instance.targetObjects != null)
+                    {
+                        foreach (VStringShelf shelf in instance.targetObjects)
+                        {
+                            returned.Add(shelf.text);
+                        }
+                    }
                 }
                 return returned;
             }
@@ -37,13 +43,13 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             shelff.width = width;
             shelff.height = 24;
             targetObjects.Add(shelff);*/
-            FileMan.man.readConfig();
+            //
             addBtn.clicked += (object a, EventArgs b)=>{
                 VStringShelf shelf = new VStringShelf();
                 shelf.width = width;
                 shelf.height = 24;
                 targetObjects.Add(shelf);
-                FileMan.man.saveConfig();
+                //
             };
             text = "Targets";
             //We have to register this manually

@@ -81,11 +81,11 @@ namespace Flare_Sharp.ClientBase.Modules
             new TabGUI();
             new ModuleList();
             new TPFlight();
-            //new ListTest();
+            new ListTest();
             //new AntiSentinel();
-            new AntiHive();
             new CpuLimiter();
             new RainbowUI();
+            new CubeCraftFly();
             Console.WriteLine("Modules registered!");
             startModuleThread();
         }
