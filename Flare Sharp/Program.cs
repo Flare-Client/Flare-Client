@@ -1,5 +1,5 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
-using Flare_Sharp.ClientBase.IO;
+
 using Flare_Sharp.ClientBase.Keybinds;
 using Flare_Sharp.ClientBase.Modules;
 using Flare_Sharp.Memory;
@@ -21,7 +21,7 @@ namespace Flare_Sharp
 {
     class Program
     {
-        public static string version = "0.0.6.4";
+        public static string version = "0.0.7";
         public static int threadSleep = 1;
         public static EventHandler<EventArgs> mainLoop;
         public static bool limitCpu = false;
@@ -40,19 +40,19 @@ namespace Flare_Sharp
                 MCM.openWindowHost();
 
                 CommandHook cmh = new CommandHook();
-                FileMan fm = new FileMan();
+                //FileMan fm = new FileMan();
                 CategoryHandler ch = new CategoryHandler();
                 ModuleHandler mh = new ModuleHandler();
                 KeybindHandler kh = new KeybindHandler();
                 Thread uiApp = new Thread(() => { OverlayHost ui = new OverlayHost(); Application.Run(ui); });
-                if (fm.readConfig())
+                /*if (fm.readConfig())
                 {
                     Console.WriteLine("Loaded config!");
                 }
                 else
                 {
                     Console.WriteLine("Could not load config!");
-                }
+                }*/
                 uiApp.Start();
                 if(args != null)
                 {

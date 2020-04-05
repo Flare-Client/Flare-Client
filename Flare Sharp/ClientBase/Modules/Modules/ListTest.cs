@@ -9,11 +9,12 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     {
         public ListTest():base("ListTest", CategoryHandler.registry.categories[0], 0x07, false)
         {
-
+            RegisterToggleSetting("Test", false);
         }
 
         public override void onEnable()
         {
+            Console.WriteLine("The toggle is: " + toggleSettings[0].value.ToString());
             List<Mob> entities = Minecraft.clientInstance.localPlayer.entityRegistry.Entities;
             Console.WriteLine("Entity List ({0})", entities.Count);
             ulong index = 0;

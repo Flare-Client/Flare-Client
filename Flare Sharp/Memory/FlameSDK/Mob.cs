@@ -22,6 +22,10 @@ namespace Flare_Sharp.Memory.FlameSDK
                 vec3.z = currentZ1;
                 return vec3;
             }
+            set
+            {
+                teleportE(value.x, value.y, value.z);
+            }
         }
         public string type
         {

@@ -396,3 +396,4 @@ MigrationBackup/
 .ionide/
 Flare Client/.vs/Flare Client/v16/.suo
 Flare Sharp/ClientBase/Modules/Modules/AntiHive.cs
+Flare Sharp/ClientBase/Modules/Modules/HiveFly.cs

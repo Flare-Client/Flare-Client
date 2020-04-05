@@ -44,61 +44,70 @@ namespace Flare_Sharp.ClientBase.Keybinds
             }
             Program.mainLoop += (object sen, EventArgs e)=>
             {
-                if (MCM.isMinecraftFocused())
+                try
                 {
-                    for (char c = (char)0; c < 0xFF; c++)
+                    if (MCM.isMinecraftFocused())
                     {
-                        noKey[c] = true;
-                        yesKey[c] = false;
-                        if (MCM.GetAsyncKeyState(c))
+                        for (char c = (char)0; c < 0xFF; c++)
                         {
-                            if (clientKeyHeldEvent != null)
-                                clientKeyHeldEvent.Invoke(this, new clientKeyEvent(c));
-                            noKey[c] = false;
-                            if (downBuffs[c] > 0)
+                            noKey[c] = true;
+                            yesKey[c] = false;
+                            if (MCM.GetAsyncKeyState(c))
                             {
-                                continue;
-                            }
-                            downBuffs[c]++;
-                            OverlayHost.ui.Invalidate();
-                            try
-                            {
-                                if (clientKeyDownEvent != null)
+                                if (clientKeyHeldEvent != null)
+                                    clientKeyHeldEvent.Invoke(this, new clientKeyEvent(c));
+                                noKey[c] = false;
+                                if (downBuffs[c] > 0)
                                 {
-                                    clientKeyDownEvent.Invoke(this, new clientKeyEvent(c));
-                                    //DBG.Debug("Dispatched key down [" + c.ToString() + "]");
+                                    continue;
                                 }
-                            }
-                            catch (Exception) { }
-                        }
-                        else
-                        {
-                            yesKey[c] = true;
-                            if (releaseBuffs[c] > 0)
-                            {
-                                continue;
-                            }
-                            releaseBuffs[c]++;
-                            OverlayHost.ui.Invalidate();
-                            if (clientKeyUpEvent != null)
-                            {
+                                downBuffs[c]++;
+                                if (OverlayHost.ui != null)
+                                    OverlayHost.ui.Invalidate();
                                 try
                                 {
-                                    clientKeyUpEvent.Invoke(this, new clientKeyEvent(c));
-                                    //DBG.Debug("Dispatched key up [" + c.ToString() + "]");
+                                    if (clientKeyDownEvent != null)
+                                    {
+                                        clientKeyDownEvent.Invoke(this, new clientKeyEvent(c));
+                                        //DBG.Debug("Dispatched key down [" + c.ToString() + "]");
+                                    }
                                 }
                                 catch (Exception) { }
                             }
-                        }
-                        if (noKey[c])
-                        {
-                            downBuffs[c] = 0;
-                        }
-                        if (!yesKey[c])
-                        {
-                            releaseBuffs[c] = 0;
+                            else
+                            {
+                                yesKey[c] = true;
+                                if (releaseBuffs[c] > 0)
+                                {
+                                    continue;
+                                }
+                                releaseBuffs[c]++;
+                                if(OverlayHost.ui != null)
+                                    OverlayHost.ui.Invalidate();
+                                if (clientKeyUpEvent != null)
+                                {
+                                    try
+                                    {
+                                        clientKeyUpEvent.Invoke(this, new clientKeyEvent(c));
+                                        //DBG.Debug("Dispatched key up [" + c.ToString() + "]");
+                                    }
+                                    catch (Exception) { }
+                                }
+                            }
+                            if (noKey[c])
+                            {
+                                downBuffs[c] = 0;
+                            }
+                            if (!yesKey[c])
+                            {
+                                releaseBuffs[c] = 0;
+                            }
                         }
                     }
+                }
+                catch(Exception)
+                {
+                    Console.WriteLine("KeyHandler failed a task!");
                 }
             };
 

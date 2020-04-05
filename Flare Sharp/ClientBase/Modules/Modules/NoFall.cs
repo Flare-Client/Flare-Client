@@ -1,6 +1,5 @@
 ﻿using Flare_Sharp.ClientBase.Categories;
 using Flare_Sharp.Memory.FlameSDK;
-using System;
 
 namespace Flare_Sharp.ClientBase.Modules.Modules
 {

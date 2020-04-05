@@ -66,13 +66,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientBase\Categories\CategoryHandler.cs" />
-    <Compile Include="ClientBase\IO\FileMan.cs" />
-    <Compile Include="ClientBase\IO\RootObject.cs" />
+    <Compile Include="ClientBase\IO\ProfileIO.cs" />
     <Compile Include="ClientBase\Keybinds\KeybindHandler.cs" />
     <Compile Include="ClientBase\Modules\Modules\Aimbot.cs" />
     <Compile Include="ClientBase\Modules\Modules\AirAcceleration.cs" />
     <Compile Include="ClientBase\Modules\Modules\AirJump.cs" />
-    <Compile Include="ClientBase\Modules\Modules\AntiSentinel.cs" />
     <Compile Include="ClientBase\Modules\Modules\AutoRespawn.cs" />
     <Compile Include="ClientBase\Modules\Modules\AutoSprint.cs" />
     <Compile Include="ClientBase\Modules\Modules\AutoSword.cs" />
@@ -83,6 +81,7 @@
     <Compile Include="ClientBase\Modules\Modules\ClickUI.cs" />
     <Compile Include="ClientBase\Modules\Modules\CpuLimiter.cs" />
     <Compile Include="ClientBase\Modules\Modules\Criticals.cs" />
+    <Compile Include="ClientBase\Modules\Modules\CubeCraftFly.cs" />
     <Compile Include="ClientBase\Modules\Modules\FastLadder.cs" />
     <Compile Include="ClientBase\Modules\Modules\Freecam.cs" />
     <Compile Include="ClientBase\Modules\Modules\Gamemode.cs" />
@@ -123,14 +122,17 @@
     <Compile Include="ClientBase\Modules\Modules\Recall.cs" />
     <Compile Include="ClientBase\Modules\Settings\Setting.cs" />
     <Compile Include="ClientBase\Modules\Settings\SliderSetting.cs" />
+    <Compile Include="ClientBase\Modules\Settings\ToggleSetting.cs" />
     <Compile Include="ClientBase\Modules\VisualModule.cs" />
     <Compile Include="ClientBase\UI\VObjs\VAddButton.cs" />
     <Compile Include="ClientBase\UI\VObjs\VKeybindItem.cs" />
     <Compile Include="ClientBase\UI\VObjs\VModuleSliderSetting.cs" />
+    <Compile Include="ClientBase\UI\VObjs\VModuleToggleSetting.cs" />
     <Compile Include="ClientBase\UI\VObjs\VSliderItem.cs" />
     <Compile Include="ClientBase\UI\VObjs\VStringShelf.cs" />
     <Compile Include="ClientBase\UI\VObjs\VSubShelfItem.cs" />
     <Compile Include="ClientBase\UI\VObjs\VTargetsWindow.cs" />
+    <Compile Include="ClientBase\UI\VObjs\VToggleItem.cs" />
     <Compile Include="DBG.cs" />
     <Compile Include="Memory\FlameSDK\Actor.cs" />
     <Compile Include="Memory\FlameSDK\AttributeInstance.cs" />
@@ -182,5 +184,6 @@
   <ItemGroup>
     <Content Include="Memory\VHooks\WhatsThis.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
