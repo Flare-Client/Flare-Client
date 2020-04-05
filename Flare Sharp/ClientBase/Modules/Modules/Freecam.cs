@@ -13,6 +13,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         byte savedFlightState;
         public Freecam() : base("Freecam", CategoryHandler.registry.categories[3], (char)0x07, false)
         {
+            RegisterToggleSetting("Revert State", true);
         }
 
         public override void onEnable()
@@ -30,14 +31,23 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onDisable()
         {
             base.onDisable();
-            Minecraft.clientInstance.localPlayer.teleport(savedCoordinates[0], savedCoordinates[1], savedCoordinates[2]);
-            Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraPitch = savedPitchAndYaw[0];
-            Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraYaw = savedPitchAndYaw[1];
-            Minecraft.clientInstance.localPlayer.isFlying = savedFlightState;
-            savedCoordinates.Clear();
-            savedPitchAndYaw.Clear();
-            byte[] write = { 0xFF, 0x50, 0x08 };
-            MCM.writeBaseBytes(Statics.movementPacket, write);
+            if (toggleSettings[0].value)
+            {
+                Minecraft.clientInstance.localPlayer.teleport(savedCoordinates[0], savedCoordinates[1], savedCoordinates[2]);
+                Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraPitch = savedPitchAndYaw[0];
+                Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraYaw = savedPitchAndYaw[1];
+                Minecraft.clientInstance.localPlayer.isFlying = savedFlightState;
+                savedCoordinates.Clear();
+                savedPitchAndYaw.Clear();
+                byte[] write = { 0xFF, 0x50, 0x08 };
+                MCM.writeBaseBytes(Statics.movementPacket, write);
+            } else
+            {
+                savedCoordinates.Clear();
+                savedPitchAndYaw.Clear();
+                byte[] write = { 0xFF, 0x50, 0x08 };
+                MCM.writeBaseBytes(Statics.movementPacket, write);
+            }
         }
     }
 }

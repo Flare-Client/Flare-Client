@@ -6,11 +6,11 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class AutoSword : Module
     {
-
         int autoSwordCounter;
 
         public AutoSword() : base("AutoSword", CategoryHandler.registry.categories[0], (char)0x07, false)
         {
+            RegisterToggleSetting("Only near enemies", true);
             RegisterSliderSetting("Range", 0, 120, 240);
         }
 
@@ -18,36 +18,59 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
             base.onTick();
 
-            List<Mob> Entity = Minecraft.clientInstance.localPlayer.entityRegistry.targetableEntities;
-
-            foreach (Mob e in Entity)
+            if (toggleSettings[0].value)
             {
-                double distance = e.distanceTo(Minecraft.clientInstance.localPlayer);
+                List<Mob> Entity = Minecraft.clientInstance.localPlayer.entityRegistry.targetableEntities;
 
-                if (distance <= (float)sliderSettings[0].value / 10F)
+                foreach (Mob e in Entity)
                 {
-                    autoSwordCounter += 1;
+                    double distance = e.distanceTo(Minecraft.clientInstance.localPlayer);
 
-                    int heldItemID = Minecraft.clientInstance.localPlayer.heldItemID;
-
-                    if (autoSwordCounter > 4)
+                    if (distance <= (float)sliderSettings[0].value / 10F)
                     {
-                        if (heldItemID != 276 && heldItemID != 283 && heldItemID != 267 && heldItemID != 272 && heldItemID != 268)
+                        autoSwordCounter += 1;
+
+                        int heldItemID = Minecraft.clientInstance.localPlayer.heldItemID;
+
+                        if (autoSwordCounter > 4)
                         {
-                            if (Minecraft.clientInstance.localPlayer.inventoryProxy.selectedHotbarSlot < 8)
+                            if (heldItemID != 276 && heldItemID != 283 && heldItemID != 267 && heldItemID != 272 && heldItemID != 268)
                             {
-                                Minecraft.clientInstance.localPlayer.inventoryProxy.selectedHotbarSlot += 1;
+                                if (Minecraft.clientInstance.localPlayer.inventoryProxy.selectedHotbarSlot < 8)
+                                {
+                                    Minecraft.clientInstance.localPlayer.inventoryProxy.selectedHotbarSlot += 1;
+                                }
+                                else
+                                {
+                                    Minecraft.clientInstance.localPlayer.inventoryProxy.selectedHotbarSlot = 0;
+                                }
                             }
-                            else
-                            {
-                                Minecraft.clientInstance.localPlayer.inventoryProxy.selectedHotbarSlot = 0;
-                            }
+                            autoSwordCounter = 0;
                         }
-                        autoSwordCounter = 0;
                     }
+                }
+            } else
+            {
+                autoSwordCounter += 1;
+
+                int heldItemID = Minecraft.clientInstance.localPlayer.heldItemID;
+
+                if (autoSwordCounter > 4)
+                {
+                    if (heldItemID != 276 && heldItemID != 283 && heldItemID != 267 && heldItemID != 272 && heldItemID != 268)
+                    {
+                        if (Minecraft.clientInstance.localPlayer.inventoryProxy.selectedHotbarSlot < 8)
+                        {
+                            Minecraft.clientInstance.localPlayer.inventoryProxy.selectedHotbarSlot += 1;
+                        }
+                        else
+                        {
+                            Minecraft.clientInstance.localPlayer.inventoryProxy.selectedHotbarSlot = 0;
+                        }
+                    }
+                    autoSwordCounter = 0;
                 }
             }
         }
-
     }
 }

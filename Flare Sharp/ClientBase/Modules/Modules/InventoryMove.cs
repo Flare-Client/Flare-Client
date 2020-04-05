@@ -11,6 +11,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
             RegisterSliderSetting("Walk Speed", 00, 03, 05);
             RegisterSliderSetting("Camera Speed", 00, 02, 05);
+            RegisterToggleSetting("Move Head", true);
         }
 
         public override void onTick()
@@ -22,21 +23,24 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 
             if (Minecraft.clientInstance.localPlayer.inventoryIsOpen)
             {
-                if (KeybindHandler.isKeyDown((char)0x27)) //Arrow Key -> Right
+                if (toggleSettings[0].value)
                 {
-                    Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraYaw -= camMoveSpeed;
-                }
-                else if (KeybindHandler.isKeyDown((char)0x25)) //Arrow Key -> Left
-                {
-                    Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraYaw += camMoveSpeed;
-                }
-                else if (KeybindHandler.isKeyDown((char)0x26)) //Arrow Key -> Up
-                {
-                    Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraPitch += camMoveSpeed;
-                }
-                else if (KeybindHandler.isKeyDown((char)0x28)) //Arrow Key -> Down
-                {
-                    Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraPitch -= camMoveSpeed;
+                    if (KeybindHandler.isKeyDown((char)0x27)) //Arrow Key -> Right
+                    {
+                        Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraYaw -= camMoveSpeed;
+                    }
+                    else if (KeybindHandler.isKeyDown((char)0x25)) //Arrow Key -> Left
+                    {
+                        Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraYaw += camMoveSpeed;
+                    }
+                    else if (KeybindHandler.isKeyDown((char)0x26)) //Arrow Key -> Up
+                    {
+                        Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraPitch += camMoveSpeed;
+                    }
+                    else if (KeybindHandler.isKeyDown((char)0x28)) //Arrow Key -> Down
+                    {
+                        Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraPitch -= camMoveSpeed;
+                    }
                 }
 
                 if (KeybindHandler.isKeyDown((char)0x20))
