@@ -7,31 +7,38 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class Triggerbot : Module
     {
+        public static int triggerbotCounter = 0;
         public Triggerbot() : base("Triggerbot", CategoryHandler.registry.categories[0], (char)0x07, false)
         {
+            RegisterSliderSetting("Delay", 0, 0, 500);
         }
 
         public override void onTick()
         {
             base.onTick();
-            Mob facing = Minecraft.clientInstance.localPlayer.level.lookingEntity;
-            if (facing.movedTick > 1)
+            triggerbotCounter++;
+            if(triggerbotCounter > sliderSettings[0].value)
             {
-                if (VTargetsWindow.targetable.Contains(facing.type))
+                Mob facing = Minecraft.clientInstance.localPlayer.level.lookingEntity;
+                if (facing.movedTick > 1)
                 {
-                    if (facing.addr > 0)
+                    if (VTargetsWindow.targetable.Contains(facing.type))
                     {
-                        MCM.writeBaseByte(Statics.attackSwing, 0);
-                    }
-                    else
-                    {
-                        MCM.writeBaseByte(Statics.attackSwing, 1);
+                        if (facing.addr > 0)
+                        {
+                            MCM.writeBaseByte(Statics.attackSwing, 0);
+                        }
+                        else
+                        {
+                            MCM.writeBaseByte(Statics.attackSwing, 1);
+                        }
                     }
                 }
-            }
-            if (facing.addr <= 0)
-            {
-                MCM.writeBaseByte(Statics.attackSwing, 1);
+                if (facing.addr <= 0)
+                {
+                    MCM.writeBaseByte(Statics.attackSwing, 1);
+                }
+                triggerbotCounter = 0;
             }
         }
 
