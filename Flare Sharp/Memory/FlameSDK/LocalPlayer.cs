@@ -17,14 +17,14 @@ namespace Flare_Sharp.Memory.FlameSDK
         {
             get
             {
-                return new EntityRegistry(MCM.evaluatePointer(addr,MCM.ceByte2uLong("8 50 120 0")));
+                return new EntityRegistry(MCM.evaluatePointer(addr + 0x820, MCM.ceByte2uLong("0 118")));
             }
         }
         public Level level
         {
             get
             {
-                return new Level(MCM.readInt64(addr + 0x358));
+                return new Level(MCM.readInt64(addr + 0x330));
             }
         }
         public PlayerInventoryProxy inventoryProxy

@@ -14,12 +14,12 @@ namespace Flare_Sharp.Memory.FlameSDK
             get
             {
                 List<Mob> entityList = new List<Mob>();
-                UInt64 likelySize = MCM.readBaseInt64(0x30366B0);
+                UInt64 likelySize = MCM.readBaseInt64(0x3090EE0);
 
                 for (UInt64 index = 0; index < likelySize; index++)
                 {
                     UInt64[] startOffs = { index * 0x8 };
-                    UInt64 indexedEntity = MCM.readInt64(MCM.evaluatePointer(addr + 0x38, startOffs));
+                    UInt64 indexedEntity = MCM.readInt64(MCM.evaluatePointer(addr, startOffs));
                     if (indexedEntity == Minecraft.clientInstance.localPlayer.addr) continue;
 
                     Mob eObj = new Mob(indexedEntity);
@@ -36,12 +36,12 @@ namespace Flare_Sharp.Memory.FlameSDK
             get
             {
                 List<Mob> entityList = new List<Mob>();
-                UInt64 likelySize = MCM.readBaseInt64(0x30366B0);
+                UInt64 likelySize = MCM.readBaseInt64(0x3090EE0);
 
                 for (UInt64 index = 0; index < likelySize; index++)
                 {
                     UInt64[] startOffs = { index * 0x8 };
-                    UInt64 indexedEntity = MCM.readInt64(MCM.evaluatePointer(addr + 0x38, startOffs));
+                    UInt64 indexedEntity = MCM.readInt64(MCM.evaluatePointer(addr, startOffs));
                     if (indexedEntity == Minecraft.clientInstance.localPlayer.addr) continue;
 
                     Mob eObj = new Mob(indexedEntity);
@@ -58,6 +58,7 @@ namespace Flare_Sharp.Memory.FlameSDK
         }
         public EntityRegistry(ulong addr) : base(addr)
         {
+            Console.WriteLine("Ent Reg Addr:"+addr.ToString("X"));
         }
     }
 }
