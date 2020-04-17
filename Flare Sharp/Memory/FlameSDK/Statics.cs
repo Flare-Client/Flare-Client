@@ -16,7 +16,7 @@ namespace Flare_Sharp.Memory.FlameSDK
         public static int showCoordinates = 0x6532CF; //v1.14.6 (Idk why I updated this as we are using game rules now)
         public static int blockFace = 0x0; //Update soon
         public static int noPacket = 0xFF3E6D; //v1.14.6
-        public static int movementPacket = 0x8AD747;
+        public static int movementPacket = 0x900617; //v1.14.6
         public static int NoSlowDown1 = 0x1A653C9;
         public static int NoSlowDown2 = 0xF7C376;
         public static int NoKnockBackX = 0x121A8D2;
