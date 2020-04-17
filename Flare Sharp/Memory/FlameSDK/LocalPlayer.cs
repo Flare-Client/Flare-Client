@@ -102,11 +102,11 @@ namespace Flare_Sharp.Memory.FlameSDK
         {
             get
             {
-                return MCM.readByte(addr + 0xA90);
+                return MCM.readByte(addr + 0xAB8);
             }
             set
             {
-                MCM.writeByte(addr+0xA90, value);
+                MCM.writeByte(addr+ 0xAB8, value);
             }
         }
         public byte isInAir
@@ -124,22 +124,22 @@ namespace Flare_Sharp.Memory.FlameSDK
         {
             get
             {
-                return MCM.readInt(addr+0x23D);
+                return MCM.readInt(addr+0x215);
             }
             set
             {
-                MCM.writeInt(addr + 0x23D, value);
+                MCM.writeInt(addr + 0x215, value);
             }
         }
         public int currentGamemode
         {
             get
             {
-                return MCM.readInt(addr+ 0x1DB4);
+                return MCM.readInt(addr+ 0x1E74);
             }
             set
             {
-                MCM.writeInt(addr + 0x1DB4, value);
+                MCM.writeInt(addr + 0x1E74, value);
             }
         }
         public int viewCreativeItems
@@ -169,66 +169,66 @@ namespace Flare_Sharp.Memory.FlameSDK
         {
             get
             {
-                return MCM.readFloat(addr+0x430);
+                return MCM.readFloat(addr+0xD88);
             }
             set
             {
-                MCM.writeFloat(addr + 0x430, value);
+                MCM.writeFloat(addr + 0xD88, value);
             }
         }
         public float Y1
         {
             get
             {
-                return MCM.readFloat(addr+0x434);
+                return MCM.readFloat(addr+0xD8C);
             }
             set
             {
-                MCM.writeFloat(addr + 0x434, value);
+                MCM.writeFloat(addr + 0xD8C, value);
             }
         }
         public float Z1
         {
             get
             {
-                return MCM.readFloat(addr+0x438);
+                return MCM.readFloat(addr+0xD90);
             }
             set
             {
-                MCM.writeFloat(addr + 0x438, value);
+                MCM.writeFloat(addr + 0xD90, value);
             }
         }
         public float X2
         {
             get
             {
-                return MCM.readFloat(addr+0x43C);
+                return MCM.readFloat(addr+0xD94);
             }
             set
             {
-                MCM.writeFloat(addr + 0x43C, value);
+                MCM.writeFloat(addr + 0xD94, value);
             }
         }
         public float Y2
         {
             get
             {
-                return MCM.readFloat(addr+0x440);
+                return MCM.readFloat(addr+0xD98);
             }
             set
             {
-                MCM.writeFloat(addr + 0x440, value);
+                MCM.writeFloat(addr + 0xD98, value);
             }
         }
         public float Z2
         {
             get
             {
-                return MCM.readFloat(addr+0x444);
+                return MCM.readFloat(addr+0xD9C);
             }
             set
             {
-                MCM.writeFloat(addr + 0x444, value);
+                MCM.writeFloat(addr + 0xD9C, value);
             }
         }
         public int isFalling
@@ -246,44 +246,44 @@ namespace Flare_Sharp.Memory.FlameSDK
         {
             get
             {
-                return MCM.readFloat(addr+0x220);
+                return MCM.readFloat(addr+0x1BC);
             }
             set
             {
-                MCM.writeFloat(addr + 0x220, value);
+                MCM.writeFloat(addr + 0x1BC, value);
             }
         }
         public float velX
         {
             get
             {
-                return MCM.readFloat(addr+0x46C);
+                return MCM.readFloat(addr+0x494);
             }
             set
             {
-                MCM.writeFloat(addr + 0x46C, value);
+                MCM.writeFloat(addr + 0x494, value);
             }
         }
         public float velY
         {
             get
             {
-                return MCM.readFloat(addr+0x470);
+                return MCM.readFloat(addr+0x498);
             }
             set
             {
-                MCM.writeFloat(addr + 0x470, value);
+                MCM.writeFloat(addr + 0x498, value);
             }
         }
         public float velZ
         {
             get
             {
-                return MCM.readFloat(addr+0x474);
+                return MCM.readFloat(addr+0x49C);
             }
             set
             {
-                MCM.writeFloat(addr + 0x474, value);
+                MCM.writeFloat(addr + 0x49C, value);
             }
         }
         public float yaw
@@ -313,7 +313,7 @@ namespace Flare_Sharp.Memory.FlameSDK
         {
             get
             {
-                return MCM.readByte(addr+0x2102);
+                return MCM.readByte(addr+ 0x225A);
             }
             set
             {
@@ -336,7 +336,7 @@ namespace Flare_Sharp.Memory.FlameSDK
         {
             get
             {
-                return MCM.readInt(addr+0x11FE) == 262144;
+                return MCM.readInt(addr+ 0x12BE) == 262144;
             }
         }
     }
