@@ -10,7 +10,7 @@ namespace Flare_Sharp.Memory.FlameSDK
     {
         public static int attackSwing = 0x102E23E;
         public static int handSwingPacket = 0x8AADBF;
-        public static int rapidPlace = 0x102E1C3;
+        public static int rapidPlace = 0x1080940; //v1.14.6
         public static int autoSprint = 0x1A652C0;
         public static int criticalsPacket = 0xFDBC66;
         public static int showCoordinates = 0x6029FD;
