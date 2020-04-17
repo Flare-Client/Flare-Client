@@ -17,11 +17,9 @@ namespace Flare_Sharp.Memory.FlameSDK
         public static int blockFace = 0x0; //Update soon
         public static int noPacket = 0xFF3E6D; //v1.14.6
         public static int movementPacket = 0x900617; //v1.14.6
-        public static int NoSlowDown1 = 0x1A653C9;
-        public static int NoSlowDown2 = 0xF7C376;
-        public static int NoKnockBackX = 0x121A8D2;
-        public static int NoKnockBackY = 0x121A8DB;
-        public static int NoKnockBackZ = 0x121A8E4;
+        public static int NoSlowDown1 = 0x0; //Update soon
+        public static int NoSlowDown2 = 0x0; //Update soon
+        public static int NoKnockBack = 0x126D0C2;
         public static int webTick = 0x1211905;
         public static int ladderUp = 0x13D7430;
         public static int ladderDown = 0x13CD065;
