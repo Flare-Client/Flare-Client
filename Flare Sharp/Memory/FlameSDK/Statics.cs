@@ -9,13 +9,13 @@ namespace Flare_Sharp.Memory.FlameSDK
     public class Statics
     {
         public static int attackSwing = 0x10809BE; //v1.14.6
-        public static int handSwingPacket = 0x0;
+        public static int handSwingPacket = 0x0; //Update soon
         public static int rapidPlace = 0x1080940; //v1.14.6
         public static int autoSprint = 0x1ABC1E0; //v1.14.6
         public static int criticalsPacket = 0x102D926; //v1.14.6
-        public static int showCoordinates = 0x6029FD;
-        public static int blockFace = 0x5D53C4;
-        public static int noPacket = 0xFA21DD;
+        public static int showCoordinates = 0x6532CF; //v1.14.6 (Idk why I updated this as we are using game rules now)
+        public static int blockFace = 0x0; //Update soon
+        public static int noPacket = 0xFF3E6D; //v1.14.6
         public static int movementPacket = 0x8AD747;
         public static int NoSlowDown1 = 0x1A653C9;
         public static int NoSlowDown2 = 0xF7C376;
