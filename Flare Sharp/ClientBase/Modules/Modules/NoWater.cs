@@ -21,7 +21,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onDisable()
         {
             base.onDisable();
-            byte[] offs = { 0xC6, 0x83, 0x3D, 0x02, 0x00, 0x00, 0x01 };
+            byte[] offs = { 0xC6, 0x83, 0x15, 0x02, 0x00, 0x00, 0x01 }; //Extra offset needed? EB
             MCM.writeBaseBytes(Statics.inWaterTick, offs);
         }
     }

@@ -19,13 +19,13 @@ namespace Flare_Sharp.Memory.FlameSDK
         public static int movementPacket = 0x900617; //v1.14.6
         public static int NoSlowDown1 = 0x0; //Update soon
         public static int NoSlowDown2 = 0x0; //Update soon
-        public static int NoKnockBack = 0x126D0C2;
-        public static int webTick = 0x1211905;
-        public static int ladderUp = 0x13D7430;
-        public static int ladderDown = 0x13CD065;
-        public static int inWaterTick = 0x1222DAD;
+        public static int NoKnockBack = 0x126D0C2; //v1.14.6
+        public static int webTick = 0x1264065; //v1.14.6
+        public static int ladderUp = 0x1429E80; //v1.14.6
+        public static int ladderDown = 0x141FAA8; //v1.14.6
+        public static int inWaterTick = 0x127559D; //v1.14.6
         public static int survivalReachCmp = 0x626171; //v1.14.6
-        public static int blockBreak = 0x14A6125;
-        public static int shadowRenderer = 0xA17A85;
+        public static int blockBreak = 0x14FC515; //v1.14.6
+        public static int shadowRenderer = 0xA69F05; //v1.14.6
     }
 }
