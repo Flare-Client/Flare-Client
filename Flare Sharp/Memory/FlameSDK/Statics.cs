@@ -12,7 +12,7 @@ namespace Flare_Sharp.Memory.FlameSDK
         public static int handSwingPacket = 0x0;
         public static int rapidPlace = 0x1080940; //v1.14.6
         public static int autoSprint = 0x1ABC1E0; //v1.14.6
-        public static int criticalsPacket = 0xFDBC66;
+        public static int criticalsPacket = 0x102D926; //v1.14.6
         public static int showCoordinates = 0x6029FD;
         public static int blockFace = 0x5D53C4;
         public static int noPacket = 0xFA21DD;
