@@ -40,5 +40,12 @@ namespace Flare_Sharp.Memory.FlameSDK
                 return new FirstPersonLookBehavior(MCM.evaluatePointer(addr + 0xE0, MCM.ceByte2uLong("28 38 168 0 0")));
             }
         }
+        public FloatOption floatOption
+        {
+            get
+            {
+                return new FloatOption(MCM.evaluatePointer(addr + 0xC8, MCM.ceByte2uLong("B8 120 0")));
+            }
+        }
     }
 }

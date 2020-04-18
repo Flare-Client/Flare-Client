@@ -137,6 +137,7 @@
     <Compile Include="Memory\FlameSDK\ClientInstance.cs" />
     <Compile Include="ClientBase\Modules\Modules\Flight.cs" />
     <Compile Include="Memory\FlameSDK\FirstPersonLookBehavior.cs" />
+    <Compile Include="Memory\FlameSDK\FloatOption.cs" />
     <Compile Include="Memory\FlameSDK\Gamerule.cs" />
     <Compile Include="Memory\FlameSDK\Inventory.cs" />
     <Compile Include="Memory\FlameSDK\Item.cs" />
