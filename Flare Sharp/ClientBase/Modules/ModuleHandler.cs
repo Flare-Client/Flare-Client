@@ -51,7 +51,6 @@ namespace Flare_Sharp.ClientBase.Modules
             new NoSlowDown();
             new NoKnockBack();
             new NoWeb();
-            new Step();
             new FastLadder();
             new AirAcceleration();
             new Velocity();

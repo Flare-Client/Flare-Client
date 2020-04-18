@@ -242,17 +242,6 @@ namespace Flare_Sharp.Memory.FlameSDK
                 MCM.writeInt(addr + 0x194, value);
             }
         }
-        public float blockCollisionStep
-        {
-            get
-            {
-                return MCM.readFloat(addr+0x1BC);
-            }
-            set
-            {
-                MCM.writeFloat(addr + 0x1BC, value);
-            }
-        }
         public float velX
         {
             get

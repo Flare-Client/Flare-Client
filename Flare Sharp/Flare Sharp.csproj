@@ -110,7 +110,6 @@
     <Compile Include="ClientBase\Modules\Modules\RapidClick.cs" />
     <Compile Include="ClientBase\Modules\Modules\Reach.cs" />
     <Compile Include="ClientBase\Modules\Modules\Scaffold.cs" />
-    <Compile Include="ClientBase\Modules\Modules\Step.cs" />
     <Compile Include="ClientBase\Modules\Modules\TabGUI.cs" />
     <Compile Include="ClientBase\Modules\Modules\TickedGlide.cs" />
     <Compile Include="ClientBase\Modules\Modules\Tower.cs" />
