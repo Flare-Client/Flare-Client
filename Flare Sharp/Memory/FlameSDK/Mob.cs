@@ -60,66 +60,66 @@ namespace Flare_Sharp.Memory.FlameSDK
         {
             get
             {
-                return MCM.readFloat(addr + 0xD88);
+                return MCM.readFloat(addr + 0x458);
             }
             set
             {
-                MCM.writeFloat(addr + 0xD88, value);
+                MCM.writeFloat(addr + 0x458, value);
             }
         }
         public float currentY1
         {
             get
             {
-                return MCM.readFloat(addr + 0xD8C);
+                return MCM.readFloat(addr + 0x45C);
             }
             set
             {
-                MCM.writeFloat(addr + 0xD8C, value);
+                MCM.writeFloat(addr + 0x45C, value);
             }
         }
         public float currentZ1
         {
             get
             {
-                return MCM.readFloat(addr + 0xD90);
+                return MCM.readFloat(addr + 0x460);
             }
             set
             {
-                MCM.writeFloat(addr + 0xD90, value);
+                MCM.writeFloat(addr + 0x460, value);
             }
         }
         public float currentX2
         {
             get
             {
-                return MCM.readFloat(addr + 0xD94);
+                return MCM.readFloat(addr + 0x464);
             }
             set
             {
-                MCM.writeFloat(addr+ 0xD94, value);
+                MCM.writeFloat(addr+ 0x464, value);
             }
         }
         public float currentY2
         {
             get
             {
-                return MCM.readFloat(addr + 0xD98);
+                return MCM.readFloat(addr + 0x468);
             }
             set
             {
-                MCM.writeFloat(addr+ 0xD98, value);
+                MCM.writeFloat(addr+ 0x468, value);
             }
         }
         public float currentZ2
         {
             get
             {
-                return MCM.readFloat(addr+0xD9C);
+                return MCM.readFloat(addr+ 0x46C);
             }
             set
             {
-                MCM.writeFloat(addr+ 0xD9C, value);
+                MCM.writeFloat(addr+ 0x46C, value);
             }
         }
         public float currentX3
