@@ -31,139 +31,139 @@ namespace Flare_Sharp.Memory.FlameSDK
         {
             get
             {
-                return MCM.readString(addr+0x388, 20);
+                return MCM.readString(addr+ 0x3B0, 20);
             }
         }
         public float hitboxWidth
         {
             get
             {
-                return MCM.readFloat(addr + 0x44C);
+                return MCM.readFloat(addr + 0x474);
             }
             set
             {
-                MCM.writeFloat(addr + 0x44C, value);
+                MCM.writeFloat(addr + 0x474, value);
             }
         }
         public float hitboxHeight
         {
             get
             {
-                return MCM.readFloat(addr + 0x450);
+                return MCM.readFloat(addr + 0x478);
             }
             set
             {
-                MCM.writeFloat(addr + 0x450, value);
+                MCM.writeFloat(addr + 0x478, value);
             }
         }
         public float currentX1
         {
             get
             {
-                return MCM.readFloat(addr + 0x454);
+                return MCM.readFloat(addr + 0xD88);
             }
             set
             {
-                MCM.writeFloat(addr + 0x454, value);
+                MCM.writeFloat(addr + 0xD88, value);
             }
         }
         public float currentY1
         {
             get
             {
-                return MCM.readFloat(addr + 0x458);
+                return MCM.readFloat(addr + 0xD8C);
             }
             set
             {
-                MCM.writeFloat(addr + 0x458, value);
+                MCM.writeFloat(addr + 0xD8C, value);
             }
         }
         public float currentZ1
         {
             get
             {
-                return MCM.readFloat(addr + 0x45C);
+                return MCM.readFloat(addr + 0xD90);
             }
             set
             {
-                MCM.writeFloat(addr + 0x45C, value);
+                MCM.writeFloat(addr + 0xD90, value);
             }
         }
         public float currentX2
         {
             get
             {
-                return MCM.readFloat(addr + 0x460);
+                return MCM.readFloat(addr + 0xD94);
             }
             set
             {
-                MCM.writeFloat(addr+0x460, value);
+                MCM.writeFloat(addr+ 0xD94, value);
             }
         }
         public float currentY2
         {
             get
             {
-                return MCM.readFloat(addr + 0x464);
+                return MCM.readFloat(addr + 0xD98);
             }
             set
             {
-                MCM.writeFloat(addr+0x464, value);
+                MCM.writeFloat(addr+ 0xD98, value);
             }
         }
         public float currentZ2
         {
             get
             {
-                return MCM.readFloat(addr+0x468);
+                return MCM.readFloat(addr+0xD9C);
             }
             set
             {
-                MCM.writeFloat(addr+0x468, value);
+                MCM.writeFloat(addr+ 0xD9C, value);
             }
         }
         public float currentX3
         {
             get
             {
-                return MCM.readFloat(addr+0x8C4);
+                return MCM.readFloat(addr+0x488);
             }
             set
             {
-                MCM.writeFloat(addr + 0x8C4, value);
+                MCM.writeFloat(addr + 0x488, value);
             }
         }
         public float currentY3
         {
             get
             {
-                return MCM.readFloat(addr+0x8C8);
+                return MCM.readFloat(addr+ 0x48C);
             }
             set
             {
-                MCM.writeFloat(addr + 0x8C8, value);
+                MCM.writeFloat(addr + 0x48C, value);
             }
         }
         public float currentZ3
         {
             get
             {
-                return MCM.readFloat(addr + 0x8CC);
+                return MCM.readFloat(addr + 0x490);
             }
             set
             {
-                MCM.writeFloat(addr + 0x8CC, value);
+                MCM.writeFloat(addr + 0x490, value);
             }
         }
         public int movedTick
         {
             get
             {
-                return MCM.readInt(addr+ 0x32C);
+                return MCM.readInt(addr+ 0x304);
             }
             set
             {
-                MCM.writeInt(addr + 0x32C, value);
+                MCM.writeInt(addr + 0x304, value);
             }
         }
         public void teleportE(float x, float y, float z)
