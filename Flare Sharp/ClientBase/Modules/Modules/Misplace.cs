@@ -13,7 +13,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            foreach (Mob e in Minecraft.clientInstance.localPlayer.entityRegistry.targetableEntities)
+            foreach (Mob e in Minecraft.clientInstance.localPlayer.level.getMovingEntities)
             {
                 if (e.distanceTo(Minecraft.clientInstance.localPlayer) < 2)
                 {

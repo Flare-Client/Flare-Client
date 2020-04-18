@@ -73,6 +73,38 @@ namespace Flare_Sharp.Memory.FlameSDK
             }
         }
 
+        public List<Mob> getMovingEntities
+        {
+            get
+            {
+                List<Mob> Entities = new List<Mob>();
+                ulong startList = MCM.readInt64(addr + 0x40);
+                ulong endList = MCM.readInt64(addr + 0x48);
+                for (ulong ent = startList; ent < endList; ent += 0x8)
+                {
+                    Mob entObj = new Mob(MCM.readInt64(ent));
+                    if (entObj.movedTick > 1) Entities.Add(entObj);
+                }
+                return Entities;
+            }
+        }
+
+        public List<Mob> getAllEntities
+        {
+            get
+            {
+                List<Mob> Entities = new List<Mob>();
+                ulong startList = MCM.readInt64(addr + 0x40);
+                ulong endList = MCM.readInt64(addr + 0x48);
+                for (ulong ent = startList; ent < endList; ent += 0x8)
+                {
+                    Mob entObj = new Mob(MCM.readInt64(ent));
+                    Entities.Add(entObj);
+                }
+                return Entities;
+            }
+        }
+
         public List<Gamerule> gamerules
         {
             get

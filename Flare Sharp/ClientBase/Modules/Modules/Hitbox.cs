@@ -15,8 +15,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            List<Mob> entList = Minecraft.clientInstance.localPlayer.entityRegistry.targetableEntities;
-            foreach(Mob e in entList)
+            List<Mob> entList = Minecraft.clientInstance.localPlayer.level.getMovingEntities;
+            foreach (Mob e in entList)
             {
                 e.hitboxHeight = (float)sliderSettings[0].value / 10;
                 e.hitboxWidth = (float)sliderSettings[1].value / 10;
@@ -26,7 +26,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onDisable()
         {
             base.onDisable();
-            List<Mob> entList = Minecraft.clientInstance.localPlayer.entityRegistry.targetableEntities;
+            List<Mob> entList = Minecraft.clientInstance.localPlayer.level.getAllEntities;
             foreach (Mob e in entList)
             {
                 e.hitboxHeight = 0.6f;
