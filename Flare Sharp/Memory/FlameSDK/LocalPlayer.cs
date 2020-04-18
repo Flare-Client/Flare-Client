@@ -146,11 +146,11 @@ namespace Flare_Sharp.Memory.FlameSDK
         {
             get
             {
-                return MCM.readInt(addr+ 0xAA8);
+                return MCM.readInt(addr+ 0xAD0);
             }
             set
             {
-                MCM.writeInt(addr + 0xAA8, value);
+                MCM.writeInt(addr + 0xAD0, value);
             }
         }
         public float airAcceleration
