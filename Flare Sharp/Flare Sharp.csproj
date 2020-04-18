@@ -82,6 +82,7 @@
     <Compile Include="ClientBase\Modules\Modules\Criticals.cs" />
     <Compile Include="ClientBase\Modules\Modules\CubeCraftFly.cs" />
     <Compile Include="ClientBase\Modules\Modules\FastLadder.cs" />
+    <Compile Include="ClientBase\Modules\Modules\FOV.cs" />
     <Compile Include="ClientBase\Modules\Modules\Freecam.cs" />
     <Compile Include="ClientBase\Modules\Modules\Gamemode.cs" />
     <Compile Include="ClientBase\Modules\Modules\Highjump.cs" />

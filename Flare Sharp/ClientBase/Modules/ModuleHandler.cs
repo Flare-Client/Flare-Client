@@ -71,6 +71,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new Instabreak();
             new AutoRespawn();
             new Recall();
+            new FOV();
             new NoPacket(); //42
             new Freecam();
             new NoShadow();
