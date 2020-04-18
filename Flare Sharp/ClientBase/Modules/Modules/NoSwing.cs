@@ -13,13 +13,15 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onEnable()
         {
             base.onEnable();
-            MCM.writeBaseByte(Statics.handSwingPacket, 1);
+            byte[] write = { 0xC6, 0x83, 0xB4, 0x08, 0x00, 0x00, 00 };
+            MCM.writeBaseBytes(Statics.handSwingPacket, write);
         }
 
         public override void onDisable()
         {
             base.onDisable();
-            MCM.writeBaseByte(Statics.handSwingPacket, 0);
+            byte[] write = { 0xC6, 0x83, 0xB4, 0x08, 0x00, 0x00, 01 };
+            MCM.writeBaseBytes(Statics.handSwingPacket, write);
         }
     }
 }
