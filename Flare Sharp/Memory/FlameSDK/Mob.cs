@@ -168,9 +168,9 @@ namespace Flare_Sharp.Memory.FlameSDK
         }
         public void teleportE(float x, float y, float z)
         {
-            currentX1 = x + 0.6f;
-            currentY1 = y + 1.8f;
-            currentZ1 = z + 0.6f;
+            currentX3 = x + 0.6f;
+            currentY3 = y + 1.8f;
+            currentZ3 = z + 0.6f;
         }
         public double distanceTo(Mob e)
         {

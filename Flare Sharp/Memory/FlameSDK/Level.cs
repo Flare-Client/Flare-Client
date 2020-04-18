@@ -82,6 +82,7 @@ namespace Flare_Sharp.Memory.FlameSDK
                 ulong endList = MCM.readInt64(addr + 0x48);
                 for (ulong ent = startList; ent < endList; ent += 0x8)
                 {
+                    if (ent == startList) continue;
                     Mob entObj = new Mob(MCM.readInt64(ent));
                     if (entObj.movedTick > 1) Entities.Add(entObj);
                 }
@@ -98,6 +99,7 @@ namespace Flare_Sharp.Memory.FlameSDK
                 ulong endList = MCM.readInt64(addr + 0x48);
                 for (ulong ent = startList; ent < endList; ent += 0x8)
                 {
+                    if (ent == startList) continue;
                     Mob entObj = new Mob(MCM.readInt64(ent));
                     Entities.Add(entObj);
                 }

@@ -16,7 +16,7 @@ namespace Flare_Sharp.Memory.FlameSDK
         {
             get
             {
-                return MCM.readString(addr+0x9E8, 20);
+                return MCM.readString(addr+ 0xA18, 20);
             }
         }
     }

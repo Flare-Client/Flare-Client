@@ -17,7 +17,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            List<Mob> Entity = Minecraft.clientInstance.localPlayer.entityRegistry.targetableEntities;
+            List<Mob> Entity = Minecraft.clientInstance.localPlayer.level.getMovingEntities;
             List<double> distancesArr = new List<double>();
 
             foreach(Mob e in Entity)
