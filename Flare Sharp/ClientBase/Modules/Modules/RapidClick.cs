@@ -5,9 +5,9 @@ using System;
 
 namespace Flare_Sharp.ClientBase.Modules.Modules
 {
-    public class RapidAttack: Module
+    public class RapidClick: Module
     {
-        public RapidAttack() : base("Rapid-Attack", CategoryHandler.registry.categories[0], (char)0x07, false)
+        public RapidClick() : base("Rapid-Click", CategoryHandler.registry.categories[0], (char)0x07, false)
         {
         }
 

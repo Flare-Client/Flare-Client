@@ -21,8 +21,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 
             if (toggleSettings[0].value)
             {
-                List<Mob> Entity = Minecraft.clientInstance.localPlayer.entityRegistry.targetableEntities;
-                List<double> distancesArr = new List<double>();
+                List<Mob> Entity = Minecraft.clientInstance.localPlayer.level.getMovingEntities;
+            	List<double> distancesArr = new List<double>();
 
                 foreach (Mob e in Entity)
                 {

@@ -14,15 +14,10 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 
         public override void onEnable()
         {
-            Console.WriteLine("The toggle is: " + toggleSettings[0].value.ToString());
-            List<Mob> entities = Minecraft.clientInstance.localPlayer.entityRegistry.Entities;
-            Console.WriteLine("Entity List ({0})", entities.Count);
-            ulong index = 0;
-            foreach(Mob e in entities)
-            {
-                Console.WriteLine("Entity{0}: {1}", index, e.addr.ToString("X"));
-                index++;
-            }
+            List<Mob> EntitiesMoving = Minecraft.clientInstance.localPlayer.level.getMovingEntities;
+            List<Mob> EntitiesAll = Minecraft.clientInstance.localPlayer.level.getAllEntities;
+            Console.WriteLine("Moving Entities: " + EntitiesMoving.Count);
+            Console.WriteLine("Entities (ALL): " + EntitiesAll.Count);
             this.enabled = false;
         }
     }
