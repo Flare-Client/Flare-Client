@@ -7,6 +7,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
 {
     public class RapidAttack: Module
     {
+        byte[] defaultBytes = { 0x41, 0x80, 0x38, 0x00, 0x74, 0x76 };
+        byte[] newBytes = { 0x41, 0x80, 0x38, 0x01, 0x74, 0x76 };
         public RapidAttack() : base("Rapid-Click", CategoryHandler.registry.categories[0], (char)0x07, false)
         {
         }
@@ -15,21 +17,19 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
             base.onTick();
             UInt64 facing = Minecraft.clientInstance.localPlayer.level.lookingEntity.addr;
-            if(facing > 0)
+            if(facing <= 0)
             {
-                byte[] write = { 0x41, 0x80, 0x38, 0x01, 0x74, 0x76 };
-                MCM.writeBaseBytes(Statics.rapidPlace, write);
+                MCM.writeBaseBytes(Statics.rapidPlace, newBytes);
             } else
             {
-                byte[] write = { 0x41, 0x80, 0x38, 0x00, 0x74, 0x76 };
-                MCM.writeBaseBytes(Statics.rapidPlace, write);
+                MCM.writeBaseBytes(Statics.rapidPlace, defaultBytes);
             }
         }
 
         public override void onDisable()
         {
             base.onDisable();
-            MCM.writeBaseByte(Statics.rapidPlace, 0);
+            MCM.writeBaseBytes(Statics.rapidPlace, defaultBytes);
         }
     }
 }
