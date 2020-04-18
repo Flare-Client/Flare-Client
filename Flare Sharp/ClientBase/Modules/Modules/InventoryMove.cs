@@ -27,19 +27,19 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                 {
                     if (KeybindHandler.isKeyDown((char)0x27)) //Arrow Key -> Right
                     {
-                        Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraYaw -= camMoveSpeed;
+                        Minecraft.clientInstance.firstPersonLookBehavior.cameraYaw -= camMoveSpeed;
                     }
                     else if (KeybindHandler.isKeyDown((char)0x25)) //Arrow Key -> Left
                     {
-                        Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraYaw += camMoveSpeed;
+                        Minecraft.clientInstance.firstPersonLookBehavior.cameraYaw += camMoveSpeed;
                     }
                     else if (KeybindHandler.isKeyDown((char)0x26)) //Arrow Key -> Up
                     {
-                        Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraPitch += camMoveSpeed;
+                        Minecraft.clientInstance.firstPersonLookBehavior.cameraPitch += camMoveSpeed;
                     }
                     else if (KeybindHandler.isKeyDown((char)0x28)) //Arrow Key -> Down
                     {
-                        Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraPitch -= camMoveSpeed;
+                        Minecraft.clientInstance.firstPersonLookBehavior.cameraPitch -= camMoveSpeed;
                     }
                 }
 

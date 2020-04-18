@@ -17,9 +17,9 @@ namespace Flare_Sharp.Memory.FlameSDK
             get
             {
                 Utils.Vec3f vec3 = new Utils.Vec3f();
-                vec3.x = currentX1;
-                vec3.y = currentY1;
-                vec3.z = currentZ1;
+                vec3.x = currentX3;
+                vec3.y = currentY3;
+                vec3.z = currentZ3;
                 return vec3;
             }
             set

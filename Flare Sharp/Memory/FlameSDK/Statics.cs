@@ -8,7 +8,7 @@ namespace Flare_Sharp.Memory.FlameSDK
 {
     public class Statics
     {
-        public static int attackSwing = 0x1080940; //v1.14.6
+        public static int attackSwing = 0x10809BE; //v1.14.6
         public static int handSwingPacket = 0x8FDCB4;  //v1.14.6
         public static int rapidPlace = 0x1080943; //v1.14.6
         public static int autoSprint = 0x1ABC1E0; //v1.14.6

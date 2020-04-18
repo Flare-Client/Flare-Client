@@ -65,14 +65,6 @@ namespace Flare_Sharp.Memory.FlameSDK
             }
         }
 
-        public FirstPersonLookBehavior firstPersonCamera
-        {
-            get
-            {
-                return new FirstPersonLookBehavior(MCM.evaluatePointer(addr, MCM.ceByte2uLong("60 38 0")));
-            }
-        }
-
         public List<Mob> getMovingEntities
         {
             get

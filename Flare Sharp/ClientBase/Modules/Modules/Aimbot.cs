@@ -41,14 +41,14 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                             Utils.Vec3f localPosition = Minecraft.clientInstance.localPlayer.location;
                             Utils.Vec3f targetPosition = e.location;
                             Utils.Vec2f calculationsArr = Utils.getCalculationsToPos(localPosition, targetPosition);
-                            Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraPitch = calculationsArr.x * 0.2F;
-                            Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraYaw = calculationsArr.y * 0.2F;
+                            Minecraft.clientInstance.firstPersonLookBehavior.cameraPitch = calculationsArr.x * 0.2F;
+                            Minecraft.clientInstance.firstPersonLookBehavior.cameraYaw = calculationsArr.y * 0.2F;
                         }
                     }
                 }
             } else
             {
-                List<Mob> Entity = Minecraft.clientInstance.localPlayer.entityRegistry.targetableEntities;
+                List<Mob> Entity = Minecraft.clientInstance.localPlayer.level.getMovingEntities;
                 List<double> distancesArr = new List<double>();
 
                 foreach (Mob e in Entity)
@@ -68,8 +68,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                             Utils.Vec3f localPosition = Minecraft.clientInstance.localPlayer.location;
                             Utils.Vec3f targetPosition = e.location;
                             Utils.Vec2f calculationsArr = Utils.getCalculationsToPos(localPosition, targetPosition);
-                            Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraPitch = calculationsArr.x;
-                            Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraYaw = calculationsArr.y;
+                            Minecraft.clientInstance.firstPersonLookBehavior.cameraPitch = calculationsArr.x;
+                            Minecraft.clientInstance.firstPersonLookBehavior.cameraYaw = calculationsArr.y;
                         }
                     }
                 }

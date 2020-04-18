@@ -21,8 +21,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             for(var I = 0; I < prevPositions.Count(); I++)
             {
                 Minecraft.clientInstance.localPlayer.teleport(prevPositions[I][0], prevPositions[I][1], prevPositions[I][2]);
-                Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraPitch = prevStaring[I][0];
-                Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraYaw = prevStaring[I][1];
+                Minecraft.clientInstance.firstPersonLookBehavior.cameraPitch = prevStaring[I][0];
+                Minecraft.clientInstance.firstPersonLookBehavior.cameraYaw = prevStaring[I][1];
                 if (enabled) break;
             }
             prevStaring.Clear();
@@ -38,8 +38,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             position.Add(Minecraft.clientInstance.localPlayer.currentY1);
             position.Add(Minecraft.clientInstance.localPlayer.currentZ1);
 
-            staringPos.Add(Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraPitch);
-            staringPos.Add(Minecraft.clientInstance.localPlayer.level.firstPersonCamera.cameraYaw);
+            staringPos.Add(Minecraft.clientInstance.firstPersonLookBehavior.cameraPitch);
+            staringPos.Add(Minecraft.clientInstance.firstPersonLookBehavior.cameraYaw);
 
             for (int I = 0; I < 10; I++)
             {

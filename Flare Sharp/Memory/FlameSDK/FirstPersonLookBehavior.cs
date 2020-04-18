@@ -16,22 +16,22 @@ namespace Flare_Sharp.Memory.FlameSDK
         {
             get
             {
-                return MCM.readFloat(addr + 0x250);
+                return MCM.readFloat(addr + 0x14);
             }
             set
             {
-                MCM.writeFloat(addr + 0x250, value);
+                MCM.writeFloat(addr + 0x14, value);
             }
         }
         public float cameraYaw
         {
             get
             {
-                return MCM.readFloat(addr + 0x254);
+                return MCM.readFloat(addr + 0x10);
             }
             set
             {
-                MCM.writeFloat(addr + 0x254, value);
+                MCM.writeFloat(addr + 0x10, value);
             }
         }
     }

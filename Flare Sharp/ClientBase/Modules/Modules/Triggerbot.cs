@@ -16,29 +16,13 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            triggerbotCounter++;
-            if(triggerbotCounter > sliderSettings[0].value)
+            Mob facing = Minecraft.clientInstance.localPlayer.level.lookingEntity;
+            if(facing.movedTick > 1)
             {
-                Mob facing = Minecraft.clientInstance.localPlayer.level.lookingEntity;
-                if (facing.movedTick > 1)
-                {
-                    if (VTargetsWindow.targetable.Contains(facing.type))
-                    {
-                        if (facing.addr > 0)
-                        {
-                            MCM.writeBaseByte(Statics.attackSwing, 0);
-                        }
-                        else
-                        {
-                            MCM.writeBaseByte(Statics.attackSwing, 1);
-                        }
-                    }
-                }
-                if (facing.addr <= 0)
-                {
-                    MCM.writeBaseByte(Statics.attackSwing, 1);
-                }
-                triggerbotCounter = 0;
+                MCM.writeBaseByte(Statics.attackSwing, 0);
+            } else
+            {
+                MCM.writeBaseByte(Statics.attackSwing, 1);
             }
         }
 

@@ -37,7 +37,7 @@ namespace Flare_Sharp.Memory.FlameSDK
             float dZ = localPos.z - targetPos.z;
             double distance = Math.Sqrt(dX * dX + dY * dY + dZ * dZ);
             vec2.x = -((float)Math.Atan2(dY, (float)distance) * (float)3.13810205 / (float)3.141592653589793);
-            vec2.y = -((float)Math.Atan2(dZ, dX) * (float)3.1381025 / (float)3.141592653589793) + (float)-1.569051027;
+            vec2.y = -((float)Math.Atan2(dZ, dX) * (float)3.13810205 / (float)3.141592653589793) + (float)1.569051027;
             return vec2;
         }
         
