@@ -73,7 +73,6 @@
     <Compile Include="ClientBase\Modules\Modules\AirJump.cs" />
     <Compile Include="ClientBase\Modules\Modules\AutoRespawn.cs" />
     <Compile Include="ClientBase\Modules\Modules\AutoSprint.cs" />
-    <Compile Include="ClientBase\Modules\Modules\AutoSword.cs" />
     <Compile Include="ClientBase\Modules\Modules\BHOP.cs" />
     <Compile Include="ClientBase\Modules\Modules\BoostHit.cs" />
     <Compile Include="ClientBase\Modules\Modules\BounceFly.cs" />

@@ -39,7 +39,6 @@ namespace Flare_Sharp.ClientBase.Modules
             new Misplace();
             new Reach();
             new RapidClick();
-            new AutoSword();
             new AirJump();
             new Glide();
             new HighJump();
