@@ -15,7 +15,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
             base.onTick();
             UInt64 facing = Minecraft.clientInstance.localPlayer.level.lookingEntity.addr;
-            if(facing <> 0)
+            if(facing > 0)
             {
                 MCM.writeBaseByte(Statics.rapidPlace, 0);
             } else
