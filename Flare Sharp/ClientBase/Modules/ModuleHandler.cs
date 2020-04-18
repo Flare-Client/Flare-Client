@@ -38,7 +38,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new Criticals();
             new Misplace();
             new Reach();
-            new RapidAttack();
+            new RapidClick();
             new AutoSword();
             new AirJump();
             new Glide();
@@ -81,11 +81,11 @@ namespace Flare_Sharp.ClientBase.Modules
             new TabGUI();
             new ModuleList();
             new TPFlight();
-            new ListTest();
+            //new ListTest();
             //new AntiSentinel();
             new CpuLimiter();
             new RainbowUI();
-            new CubeCraftFly();
+            //new CubeCraftFly();
             Console.WriteLine("Modules registered!");
             startModuleThread();
         }
