@@ -40,7 +40,7 @@ namespace Flare_Sharp.ClientBase.IO
 
         public void saveConfig()
         {
-            Console.WriteLine("Saving...");
+            //Console.WriteLine("Saving...");
             RootObject root = new RootObject();
             int z = 0;
             foreach (Category cat in CategoryHandler.registry.categories)
@@ -72,7 +72,7 @@ namespace Flare_Sharp.ClientBase.IO
                 configFile.Create();
             }
             File.WriteAllText(configFile.FullName, json);
-            Console.WriteLine("Saved!");
+            //Console.WriteLine("Saved!");
         }
 
         //returns false if it fails
