@@ -10,7 +10,7 @@ namespace Flare_Sharp.ClientBase.IO
 {
     public class ProfileIO
     {
-        static string currentProfile = "DefaultProfile";
+        /*static string currentProfile = "DefaultProfile";
         static string configDir = Environment.CurrentDirectory + "/FlareData/";
         public static void saveSetting<T>(string path, T value)
         {
@@ -112,6 +112,6 @@ namespace Flare_Sharp.ClientBase.IO
                 success = false;
                 return default;
             }
-        }
+        }*/
     }
 }

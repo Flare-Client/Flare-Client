@@ -28,11 +28,6 @@ namespace Flare_Sharp.ClientBase.Modules
             this.enabled = enabled;
             category.modules.Add(this);
             bool succ = false;
-            bool enabl = ProfileIO.loadSetting<bool>(name + ".enabled", out succ);
-            if (succ)
-            {
-                enabled = enabl;
-            }
         }
 
         public List<SliderSetting> sliderSettings = new List<SliderSetting>();
@@ -64,12 +59,12 @@ namespace Flare_Sharp.ClientBase.Modules
         public virtual void onEnable()
         {
             this.enabled = true;
-            //
+            FileMan.man.saveConfig();
         }
         public virtual void onDisable()
         {
             this.enabled = false;
-            //
+            FileMan.man.saveConfig();
         }
         //Called like a loop when enabled
         public virtual void onTick()
@@ -86,7 +81,6 @@ namespace Flare_Sharp.ClientBase.Modules
                     onDisable();
                     try
                     {
-                        ProfileIO.saveSetting<bool>(name + ".enabled", false);
                         if (toggleEvent != null)
                             toggleEvent.Invoke(this, new EventArgs());
                     }
@@ -97,7 +91,6 @@ namespace Flare_Sharp.ClientBase.Modules
                     onEnable();
                     try
                     {
-                        ProfileIO.saveSetting<bool>(name + ".enabled", true);
                         if (toggleEvent!=null)
                             toggleEvent.Invoke(this, new EventArgs());
                     }
