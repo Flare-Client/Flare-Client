@@ -12,74 +12,15 @@ namespace Flare_Sharp.Memory.FlameSDK
         {
         }
 
-        public AttributeInstance health
+        public float playerSpeed
         {
             get
             {
-                return new AttributeInstance(MCM.readInt64(addr + 0x20));
+                return MCM.readFloat(addr + 0x9C);
             }
-        }
-        public AttributeInstance unknown_1
-        {
-            get
+            set
             {
-                return new AttributeInstance(MCM.readInt64(addr + 0x60));
-            }
-        }
-        public AttributeInstance unknown_2
-        {
-            get
-            {
-                return new AttributeInstance(MCM.readInt64(addr + 0xE0));
-            }
-        }
-        public AttributeInstance xp
-        {
-            get
-            {
-                return new AttributeInstance(MCM.readInt64(addr + 0x130));
-            }
-        }
-        public AttributeInstance hunger
-        {
-            get
-            {
-                return new AttributeInstance(MCM.readInt64(addr + 0x170));
-            }
-        }
-        public AttributeInstance unknown_3
-        {
-            get
-            {
-                return new AttributeInstance(MCM.readInt64(addr + 0x1B0));
-            }
-        }
-        public AttributeInstance speed
-        {
-            get
-            {
-                return new AttributeInstance(MCM.readInt64(addr + 0x1F0));
-            }
-        }
-        public AttributeInstance level
-        {
-            get
-            {
-                return new AttributeInstance(MCM.readInt64(addr + 0x200));
-            }
-        }
-        public AttributeInstance unknown_4
-        {
-            get
-            {
-                return new AttributeInstance(MCM.readInt64(addr + 0x2C0));
-            }
-        }
-        public AttributeInstance unknown_5
-        {
-            get
-            {
-                return new AttributeInstance(MCM.readInt64(addr + 0x390));
+                MCM.writeFloat(addr + 0x9C, value);
             }
         }
     }

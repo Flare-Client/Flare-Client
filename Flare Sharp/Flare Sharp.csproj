@@ -134,7 +134,6 @@
     <Compile Include="ClientBase\UI\VObjs\VToggleItem.cs" />
     <Compile Include="DBG.cs" />
     <Compile Include="Memory\FlameSDK\Actor.cs" />
-    <Compile Include="Memory\FlameSDK\AttributeInstance.cs" />
     <Compile Include="Memory\FlameSDK\ClientInstance.cs" />
     <Compile Include="ClientBase\Modules\Modules\Flight.cs" />
     <Compile Include="Memory\FlameSDK\FirstPersonLookBehavior.cs" />

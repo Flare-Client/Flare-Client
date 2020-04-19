@@ -13,19 +13,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
         }
 
-        public override void onEnable()
-        {
-            base.onEnable();
-            List<Gamerule> gamerules = Minecraft.clientInstance.localPlayer.level.gamerules;
-            int i = 0;
-            foreach(Gamerule rule in gamerules)
-            {
-                Console.WriteLine(rule.name + "," + i.ToString());
-                i++;
-            }
-            savedImmediateSpawnGameRule = Minecraft.clientInstance.localPlayer.level.gamerules[23].toggle;
-        }
-
         public override void onTick()
         {
             base.onTick();
