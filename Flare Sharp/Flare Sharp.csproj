@@ -160,6 +160,7 @@
     <Compile Include="Memory\FlameSDK\SDKObj.cs" />
     <Compile Include="Memory\FlameSDK\Statics.cs" />
     <Compile Include="Memory\FlameSDK\Utils.cs" />
+    <Compile Include="Memory\FlameSDK\VanillaMoveInputHandler.cs" />
     <Compile Include="Memory\FlameSDK\WeaponItem.cs" />
     <Compile Include="Memory\MCM.cs" />
     <Compile Include="ClientBase\Categories\Category.cs" />
