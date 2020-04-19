@@ -21,7 +21,7 @@ namespace Flare_Sharp
 {
     class Program
     {
-        public static string version = "0.0.6.9";
+        public static string version = "0.0.7";
         public static int threadSleep = 1;
         public static EventHandler<EventArgs> mainLoop;
         public static bool limitCpu = false;
