@@ -63,6 +63,10 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                     e.Graphics.FillRectangle(tertiary, drawn);
                 }
             }
+            if (value < minimum)
+            {
+                value = minimum;
+            } else if(value > maximum) value = minimum;
             e.Graphics.DrawString(value.ToString(), font, primary, x + width - (font.Size * value.ToString().Length), y);
             e.Graphics.DrawString(text, font, primary, x, y);
         }
