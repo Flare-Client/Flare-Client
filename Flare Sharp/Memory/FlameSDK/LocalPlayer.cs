@@ -43,14 +43,6 @@ namespace Flare_Sharp.Memory.FlameSDK
             }
         }
 
-        public VanillaMoveInputHandler vanillaMoveInputHandler
-        {
-            get
-            {
-                return new VanillaMoveInputHandler(MCM.readInt64(addr + 0xA0));
-            }
-        }
-
         //Player offset shiz
         public void teleport(float x, float y, float z)
         {

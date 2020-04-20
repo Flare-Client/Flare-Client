@@ -20,7 +20,7 @@ namespace Flare_Sharp.Memory.FlameSDK
             }
             set
             {
-                MCM.writeByte(addr + 0x40, value);
+                MCM.writeByte(addr + 0x48, value);
             }
         }
     }

@@ -47,5 +47,12 @@ namespace Flare_Sharp.Memory.FlameSDK
                 return new FloatOption(MCM.evaluatePointer(addr + 0xC8, MCM.ceByte2uLong("B8 120 0")));
             }
         }
+        public VanillaMoveInputHandler vanillaMoveInputHandler
+        {
+            get
+            {
+                return new VanillaMoveInputHandler(MCM.readInt64(addr + 0xA0));
+            }
+        }
     }
 }

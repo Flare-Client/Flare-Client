@@ -72,6 +72,7 @@ namespace Flare_Sharp.ClientBase.Modules
             new AutoRespawn();
             new Recall();
             new FOV();
+            new AutoCrouch();
             new NoPacket(); //42
             new Freecam();
             new NoShadow();
