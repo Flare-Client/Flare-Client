@@ -29,7 +29,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
         {
             base.OnPaint(e);
             e.Graphics.FillRectangle(secondary, objRect);
-            e.Graphics.DrawString(text, font, primary, x + width / 2 - font.Size / 2, y);
+            e.Graphics.DrawString(text, font, primary, x - font.Size / 2, y);
         }
 
         public override void OnInteractUp(clientKeyEvent a)

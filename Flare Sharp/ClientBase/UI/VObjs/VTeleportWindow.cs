@@ -14,7 +14,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
     public class VTeleportWindow : VWindowBase
     {
         public static VTeleportWindow instance;
-        VButton teleportButton = new VButton("Teleport");
+        VButton teleportButton = new VButton("TP");
         public List<VIntStringShelf> xyzInputs = new List<VIntStringShelf>();
         public static List<string> xyz 
         {
