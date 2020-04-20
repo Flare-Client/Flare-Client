@@ -157,11 +157,11 @@ namespace Flare_Sharp.Memory.FlameSDK
         {
             get
             {
-                return MCM.readFloat(addr+0x8A4);
+                return MCM.readFloat(addr+0x8CC);
             }
             set
             {
-                MCM.writeFloat(addr + 0x8A4, value);
+                MCM.writeFloat(addr + 0x8CC, value);
             }
         }
 
