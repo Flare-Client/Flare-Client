@@ -62,5 +62,11 @@ namespace Flare_Sharp.Memory.FlameSDK
             };
             return newPos;
         }
+
+        public static float generateRandomFloat(float minimumFloat, float maxFloat)
+        {
+            Random random = new Random();
+            return (float)random.Next((int)minimumFloat, (int)maxFloat);
+        }
     }
 }
