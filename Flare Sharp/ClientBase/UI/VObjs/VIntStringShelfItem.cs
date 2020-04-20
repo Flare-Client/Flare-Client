@@ -32,7 +32,8 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                         text = text.Remove(text.Length - 1);
                         if (text.Length == 0)
                         {
-                            deleted = true;
+                            //deleted = true;
+                            text = "0";
                         }
                         editing = false;
                     }
@@ -55,6 +56,13 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                     if (editing)
                     {
                         char typed = a.key;
+                        text = text.Remove(text.Length - 1) + typed + "|";
+                    }
+                } else if(a.key != 0x1 && a.key != 0x2 && a.key != 0x8)
+                {
+                    if (editing && text.Length <= 1)
+                    {
+                        char typed = '-';
                         text = text.Remove(text.Length - 1) + typed + "|";
                     }
                 }
