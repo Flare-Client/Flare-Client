@@ -127,6 +127,7 @@
     <Compile Include="ClientBase\Modules\Settings\ToggleSetting.cs" />
     <Compile Include="ClientBase\Modules\VisualModule.cs" />
     <Compile Include="ClientBase\UI\VObjs\VAddButton.cs" />
+    <Compile Include="ClientBase\UI\VObjs\VIntStringShelfItem.cs" />
     <Compile Include="ClientBase\UI\VObjs\VKeybindItem.cs" />
     <Compile Include="ClientBase\UI\VObjs\VModuleSliderSetting.cs" />
     <Compile Include="ClientBase\UI\VObjs\VModuleToggleSetting.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="ClientBase\UI\VObjs\VStringShelf.cs" />
     <Compile Include="ClientBase\UI\VObjs\VSubShelfItem.cs" />
     <Compile Include="ClientBase\UI\VObjs\VTargetsWindow.cs" />
+    <Compile Include="ClientBase\UI\VObjs\VTeleportWindow.cs" />
     <Compile Include="ClientBase\UI\VObjs\VToggleItem.cs" />
     <Compile Include="DBG.cs" />
     <Compile Include="Memory\FlameSDK\Actor.cs" />

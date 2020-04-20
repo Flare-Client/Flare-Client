@@ -23,6 +23,10 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                   VTargetsWindow targets = new VTargetsWindow(x);
                   x += targets.width;
                   windows.Add(targets);
+
+                  VTeleportWindow teleport = new VTeleportWindow(x);
+                  x += teleport.width;
+                  windows.Add(teleport);
               };
         }
         public override void onEnable()
