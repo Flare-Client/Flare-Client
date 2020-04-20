@@ -20,9 +20,9 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                       x += categoryWindow.width;
                       windows.Add(categoryWindow);
                   }
-                  VTargetsWindow targets = new VTargetsWindow(x);
+                  /*VTargetsWindow targets = new VTargetsWindow(x);
                   x += targets.width;
-                  windows.Add(targets);
+                  windows.Add(targets);*/
 
                   VTeleportWindow teleport = new VTeleportWindow(x);
                   x += teleport.width;
