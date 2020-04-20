@@ -14,7 +14,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
     public class VTeleportWindow : VWindowBase
     {
         public static VTeleportWindow instance;
-        VAddButton teleportButton;
+        VButton teleportButton = new VButton("Teleport");
         public List<VIntStringShelf> xyzInputs = new List<VIntStringShelf>();
         public static List<string> xyz 
         {
@@ -54,15 +54,12 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             xyzInputs.Add(yEntry);
             xyzInputs.Add(zEntry);
 
-            teleportButton = new VAddButton();
             teleportButton.width = width;
             teleportButton.height = 24;
 
             teleportButton.clicked += (object a, EventArgs b) => {
                 Minecraft.clientInstance.localPlayer.teleport(float.Parse(xEntry.text), float.Parse(yEntry.text), float.Parse(zEntry.text));
             };
-
-            teleportButton.text = "TP";
 
             text = "Teleport";
             //We have to register this manually
