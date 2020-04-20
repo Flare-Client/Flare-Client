@@ -8,8 +8,10 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     {
         public Hitbox() : base("Hitbox", CategoryHandler.registry.categories[0], (char)0x07, false)
         {
-            RegisterSliderSetting("Hitbox Height", 0, 60, 120);
-            RegisterSliderSetting("Hitbox Width", 0, 40, 80);
+            /*RegisterSliderSetting("Hitbox Height", 0, 60, 120);
+            RegisterSliderSetting("Hitbox Width", 0, 40, 80);*/
+            RegisterFloatSliderSetting("Hitbox Width", 0.6f, 0.6f, 60f);
+            RegisterFloatSliderSetting("Hitbox Width", 1.8f, 1.8f, 18f);
         }
 
         public override void onTick()
@@ -18,8 +20,8 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             List<Mob> entList = Minecraft.clientInstance.localPlayer.level.getMovingEntities;
             foreach (Mob e in entList)
             {
-                e.hitboxHeight = (float)sliderSettings[0].value / 10;
-                e.hitboxWidth = (float)sliderSettings[1].value / 10;
+                e.hitboxWidth = (float)sliderFloatSettings[0].value;
+                e.hitboxHeight = (float)sliderFloatSettings[1].value;
             }
         }
 

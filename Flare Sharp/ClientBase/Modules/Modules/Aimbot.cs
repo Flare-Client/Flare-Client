@@ -10,7 +10,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
     {
         public Aimbot() : base("Aimbot", CategoryHandler.registry.categories[0], (char)0x07, false)
         {
-            RegisterSliderSetting("Range", 0, 120, 500);
+            RegisterFloatSliderSetting("Range", 0f, 12.0f, 50.0f);
             RegisterToggleSetting("Random Angles", false);
         }
 
@@ -27,7 +27,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                 foreach (Mob e in Entity)
                 {
                     Double distance = e.distanceTo(Minecraft.clientInstance.localPlayer);
-                    if (distance <= sliderSettings[0].value / 10F) distancesArr.Add(distance);
+                    if (distance <= sliderFloatSettings[0].value) distancesArr.Add(distance);
                 }
 
                 if (distancesArr.Count() > 0)
@@ -54,7 +54,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                 foreach (Mob e in Entity)
                 {
                     Double distance = e.distanceTo(Minecraft.clientInstance.localPlayer);
-                    if (distance <= sliderSettings[0].value / 10F) distancesArr.Add(distance);
+                    if (distance <= sliderFloatSettings[0].value) distancesArr.Add(distance);
                 }
 
                 if (distancesArr.Count() > 0)
