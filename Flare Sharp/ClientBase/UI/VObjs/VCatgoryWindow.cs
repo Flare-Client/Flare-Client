@@ -29,7 +29,11 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
                 {
                     VMI.children.Add(new VModuleSliderSetting(sliderSetting, VMI));
                 }
-                foreach(ToggleSetting toggleSetting in VMI.module.toggleSettings)
+                foreach (SliderFloatSetting sliderFloatSetting in VMI.module.sliderFloatSettings)
+                {
+                    VMI.children.Add(new VModuleFloatSliderSetting(sliderFloatSetting, VMI));
+                }
+                foreach (ToggleSetting toggleSetting in VMI.module.toggleSettings)
                 {
                     VMI.children.Add(new VModuleToggleSetting(toggleSetting, VMI));
                 }

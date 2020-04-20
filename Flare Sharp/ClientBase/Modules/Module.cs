@@ -31,10 +31,18 @@ namespace Flare_Sharp.ClientBase.Modules
         }
 
         public List<SliderSetting> sliderSettings = new List<SliderSetting>();
+
+        public List<SliderFloatSetting> sliderFloatSettings = new List<SliderFloatSetting>();
         public void RegisterSliderSetting(string text, int min, int value, int max)
         {
             sliderSettings.Add(new SliderSetting(text, min, value, max));
         }
+
+        public void RegisterFloatSliderSetting(string text, float min, float value, float max)
+        {
+            sliderFloatSettings.Add(new SliderFloatSetting(text, min, value, max));
+        }
+
         public List<ToggleSetting> toggleSettings = new List<ToggleSetting>();
         public void RegisterToggleSetting(string text, bool value)
         {
