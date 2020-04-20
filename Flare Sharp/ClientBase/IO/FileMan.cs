@@ -42,16 +42,21 @@ namespace Flare_Sharp.ClientBase.IO
         {
             //Console.WriteLine("Saving...");
             RootObject root = new RootObject();
-            int z = 0;
             foreach (Category cat in CategoryHandler.registry.categories)
             {
                 foreach (Module mod in cat.modules)
                 {
                     int y = 0;
+                    int z = 0;
                     foreach (SliderSetting slider in mod.sliderSettings)
                     {
                         root.moduleSliderSettings.Add(mod.sliderSettings[y].value);
                         y++;
+                    }
+                    foreach(SliderFloatSetting sliderFloat in mod.sliderFloatSettings)
+                    {
+                        root.moduleFloatSliderSetting.Add(mod.sliderFloatSettings[z].value);
+                        z++;
                     }
                     root.moduleKeybinds.Add(mod.keybind);
                     root.enabledModules.Add(mod.enabled);
@@ -94,6 +99,7 @@ namespace Flare_Sharp.ClientBase.IO
                 RootObject root = new JavaScriptSerializer().Deserialize<RootObject>(json);
                 int z = 0;
                 int y = 0;
+                int x = 0;
                 foreach (Category cat in CategoryHandler.registry.categories)
                 {
                     foreach (Module mod in cat.modules)
@@ -102,6 +108,11 @@ namespace Flare_Sharp.ClientBase.IO
                         {
                             slider.value = root.moduleSliderSettings[y];
                             y++;
+                        }
+                        foreach (SliderFloatSetting sliderFloat in mod.sliderFloatSettings)
+                        {
+                            sliderFloat.value = root.moduleFloatSliderSetting[x];
+                            x++;
                         }
                         mod.keybind = root.moduleKeybinds[z];
                         mod.enabled = root.enabledModules[z];
