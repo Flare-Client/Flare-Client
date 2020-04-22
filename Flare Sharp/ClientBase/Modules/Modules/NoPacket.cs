@@ -13,7 +13,13 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onEnable()
         {
             base.onEnable();
-            MCM.writeBaseByte(Statics.noPacket, 117);
+            if(Minecraft.clientInstance.localPlayer.username.Length > 0)
+            {
+                MCM.writeBaseByte(Statics.noPacket, 117);
+            } else
+            {
+                MCM.writeBaseByte(Statics.noPacket, 116);
+            }
         }
         public override void onDisable()
         {
