@@ -66,7 +66,7 @@ namespace Flare_Sharp.ClientBase.UI.VObjs
             if (value < minimum)
             {
                 value = minimum;
-            } else if(value > maximum) value = minimum;
+            } else if(value > maximum) value = maximum;
             e.Graphics.DrawString(value.ToString(), font, primary, x + width - (font.Size * value.ToString().Length), y);
             e.Graphics.DrawString(text, font, primary, x, y);
         }

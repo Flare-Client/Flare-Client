@@ -9,7 +9,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public Jetpack() : base("Jetpack", CategoryHandler.registry.categories[1], 'F', false)
         {
             KeybindHandler.clientKeyUpEvent += UpKeyHeld;
-            RegisterSliderSetting("Jetpack", 0, 10, 500);
+            RegisterFloatSliderSetting("Jetpack", 0F, 1F, 20F);
         }
         public void UpKeyHeld(object sender, clientKeyEvent e)
         {
@@ -22,9 +22,9 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
             base.onTick();
             Utils.Vec3f directionalVec = Minecraft.clientInstance.localPlayer.lookingVec;
-            Minecraft.clientInstance.localPlayer.velX = sliderSettings[0].value / 10f * directionalVec.x;
-            Minecraft.clientInstance.localPlayer.velY = sliderSettings[0].value / 10f * -directionalVec.y;
-            Minecraft.clientInstance.localPlayer.velZ = sliderSettings[0].value / 10f * directionalVec.z;
+            Minecraft.clientInstance.localPlayer.velX = sliderFloatSettings[0].value * directionalVec.x;
+            Minecraft.clientInstance.localPlayer.velY = sliderFloatSettings[0].value * -directionalVec.y;
+            Minecraft.clientInstance.localPlayer.velZ = sliderFloatSettings[0].value * directionalVec.z;
         }
     }
 }

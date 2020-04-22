@@ -8,7 +8,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         float savedSpeed;
         public PlayerSpeed() : base("Speed", CategoryHandler.registry.categories[1], (char)0x07, false)
         {
-            RegisterSliderSetting("Speed", 0, 5, 50);
+            RegisterFloatSliderSetting("Speed", 0.2F, 1F, 5F);
         }
 
         public override void onEnable()
@@ -26,7 +26,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            Minecraft.clientInstance.localPlayer.playerAttributes.playerSpeed = (float)sliderSettings[0].value / 10;
+            Minecraft.clientInstance.localPlayer.playerAttributes.playerSpeed = sliderFloatSettings[0].value;
         }
     }
 }

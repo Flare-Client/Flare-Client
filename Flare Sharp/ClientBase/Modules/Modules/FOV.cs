@@ -8,7 +8,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         float savedFOV;
         public FOV() : base("FOV", CategoryHandler.registry.categories[2], 'C', false)
         {
-            RegisterSliderSetting("FOV Value", 10, 10, 3000);
+            RegisterFloatSliderSetting("FOV", 0F, 3F, 300F);
         }
 
         public override void onEnable()
@@ -20,7 +20,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onTick()
         {
             base.onTick();
-            Minecraft.clientInstance.floatOption.playerFOV = (float)sliderSettings[0].value / 10F;
+            Minecraft.clientInstance.floatOption.playerFOV = sliderFloatSettings[0].value;
         }
 
         public override void onDisable()
