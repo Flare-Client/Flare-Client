@@ -13,15 +13,17 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onEnable()
         {
             base.onEnable();
-            byte[] write = { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x8B, 0x42, 0x04, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x8B, 0x42, 0x08, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 };
-            MCM.writeBaseBytes(Statics.NoKnockBack, write);
+            MCM.writeBaseByte(Statics.NoKnockBackX, 0);
+            MCM.writeBaseByte(Statics.NoKnockBackY, 0);
+            MCM.writeBaseByte(Statics.NoKnockBackZ, 0);
         }
 
         public override void onDisable()
         {
             base.onDisable();
-            byte[] write = { 0x89, 0x81, 0x94, 0x04, 0x00, 0x00, 0x8B, 0x42, 0x04, 0x89, 0x81, 0x98, 0x04, 0x00, 0x00, 0x8B, 0x42, 0x08, 0x89, 0x81, 0x9C, 0x04, 0x00, 0x00 };
-            MCM.writeBaseBytes(Statics.NoKnockBack, write);
+            MCM.writeBaseByte(Statics.NoKnockBackX, 4);
+            MCM.writeBaseByte(Statics.NoKnockBackY, 4);
+            MCM.writeBaseByte(Statics.NoKnockBackZ, 4);
         }
     }
 }
