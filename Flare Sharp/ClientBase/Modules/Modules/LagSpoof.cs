@@ -14,7 +14,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         int togglePacketState;
         public LagSpoof() : base("Lag Spoof", CategoryHandler.registry.categories[2], (char)0x07, false)
         {
-            RegisterSliderSetting("Delay", 0, 300, 2000);
+            RegisterSliderSetting("Delay (MS)", 0, 300, 2000);
         }
 
         public override void onEnable()
@@ -51,6 +51,9 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                             togglePacketState = 0;
                             break;
                     }
+                } else
+                {
+                    MCM.writeBaseByte(Statics.noPacket, 116);
                 }
 
                 await packetDelay();
