@@ -68,5 +68,27 @@ namespace Flare_Sharp.Memory.FlameSDK
             Random random = new Random();
             return (float)random.Next((int)minimumFloat, (int)maxFloat);
         }
+
+        public static Mob getClosestEntity(List<Mob> EntitiesArr)
+        {
+            List<double> distances = new List<double>();
+
+            foreach(Mob currEnt in EntitiesArr)
+            {
+                distances.Add(currEnt.distanceTo(Minecraft.clientInstance.localPlayer));
+            }
+
+            if(distances.Count() > 0)
+            {
+                distances.Sort();
+
+                foreach (Mob ent in EntitiesArr)
+                {
+                    if (ent.distanceTo(Minecraft.clientInstance.localPlayer) == distances[0]) return ent;
+                }
+            }
+
+            return (Mob)null;
+        }
     }
 }

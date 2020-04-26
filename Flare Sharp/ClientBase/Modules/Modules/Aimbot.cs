@@ -11,7 +11,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public Aimbot() : base("Aimbot", CategoryHandler.registry.categories[0], (char)0x07, false)
         {
             RegisterFloatSliderSetting("Range", 0f, 12.0f, 50.0f);
-            RegisterToggleSetting("Random Angles", false);
         }
 
 
@@ -19,60 +18,14 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
             base.onTick();
 
-            if (toggleSettings[0].value)
+            Mob closestEnt = Utils.getClosestEntity(Minecraft.clientInstance.localPlayer.level.getMovingEntities);
+
+            if (closestEnt.username.Length > 0)
             {
-                List<Mob> Entity = Minecraft.clientInstance.localPlayer.level.getMovingEntities;
-            	List<double> distancesArr = new List<double>();
+                Utils.Vec2f anglesArr = Utils.getCalculationsToPos(Minecraft.clientInstance.localPlayer.location, closestEnt.location);
 
-                foreach (Mob e in Entity)
-                {
-                    Double distance = e.distanceTo(Minecraft.clientInstance.localPlayer);
-                    if (distance <= sliderFloatSettings[0].value) distancesArr.Add(distance);
-                }
-
-                if (distancesArr.Count() > 0)
-                {
-                    distancesArr.Sort();
-
-                    foreach (Mob e in Entity)
-                    {
-                        if (e.distanceTo(Minecraft.clientInstance.localPlayer) == distancesArr[0])
-                        {
-                            Utils.Vec3f localPosition = Minecraft.clientInstance.localPlayer.location;
-                            Utils.Vec3f targetPosition = e.location;
-                            Utils.Vec2f calculationsArr = Utils.getCalculationsToPos(localPosition, targetPosition);
-                            Minecraft.clientInstance.firstPersonLookBehavior.cameraPitch = calculationsArr.x * 0.2F;
-                            Minecraft.clientInstance.firstPersonLookBehavior.cameraYaw = calculationsArr.y * 0.2F;
-                        }
-                    }
-                }
-            } else
-            {
-                List<Mob> Entity = Minecraft.clientInstance.localPlayer.level.getMovingEntities;
-                List<double> distancesArr = new List<double>();
-
-                foreach (Mob e in Entity)
-                {
-                    Double distance = e.distanceTo(Minecraft.clientInstance.localPlayer);
-                    if (distance <= sliderFloatSettings[0].value) distancesArr.Add(distance);
-                }
-
-                if (distancesArr.Count() > 0)
-                {
-                    distancesArr.Sort();
-
-                    foreach (Mob e in Entity)
-                    {
-                        if (e.distanceTo(Minecraft.clientInstance.localPlayer) == distancesArr[0])
-                        {
-                            Utils.Vec3f localPosition = Minecraft.clientInstance.localPlayer.location;
-                            Utils.Vec3f targetPosition = e.location;
-                            Utils.Vec2f calculationsArr = Utils.getCalculationsToPos(localPosition, targetPosition);
-                            Minecraft.clientInstance.firstPersonLookBehavior.cameraPitch = calculationsArr.x;
-                            Minecraft.clientInstance.firstPersonLookBehavior.cameraYaw = calculationsArr.y;
-                        }
-                    }
-                }
+                Minecraft.clientInstance.firstPersonLookBehavior.cameraPitch = anglesArr.x;
+                Minecraft.clientInstance.firstPersonLookBehavior.cameraYaw = anglesArr.y;
             }
         }
     }

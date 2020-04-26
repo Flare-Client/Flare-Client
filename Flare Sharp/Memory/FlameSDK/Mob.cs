@@ -166,6 +166,13 @@ namespace Flare_Sharp.Memory.FlameSDK
                 MCM.writeInt(addr + 0x304, value);
             }
         }
+        public string username
+        {
+            get
+            {
+                return MCM.readString(addr + 0xA18, 20);
+            }
+        }
         public void teleportE(float x, float y, float z)
         {
             currentX3 = x + 0.6f;
