@@ -90,6 +90,7 @@
     <Compile Include="ClientBase\Modules\Modules\Gamemode.cs" />
     <Compile Include="ClientBase\Modules\Modules\Highjump.cs" />
     <Compile Include="ClientBase\Modules\Modules\Hitbox.cs" />
+    <Compile Include="ClientBase\Modules\Modules\Killaura.cs" />
     <Compile Include="ClientBase\Modules\Modules\LagSpoof.cs" />
     <Compile Include="ClientBase\Modules\Modules\InventoryMove.cs" />
     <Compile Include="ClientBase\Modules\Modules\JitterFlight.cs" />

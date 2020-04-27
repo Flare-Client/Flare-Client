@@ -20,6 +20,26 @@ namespace Flare_Sharp.Memory.FlameSDK
             }
         }
 
+        public ulong setLookingEnt
+        {
+            set
+            {
+                MCM.writeInt64(addr + 0x870, value);
+            }
+        }
+
+        public int lookingState
+        {
+            get
+            {
+                return MCM.readInt(addr + 0x850);
+            }
+            set
+            {
+                MCM.writeInt(addr + 0x850, value);
+            }
+        }
+
         public int lookingBlockSide 
         {
             get

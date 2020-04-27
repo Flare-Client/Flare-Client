@@ -31,6 +31,7 @@ namespace Flare_Sharp.ClientBase.Modules
             */
             Console.WriteLine("Starting module register...");
             /* Register modules here */
+            new Killaura();
             new Aimbot();
             new Hitbox();
             new Triggerbot();
