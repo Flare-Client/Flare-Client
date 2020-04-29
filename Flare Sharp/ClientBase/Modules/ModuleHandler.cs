@@ -87,6 +87,7 @@ namespace Flare_Sharp.ClientBase.Modules
             //new AntiSentinel();
             new CpuLimiter();
             new RainbowUI();
+            new CoordinatesDisplay();
             //new CubeCraftFly();
             Console.WriteLine("Modules registered!");
             startModuleThread();

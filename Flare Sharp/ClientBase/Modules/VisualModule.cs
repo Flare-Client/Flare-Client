@@ -15,6 +15,7 @@ namespace Flare_Sharp.ClientBase.Modules
         public int fontSize = 32;
         public Font titleFont;
         public Font textFont;
+        public Font textFontSmall;
         public float scale = 1;
         public SolidBrush primary
         {
@@ -63,6 +64,7 @@ namespace Flare_Sharp.ClientBase.Modules
         {
             titleFont = new Font(new FontFamily("Arial"), tFontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
             textFont = new Font(new FontFamily("Arial"), fontSize * scale, FontStyle.Regular, GraphicsUnit.Pixel);
+            textFontSmall = new Font(new FontFamily("Arial"), fontSize * scale / 2, FontStyle.Regular, GraphicsUnit.Pixel);
         }
 
         public virtual void onDraw(Graphics graphics)
