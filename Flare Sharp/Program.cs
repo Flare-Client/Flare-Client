@@ -30,7 +30,7 @@ namespace Flare_Sharp
             //Dont.Be.A.Scumbag.And.Remove.This.Warn.warn();
             Console.WriteLine("Flare# Client");
             Console.WriteLine("Flare port to C#");
-            Console.WriteLine("Discord: https://discord.gg/Hz3Dxg8");
+            Console.WriteLine("Discord: https://discord.gg/Htd5rtb");
 
             Process.Start("minecraft://");
 
