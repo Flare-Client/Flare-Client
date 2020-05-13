@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{047C8584-C2FC-4FFE-894B-EC33A02CEC4A}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Flare_Remastered</RootNamespace>
+    <AssemblyName>Flare Remastered</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Client\Categories\Category.cs" />
+    <Compile Include="Client\Categories\CategoryHandler.cs" />
+    <Compile Include="Client\Keybinds\KeybindHandler.cs" />
+    <Compile Include="Client\Modules\Module.cs" />
+    <Compile Include="Client\Modules\ModuleHandler.cs" />
+    <Compile Include="Client\Modules\Modules\Aimbot.cs" />
+    <Compile Include="Client\Modules\Modules\AirAcceleration.cs" />
+    <Compile Include="Client\Modules\Modules\AirJump.cs" />
+    <Compile Include="Client\Modules\Modules\AutoCrouch.cs" />
+    <Compile Include="Client\Modules\Modules\AutoRespawn.cs" />
+    <Compile Include="Client\Modules\Modules\AutoSprint.cs" />
+    <Compile Include="Client\Modules\Modules\AutoWalk.cs" />
+    <Compile Include="Client\Modules\Modules\BHOP.cs" />
+    <Compile Include="Client\Modules\Modules\BoostHit.cs" />
+    <Compile Include="Client\Modules\Modules\BounceFly.cs" />
+    <Compile Include="Client\Modules\Modules\ClickTP.cs" />
+    <Compile Include="Client\Modules\Modules\ClickUI.cs" />
+    <Compile Include="Client\Modules\Modules\Coordinates.cs" />
+    <Compile Include="Client\Modules\Modules\CoordinatesDisplay.cs" />
+    <Compile Include="Client\Modules\Modules\Criticals.cs" />
+    <Compile Include="Client\Modules\Modules\CubeCraftFly.cs" />
+    <Compile Include="Client\Modules\Modules\FastLadder.cs" />
+    <Compile Include="Client\Modules\Modules\Flight.cs" />
+    <Compile Include="Client\Modules\Modules\FOV.cs" />
+    <Compile Include="Client\Modules\Modules\Freecam.cs" />
+    <Compile Include="Client\Modules\Modules\Gamemode.cs" />
+    <Compile Include="Client\Modules\Modules\Glide.cs" />
+    <Compile Include="Client\Modules\Modules\Highjump.cs" />
+    <Compile Include="Client\Modules\Modules\Hitbox.cs" />
+    <Compile Include="Client\Modules\Modules\Instabreak.cs" />
+    <Compile Include="Client\Modules\Modules\InventoryMove.cs" />
+    <Compile Include="Client\Modules\Modules\Jesus.cs" />
+    <Compile Include="Client\Modules\Modules\Jetpack.cs" />
+    <Compile Include="Client\Modules\Modules\JitterFlight.cs" />
+    <Compile Include="Client\Modules\Modules\Killaura.cs" />
+    <Compile Include="Client\Modules\Modules\LagSpoof.cs" />
+    <Compile Include="Client\Modules\Modules\ListTest.cs" />
+    <Compile Include="Client\Modules\Modules\Misplace.cs" />
+    <Compile Include="Client\Modules\Modules\ModuleList.cs" />
+    <Compile Include="Client\Modules\Modules\NoFall.cs" />
+    <Compile Include="Client\Modules\Modules\NoKnockBack.cs" />
+    <Compile Include="Client\Modules\Modules\NoPacket.cs" />
+    <Compile Include="Client\Modules\Modules\NoShadow.cs" />
+    <Compile Include="Client\Modules\Modules\NoSlowDown.cs" />
+    <Compile Include="Client\Modules\Modules\NoSwing.cs" />
+    <Compile Include="Client\Modules\Modules\NoWater.cs" />
+    <Compile Include="Client\Modules\Modules\NoWeb.cs" />
+    <Compile Include="Client\Modules\Modules\Phase.cs" />
+    <Compile Include="Client\Modules\Modules\PlayerSpeed.cs" />
+    <Compile Include="Client\Modules\Modules\RapidClick.cs" />
+    <Compile Include="Client\Modules\Modules\Reach.cs" />
+    <Compile Include="Client\Modules\Modules\Recall.cs" />
+    <Compile Include="Client\Modules\Modules\Scaffold.cs" />
+    <Compile Include="Client\Modules\Modules\TabGUI.cs" />
+    <Compile Include="Client\Modules\Modules\TickedGlide.cs" />
+    <Compile Include="Client\Modules\Modules\Tower.cs" />
+    <Compile Include="Client\Modules\Modules\TPFlight.cs" />
+    <Compile Include="Client\Modules\Modules\Triggerbot.cs" />
+    <Compile Include="Client\Modules\Modules\Velocity.cs" />
+    <Compile Include="Client\Modules\Modules\YBoost.cs" />
+    <Compile Include="Client\Modules\Settings\Setting.cs" />
+    <Compile Include="Client\Modules\Settings\SliderFloatSetting.cs" />
+    <Compile Include="Client\Modules\Settings\SliderSetting.cs" />
+    <Compile Include="Client\Modules\Settings\ToggleSetting.cs" />
+    <Compile Include="Client\Modules\VisualModule.cs" />
+    <Compile Include="Client\VObjs\VAddButton.cs" />
+    <Compile Include="Client\VObjs\VButton.cs" />
+    <Compile Include="Client\VObjs\VCatgoryWindow.cs" />
+    <Compile Include="Client\VObjs\VFloatSliderItem.cs" />
+    <Compile Include="Client\VObjs\VIntStringShelfItem.cs" />
+    <Compile Include="Client\VObjs\VKeybindItem.cs" />
+    <Compile Include="Client\VObjs\VModuleFloatSliderSetting.cs" />
+    <Compile Include="Client\VObjs\VModuleItem.cs" />
+    <Compile Include="Client\VObjs\VModuleSliderSetting.cs" />
+    <Compile Include="Client\VObjs\VModuleToggleSetting.cs" />
+    <Compile Include="Client\VObjs\VObject.cs" />
+    <Compile Include="Client\VObjs\VShelfItem.cs" />
+    <Compile Include="Client\VObjs\VSliderItem.cs" />
+    <Compile Include="Client\VObjs\VStringShelf.cs" />
+    <Compile Include="Client\VObjs\VSubShelfItem.cs" />
+    <Compile Include="Client\VObjs\VTargetsWindow.cs" />
+    <Compile Include="Client\VObjs\VTeleportWindow.cs" />
+    <Compile Include="Client\VObjs\VToggleItem.cs" />
+    <Compile Include="Client\VObjs\VWindowBase.cs" />
+    <Compile Include="MCM.cs" />
+    <Compile Include="Client\OverlayHost.cs" />
+    <Compile Include="SparkSDK\Actor.cs" />
+    <Compile Include="SparkSDK\ClientInstance.cs" />
+    <Compile Include="SparkSDK\EntityRegistry.cs" />
+    <Compile Include="SparkSDK\FirstPersonLookBehavior.cs" />
+    <Compile Include="SparkSDK\FloatOption.cs" />
+    <Compile Include="SparkSDK\Game.cs" />
+    <Compile Include="SparkSDK\Gamerule.cs" />
+    <Compile Include="SparkSDK\Graphics.cs" />
+    <Compile Include="SparkSDK\Inventory.cs" />
+    <Compile Include="SparkSDK\Item.cs" />
+    <Compile Include="SparkSDK\ItemStack.cs" />
+    <Compile Include="SparkSDK\Level.cs" />
+    <Compile Include="SparkSDK\LocalPlayer.cs" />
+    <Compile Include="SparkSDK\LoopbackPacketSender.cs" />
+    <Compile Include="SparkSDK\Minecraft.cs" />
+    <Compile Include="SparkSDK\Mob.cs" />
+    <Compile Include="SparkSDK\NetworkHandler.cs" />
+    <Compile Include="SparkSDK\PlayerAttributes.cs" />
+    <Compile Include="SparkSDK\PlayerEntity.cs" />
+    <Compile Include="SparkSDK\PlayerInventoryProxy.cs" />
+    <Compile Include="SparkSDK\RakNetInstance.cs" />
+    <Compile Include="SparkSDK\SDKObj.cs" />
+    <Compile Include="SparkSDK\Statics.cs" />
+    <Compile Include="SparkSDK\Utils.cs" />
+    <Compile Include="SparkSDK\VanillaMoveInputHandler.cs" />
+    <Compile Include="SparkSDK\WeaponItem.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Client\WinHooks.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
