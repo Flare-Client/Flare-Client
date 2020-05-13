@@ -31,7 +31,6 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onDisable()
         {
             base.onDisable();
-            Minecraft.clientInstance.localPlayer.isFlying = 0;
 
             if (toggleSettings[0].value)
             {
