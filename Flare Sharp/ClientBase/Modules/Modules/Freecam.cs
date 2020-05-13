@@ -31,6 +31,9 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         public override void onDisable()
         {
             base.onDisable();
+            Minecraft.clientInstance.localPlayer.Y2 = Minecraft.clientInstance.localPlayer.Y1 + 1.8f;
+            Minecraft.clientInstance.localPlayer.isFlying = 0;
+
             if (toggleSettings[0].value)
             {
                 Minecraft.clientInstance.localPlayer.teleport(savedCoordinates[0], savedCoordinates[1], savedCoordinates[2]);
@@ -48,6 +51,13 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                 byte[] write = { 0xFF, 0x50, 0x08 };
                 MCM.writeBaseBytes(Statics.movementPacket, write);
             }
+        }
+
+        public override void onTick()
+        {
+            base.onTick();
+            Minecraft.clientInstance.localPlayer.Y2 = Minecraft.clientInstance.localPlayer.Y1;
+            Minecraft.clientInstance.localPlayer.isFlying = 1;
         }
     }
 }
