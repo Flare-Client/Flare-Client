@@ -20,7 +20,7 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
         {
             base.onEnable();
             savedCoordinates.Add(Minecraft.clientInstance.localPlayer.currentX1);
-            savedCoordinates.Add((float)Math.Floor(Minecraft.clientInstance.localPlayer.currentY1 - 1));
+            savedCoordinates.Add((float)Math.Floor(Minecraft.clientInstance.localPlayer.currentY1));
             savedCoordinates.Add(Minecraft.clientInstance.localPlayer.currentZ1);
             savedPitchAndYaw.Add(Minecraft.clientInstance.firstPersonLookBehavior.cameraPitch);
             savedPitchAndYaw.Add(Minecraft.clientInstance.firstPersonLookBehavior.cameraYaw);
@@ -28,9 +28,11 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
             byte[] write = { 0x90, 0x90, 0x90 };
             MCM.writeBaseBytes(Statics.movementPacket, write);
         }
+
         public override void onDisable()
         {
             base.onDisable();
+
             if (toggleSettings[0].value)
             {
                 Minecraft.clientInstance.localPlayer.teleport(savedCoordinates[0], savedCoordinates[1], savedCoordinates[2]);
@@ -48,6 +50,13 @@ namespace Flare_Sharp.ClientBase.Modules.Modules
                 byte[] write = { 0xFF, 0x50, 0x08 };
                 MCM.writeBaseBytes(Statics.movementPacket, write);
             }
+        }
+
+        public override void onTick()
+        {
+            base.onTick();
+            Minecraft.clientInstance.localPlayer.isFlying = 1;
+            Minecraft.clientInstance.localPlayer.Y2 = Minecraft.clientInstance.localPlayer.Y1;
         }
     }
 }
